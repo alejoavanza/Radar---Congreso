@@ -9,7 +9,7 @@ app = Flask(__name__)
 POS = {'apoyo','respaldo','logro','avance','acuerdo','lidera','celebra','aprobado','victoria','positivo','defiende','gracias','excelente','bien'}
 NEG = {'crítica','critica','denuncia','escándalo','escandalo','rechazo','ataque','investigación','investigacion','crisis','polémica','polemica','fracaso','corrupción','corrupcion','mentira'}
 STOP = {'para','como','sobre','entre','desde','ante','tras','este','esta','estos','estas','del','las','los','una','uno','que','por','con','sin','más','mas','sus','han','fue','son','ser','https','esto','pero','porque','cuando','donde'}
-UA = {'User-Agent':'RADAR-Congreso/1.5 (+political-intelligence; public-source-counter)'}
+UA = {'User-Agent':'RADAR-Congreso/1.6 (+political-intelligence; public-source-counter)'}
 
 def sentiment(text):
     words = re.findall(r"[a-záéíóúñü]+", text.lower())
@@ -97,7 +97,7 @@ def x_intelligence(posts,users,name):
         username=u.get('username',''); followers=int((u.get('public_metrics') or {}).get('followers_count',0) or 0)
         verified=bool(u.get('verified',False)); verified_type=u.get('verified_type','') or ''
         pid=p.get('id',''); url=f'https://x.com/{username}/status/{pid}' if username and pid else ''
-        post_rows.append({'id':pid,'text':text,'created_at':p.get('created_at',''),'author_name':u.get('name','Cuenta X'),'username':username,'followers':followers,'verified':verified,'verified_type':verified_type,'likes':likes,'reposts':reposts,'replies':replies,'quotes':quotes,'engagement':eng,'url':url,'sentiment':s})
+        post_rows.append({'id':pid,'author_id':aid,'text':text,'created_at':p.get('created_at',''),'author_name':u.get('name','Cuenta X'),'username':username,'followers':followers,'verified':verified,'verified_type':verified_type,'likes':likes,'reposts':reposts,'replies':replies,'quotes':quotes,'engagement':eng,'url':url,'sentiment':s})
         created=p.get('created_at','')[:10]
         if created: daily[created]+=1
         for w in re.findall(r"[a-záéíóúñü]{4,}",text.lower()):
@@ -105,11 +105,14 @@ def x_intelligence(posts,users,name):
     top_authors=[]
     for aid,count in authors.most_common(5):
         u=users.get(aid,{})
-        top_authors.append({'name':u.get('name','Cuenta X'),'username':u.get('username',''),'mentions':count,'followers':(u.get('public_metrics') or {}).get('followers_count',0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or ''})
+        username=u.get('username','')
+        author_posts=sorted([p for p in post_rows if p.get('author_id')==aid],key=lambda p:(p['engagement'],p['created_at']),reverse=True)[:5]
+        top_authors.append({'name':u.get('name','Cuenta X'),'username':username,'profile_url':f'https://x.com/{username}' if username else '','mentions':count,'followers':(u.get('public_metrics') or {}).get('followers_count',0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or '','posts':[{'text':p['text'],'url':p['url'],'engagement':p['engagement'],'created_at':p['created_at']} for p in author_posts]})
     top_accounts=[]
     for aid,count in authors.items():
         u=users.get(aid,{})
-        top_accounts.append({'name':u.get('name','Cuenta X'),'username':u.get('username',''),'mentions':count,'followers':int((u.get('public_metrics') or {}).get('followers_count',0) or 0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or ''})
+        username=u.get('username','')
+        top_accounts.append({'name':u.get('name','Cuenta X'),'username':username,'profile_url':f'https://x.com/{username}' if username else '','mentions':count,'followers':int((u.get('public_metrics') or {}).get('followers_count',0) or 0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or ''})
     top_accounts=sorted(top_accounts,key=lambda a:(a['followers'],a['mentions']),reverse=True)[:10]
     top_posts=sorted(post_rows,key=lambda p:(p['engagement'],p['followers'],p['created_at']),reverse=True)[:10]
     n=len(posts); balance=round((sc['Positivo']-sc['Negativo'])/n*100,1) if n else 0
