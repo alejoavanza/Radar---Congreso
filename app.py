@@ -9,7 +9,7 @@ app = Flask(__name__)
 POS = {'apoyo','respaldo','logro','avance','acuerdo','lidera','celebra','aprobado','victoria','positivo','defiende','gracias','excelente','bien'}
 NEG = {'crítica','critica','denuncia','escándalo','escandalo','rechazo','ataque','investigación','investigacion','crisis','polémica','polemica','fracaso','corrupción','corrupcion','mentira'}
 STOP = {'para','como','sobre','entre','desde','ante','tras','este','esta','estos','estas','del','las','los','una','uno','que','por','con','sin','más','mas','sus','han','fue','son','ser','https','esto','pero','porque','cuando','donde'}
-UA = {'User-Agent':'RADAR-Congreso/1.4 (+political-intelligence; public-source-counter)'}
+UA = {'User-Agent':'RADAR-Congreso/1.5 (+political-intelligence; public-source-counter)'}
 
 def sentiment(text):
     words = re.findall(r"[a-záéíóúñü]+", text.lower())
@@ -87,20 +87,33 @@ def x_status_detail(code):
 def x_intelligence(posts,users,name):
     sc=Counter(); words=Counter(); authors=Counter(); daily=Counter(); total_eng=0
     banned=set(re.findall(r"[a-záéíóúñü]+",name.lower()))|STOP
+    post_rows=[]
     for p in posts:
         text=p.get('text',''); s=sentiment(text); sc[s]+=1
-        pm=p.get('public_metrics') or {}; total_eng+=sum(int(pm.get(k,0) or 0) for k in ('like_count','retweet_count','reply_count','quote_count'))
-        aid=p.get('author_id'); authors[aid]+=1
+        pm=p.get('public_metrics') or {}
+        likes=int(pm.get('like_count',0) or 0); reposts=int(pm.get('retweet_count',0) or 0); replies=int(pm.get('reply_count',0) or 0); quotes=int(pm.get('quote_count',0) or 0)
+        eng=likes+reposts+replies+quotes; total_eng+=eng
+        aid=p.get('author_id'); authors[aid]+=1; u=users.get(aid,{})
+        username=u.get('username',''); followers=int((u.get('public_metrics') or {}).get('followers_count',0) or 0)
+        verified=bool(u.get('verified',False)); verified_type=u.get('verified_type','') or ''
+        pid=p.get('id',''); url=f'https://x.com/{username}/status/{pid}' if username and pid else ''
+        post_rows.append({'id':pid,'text':text,'created_at':p.get('created_at',''),'author_name':u.get('name','Cuenta X'),'username':username,'followers':followers,'verified':verified,'verified_type':verified_type,'likes':likes,'reposts':reposts,'replies':replies,'quotes':quotes,'engagement':eng,'url':url,'sentiment':s})
         created=p.get('created_at','')[:10]
         if created: daily[created]+=1
         for w in re.findall(r"[a-záéíóúñü]{4,}",text.lower()):
             if w not in banned: words[w]+=1
-    top=[]
+    top_authors=[]
     for aid,count in authors.most_common(5):
         u=users.get(aid,{})
-        top.append({'name':u.get('name','Cuenta X'),'username':u.get('username',''),'mentions':count,'followers':(u.get('public_metrics') or {}).get('followers_count',0)})
+        top_authors.append({'name':u.get('name','Cuenta X'),'username':u.get('username',''),'mentions':count,'followers':(u.get('public_metrics') or {}).get('followers_count',0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or ''})
+    top_accounts=[]
+    for aid,count in authors.items():
+        u=users.get(aid,{})
+        top_accounts.append({'name':u.get('name','Cuenta X'),'username':u.get('username',''),'mentions':count,'followers':int((u.get('public_metrics') or {}).get('followers_count',0) or 0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or ''})
+    top_accounts=sorted(top_accounts,key=lambda a:(a['followers'],a['mentions']),reverse=True)[:10]
+    top_posts=sorted(post_rows,key=lambda p:(p['engagement'],p['followers'],p['created_at']),reverse=True)[:10]
     n=len(posts); balance=round((sc['Positivo']-sc['Negativo'])/n*100,1) if n else 0
-    return {'total':n,'positive':sc['Positivo'],'negative':sc['Negativo'],'neutral':sc['Neutral'],'balance':balance,'engagement':total_eng,'avg_engagement':round(total_eng/n,1) if n else 0,'top_topics':[w for w,_ in words.most_common(8)],'top_authors':top,'daily':[{'date':d,'count':c} for d,c in sorted(daily.items())]}
+    return {'total':n,'positive':sc['Positivo'],'negative':sc['Negativo'],'neutral':sc['Neutral'],'balance':balance,'engagement':total_eng,'avg_engagement':round(total_eng/n,1) if n else 0,'top_topics':[w for w,_ in words.most_common(8)],'top_authors':top_authors,'top_accounts':top_accounts,'top_posts':top_posts,'daily':[{'date':d,'count':c} for d,c in sorted(daily.items())]}
 
 def fetch_x_count(name,aliases,territory,days,max_pages=10):
     token=os.getenv('X_BEARER_TOKEN','').strip()
@@ -109,7 +122,7 @@ def fetch_x_count(name,aliases,territory,days,max_pages=10):
     start=(datetime.now(timezone.utc)-timedelta(days=days)).replace(microsecond=0).isoformat().replace('+00:00','Z'); headers={'Authorization':f'Bearer {token}','User-Agent':UA['User-Agent']}; nxt=None; posts={}; users={}
     try:
         for _ in range(max_pages):
-            params={'query':query,'max_results':100,'start_time':start,'tweet.fields':'created_at,author_id,public_metrics,lang','expansions':'author_id','user.fields':'name,username,public_metrics'}
+            params={'query':query,'max_results':100,'start_time':start,'tweet.fields':'created_at,author_id,public_metrics,lang','expansions':'author_id','user.fields':'name,username,public_metrics,verified,verified_type'}
             if nxt: params['next_token']=nxt
             r=requests.get(endpoint,params=params,timeout=15,headers=headers)
             if not r.ok: return 0,'error',{'code':f'http_{r.status_code}','label':x_status_detail(r.status_code),'http_status':r.status_code,'endpoint':endpoint_name},None
