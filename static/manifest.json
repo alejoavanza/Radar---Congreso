@@ -1,1 +1,1 @@
-{"name":"RADAR Congreso","short_name":"RADAR","start_url":"/","display":"standalone","background_color":"#071226","theme_color":"#08152d","description":"Inteligencia política y monitoreo reputacional."}
+{"name":"RADAR Congreso","short_name":"RADAR","start_url":"/","scope":"/","display":"standalone","orientation":"portrait","background_color":"#071226","theme_color":"#08152d","description":"Inteligencia política y monitoreo reputacional en tiempo real.","icons":[{"src":"/static/radar-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
