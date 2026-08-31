@@ -9,7 +9,7 @@ app = Flask(__name__)
 POS = {'apoyo','respaldo','logro','avance','acuerdo','lidera','celebra','aprobado','victoria','positivo','defiende'}
 NEG = {'crítica','critica','denuncia','escándalo','escandalo','rechazo','ataque','investigación','investigacion','crisis','polémica','polemica','fracaso'}
 STOP = {'para','como','sobre','entre','desde','ante','tras','este','esta','estos','estas','del','las','los','una','uno','que','por','con','sin','más','mas','sus','han','fue','son','ser'}
-UA = {'User-Agent':'RADAR-Congreso/1.2 (+political-intelligence; public-source-counter)'}
+UA = {'User-Agent':'RADAR-Congreso/1.3 (+political-intelligence; public-source-counter)'}
 
 def sentiment(text):
     words = re.findall(r"[a-záéíóúñü]+", text.lower())
@@ -97,10 +97,23 @@ def fetch_reddit_count(name, aliases, territory, days, max_pages=5):
     except Exception as e:
         return 0, 'error', str(e)
 
+def x_status_detail(status_code):
+    mapping={
+        400:'Solicitud rechazada por X (consulta o parámetros no admitidos).',
+        401:'Token rechazado por X. Revisa que el Bearer Token sea válido.',
+        402:'X exige créditos o facturación activa para esta consulta.',
+        403:'La cuenta/app no tiene permiso para este endpoint de X.',
+        404:'Endpoint de X no disponible para esta app.',
+        429:'Límite de consultas de X alcanzado temporalmente.'
+    }
+    return mapping.get(status_code, f'X respondió con HTTP {status_code}.')
+
 def fetch_x_count(name, aliases, territory, days, max_pages=10):
     token=os.getenv('X_BEARER_TOKEN','').strip()
-    if not token: return 0, 'credential_required', None
+    if not token:
+        return 0, 'credential_required', {'code':'missing_token','label':'X: falta Bearer Token','http_status':None,'endpoint':None}
     endpoint='https://api.x.com/2/tweets/search/recent' if days <= 7 else 'https://api.x.com/2/tweets/search/all'
+    endpoint_name='recent' if days <= 7 else 'all'
     query=build_query(name,aliases,territory)
     start=(datetime.now(timezone.utc)-timedelta(days=days)).replace(microsecond=0).isoformat().replace('+00:00','Z')
     headers={'Authorization':f'Bearer {token}','User-Agent':UA['User-Agent']}
@@ -109,14 +122,32 @@ def fetch_x_count(name, aliases, territory, days, max_pages=10):
         for _ in range(max_pages):
             params={'query':query,'max_results':100,'start_time':start,'tweet.fields':'created_at'}
             if next_token: params['next_token']=next_token
-            r=requests.get(endpoint,params=params,timeout=15,headers=headers); r.raise_for_status(); data=r.json()
+            r=requests.get(endpoint,params=params,timeout=15,headers=headers)
+            if not r.ok:
+                status=r.status_code
+                return 0, 'error', {
+                    'code':f'http_{status}',
+                    'label':x_status_detail(status),
+                    'http_status':status,
+                    'endpoint':endpoint_name
+                }
+            data=r.json()
             for item in data.get('data',[]):
                 if item.get('id'): seen.add(item['id'])
             next_token=(data.get('meta') or {}).get('next_token')
             if not next_token: break
-        return len(seen), 'active', None
-    except Exception as e:
-        return 0, 'error', str(e)
+        return len(seen), 'active', {
+            'code':'ok',
+            'label':f'X conectado: {len(seen)} menciones detectadas.',
+            'http_status':200,
+            'endpoint':endpoint_name
+        }
+    except requests.Timeout:
+        return 0, 'error', {'code':'timeout','label':'X no respondió a tiempo.','http_status':None,'endpoint':endpoint_name}
+    except requests.RequestException:
+        return 0, 'error', {'code':'network_error','label':'Error de conexión al consultar X.','http_status':None,'endpoint':endpoint_name}
+    except Exception:
+        return 0, 'error', {'code':'unexpected_error','label':'Error inesperado al procesar la respuesta de X.','http_status':None,'endpoint':endpoint_name}
 
 def fetch_youtube_count(name, aliases, territory, days, max_pages=10):
     key=os.getenv('YOUTUBE_API_KEY','').strip()
@@ -157,7 +188,7 @@ def report():
 
     bsky,bsky_status,_=fetch_bluesky_count(name,aliases,territory,days)
     reddit,reddit_status,_=fetch_reddit_count(name,aliases,territory,days)
-    xcount,xstatus,_=fetch_x_count(name,aliases,territory,days)
+    xcount,xstatus,xdetail=fetch_x_count(name,aliases,territory,days)
     yt,ytstatus,_=fetch_youtube_count(name,aliases,territory,days)
     fb,fbstatus,_=restricted_platform('Facebook')
     ig,igstatus,_=restricted_platform('Instagram')
@@ -165,7 +196,8 @@ def report():
 
     platform_counts={'X':xcount,'YouTube':yt,'Bluesky':bsky,'Reddit':reddit,'Facebook':fb,'Instagram':ig,'TikTok':tt}
     platform_status={'X':xstatus,'YouTube':ytstatus,'Bluesky':bsky_status,'Reddit':reddit_status,'Facebook':fbstatus,'Instagram':igstatus,'TikTok':ttstatus}
-    social=sum(platform_counts.values()); mentions_total=total+social
+    social=sum(platform_counts[k] for k,v in platform_status.items() if v=='active')
+    mentions_total=total+social
     active=[k for k,v in platform_status.items() if v=='active']
 
     summary=f"{name} registra {total} resultados periodísticos en los últimos {days} días. El balance contextual preliminar es {balance:+.1f}, con {pos} titulares positivos, {neg} negativos y {neu} neutrales."
@@ -175,7 +207,8 @@ def report():
         'mentions':{
             'web':total,'social':social,'combined':mentions_total,
             'platform_counts':platform_counts,'platform_status':platform_status,'active_sources':active,
-            'note':'Total detectado únicamente en fuentes activas. X y YouTube se activan con credenciales API. Facebook, Instagram y TikTok requieren acceso especializado/restringido para monitoreo público general.'
+            'diagnostics':{'X':xdetail},
+            'note':'Total detectado únicamente en fuentes activas. Facebook, Instagram y TikTok requieren acceso especializado/restringido para monitoreo público general.'
         }
     })
 
