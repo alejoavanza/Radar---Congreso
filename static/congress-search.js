@@ -55,6 +55,7 @@
   if (!root.document) return;
 
   const input = document.getElementById('name');
+  const clearButton = document.getElementById('clear-name');
   const list = document.getElementById('congress-options');
   const status = document.getElementById('congress-status');
   const selectedNote = document.getElementById('congress-selected');
@@ -136,6 +137,13 @@
   }
 
   input.addEventListener('input', () => { clearSelection(); render(); });
+  clearButton?.addEventListener('mousedown', event => event.preventDefault());
+  clearButton?.addEventListener('click', () => {
+    input.value = '';
+    // Use the normal editing flow to clear the selected member and suggestions.
+    input.dispatchEvent(new Event('input', {bubbles: true}));
+    input.focus();
+  });
   input.addEventListener('focus', render);
   input.addEventListener('blur', () => { if (!choosing) close(); });
   input.addEventListener('keydown', event => {
