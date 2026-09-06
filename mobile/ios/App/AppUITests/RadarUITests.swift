@@ -58,7 +58,7 @@ final class RadarUITests: XCTestCase {
             let delta = firstControl.frame.minY - app.frame.minY - app.frame.height * 0.12
             if abs(delta) < 24 { return }
             let distance = min(abs(delta) / app.frame.height, 0.4)
-            let startY = delta > 0 ? 0.75 : 0.25
+            let startY: CGFloat = delta > 0 ? 0.75 : 0.25
             let endY = startY + (delta > 0 ? -distance : distance)
             let view = app.webViews.firstMatch
             view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: startY))
