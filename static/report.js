@@ -4,6 +4,32 @@ let currentQuery = null;
 let currentForm = null;
 let reportSearchSequence = 0;
 
+function withoutX(report) {
+  const mentions = {...report.mentions};
+  const counts = {...mentions.platform_counts};
+  const statuses = {...mentions.platform_status};
+  delete counts.X;
+  delete statuses.X;
+  // Old saved reports can include X in their aggregate totals. Recalculate
+  // from the remaining measured sources instead of keeping that hidden count.
+  if (mentions.platform_counts && mentions.platform_status) {
+    mentions.social = Object.entries(counts).reduce((sum, [source, count]) =>
+      sum + (statuses[source] === 'active' && Number.isFinite(count) && count >= 0 ? count : 0), 0);
+    mentions.combined = mentions.web + mentions.social;
+  }
+  mentions.platform_counts = counts;
+  mentions.platform_status = statuses;
+  mentions.active_sources = (Array.isArray(mentions.active_sources) ? mentions.active_sources : [])
+    .filter(source => source !== 'X');
+  if (mentions.diagnostics) {
+    mentions.diagnostics = {...mentions.diagnostics};
+    delete mentions.diagnostics.X;
+    if (!Object.keys(mentions.diagnostics).length) delete mentions.diagnostics;
+  }
+  delete mentions.x_intelligence;
+  return {...report, mentions};
+}
+
 async function showOfficialProfile(query, selectedId, searchSequence) {
   const card = $('official-profile');
   if (!card) return;
@@ -100,7 +126,7 @@ function restoreReport() {
   try {
     const saved = JSON.parse(sessionStorage.getItem(reportStorageKey));
     if (!saved?.query || !saved.report?.mentions || !Array.isArray(saved.report.items)) return;
-    currentReport = saved.report;
+    currentReport = withoutX(saved.report);
     currentQuery = saved.query;
     currentForm = saved.form || null;
     for (const field of ['name', 'aliases', 'days']) {
@@ -145,8 +171,9 @@ async function go() {
     const data = await response.json();
     if (searchSequence !== reportSearchSequence) return;
     if (!response.ok) throw new Error(data.error || 'Error');
-    renderReport(data);
-    currentReport = data;
+    const reportData = withoutX(data);
+    renderReport(reportData);
+    currentReport = reportData;
     currentQuery = query;
     currentForm = form;
     $('report-restored').classList.add('hide');
@@ -167,7 +194,13 @@ document.addEventListener('visibilitychange', () => {
 });
 
 function renderReport(d) {
-  $('mweb').textContent=d.mentions.web;$('msocial').textContent=d.mentions.social;$('mcombined').textContent=d.mentions.combined;$('xstatus').textContent=d.mentions.diagnostics?.X?.label||'';const x=d.mentions.x_intelligence;if(x){$('xintel').classList.remove('hide');$('xtotal').textContent=x.total;$('xbalance').textContent=x.balance;$('xeng').textContent=fmt(x.engagement);$('xavg').textContent=fmt(x.avg_engagement);$('xaccounts').innerHTML=(x.top_accounts||[]).map(accountRow).join('');$('xposts').innerHTML=(x.top_posts||[]).map(postRow).join('');$('xauthors').innerHTML=(x.top_authors||[]).map(a=>`<div class="author"><div class="name">${a.profile_url?`<a href="${a.profile_url}" target="_blank">${esc(a.name)} ${a.username?'@'+esc(a.username):''}</a>`:esc(a.name)}${vb(a)}</div><div class="stats">${a.count} apariciones · ${fmt(a.followers)} seguidores · ${fmt(a.engagement)} interacciones</div>${(a.top_posts||[]).map((p,j)=>`<div class="author-post"><span class="stats">#${j+1} · ${fmt(p.engagement)} interacciones</span><div>${esc(p.text)}</div>${p.post_url?`<a href="${p.post_url}" target="_blank">Abrir publicación →</a>`:''}</div>`).join('')}</div>`).join('');$('xtopics').innerHTML=(x.topics||[]).map(t=>`<span class="topic">${esc(t.term)} · ${t.count}</span>`).join('');$('xdaily').innerHTML=(x.daily||[]).map(v=>`${esc(v.date)} · ${v.count} menciones · ${fmt(v.engagement)} interacciones`).join('<br>')}else $('xintel').classList.add('hide');$('rname').textContent=d.name;$('summary').textContent=d.summary;$('items').innerHTML=(d.items||[]).map(newsItem).join('');$('result').classList.remove('hide')
+  $('mweb').textContent = d.mentions.web;
+  $('msocial').textContent = d.mentions.social;
+  $('mcombined').textContent = d.mentions.combined;
+  $('rname').textContent = d.name;
+  $('summary').textContent = d.summary;
+  $('items').innerHTML = (d.items || []).map(newsItem).join('');
+  $('result').classList.remove('hide');
 }
 
 const radarZone = $('territory');
