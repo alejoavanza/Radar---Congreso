@@ -71,43 +71,6 @@ def fetch_reddit_count(name,aliases,territory,days,max_pages=5):
             if old or not after:break
         return len(seen),'active',None
     except Exception as e:return 0,'error',str(e)
-def x_status_detail(code):return {400:'Solicitud rechazada por X.',401:'Token rechazado por X.',402:'X exige créditos o facturación activa para esta consulta.',403:'La app no tiene permiso para este endpoint de X.',429:'Límite de consultas de X alcanzado temporalmente.'}.get(code,f'X respondió con HTTP {code}.')
-def x_headers():return {'Authorization':f"Bearer {os.getenv('X_BEARER_TOKEN','').strip()}",'User-Agent':UA['User-Agent']}
-def x_get(url,params=None):
-    r=requests.get(url,params=params,timeout=15,headers=x_headers());return r,r.json() if r.ok else {}
-def x_intelligence(posts,users,name):
-    sc=Counter();words=Counter();authors=Counter();daily=Counter();total_eng=0;post_rows=[];banned=set(re.findall(r"[a-záéíóúñü]+",name.lower()))|STOP
-    for p in posts:
-        text=p.get('text','');s=sentiment(text);sc[s]+=1;pm=p.get('public_metrics') or {};likes=int(pm.get('like_count',0) or 0);reposts=int(pm.get('retweet_count',pm.get('repost_count',0)) or 0);replies=int(pm.get('reply_count',0) or 0);quotes=int(pm.get('quote_count',0) or 0);eng=likes+reposts+replies+quotes;total_eng+=eng;aid=p.get('author_id');authors[aid]+=1;u=users.get(aid,{});username=u.get('username','');followers=int((u.get('public_metrics') or {}).get('followers_count',0) or 0);pid=p.get('id','');url=f'https://x.com/{username}/status/{pid}' if username and pid else ''
-        post_rows.append({'id':pid,'author_id':aid,'text':text,'created_at':p.get('created_at',''),'author_name':u.get('name','Cuenta X'),'username':username,'followers':followers,'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or '','likes':likes,'reposts':reposts,'replies':replies,'quotes':quotes,'engagement':eng,'url':url,'sentiment':s})
-        if p.get('created_at','')[:10]:daily[p['created_at'][:10]]+=1
-        for w in re.findall(r"[a-záéíóúñü]{4,}",text.lower()):
-            if w not in banned:words[w]+=1
-    top_authors=[];top_accounts=[]
-    for aid,count in authors.items():
-        u=users.get(aid,{});username=u.get('username','');base={'name':u.get('name','Cuenta X'),'username':username,'profile_url':f'https://x.com/{username}' if username else '','mentions':count,'followers':int((u.get('public_metrics') or {}).get('followers_count',0) or 0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or ''};top_accounts.append(base)
-        aps=sorted([p for p in post_rows if p['author_id']==aid],key=lambda p:(p['engagement'],p['created_at']),reverse=True)[:5];top_authors.append({**base,'posts':[{'text':p['text'],'url':p['url'],'engagement':p['engagement']} for p in aps]})
-    top_authors=sorted(top_authors,key=lambda a:a['mentions'],reverse=True)[:5];top_accounts=sorted(top_accounts,key=lambda a:(a['followers'],a['mentions']),reverse=True)[:10];top_posts=sorted(post_rows,key=lambda p:(p['engagement'],p['followers']),reverse=True)[:10];n=len(posts)
-    return {'total':n,'positive':sc['Positivo'],'negative':sc['Negativo'],'neutral':sc['Neutral'],'balance':round((sc['Positivo']-sc['Negativo'])/n*100,1) if n else 0,'engagement':total_eng,'avg_engagement':round(total_eng/n,1) if n else 0,'top_topics':[w for w,_ in words.most_common(8)],'top_authors':top_authors,'top_accounts':top_accounts,'top_posts':top_posts,'daily':[{'date':d,'count':c} for d,c in sorted(daily.items())]}
-def fetch_x_count(name,aliases,territory,days,max_pages=10):
-    if not os.getenv('X_BEARER_TOKEN','').strip():return 0,'credential_required',{'code':'missing_token','label':'X: falta Bearer Token'},None
-    endpoint='https://api.x.com/2/tweets/search/recent' if days<=7 else 'https://api.x.com/2/tweets/search/all';start=(datetime.now(timezone.utc)-timedelta(days=days)).replace(microsecond=0).isoformat().replace('+00:00','Z');nxt=None;posts={};users={}
-    try:
-        for _ in range(max_pages):
-            params={'query':build_query(name,aliases,territory),'max_results':100,'start_time':start,'tweet.fields':'created_at,author_id,public_metrics,lang,referenced_tweets','expansions':'author_id','user.fields':'name,username,public_metrics,verified,verified_type'}
-            if nxt:params['next_token']=nxt
-            r=requests.get(endpoint,params=params,timeout=15,headers=x_headers())
-            if not r.ok:return 0,'error',{'code':f'http_{r.status_code}','label':x_status_detail(r.status_code),'http_status':r.status_code},None
-            data=r.json()
-            for u in (data.get('includes') or {}).get('users',[]):users[u.get('id')]=u
-            for p in data.get('data',[]):
-                if p.get('id'):posts[p['id']]=p
-            nxt=(data.get('meta') or {}).get('next_token')
-            if not nxt:break
-        intel=x_intelligence(list(posts.values()),users,name);return len(posts),'active',{'code':'ok','label':f'X conectado: {len(posts)} menciones detectadas.','http_status':200},intel
-    except requests.Timeout:return 0,'error',{'code':'timeout','label':'X no respondió a tiempo.'},None
-    except Exception:return 0,'error',{'code':'unexpected_error','label':'Error al procesar X.'},None
-
 def fetch_youtube_count(*args,**kwargs):return (0,'credential_required',None) if not os.getenv('YOUTUBE_API_KEY','').strip() else (0,'credential_required',None)
 def restricted_platform(name):return 0,'restricted_access',None
 @app.get('/')
@@ -123,8 +86,8 @@ def report():
     if not name:return jsonify({'error':'Escribe un nombre.'}),400
     days=max(1,min(int(d.get('days',30)),90));limit=max(10,min(int(d.get('limit',60)),100));aliases=d.get('aliases','');territory=d.get('territory','Colombia');items,err=fetch_news(name,aliases,territory,days,limit)
     if err:return jsonify({'error':'No fue posible consultar las fuentes en este momento.','detail':err}),502
-    counts=Counter(x['sentiment'] for x in items);total=len(items);pos=counts['Positivo'];neg=counts['Negativo'];neu=counts['Neutral'];balance=round((pos-neg)/total*100,1) if total else 0;bsky,bs,_=fetch_bluesky_count(name,aliases,territory,days);reddit,rs,_=fetch_reddit_count(name,aliases,territory,days);xcount,xs,xd,xintel=fetch_x_count(name,aliases,territory,days);yt,ys,_=fetch_youtube_count();fb,fbs,_=restricted_platform('Facebook');ig,igs,_=restricted_platform('Instagram');tt,tts,_=restricted_platform('TikTok');pc={'X':xcount,'YouTube':yt,'Bluesky':bsky,'Reddit':reddit,'Facebook':fb,'Instagram':ig,'TikTok':tt};ps={'X':xs,'YouTube':ys,'Bluesky':bs,'Reddit':rs,'Facebook':fbs,'Instagram':igs,'TikTok':tts};social=sum(pc[k] for k,v in ps.items() if v=='active');active=[k for k,v in ps.items() if v=='active'];summary=f"{name} registra {total} resultados periodísticos en los últimos {days} días. El balance contextual preliminar es {balance:+.1f}, con {pos} titulares positivos, {neg} negativos y {neu} neutrales."
-    return jsonify({'name':name,'days':days,'total':total,'positive':pos,'negative':neg,'neutral':neu,'balance':balance,'topics':topics(items,name),'summary':summary,'items':items,'mentions':{'web':total,'social':social,'combined':total+social,'platform_counts':pc,'platform_status':ps,'active_sources':active,'diagnostics':{'X':xd},'x_intelligence':xintel,'note':'Total detectado únicamente en fuentes activas.'}})
+    counts=Counter(x['sentiment'] for x in items);total=len(items);pos=counts['Positivo'];neg=counts['Negativo'];neu=counts['Neutral'];balance=round((pos-neg)/total*100,1) if total else 0;bsky,bs,_=fetch_bluesky_count(name,aliases,territory,days);reddit,rs,_=fetch_reddit_count(name,aliases,territory,days);yt,ys,_=fetch_youtube_count();fb,fbs,_=restricted_platform('Facebook');ig,igs,_=restricted_platform('Instagram');tt,tts,_=restricted_platform('TikTok');pc={'YouTube':yt,'Bluesky':bsky,'Reddit':reddit,'Facebook':fb,'Instagram':ig,'TikTok':tt};ps={'YouTube':ys,'Bluesky':bs,'Reddit':rs,'Facebook':fbs,'Instagram':igs,'TikTok':tts};social=sum(pc[k] for k,v in ps.items() if v=='active');active=[k for k,v in ps.items() if v=='active'];summary=f"{name} registra {total} resultados periodísticos en los últimos {days} días. El balance contextual preliminar es {balance:+.1f}, con {pos} titulares positivos, {neg} negativos y {neu} neutrales."
+    return jsonify({'name':name,'days':days,'total':total,'positive':pos,'negative':neg,'neutral':neu,'balance':balance,'topics':topics(items,name),'summary':summary,'items':items,'mentions':{'web':total,'social':social,'combined':total+social,'platform_counts':pc,'platform_status':ps,'active_sources':active,'note':'Total detectado únicamente en fuentes activas.'}})
 @app.get('/health')
 def health():return {'status':'ok'}
 if __name__=='__main__':app.run(host='0.0.0.0',port=5000,debug=True)

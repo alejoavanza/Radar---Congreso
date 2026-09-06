@@ -29,7 +29,7 @@ body { background: var(--tactika-gray); color: var(--text); }
 .splash::after { background: var(--tactika-orange); }
 
 .card { background: var(--panel); border-color: var(--line); }
-label, .metric span, .stats, .note, .subtle, .daily, .loading {
+label, .metric span, .note, .subtle, .loading {
   color: var(--muted);
 }
 input, select { background: var(--panel); border-color: var(--line); color: var(--text); }
@@ -67,20 +67,19 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
   border: 1px solid var(--tactika-teal);
   border-bottom: 4px solid var(--tactika-orange);
 }
-.metric, .xdiag { background: var(--tactika-soft); border-color: var(--line); }
+.metric { background: var(--tactika-soft); border-color: var(--line); }
 .metric b { color: var(--tactika-teal); }
 .mentions .metric:nth-child(1), .mentions .metric:nth-child(3) { border-top: 3px solid var(--tactika-teal); }
 .mentions .metric:nth-child(2) { border-top: 3px solid var(--tactika-orange); }
-.topic, .badge { background: var(--tactika-soft); border-color: var(--line); color: var(--tactika-teal); }
-.item, .xrow, .author { border-bottom-color: var(--line); }
-.item a, .xrow a, .author a, #comparetab a, .congress-sources a { color: var(--tactika-teal); }
+.topic { background: var(--tactika-soft); border-color: var(--line); color: var(--tactika-teal); }
+.item { border-bottom-color: var(--line); }
+.item a, #comparetab a, .congress-sources a { color: var(--tactika-teal); }
 .official-profile { border-left: 4px solid var(--tactika-orange); }
 .official-profile-label { color: var(--tactika-teal); font-size: .875rem; font-weight: 700; margin: 0 0 .5rem; }
 .official-profile h2 { margin: .5rem 0; overflow-wrap: anywhere; }
 .official-profile a { color: var(--tactika-teal); display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
 .official-profile .note { margin: .5rem 0; }
 .official-profile-footnote { font-size: .875rem; }
-.network-head, .author-post { border-left-color: var(--tactika-orange); }
 .coverage { background: var(--tactika-soft); }
 .coverage > div { background: var(--tactika-teal); }
 .warning { background: #fff3eb; border-color: var(--tactika-orange); color: var(--tactika-ink); }
@@ -124,6 +123,15 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
   margin-top: 30px;
   padding-top: 24px;
   border-top: 1px solid var(--line);
+}
+.tactika-services {
+  margin: 0 0 14px;
+  color: var(--tactika-teal);
+  font-size: clamp(11px, 3.2vw, 16px);
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
 }
 .tactika-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 .tactika-links a {
