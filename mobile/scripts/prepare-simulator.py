@@ -11,10 +11,12 @@ def run(*args):
 
 
 devices = json.loads(run("xcrun", "simctl", "list", "devices", "available", "--json"))["devices"]
+sdk_version = tuple(map(int, run("xcrun", "--sdk", "iphonesimulator", "--show-sdk-version").split(".")))
 candidates = [
     (runtime, device)
     for runtime, group in devices.items()
     if ".iOS-" in runtime
+    if tuple(map(int, re.findall(r"\d+", runtime))) <= sdk_version
     for device in group
     if device.get("isAvailable") and "iPhone" in device["name"] and "Pro Max" in device["name"]
 ]
@@ -29,20 +31,10 @@ def version_key(candidate):
 
 runtime, device = max(candidates, key=version_key)
 udid = device["udid"]
-if device["state"] != "Booted":
-    subprocess.run(["xcrun", "simctl", "boot", udid], check=True, timeout=60)
-subprocess.run(["xcrun", "simctl", "bootstatus", udid, "-b"], check=True, timeout=240)
-subprocess.run([
-    "xcrun", "simctl", "status_bar", udid, "override", "--time", "9:41",
-    "--dataNetwork", "wifi", "--wifiMode", "active", "--wifiBars", "3",
-    "--batteryState", "charged", "--batteryLevel", "100",
-], check=True, timeout=30)
-with open(os.environ["GITHUB_ENV"], "a") as env_file:
-    env_file.write(f"SIMULATOR_UDID={udid}\n")
 evidence = Path("build/evidence")
 evidence.mkdir(parents=True, exist_ok=True)
 (evidence / "simulator.json").write_text(json.dumps({
-    "device": device["name"], "runtime": runtime, "udid": udid,
+    "device": device["name"], "runtime": runtime, "udid": udid, "sdk_version": sdk_version,
     "tested_commit": run("git", "rev-parse", "HEAD"),
     "source_commit": os.environ.get("RADAR_SOURCE_COMMIT"),
     "workflow_run": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
@@ -50,4 +42,16 @@ evidence.mkdir(parents=True, exist_ok=True)
     "capture_method": "XCUIScreen screenshot attachment from the running app; no seeded results",
     "scope": "Launch, tab navigation and name/zone clear controls. No live report, purchase or physical-device claim.",
 }, ensure_ascii=False, indent=2) + "\n")
-print(f"Selected {device['name']} / {runtime} ({udid})")
+print(f"Selected {device['name']} / {runtime} ({udid}); SDK {sdk_version}", flush=True)
+if device["state"] != "Booted":
+    subprocess.run(["xcrun", "simctl", "boot", udid], check=True, timeout=60)
+# A hosted Mac's first boot migrates iOS data. Keep a finite allowance for it,
+# independent of the app's own launch timeout in RadarUITests.
+subprocess.run(["xcrun", "simctl", "bootstatus", udid, "-b"], check=True, timeout=600)
+subprocess.run([
+    "xcrun", "simctl", "status_bar", udid, "override", "--time", "9:41",
+    "--dataNetwork", "wifi", "--wifiMode", "active", "--wifiBars", "3",
+    "--batteryState", "charged", "--batteryLevel", "100",
+], check=True, timeout=30)
+with open(os.environ["GITHUB_ENV"], "a") as env_file:
+    env_file.write(f"SIMULATOR_UDID={udid}\n")
