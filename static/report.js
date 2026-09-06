@@ -94,13 +94,16 @@ function saveReport() {
 }
 
 function restoreReport() {
+  // Every opening starts the next Radar search in Colombia, even after a saved
+  // search elsewhere. Keep the original query attached to the recovered report.
+  $('territory').value = 'Colombia';
   try {
     const saved = JSON.parse(sessionStorage.getItem(reportStorageKey));
     if (!saved?.query || !saved.report?.mentions || !Array.isArray(saved.report.items)) return;
     currentReport = saved.report;
     currentQuery = saved.query;
     currentForm = saved.form || null;
-    for (const field of ['name', 'aliases', 'territory', 'days']) {
+    for (const field of ['name', 'aliases', 'days']) {
       if (currentQuery[field] !== undefined) $(field).value = currentQuery[field];
     }
     if (currentForm) {
@@ -112,6 +115,8 @@ function restoreReport() {
     const searchSequence = ++reportSearchSequence;
     const profileReady = showOfficialProfile(currentQuery, currentForm?.congress_id, searchSequence);
     renderReport(currentReport);
+    const savedZone = typeof currentQuery.territory === 'string' ? currentQuery.territory.trim() : 'Colombia';
+    $('report-restored').textContent = `Consulta recuperada · Zona consultada: ${savedZone || 'Sin filtro de zona'}. Genera otro reporte para actualizarla.`;
     $('report-restored').classList.remove('hide');
     profileReady.then(() => {
       if (searchSequence === reportSearchSequence) requestAnimationFrame(() => window.scrollTo(0, Number(saved.scrollY) || 0));
@@ -164,5 +169,14 @@ document.addEventListener('visibilitychange', () => {
 function renderReport(d) {
   $('mweb').textContent=d.mentions.web;$('msocial').textContent=d.mentions.social;$('mcombined').textContent=d.mentions.combined;$('xstatus').textContent=d.mentions.diagnostics?.X?.label||'';const x=d.mentions.x_intelligence;if(x){$('xintel').classList.remove('hide');$('xtotal').textContent=x.total;$('xbalance').textContent=x.balance;$('xeng').textContent=fmt(x.engagement);$('xavg').textContent=fmt(x.avg_engagement);$('xaccounts').innerHTML=(x.top_accounts||[]).map(accountRow).join('');$('xposts').innerHTML=(x.top_posts||[]).map(postRow).join('');$('xauthors').innerHTML=(x.top_authors||[]).map(a=>`<div class="author"><div class="name">${a.profile_url?`<a href="${a.profile_url}" target="_blank">${esc(a.name)} ${a.username?'@'+esc(a.username):''}</a>`:esc(a.name)}${vb(a)}</div><div class="stats">${a.count} apariciones · ${fmt(a.followers)} seguidores · ${fmt(a.engagement)} interacciones</div>${(a.top_posts||[]).map((p,j)=>`<div class="author-post"><span class="stats">#${j+1} · ${fmt(p.engagement)} interacciones</span><div>${esc(p.text)}</div>${p.post_url?`<a href="${p.post_url}" target="_blank">Abrir publicación →</a>`:''}</div>`).join('')}</div>`).join('');$('xtopics').innerHTML=(x.topics||[]).map(t=>`<span class="topic">${esc(t.term)} · ${t.count}</span>`).join('');$('xdaily').innerHTML=(x.daily||[]).map(v=>`${esc(v.date)} · ${v.count} menciones · ${fmt(v.engagement)} interacciones`).join('<br>')}else $('xintel').classList.add('hide');$('rname').textContent=d.name;$('summary').textContent=d.summary;$('items').innerHTML=(d.items||[]).map(newsItem).join('');$('result').classList.remove('hide')
 }
+
+const radarZone = $('territory');
+const clearZoneButton = $('clear-territory');
+clearZoneButton?.addEventListener('mousedown', event => event.preventDefault());
+clearZoneButton?.addEventListener('click', () => {
+  radarZone.value = '';
+  radarZone.dispatchEvent(new Event('input', {bubbles: true}));
+  radarZone.focus();
+});
 
 restoreReport();
