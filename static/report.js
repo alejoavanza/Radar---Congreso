@@ -2,6 +2,56 @@ const reportStorageKey = 'radar:report:v1';
 let currentReport = null;
 let currentQuery = null;
 let currentForm = null;
+let reportSearchSequence = 0;
+
+async function showOfficialProfile(query, selectedId, searchSequence) {
+  const card = $('official-profile');
+  if (!card) return;
+  card.replaceChildren();
+  card.classList.add('hide');
+  try {
+    await window.RadarCongress?.catalogReady;
+    if (searchSequence !== reportSearchSequence) return;
+    const member = window.RadarCongress?.findMember(query.name, selectedId);
+    if (!member) return;
+    const individual = Boolean(member.profile_url);
+    const url = new URL(individual ? member.profile_url : member.source_url);
+    const host = member.chamber === 'camara' ? 'www.camara.gov.co' : 'www.senado.gov.co';
+    if (url.protocol !== 'https:' || url.hostname !== host || url.username || url.password || url.port) return;
+    if (!individual) url.hash = ':~:text=' + encodeURIComponent(`${member.surnames} ${member.given_names}`);
+    const chamber = member.chamber === 'camara' ? 'Cámara de Representantes' : 'Senado de la República';
+    const label = document.createElement('p');
+    label.className = 'official-profile-label';
+    label.textContent = `${individual ? 'Perfil oficial' : 'Ficha en el directorio oficial'} · ${chamber}`;
+    const heading = document.createElement('h2');
+    heading.id = 'official-profile-title';
+    heading.textContent = member.full_name;
+    const details = document.createElement('p');
+    details.className = 'note';
+    details.textContent = `${member.party} · ${member.constituency}`;
+    const link = document.createElement('a');
+    link.href = url.href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer external';
+    link.dataset.newsSource = 'true';
+    link.textContent = individual ? `Ver perfil en ${chamber} →` : 'Ver ficha en el directorio del Senado →';
+    link.setAttribute('aria-label', `${link.textContent.replace(' →', '')}: ${member.full_name} (abre en otra pestaña)`);
+    card.append(label, heading, details, link);
+    if (!individual) {
+      const note = document.createElement('p');
+      note.className = 'note';
+      note.textContent = 'El directorio del Senado no enlaza una página individual para este registro.';
+      card.append(note);
+    }
+    const note = document.createElement('p');
+    note.className = 'note official-profile-footnote';
+    note.textContent = 'Este perfil no se cuenta como una mención.';
+    card.append(note);
+    card.classList.remove('hide');
+  } catch (_) {
+    // Directory availability must not prevent the ordinary news search.
+  }
+}
 
 function newsSourceLink(item) {
   for (const value of [item.url, item.link]) {
@@ -30,7 +80,7 @@ function newsItem(item) {
 }
 
 function saveReport() {
-  if (!currentReport || !currentQuery || $('reporttab').classList.contains('hide')) return;
+  if (!currentReport || !currentQuery || $('reporttab').classList.contains('hide') || $('result').classList.contains('hide')) return;
   try {
     sessionStorage.setItem(reportStorageKey, JSON.stringify({
       report: currentReport,
@@ -59,9 +109,13 @@ function restoreReport() {
       $('aliases').value = currentForm.aliases;
       if (currentForm.congress_id) window.RadarCongress?.restore(currentForm.congress_id);
     }
+    const searchSequence = ++reportSearchSequence;
+    const profileReady = showOfficialProfile(currentQuery, currentForm?.congress_id, searchSequence);
     renderReport(currentReport);
     $('report-restored').classList.remove('hide');
-    requestAnimationFrame(() => window.scrollTo(0, Number(saved.scrollY) || 0));
+    profileReady.then(() => {
+      if (searchSequence === reportSearchSequence) requestAnimationFrame(() => window.scrollTo(0, Number(saved.scrollY) || 0));
+    });
   } catch (_) {
     // An unavailable or outdated saved report leaves the normal search form usable.
   }
@@ -73,8 +127,10 @@ async function go() {
   const search = window.RadarCongress?.query() || {name, aliases: $('aliases').value};
   const form = {name: $('name').value, aliases: $('aliases').value, congress_id: window.RadarCongress?.selectedId() || null};
   const query = {...search, territory: $('territory').value, days: +$('days').value, limit: 60};
+  const searchSequence = ++reportSearchSequence;
   $('loading').classList.remove('hide');
   $('result').classList.add('hide');
+  showOfficialProfile(query, form.congress_id, searchSequence);
   try {
     const response = await fetch('/api/report', {
       method: 'POST',
@@ -82,6 +138,7 @@ async function go() {
       body: JSON.stringify(query)
     });
     const data = await response.json();
+    if (searchSequence !== reportSearchSequence) return;
     if (!response.ok) throw new Error(data.error || 'Error');
     renderReport(data);
     currentReport = data;
@@ -90,10 +147,9 @@ async function go() {
     $('report-restored').classList.add('hide');
     saveReport();
   } catch (error) {
-    if (currentReport) $('result').classList.remove('hide');
-    alert(error.message);
+    if (searchSequence === reportSearchSequence) alert(error.message);
   } finally {
-    $('loading').classList.add('hide');
+    if (searchSequence === reportSearchSequence) $('loading').classList.add('hide');
   }
 }
 

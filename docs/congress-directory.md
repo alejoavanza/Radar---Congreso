@@ -15,10 +15,20 @@ Los campos `given_names` y `surnames` se guardan separados y las opciones muestr
 
 El navegador descarga una vez el JSON y filtra localmente a partir de dos letras, con un máximo de ocho opciones ordenadas por apellidos. Escribir, seleccionar o abrir el listado no llama a las API de reportes, noticias ni X. Si falla el catálogo, el campo conserva su búsqueda libre.
 
+## Perfil oficial como primer resultado de Radar
+
+Al generar un reporte se muestra una tarjeta institucional antes de las menciones y noticias. Se resuelve localmente con la identidad seleccionada o con una coincidencia única del nombre completo, el nombre de búsqueda o los alias del catálogo. Ignora tildes y el orden de nombres/apellidos; no elige automáticamente una persona a partir de una búsqueda parcial o ambigua. Los términos asociados escritos por el usuario no se usan para atribuir un perfil.
+
+La tarjeta es independiente del periodo (1, 7, 30, 60 y 90 días) y de la zona. No se añade a `items`, no aumenta los conteos ni modifica el sentimiento. Aparece aun con cero noticias o un error al consultar las fuentes. El enlace abre en otra pestaña y, al volver a un reporte guardado, la ficha se reconstruye desde el catálogo, conservando el reporte y su posición. Una respuesta tardía de una búsqueda anterior no reemplaza el resultado más reciente.
+
+`profile_url` conserva los enlaces individuales: 182 de Cámara y 68 publicados mediante «Ver más» en el directorio del Senado. La revisión del 6 de septiembre de 2026 recuperó 66 de esas páginas del Senado; los enlaces de Juan Fernando Espinal y Héctor Olimpo Espinosa fueron observados en sus tarjetas, pero la consulta de sus destinos recibió una limitación temporal HTTP 429. No se sustituyeron por direcciones deducidas.
+
+Los otros 34 registros del Senado no enlazan una página individual en el directorio consultado. Conservan `profile_url: null` y muestran «Ficha en el directorio oficial» con acceso a esa fuente y un fragmento de texto del nombre; la navegación al fragmento depende del navegador y de la página de destino. Se comunica esta diferencia en la tarjeta. `profile_links_checked_at` indica la fecha de revisión de los enlaces. No se generan URLs individuales a partir del nombre de un senador ni se usan páginas particulares como perfiles institucionales.
+
 ## Actualización
 
 1. Volver a consultar ambos directorios oficiales y revisar altas, salidas, reemplazos y circunscripciones. Conservar la identidad de los registros existentes con su `id` y retirar quienes ya no figuren; verificar discrepancias con la corporación correspondiente.
-2. Revisar manualmente la separación de apellidos compuestos y las variantes del nombre de las nuevas personas. Guardar la URL de la fuente y no agregar datos de contacto.
+2. Revisar manualmente la separación de apellidos compuestos y las variantes del nombre de las nuevas personas. Guardar la URL de la fuente y no agregar datos de contacto. Revisar también `profile_url`: copiar el enlace institucional individual cuando la fuente lo publique, o dejarlo nulo y conservar el acceso al directorio. Actualizar `profile_links_checked_at` tras revisarlos.
 3. Actualizar `checked_at`, los conteos de `sources` y la versión de la URL del JSON en `static/congress-search.js`. La fecha indica una revisión real; no cambia automáticamente al visitar la aplicación.
 4. Ejecutar `node --test tests/congress-search.test.cjs`, las pruebas existentes de Python y comprobar selección por teclado y toque en la vista previa.
 

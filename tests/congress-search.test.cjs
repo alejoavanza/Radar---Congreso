@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const catalog = require('../static/congress-members.json');
-const {createIndex, findMatches, buildSearch} = require('../static/congress-search.js');
+const {createIndex, findMatches, buildSearch, resolveMember} = require('../static/congress-search.js');
 const index = createIndex(catalog.members);
 const find = value => findMatches(index, value);
 const toro = catalog.members.find(m => m.full_name === 'David Alejandro Toro Ramírez');
@@ -49,4 +49,30 @@ test('directory preserves identities, official provenance and compound surnames'
     assert.ok([query.name, ...query.aliases.split(', ')].includes(member.full_name));
   }
   assert.equal(catalog.members.find(m => m.full_name === 'Alejandro De la Ossa Lacayo').surnames, 'De la Ossa Lacayo');
+});
+
+test('official profile lookup accepts complete known names in either order', () => {
+  for (const name of ['Alejandro Toro', 'DAVID ALEJANDRO TORO RAMIREZ', 'Toro Ramírez, David Alejandro']) {
+    assert.equal(resolveMember(index, name)?.id, toro.id);
+  }
+  assert.equal(resolveMember(index, 'Isabel Zuleta')?.chamber, 'senado');
+  for (const member of catalog.members) {
+    assert.equal(resolveMember(index, member.search_name, member.id)?.id, member.id);
+    if (member.profile_url) {
+      const url = new URL(member.profile_url);
+      assert.equal(url.protocol, 'https:');
+      assert.equal(url.hostname, member.chamber === 'camara' ? 'www.camara.gov.co' : 'www.senado.gov.co');
+    } else {
+      assert.equal(member.chamber, 'senado', 'Only unlinked Senate entries use the directory fallback');
+    }
+  }
+});
+
+test('profile lookup never chooses an arbitrary person from a partial or ambiguous name', () => {
+  for (const name of ['Toro', 'alej tor', 'Persona desconocida', '']) assert.equal(resolveMember(index, name), null);
+  const other = catalog.members.find(m => m.full_name === 'Isabel Cristina Zuleta López');
+  assert.equal(resolveMember(index, 'Isabel Zuleta', toro.id)?.id, other.id, 'A stale selection cannot override the searched name');
+  const ambiguous = createIndex([toro, other].map(member => ({...member, aliases: [...member.aliases, 'Nombre Compartido']})));
+  assert.equal(resolveMember(ambiguous, 'Nombre Compartido'), null);
+  assert.equal(resolveMember(ambiguous, 'Nombre Compartido', toro.id)?.id, toro.id);
 });

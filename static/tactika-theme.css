@@ -74,6 +74,12 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
 .topic, .badge { background: var(--tactika-soft); border-color: var(--line); color: var(--tactika-teal); }
 .item, .xrow, .author { border-bottom-color: var(--line); }
 .item a, .xrow a, .author a, #comparetab a, .congress-sources a { color: var(--tactika-teal); }
+.official-profile { border-left: 4px solid var(--tactika-orange); }
+.official-profile-label { color: var(--tactika-teal); font-size: .875rem; font-weight: 700; margin: 0 0 .5rem; }
+.official-profile h2 { margin: .5rem 0; overflow-wrap: anywhere; }
+.official-profile a { color: var(--tactika-teal); display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
+.official-profile .note { margin: .5rem 0; }
+.official-profile-footnote { font-size: .875rem; }
 .network-head, .author-post { border-left-color: var(--tactika-orange); }
 .coverage { background: var(--tactika-soft); }
 .coverage > div { background: var(--tactika-teal); }
