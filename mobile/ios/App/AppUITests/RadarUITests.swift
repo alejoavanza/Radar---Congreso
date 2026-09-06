@@ -32,6 +32,42 @@ final class RadarUITests: XCTestCase {
         add(attachment)
     }
 
+    private func reveal(_ element: XCUIElement, upwards: Bool = true) {
+        for _ in 0..<20 {
+            if element.exists && element.isHittable { return }
+            let view = app.webViews.firstMatch
+            let start = view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: upwards ? 0.75 : 0.3))
+            let end = view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: upwards ? 0.35 : 0.75))
+            start.press(forDuration: 0.05, thenDragTo: end)
+        }
+        XCTAssertTrue(element.isHittable, "El control debe poder alcanzarse desplazando la pantalla: \(element.label)")
+    }
+
+    private func selectTab(_ name: String) {
+        let tab = control(name)
+        reveal(tab, upwards: false)
+        tab.tap()
+    }
+
+    private func dismissKeyboard() {
+        let done = app.toolbars.buttons.matching(NSPredicate(format: "label IN %@ OR identifier == 'Done'", ["OK", "Listo", "Done"])).firstMatch
+        if done.exists && done.isHittable { done.tap() }
+        else if app.keyboards.firstMatch.exists {
+            app.webViews.firstMatch.swipeUp()
+        }
+    }
+
+    private func cancelShare(_ name: String) {
+        let share = control(name)
+        reveal(share)
+        share.tap()
+        let close = app.buttons.matching(NSPredicate(format: "label IN %@ OR identifier == 'Close'", ["Cerrar", "Close", "Cancelar", "Cancel"])).firstMatch
+        XCTAssertTrue(close.waitForExistence(timeout: 15), "Debe abrir la hoja nativa para compartir.")
+        capture(name == "Compartir reporte" ? "QA-Compartir-reporte" : "QA-Compartir-comparativo")
+        close.tap()
+        XCTAssertTrue(share.waitForExistence(timeout: 10), "Cancelar no debe perder el resultado.")
+    }
+
     func testLaunchNavigationAndClearControls() throws {
         let radarName = field("Nombre o apellido", id: "name")
         XCTAssertTrue(radarName.waitForExistence(timeout: 20), "Radar debe terminar de cargar.")
@@ -76,5 +112,94 @@ final class RadarUITests: XCTestCase {
         XCTAssertTrue(radarZone.value as? String == "" || radarZone.value as? String == "Ej. Colombia o Antioquia")
         radarZone.typeText("Colombia")
         XCTAssertEqual(radarZone.value as? String, "Colombia")
+    }
+
+    func testLiveReportComparisonAndNativeActions() throws {
+        // Use the same public API and native plugins as the shipped app. No
+        // response fixtures or synthetic results are injected into this test.
+        selectTab("RADAR")
+        let name = field("Nombre o apellido", id: "name")
+        reveal(name, upwards: false)
+        name.tap()
+        if control("Borrar nombre").isHittable { control("Borrar nombre").tap() }
+        name.typeText("Alejandro Toro")
+        dismissKeyboard()
+        let generate = control("GENERAR REPORTE")
+        reveal(generate)
+        generate.tap()
+
+        let source = app.links.matching(NSPredicate(format: "label BEGINSWITH %@", "Abrir fuente:")).firstMatch
+        XCTAssertTrue(source.waitForExistence(timeout: 100), "La consulta real debe devolver al menos una noticia; un fallo de la fuente no se sustituye por datos inventados.")
+        let originalSource = source.label
+        reveal(control("Compartir reporte"))
+        capture("03-Reporte-real-iPhone")
+        cancelShare("Compartir reporte")
+        reveal(source)
+        source.tap()
+        let safariDone = app.buttons.matching(NSPredicate(format: "identifier == 'Done' OR label IN %@", ["OK", "Listo", "Done"])).firstMatch
+        XCTAssertTrue(safariDone.waitForExistence(timeout: 20), "La fuente debe abrir en Safari integrado con salida a Radar.")
+        capture("QA-Fuente-Safari")
+        safariDone.tap()
+        XCTAssertTrue(source.waitForExistence(timeout: 10))
+        XCTAssertEqual(source.label, originalSource, "Al cerrar Safari se conserva la noticia de la consulta.")
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(source.waitForExistence(timeout: 20), "El reporte debe recuperarse de Preferences tras cerrar la app.")
+        XCTAssertEqual(source.label, originalSource)
+        let restored = app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "Consulta recuperada")).firstMatch
+        XCTAssertTrue(restored.waitForExistence(timeout: 10))
+        reveal(restored, upwards: false)
+        capture("QA-Reporte-recuperado")
+
+        selectTab("COMPARATIVOS")
+        let comparisonName = field("Agregar congresista", id: "compare-name")
+        for (query, expected) in [("Alejandro Toro", "Toro Ramírez, David Alejandro"), ("Iván Cepeda", "Cepeda Castro, Iván")] {
+            reveal(comparisonName, upwards: false)
+            comparisonName.tap()
+            comparisonName.typeText(query)
+            let option = app.staticTexts.matching(NSPredicate(format: "label == %@", expected)).firstMatch
+            XCTAssertTrue(option.waitForExistence(timeout: 10), "El congresista debe estar en el directorio incluido.")
+            option.tap()
+        }
+        dismissKeyboard()
+        let compare = control("COMPARAR MENCIONES")
+        reveal(compare)
+        XCTAssertTrue(compare.isEnabled)
+        compare.tap()
+        let comparisonShare = control("Compartir comparativo")
+        XCTAssertTrue(comparisonShare.waitForExistence(timeout: 100), "Comparativos debe terminar con los datos reales y los fallos que correspondan.")
+        reveal(comparisonShare)
+        capture("04-Comparativo-real-iPhone")
+        cancelShare("Compartir comparativo")
+
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(comparisonShare.waitForExistence(timeout: 20), "La pestaña y el comparativo deben recuperarse al reabrir.")
+
+        let settings = control("Soporte, privacidad y datos guardados")
+        reveal(settings)
+        settings.tap()
+        let privacy = control("Privacidad")
+        reveal(privacy)
+        privacy.tap()
+        XCTAssertTrue(control("Privacidad de Radar Político").waitForExistence(timeout: 10))
+        control("← Volver a Radar").tap()
+        XCTAssertTrue(comparisonShare.waitForExistence(timeout: 20), "Volver de privacidad debe recuperar el comparativo.")
+        reveal(settings)
+        settings.tap()
+        let clear = control("Borrar consultas guardadas")
+        reveal(clear)
+        clear.tap()
+        let confirm = app.alerts.buttons.matching(NSPredicate(format: "label IN %@", ["OK", "Aceptar", "Borrar"])).firstMatch
+        XCTAssertTrue(confirm.waitForExistence(timeout: 10))
+        confirm.tap()
+        XCTAssertTrue(field("Nombre o apellido", id: "name").waitForExistence(timeout: 20))
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(field("Nombre o apellido", id: "name").waitForExistence(timeout: 20))
+        XCTAssertFalse(source.exists, "La consulta borrada no debe reaparecer al abrir la app.")
+        selectTab("COMPARATIVOS")
+        XCTAssertFalse(comparisonShare.exists, "El comparativo borrado tampoco debe reaparecer.")
     }
 }

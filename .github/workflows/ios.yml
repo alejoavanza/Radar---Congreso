@@ -46,7 +46,7 @@ jobs:
         env:
           RADAR_SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python3 scripts/prepare-simulator.py
-      - name: Run iPhone navigation and clear-control checks
+      - name: Run iPhone navigation and live native flows
         run: >-
           xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug
           -destination "platform=iOS Simulator,id=$SIMULATOR_UDID"

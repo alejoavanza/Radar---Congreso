@@ -13,7 +13,7 @@ function notice(message) {
   const node = $('native-message');
   if (node) { node.textContent = message; node.hidden = !message; }
 }
-function button(label, id, parent, action) {
+function button(label, id, parent, action, first = false) {
   const node = document.createElement('button');
   node.type = 'button'; node.id = id; node.className = 'secondary native-action';
   node.textContent = label;
@@ -21,7 +21,8 @@ function button(label, id, parent, action) {
     node.disabled = true;
     try { await action(); } finally { node.disabled = false; }
   });
-  parent.append(node);
+  if (first) parent.prepend(node);
+  else parent.append(node);
 }
 
 async function start() {
@@ -56,8 +57,8 @@ async function start() {
       if (!/cancel|dismiss/i.test(String(error?.message || error))) notice('No se pudo compartir el resultado. Intenta de nuevo.');
     }
   }
-  button('Compartir reporte', 'native-share-report', $('result'), () => share('radar:report:v1', reportText));
-  button('Compartir comparativo', 'native-share-comparison', $('compare-results'), () => share('radar:comparison:v1', comparisonText));
+  button('Compartir reporte', 'native-share-report', $('result'), () => share('radar:report:v1', reportText), true);
+  button('Compartir comparativo', 'native-share-comparison', $('compare-results'), () => share('radar:comparison:v1', comparisonText), true);
   button('Borrar consultas guardadas', 'native-clear-saved', $('native-settings'), async () => {
     if (!window.confirm('¿Borrar el reporte y el comparativo guardados en este iPhone?')) return;
     try { await storage.clearSaved(); window.location.reload(); }

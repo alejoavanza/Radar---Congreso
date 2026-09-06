@@ -93,7 +93,8 @@ function newsSourceLink(item) {
       link.rel = 'noopener noreferrer external';
       link.dataset.newsSource = 'true';
       link.textContent = 'Abrir fuente →';
-      link.setAttribute('aria-label', `Abrir fuente: ${item.title || 'noticia'} (abre en otra pestaña)`);
+      const destination = window.RadarNative ? 'abre en Safari; ciérralo para regresar' : 'abre en otra pestaña';
+      link.setAttribute('aria-label', `Abrir fuente: ${item.title || 'noticia'} (${destination})`);
       return link.outerHTML;
     } catch (_) {
       // Older reports may have only `link`; try that before disabling the link.
@@ -203,9 +204,18 @@ document.addEventListener('visibilitychange', () => {
 });
 
 function renderReport(d) {
+  const counts = d.mentions.platform_counts || {};
+  const measured = Object.entries(d.mentions.platform_status || {})
+    .filter(([source, status]) => source !== 'X' && status === 'active' && Number.isFinite(counts[source]) && counts[source] >= 0)
+    .map(([source]) => source);
   $('mweb').textContent = d.mentions.web;
-  $('msocial').textContent = d.mentions.social;
+  $('msocial').textContent = measured.length ? d.mentions.social : 'N/D';
+  $('msocial').setAttribute?.('aria-label', measured.length ? `${d.mentions.social} menciones en redes disponibles` : 'Redes públicas: no disponible');
   $('mcombined').textContent = d.mentions.combined;
+  const coverage = $('report-coverage');
+  if (coverage) coverage.textContent = measured.length
+    ? `Redes consultadas: ${measured.join(', ')}. El total suma la web y estas fuentes; las demás redes no están disponibles. No es un censo de todas las menciones.`
+    : 'Redes públicas: no disponible (N/D). El total corresponde solo a las noticias detectadas en web; no significa que haya cero menciones en redes.';
   $('rname').textContent = d.name;
   $('summary').textContent = d.summary;
   $('items').innerHTML = (d.items || []).map(newsItem).join('');

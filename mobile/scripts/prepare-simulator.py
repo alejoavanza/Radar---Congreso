@@ -40,7 +40,7 @@ evidence.mkdir(parents=True, exist_ok=True)
     "workflow_run": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
     "xcode": run("xcodebuild", "-version"),
     "capture_method": "XCUIScreen screenshot attachment from the running app; no seeded results",
-    "scope": "Launch, tab navigation and name/zone clear controls. No live report, purchase or physical-device claim.",
+    "scope": "Launch, clear controls, live public-source report and comparison, Safari return, native share cancellation, relaunch recovery, privacy and deletion. Consult test-summary.json for actual pass/failure; no physical-device claim.",
 }, ensure_ascii=False, indent=2) + "\n")
 print(f"Selected {device['name']} / {runtime} ({udid}); SDK {sdk_version}", flush=True)
 if device["state"] != "Booted":
