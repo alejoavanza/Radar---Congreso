@@ -29,27 +29,44 @@ class ComparisonTest(unittest.TestCase):
         for days in (60.0, True, 0, 120, '30', None):
             self.assertEqual(self.client.post('/api/compare/start', json={'days': days, 'member_ids': self.ids[:5]}).status_code, 400)
 
-    def test_member_preserves_window_and_source_failures_are_null(self):
+    @patch.dict(comp.os.environ, {'X_BEARER_TOKEN': 'test-only-token'})
+    def test_member_preserves_window_and_cache_without_calling_social_sources(self):
         start = self.client.post('/api/compare/start', json={'days': 60, 'territory': 'Antioquia', 'member_ids': self.ids[:5]}).get_json()
-        with patch.object(comp, 'count_news', return_value=comp.available(17, 'Web')), \
-             patch.object(comp, 'count_x', return_value=comp.unavailable('X requiere créditos')), \
-             patch.object(comp, 'count_bluesky', return_value=comp.available(0, 'No matches')) as bsky, \
-             patch.object(comp, 'count_reddit', side_effect=comp.requests.Timeout):
+        with patch.object(comp, 'count_news', return_value=comp.available(17, 'Web')) as news, \
+             patch.object(comp, 'count_x') as x, \
+             patch.object(comp, 'count_bluesky') as bsky, \
+             patch.object(comp, 'count_reddit') as reddit:
             for member_id in self.ids[:5]:
                 response = self.client.post('/api/compare/member', json={'member_id': member_id, 'days': 60, 'end_time': start['end_time'], 'territory': 'Antioquia'})
                 self.assertEqual(response.status_code, 200)
                 result = response.get_json()
                 self.assertEqual(result['start_time'], start['start_time'])
                 self.assertEqual(result['end_time'], start['end_time'])
+                self.assertEqual(result['days'], 60)
+                self.assertEqual(result['territory'], 'Antioquia')
+                self.assertEqual(list(result['sources']), ['Web'])
                 self.assertEqual(result['sources']['Web']['count'], 17)
-                self.assertIsNone(result['sources']['X']['count'])
-                self.assertEqual(result['sources']['Bluesky']['count'], 0)
-                self.assertEqual(result['sources']['Bluesky']['status'], 'available')
-                self.assertIsNone(result['sources']['Reddit']['count'])
-            self.assertTrue(all(call.args[1] == comp.date(start['start_time']) for call in bsky.call_args_list))
-            before = bsky.call_count
+            self.assertEqual(news.call_count, 5)
+            self.assertTrue(all(call.args[1] == comp.date(start['start_time']) for call in news.call_args_list))
             self.client.post('/api/compare/member', json={'member_id': self.ids[0], 'days': 60, 'end_time': start['end_time'], 'territory': 'Antioquia'})
-            self.assertEqual(bsky.call_count, before, 'Identical windows use the cache')
+            self.assertEqual(news.call_count, 5, 'Identical windows use the cache')
+            x.assert_not_called()
+            bsky.assert_not_called()
+            reddit.assert_not_called()
+
+    def test_web_failure_is_unavailable_and_valid_empty_search_is_zero(self):
+        start = self.client.post('/api/compare/start', json={'days': 1, 'member_ids': self.ids[:2]}).get_json()
+        payload = {'member_id': self.ids[0], 'days': 1, 'end_time': start['end_time']}
+        with patch.object(comp, 'count_news', side_effect=comp.requests.Timeout):
+            result = self.client.post('/api/compare/member', json=payload).get_json()
+        self.assertEqual(list(result['sources']), ['Web'])
+        self.assertEqual(result['sources']['Web']['status'], 'unavailable')
+        self.assertIsNone(result['sources']['Web']['count'])
+        comp.collect.cache_clear()
+        with patch.object(comp, 'count_news', return_value=comp.available(0, 'Sin noticias')):
+            result = self.client.post('/api/compare/member', json=payload).get_json()
+        self.assertEqual(result['sources']['Web']['status'], 'available')
+        self.assertEqual(result['sources']['Web']['count'], 0)
 
     def test_expired_and_future_windows_are_rejected_before_source_calls(self):
         for end in (comp.iso(comp.now() - timedelta(hours=1)), comp.iso(comp.now() + timedelta(hours=1)), 'invalid'):

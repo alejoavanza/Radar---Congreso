@@ -2,7 +2,7 @@
 
 Aplicación móvil/web de inteligencia política para consultar un actor por nombre y generar un reporte preliminar de visibilidad, contexto de titulares, temas dominantes y fuentes.
 
-La pestaña **Comparativos** permite elegir entre 2 y 10 congresistas y contrastar menciones detectadas en web y redes con barras y una tabla. Ofrece periodos de 90, 60, 30, 7 y 1 día; distingue datos no disponibles de ceros e informa la cobertura de las fuentes. Consulta [la metodología y las pruebas](docs/comparisons.md).
+La pestaña **Comparativos** permite elegir entre 2 y 10 congresistas y contrastar menciones detectadas en web con barras y una tabla. Ofrece periodos de 90, 60, 30, 7 y 1 día; distingue datos no disponibles de ceros y permite revisar las noticias. La comparación en redes está pausada y no realiza consultas a esas plataformas. Consulta [la metodología y las pruebas](docs/comparisons.md).
 
 ## Ejecutar
 
