@@ -40,7 +40,7 @@ await writeFile(join(out, 'app.js'), scripts.join('\n;\n'));
 await cp(join(mobile, 'src/mobile.css'), join(out, 'mobile.css'));
 for (const page of ['support', 'privacy']) {
   const source = await readFile(join(root, `templates/${page}.html`), 'utf8');
-  await writeFile(join(out, `${page}.html`), source.replaceAll('href="/privacy"', 'href="/privacy.html"').replaceAll('href="/support"', 'href="/support.html"'));
+  await writeFile(join(out, `${page}.html`), source.replaceAll('href="/privacy"', 'href="/privacy.html"').replaceAll('href="/support"', 'href="/support.html"').replace('</head>', '<link rel="stylesheet" href="/mobile.css"></head>'));
 }
 await build({entryPoints: [join(mobile, 'src/main.js')], bundle: true, outfile: join(out, 'native.js'),
   format: 'iife', platform: 'browser', target: 'safari15', minify: true, legalComments: 'eof'});

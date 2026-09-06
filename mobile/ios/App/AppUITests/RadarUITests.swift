@@ -36,8 +36,9 @@ final class RadarUITests: XCTestCase {
         for _ in 0..<20 {
             if element.exists && element.isHittable { return }
             let view = app.webViews.firstMatch
-            let start = view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: upwards ? 0.75 : 0.3))
-            let end = view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: upwards ? 0.35 : 0.75))
+            let forward = element.exists && element.frame.height > 0 ? element.frame.midY > app.frame.midY : upwards
+            let start = view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: forward ? 0.75 : 0.3))
+            let end = view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: forward ? 0.35 : 0.75))
             start.press(forDuration: 0.05, thenDragTo: end)
         }
         XCTAssertTrue(element.isHittable, "El control debe poder alcanzarse desplazando la pantalla: \(element.label)")
@@ -61,16 +62,29 @@ final class RadarUITests: XCTestCase {
         let share = control(name)
         reveal(share)
         share.tap()
-        let close = app.buttons.matching(NSPredicate(format: "label IN %@ OR identifier == 'Close'", ["Cerrar", "Close", "Cancelar", "Cancel"])).firstMatch
-        XCTAssertTrue(close.waitForExistence(timeout: 15), "Debe abrir la hoja nativa para compartir.")
+        let sheet = app.otherElements["ActivityListView"]
+        XCTAssertTrue(sheet.waitForExistence(timeout: 20), "Debe abrir la hoja nativa para compartir.")
         capture(name == "Compartir reporte" ? "QA-Compartir-reporte" : "QA-Compartir-comparativo")
-        close.tap()
+        let dismissRegion = app.otherElements["PopoverDismissRegion"]
+        if dismissRegion.exists {
+            // iOS 26 presents this activity controller as a popover; its
+            // accessibility hierarchy exposes an outside dismissal region.
+            dismissRegion.tap()
+        } else {
+            let close = app.buttons.matching(NSPredicate(format: "label IN %@ OR identifier == 'Close'", ["Cerrar", "Close", "Cancelar", "Cancel"])).firstMatch
+            XCTAssertTrue(close.waitForExistence(timeout: 10))
+            close.tap()
+        }
+        let closed = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: sheet)
+        XCTAssertEqual(XCTWaiter.wait(for: [closed], timeout: 10), .completed)
         XCTAssertTrue(share.waitForExistence(timeout: 10), "Cancelar no debe perder el resultado.")
     }
 
     func testLaunchNavigationAndClearControls() throws {
         let radarName = field("Nombre o apellido", id: "name")
-        XCTAssertTrue(radarName.waitForExistence(timeout: 20), "Radar debe terminar de cargar.")
+        // Initial WKWebView/accessibility setup is slower on a fresh hosted
+        // simulator. The previous run exposed the ready form after 60 seconds.
+        XCTAssertTrue(radarName.waitForExistence(timeout: 75), "Radar debe terminar de cargar.")
         let comparisonTab = control("COMPARATIVOS")
         XCTAssertTrue(comparisonTab.waitForExistence(timeout: 10))
         XCTAssertTrue(comparisonTab.isHittable)
@@ -132,6 +146,7 @@ final class RadarUITests: XCTestCase {
         XCTAssertTrue(source.waitForExistence(timeout: 100), "La consulta real debe devolver al menos una noticia; un fallo de la fuente no se sustituye por datos inventados.")
         let originalSource = source.label
         reveal(control("Compartir reporte"))
+        app.webViews.firstMatch.swipeUp()
         capture("03-Reporte-real-iPhone")
         cancelShare("Compartir reporte")
         reveal(source)
@@ -158,7 +173,7 @@ final class RadarUITests: XCTestCase {
             reveal(comparisonName, upwards: false)
             comparisonName.tap()
             comparisonName.typeText(query)
-            let option = app.staticTexts.matching(NSPredicate(format: "label == %@", expected)).firstMatch
+            let option = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", expected)).firstMatch
             XCTAssertTrue(option.waitForExistence(timeout: 10), "El congresista debe estar en el directorio incluido.")
             option.tap()
         }
@@ -170,6 +185,7 @@ final class RadarUITests: XCTestCase {
         let comparisonShare = control("Compartir comparativo")
         XCTAssertTrue(comparisonShare.waitForExistence(timeout: 100), "Comparativos debe terminar con los datos reales y los fallos que correspondan.")
         reveal(comparisonShare)
+        app.webViews.firstMatch.swipeUp()
         capture("04-Comparativo-real-iPhone")
         cancelShare("Compartir comparativo")
 

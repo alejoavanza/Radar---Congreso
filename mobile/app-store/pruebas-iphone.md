@@ -12,6 +12,16 @@ Se revisaron visualmente las dos capturas originales: texto legible, pestaña ac
 
 Las pruebas con respuestas simuladas de los adaptadores verifican transporte, persistencia, errores, compartir y recuperación. La prueba de interfaz sí abrió la app en el simulador de iOS. Ninguna de ellas equivale a las comprobaciones de Safari, compartir, VoiceOver y uso cotidiano en un iPhone físico que siguen pendientes abajo.
 
+## Ampliación de la validación del 6 de septiembre
+
+Alejandro confirmó en la conversación que Radar funciona bien en su iPhone. No se registró una instalación firmada ni un número de compilación iOS; esa confirmación de uso no se convierte automáticamente en aprobación de todas las pruebas nativas pendientes.
+
+Se amplió la prueba de interfaz para consultar fuentes reales, abrir y cerrar Safari integrado, abrir y cancelar las hojas de compartir, recuperar el reporte y el comparativo al relanzar, abrir la privacidad y borrar las consultas. El flujo compila también un archivo Release para iPhone sin firma. **La ejecución ampliada está en curso; esta sección no la da por aprobada.** No se inyectan resultados de ejemplo en la app para obtener las capturas.
+
+Validación local de esta ampliación: 9 pruebas móviles, 15 de la interfaz compartida y 14 del servidor aprobadas. Una consulta HTTP real devolvió noticias para Alejandro Toro; el comparativo de Alejandro Toro e Iván Cepeda devolvió datos disponibles bajo la misma ventana de 30 días. Esto verifica el servidor, no sustituye la ejecución de los plugins dentro de iOS.
+
+Al consultar las fuentes reales se detectó que las redes no disponibles se mostraban como cero. La interfaz candidata ahora muestra N/D y explica qué fuentes respaldan el total. Un cero procedente de una fuente que sí respondió se conserva como cero. El botón de compartir se colocó al inicio de cada resultado.
+
 ## Registro de una ejecución
 
 Registrar versión y número de compilación, commit, modelo del dispositivo, versión de iOS, fecha, persona que prueba, resultado y evidencia. Repetir las filas afectadas cuando cambie la versión candidata.
