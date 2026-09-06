@@ -2,7 +2,7 @@
 
 Proyecto iOS de **TACTIKA COMUNICACIONES S.A.S**. Conserva Radar y Comparativos de la aplicación existente. La interfaz, el directorio y sus recursos están incluidos en el paquete; las búsquedas nuevas consultan el servidor de producción por HTTPS. No utiliza una URL remota para cargar la aplicación ni exige la cuenta de Apple de Melissa durante el desarrollo.
 
-**Estado de esta preparación:** recursos empaquetados y sincronizados; 9 pruebas móviles, 13 de la interfaz compartida y 14 del servidor aprobadas localmente. La prueba del arranque móvil utiliza el paquete real con respuestas simuladas de los plugins. Alejandro autorizó subir la rama `feat/ios-app` al repositorio y continuar con la compilación. La compilación con Xcode y las pruebas en un iPhone siguen pendientes de verificación.
+**Estado de esta preparación:** recursos empaquetados y sincronizados; 9 pruebas móviles, 13 de la interfaz compartida y 14 del servidor aprobadas localmente. La prueba del arranque móvil utiliza el paquete real con respuestas simuladas de los plugins. Alejandro autorizó subir la rama `feat/ios-app` al repositorio y continuar con la compilación. La compilación sin firma para simulador ya finalizó correctamente en GitHub Actions, también con los cambios de los campos de Comparativos. Las pruebas en un iPhone físico, la firma y el envío a Apple siguen pendientes.
 
 ## Implementado
 
@@ -47,6 +47,10 @@ Para regenerar el icono desde el vector existente: `node scripts/icons.mjs`. Los
 
 El flujo `.github/workflows/ios.yml` ejecuta las pruebas y compila para el simulador en un Mac de GitHub, sin certificados de distribución. Una compilación del simulador no sustituye pruebas en un iPhone físico ni certifica la aprobación de Apple.
 
+## Material de publicación preparado
+
+La [guía de publicación](app-store/README.md) reúne la ficha en español, el [inventario de privacidad](app-store/privacidad.md) y el [guion de pruebas y capturas](app-store/pruebas-iphone.md). La ficha usa `es-MX`, la localización que Apple asigna por defecto a Colombia. El idioma de la aplicación y sus formatos colombianos se conservan.
+
 ## Pendientes antes de TestFlight y App Store
 
 1. Activar el correo empresarial, resolver D-U-N-S y completar Apple Developer como organización con Melissa.
@@ -54,7 +58,7 @@ El flujo `.github/workflows/ios.yml` ejecuta las pruebas y compila para el simul
 3. Validar con Táctika el texto de privacidad, los proveedores/configuración de registros y la declaración de datos de App Store Connect. **No marcar automáticamente “No se recopilan datos”**: las consultas viajan al servidor y a las fuentes, y el alojamiento puede conservar registros. Confirmar los plazos reales de esos registros y completar el texto antes del envío.
 4. Publicar las rutas de soporte/privacidad y comprobar sus URLs en el servidor de producción. Hasta integrar y desplegar esta rama, las nuevas rutas no están publicadas.
 5. Probar en iPhone: primera apertura, teclado, conexiones lentas, cierre/reapertura, compartir/cancelar, apertura/cierre de fuentes, cambio de pestañas, búsqueda de 1 día y comparativos con fuentes fallidas.
-6. Obtener capturas reales de la versión ejecutándose, completar clasificación por edad, disponibilidad y demás campos de App Store Connect. La ficha inicial está en `app-store/es-CO.json`; no se ha enviado.
+6. Obtener capturas reales de la versión ejecutándose, completar clasificación por edad, disponibilidad y demás campos de App Store Connect. La ficha inicial está en `app-store/es-MX.json`; no se ha enviado.
 7. Archivar con la firma del equipo y enviar a TestFlight. Corregir cualquier incidencia antes de solicitar la revisión de App Store. Apple evalúa la utilidad y experiencia de la app bajo su regla 4.2; las integraciones nativas no garantizan aceptación.
 
 Fuentes: [Capacitor iOS](https://capacitorjs.com/docs/ios), [Preferences y manifiesto](https://capacitorjs.com/docs/apis/preferences), [inscripción de organizaciones](https://developer.apple.com/programs/enroll/), [revisión de App Store](https://developer.apple.com/app-store/review/guidelines/).
