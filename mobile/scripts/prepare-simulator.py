@@ -48,10 +48,19 @@ if device["state"] != "Booted":
 # A hosted Mac's first boot migrates iOS data. Keep a finite allowance for it,
 # independent of the app's own launch timeout in RadarUITests.
 subprocess.run(["xcrun", "simctl", "bootstatus", udid, "-b"], check=True, timeout=600)
-subprocess.run([
-    "xcrun", "simctl", "status_bar", udid, "override", "--time", "9:41",
-    "--dataNetwork", "wifi", "--wifiMode", "active", "--wifiBars", "3",
-    "--batteryState", "charged", "--batteryLevel", "100",
-], check=True, timeout=30)
+# Normalizing the status bar is cosmetic. SpringBoard can still be busy after
+# bootstatus completes; a timeout here must not prevent actual app validation.
+status_bar = {"applied": False}
+try:
+    subprocess.run([
+        "xcrun", "simctl", "status_bar", udid, "override", "--time", "9:41",
+        "--dataNetwork", "wifi", "--wifiMode", "active", "--wifiBars", "3",
+        "--batteryState", "charged", "--batteryLevel", "100",
+    ], check=True, timeout=30)
+    status_bar["applied"] = True
+except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+    status_bar["error"] = str(error)
+    print(f"::warning::Status-bar appearance was not normalized: {error}", flush=True)
+(evidence / "status-bar.json").write_text(json.dumps(status_bar, indent=2) + "\n")
 with open(os.environ["GITHUB_ENV"], "a") as env_file:
     env_file.write(f"SIMULATOR_UDID={udid}\n")
