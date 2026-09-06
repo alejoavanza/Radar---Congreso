@@ -31,7 +31,7 @@ def fetch_news(name,aliases,territory,days,limit):
         link=e.get('link','#')
         if link in seen:continue
         seen.add(link);title=e.get('title','').strip();source=e.get('source',{}).get('title','') if isinstance(e.get('source',{}),dict) else ''
-        out.append({'title':title,'link':link,'published':e.get('published',''),'source':source,'sentiment':sentiment(title)})
+        out.append({'title':title,'url':link,'link':link,'published':e.get('published',''),'source':source,'sentiment':sentiment(title)})
     return out,None
 def fetch_bluesky_count(name,aliases,territory,days,max_pages=5):
     cutoff=datetime.now(timezone.utc)-timedelta(days=days);cursor=None;seen=set()
@@ -176,6 +176,11 @@ def fetch_youtube_count(*args,**kwargs):return (0,'credential_required',None) if
 def restricted_platform(name):return 0,'restricted_access',None
 @app.get('/')
 def home():return render_template('index.html')
+@app.errorhandler(404)
+def not_found(error):
+    if request.path.startswith('/api/'):
+        return jsonify({'error':'Ruta no encontrada.'}),404
+    return render_template('not_found.html'),404
 @app.post('/api/report')
 def report():
     d=request.get_json(force=True);name=(d.get('name') or '').strip()
