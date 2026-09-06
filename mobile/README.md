@@ -2,7 +2,7 @@
 
 Proyecto iOS de **TACTIKA COMUNICACIONES S.A.S**. Conserva Radar y Comparativos de la aplicación existente. La interfaz, el directorio y sus recursos están incluidos en el paquete; las búsquedas nuevas consultan el servidor de producción por HTTPS. No utiliza una URL remota para cargar la aplicación ni exige la cuenta de Apple de Melissa durante el desarrollo.
 
-**Estado de esta preparación:** recursos empaquetados y sincronizados; 9 pruebas móviles, 13 de la interfaz compartida y 14 del servidor aprobadas localmente. La prueba del arranque móvil utiliza el paquete real con respuestas simuladas de los plugins. Alejandro autorizó subir la rama `feat/ios-app` al repositorio y continuar con la compilación. La compilación sin firma para simulador ya finalizó correctamente en GitHub Actions, también con los cambios de los campos de Comparativos. Las pruebas en un iPhone físico, la firma y el envío a Apple siguen pendientes.
+**Estado de esta preparación:** recursos empaquetados y sincronizados; 9 pruebas móviles, 13 de la interfaz compartida y 14 del servidor aprobadas localmente. La prueba del arranque móvil utiliza el paquete real con respuestas simuladas de los plugins. Alejandro autorizó subir la rama `feat/ios-app` al repositorio y continuar con la compilación. La compilación sin firma para simulador ya finalizó correctamente en GitHub Actions, también con los cambios de los campos de Comparativos. La ejecución de interfaz también pasó en iPhone 17 Pro Max simulado (iOS 26.5), con capturas reales de ambas pestañas; el resultado y su alcance están en el [registro de pruebas](app-store/pruebas-iphone.md). Las pruebas en un iPhone físico, la firma y el envío a Apple siguen pendientes.
 
 ## Implementado
 

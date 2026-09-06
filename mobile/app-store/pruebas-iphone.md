@@ -4,7 +4,13 @@ Fecha: 6 de septiembre de 2026. Este documento prepara la ejecución: ninguna fi
 
 ## Estado comprobado
 
-La compilación automática para simulador y las pruebas del paquete móvil finalizaron correctamente en el flujo `iOS preparation` del 6 de septiembre, sobre el commit `82b9a007ec80dec38b7dbc3623b5a1792ea227f2`. Las pruebas con respuestas simuladas comprueban transporte, persistencia, errores, compartir y recuperación. No equivalen a una prueba del teclado, Safari o la hoja de compartir en un iPhone físico.
+La ejecución [iOS preparation #4](https://github.com/alejoavanza/Radar---Congreso/actions/runs/34045828725) del 6 de septiembre de 2026 finalizó correctamente. Probó el código `c760219822edcc07d4d27e70e60b0523a912d4f1` en el commit de integración `10178d103a1ee58dc891c5a8beb6030e673b8481`, con Xcode 26.6 e iPhone 17 Pro Max simulado, iOS 26.5. La versión es 1.0.0, compilación 1.
+
+Pasaron la compilación, las 9 pruebas móviles, las 13 pruebas de la interfaz compartida y una prueba de interfaz ejecutada dentro de iOS, con cero fallos. Esta última comprobó la apertura, el directorio incluido, el cambio entre Radar y Comparativos, los cuatro botones × de nombre/zona y la posibilidad de volver a escribir después de borrar. No generó reportes ni utilizó resultados inventados.
+
+Se revisaron visualmente las dos capturas originales: texto legible, pestaña activa, campos y zona Colombia visibles, sin teclado ni alertas sobrepuestas. Ambas son PNG RGB opacos de 1320 × 2868 píxeles. El [artefacto de evidencia](https://github.com/alejoavanza/Radar---Congreso/actions/runs/34045828725/artifacts/9993183946) conserva capturas, identificación del simulador y resultado del test hasta el 6 de octubre de 2026. Se entregaron también las imágenes por separado.
+
+Las pruebas con respuestas simuladas de los adaptadores verifican transporte, persistencia, errores, compartir y recuperación. La prueba de interfaz sí abrió la app en el simulador de iOS. Ninguna de ellas equivale a las comprobaciones de Safari, compartir, VoiceOver y uso cotidiano en un iPhone físico que siguen pendientes abajo.
 
 ## Registro de una ejecución
 
@@ -29,12 +35,12 @@ Registrar versión y número de compilación, commit, modelo del dispositivo, ve
 
 Usar consultas públicas para estas pruebas y registrar los fallos reales de las fuentes. No fabricar conteos ni resultados para ocultar una fuente no disponible.
 
-## Capturas pendientes
+## Capturas obtenidas y selección pendiente
 
-Preparar entre tres y cinco capturas de la app ejecutándose, por ejemplo: Radar, un reporte real, Comparativos con resultado real y recuperación de una consulta. Mostrar los estados de error cuando correspondan durante QA; elegir estados representativos y comprobados para la ficha.
+Ya se obtuvieron `01-Radar-iPhone.png` y `02-Comparativos-iPhone.png` de la app ejecutándose. Para la ficha final, completar una selección de entre tres y cinco imágenes con un reporte real, un comparativo con resultado real y, si aporta claridad, la recuperación de una consulta. Mostrar los estados de error cuando correspondan durante QA; elegir estados representativos y comprobados para la ficha.
 
 Para el grupo iPhone de 6,9 pulgadas, Apple acepta en vertical 1260 × 2736, 1290 × 2796 o 1320 × 2868 píxeles. Las imágenes deben ser PNG o JPEG sin transparencia. Elegir un simulador o dispositivo con una medida admitida y conservar la captura original. Las dimensiones corresponden a capturas de App Store, no a publicaciones de Instagram.
 
-Antes de usarlas: revisar que no haya teclado o alertas accidentales, que el texto se lea completo, que no aparezcan datos privados y que las funciones mostradas estén disponibles en la compilación enviada. No se han generado capturas ni simulado pantallas aprobadas en esta preparación.
+Antes de usarlas: revisar que no haya teclado o alertas accidentales, que el texto se lea completo, que no aparezcan datos privados y que las funciones mostradas estén disponibles en la compilación enviada. Estas primeras capturas muestran la navegación y los formularios; no sustituyen las capturas de resultados que todavía faltan para la selección editorial final.
 
 Fuente de medidas: [especificaciones de capturas de Apple](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/).

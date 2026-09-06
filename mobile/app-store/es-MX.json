@@ -17,8 +17,8 @@
   "pending": [
     "Nombre y Bundle ID en Apple",
     "Firma del equipo de la empresa",
-    "Pruebas en iPhone",
-    "Capturas reales",
+    "Pruebas en iPhone físico",
+    "Completar la selección final de capturas con reportes reales",
     "Clasificación por edad",
     "Declaración de privacidad",
     "Validación y publicación de URLs",
@@ -61,5 +61,21 @@
     "price": null,
     "billing_period": null,
     "ios_payment_plan": "Planificar compras integradas de Apple para contenido digital y revisar las reglas de los países elegidos antes de implementar."
+  },
+  "simulator_verification": {
+    "date": "2026-09-06",
+    "source_commit": "c760219822edcc07d4d27e70e60b0523a912d4f1",
+    "workflow_url": "https://github.com/alejoavanza/Radar---Congreso/actions/runs/34045828725",
+    "device": "iPhone 17 Pro Max",
+    "ios": "26.5",
+    "result": "Aprobado: apertura, pestañas y cuatro botones para borrar nombre/zona",
+    "screenshots": {
+      "count": 2,
+      "format": "PNG RGB sin transparencia",
+      "width": 1320,
+      "height": 2868,
+      "scope": "Formularios Radar y Comparativos; faltan imágenes con resultados para la selección final."
+    },
+    "physical_iphone_status": "Pendiente"
   }
 }

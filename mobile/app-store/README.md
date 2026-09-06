@@ -6,7 +6,7 @@ Actualizado: 6 de septiembre de 2026. Material de trabajo; no se ha enviado una 
 
 - Proyecto iPhone con interfaz y directorio incluidos, guardado local de la última consulta, compartir nativo y apertura de fuentes con regreso al reporte.
 - Icono opaco de 1024 × 1024 y pantalla de lanzamiento.
-- Compilación automática sin firma para simulador aprobada; las pruebas de los adaptadores y de la interfaz empaquetada también pasaron. Esto no sustituye pruebas en un teléfono.
+- Compilación y ejecución en simulador aprobadas: apertura, navegación y borrado de nombres y zonas en iPhone 17 Pro Max con iOS 26.5. Las pruebas de los adaptadores y la interfaz empaquetada también pasaron. Esto no sustituye pruebas en un teléfono físico.
 - [Ficha de la tienda](es-MX.json): nombre y subtítulo propuestos, descripción, palabras clave, texto promocional, notas para revisión, contacto e identificadores propuestos.
 - [Inventario de privacidad](privacidad.md), basado en el código actual, para completar con Táctika y el administrador del alojamiento.
 - [Guion de pruebas y capturas](pruebas-iphone.md) para ejecutar sobre la versión que se enviará.
@@ -36,7 +36,7 @@ El correo de soporte de la ficha no reemplaza el correo corporativo necesario pa
 ## Qué se puede completar sin la membresía
 
 1. Revisar la ficha y las notas de revisión con la versión real de la app.
-2. Ejecutar pruebas en simulador y preparar las pruebas en dispositivo. Las capturas pueden obtenerse de la app ejecutada en un simulador compatible o en un iPhone; aún no se han producido las capturas de esta entrega.
+2. Ejecutar pruebas en simulador y preparar las pruebas en dispositivo. Ya se obtuvieron y revisaron dos capturas reales de Radar y Comparativos, de 1320 × 2868 píxeles; falta completar la selección final con reportes reales de la versión candidata.
 3. Confirmar la política de conservación, proveedores, contacto y procedimiento de solicitudes de datos.
 4. Validar las páginas de soporte y privacidad y preparar su publicación.
 5. Configurar el lanzamiento gratuito cuando esté disponible la cuenta, confirmar la lista de países y revisar el contenido accesible para completar la clasificación por edad.
