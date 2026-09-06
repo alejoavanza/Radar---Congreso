@@ -136,7 +136,7 @@ final class RadarUITests: XCTestCase {
         radarName.tap()
         radarName.typeText("Toro")
         control("Borrar nombre").tap()
-        XCTAssertTrue(radarName.value as? String == "" || radarName.value as? String == "Ej. Toro o Alejandro")
+        XCTAssertTrue(radarName.value as? String == "" || radarName.value as? String == "Ej. Arizabaleta o Alejandro")
         let radarZone = field("Zona", id: "territory")
         control("Borrar zona").tap()
         XCTAssertTrue(radarZone.value as? String == "" || radarZone.value as? String == "Ej. Colombia o Antioquia")
@@ -144,7 +144,7 @@ final class RadarUITests: XCTestCase {
         XCTAssertEqual(radarZone.value as? String, "Colombia")
     }
 
-    func testLiveReportComparisonAndNativeActions() throws {
+    private func generateLiveReport() -> XCUIElement {
         // Use the same public API and native plugins as the shipped app. No
         // response fixtures or synthetic results are injected into this test.
         selectTab("RADAR")
@@ -160,10 +160,12 @@ final class RadarUITests: XCTestCase {
 
         let source = app.links.matching(NSPredicate(format: "label BEGINSWITH %@", "Abrir fuente:")).firstMatch
         XCTAssertTrue(source.waitForExistence(timeout: 100), "La consulta real debe devolver al menos una noticia; un fallo de la fuente no se sustituye por datos inventados.")
+        return source
+    }
+
+    func testSafariReturnKeepsReport() throws {
+        let source = generateLiveReport()
         let originalSource = source.label
-        frameResult(control("Compartir reporte"))
-        capture("03-Reporte-real-iPhone")
-        cancelShare("Compartir reporte")
         reveal(source)
         source.tap()
         // The observed iOS 26 Safari toolbar exposes Close instead of Done.
@@ -171,9 +173,27 @@ final class RadarUITests: XCTestCase {
         let safariDone = app.buttons.matching(NSPredicate(format: "identifier IN %@ OR label IN %@", ["Close", "Done"], ["OK", "Listo", "Done", "Cerrar", "Close"])).firstMatch
         XCTAssertTrue(safariDone.waitForExistence(timeout: 20), "La fuente debe abrir en Safari integrado con salida a Radar.")
         capture("QA-Fuente-Safari")
-        safariDone.tap()
-        XCTAssertTrue(source.waitForExistence(timeout: 10))
+        // A publisher's modal cookie dialog can trap accessibility focus in the
+        // web page. Dismiss that dialog without accepting cookies before using
+        // Safari's own toolbar, then require the actual return to Radar.
+        let cookieClose = app.webViews.buttons.matching(NSPredicate(format: "label IN %@", ["Close dialog", "Cerrar diálogo"])).firstMatch
+        if cookieClose.exists && cookieClose.isHittable { cookieClose.tap() }
+        let toolbarClose = app.otherElements["TopBrowserBar"].buttons["Close"]
+        let closeControl = toolbarClose.exists ? toolbarClose : safariDone
+        let closeReady = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == true"), object: closeControl)
+        XCTAssertEqual(XCTWaiter.wait(for: [closeReady], timeout: 15), .completed)
+        closeControl.tap()
+        XCTAssertTrue(source.waitForExistence(timeout: 20), "Cerrar Safari debe devolver la consulta original.")
         XCTAssertEqual(source.label, originalSource, "Al cerrar Safari se conserva la noticia de la consulta.")
+
+    }
+
+    func testLiveReportComparisonAndNativeActions() throws {
+        let source = generateLiveReport()
+        let originalSource = source.label
+        frameResult(control("Compartir reporte"))
+        capture("03-Reporte-real-iPhone")
+        cancelShare("Compartir reporte")
 
         app.terminate()
         app.launch()

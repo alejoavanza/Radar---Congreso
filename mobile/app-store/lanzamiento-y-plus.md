@@ -16,7 +16,7 @@ La descripción y las notas de revisión en `es-MX.json` ya reflejan el público
 
 ## Segunda etapa: Plus
 
-Está confirmada la intención de ofrecer información adicional de pago más adelante. No están definidos sus contenidos, precio, periodicidad ni fecha de salida. La versión actual no incorpora cobros ni ofrece una suscripción.
+Está confirmada la intención de ofrecer información adicional de pago más adelante. El 6 de septiembre de 2026 Alejandro reservó la **exportación de reportes en PDF para la versión paga** y pidió detener su desarrollo para el lanzamiento gratuito. No se ha implementado esa exportación. El resto del contenido, precio, periodicidad y fecha de salida siguen pendientes. La versión actual no incorpora cobros ni ofrece una suscripción.
 
 Antes de desarrollar Plus:
 

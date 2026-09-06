@@ -24,6 +24,10 @@ Validación local de esta ampliación: 9 pruebas móviles, 15 de la interfaz com
 
 Al consultar las fuentes reales se detectó que las redes no disponibles se mostraban como cero. La interfaz candidata ahora muestra N/D y explica qué fuentes respaldan el total. Un cero procedente de una fuente que sí respondió se conserva como cero. El botón de compartir se colocó al inicio de cada resultado. Una captura original permitió verificar que el contenido desplazado ya no se superpone a la hora ni al indicador inferior del iPhone.
 
+La ejecución [34051343025](https://github.com/alejoavanza/Radar---Congreso/actions/runs/34051343025), de `2aea817aedc3fce639fbc822ee598fff85029d82`, volvió a aprobar ambas compilaciones y la navegación. La fuente abrió en Safari, pero siguió visible tras el toque automatizado de cierre; la jerarquía mostraba un aviso de cookies del editor. Se añadió el cierre de ese aviso sin aceptar cookies y se separó Safari en una prueba propia, conservando la exigencia de volver a la consulta original. Así el recorrido de recuperación, comparativo y borrado puede ejecutarse aunque Safari falle. Consultar el resultado de la nueva ejecución en el PR; este cambio del test no acredita por sí solo que el regreso esté resuelto.
+
+La interfaz incorpora el ejemplo «Arizabaleta o Alejandro», una ficha desplegable sobre las fuentes y los límites del método y una explicación visible de la diferencia entre Radar y Comparativos. La exportación PDF se reserva para una futura versión paga, por instrucción de Alejandro; no forma parte de estas pruebas ni de la versión gratuita.
+
 ## Registro de una ejecución
 
 Registrar versión y número de compilación, commit, modelo del dispositivo, versión de iOS, fecha, persona que prueba, resultado y evidencia. Repetir las filas afectadas cuando cambie la versión candidata.
