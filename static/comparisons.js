@@ -34,6 +34,7 @@
   const form = $('compare-form'), run = $('compare-run'), progress = $('compare-progress');
   const results = $('compare-results'), chart = $('compare-chart');
   const STORAGE = 'radar:comparison:v1';
+  const storage = root.RadarNative?.storage || sessionStorage;
   let selected = [], catalog = null, index = [], suggestions = [], active = -1;
   let snapshot = null, running = false, choosing = false;
   const fmt = value => new Intl.NumberFormat('es-CO').format(value);
@@ -58,7 +59,7 @@
 
   function persist() {
     try {
-      sessionStorage.setItem(STORAGE, JSON.stringify({
+      storage.setItem(STORAGE, JSON.stringify({
         ids: selected.map(member => member.id), days: +$('compare-days').value,
         territory: $('compare-territory').value, order: $('compare-order').value, snapshot
       }));
@@ -249,7 +250,7 @@
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), milliseconds);
     try {
-      const response = await fetch(url, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body), signal: controller.signal});
+      const response = await (root.RadarNative?.request || fetch)(url, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body), signal: controller.signal});
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'No se pudo completar la consulta.');
       return data;
@@ -310,7 +311,7 @@
     if (!data) { $('compare-error').textContent = 'No se pudo cargar el directorio. Recarga la página para elegir congresistas.'; return; }
     catalog = data; index = root.RadarCongress.createIndex(catalog.members);
     try {
-      const saved = JSON.parse(sessionStorage.getItem(STORAGE));
+      const saved = JSON.parse(storage.getItem(STORAGE));
       if (saved && Array.isArray(saved.ids)) {
         selected = [...new Set(saved.ids)].map(id => catalog.members.find(member => member.id === id)).filter(Boolean).slice(0, 10);
         if ([90, 60, 30, 7, 1].includes(saved.days)) $('compare-days').value = saved.days;
@@ -327,5 +328,5 @@
     } catch (_) { /* Old or unavailable storage leaves a fresh form. */ }
     renderSelected();
   });
-  try { if (sessionStorage.getItem('radar:tab:v1') === 'compare') root.showTab('compare'); } catch (_) { /* Optional state. */ }
+  try { if (storage.getItem('radar:tab:v1') === 'compare') root.showTab('compare'); } catch (_) { /* Optional state. */ }
 })(typeof window === 'undefined' ? globalThis : window);

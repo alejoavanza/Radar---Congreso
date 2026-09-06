@@ -45,3 +45,35 @@ test('removing unavailable X preserves the counts of remaining sources', () => {
   assert.equal('x_intelligence' in clean.mentions, false);
   assert.deepEqual(withoutX(clean), clean, 'New reports stay stable after recovery');
 });
+
+test('unavailable networks are not displayed as a measured zero', () => {
+  const nodes = new Map();
+  context.$ = id => {
+    if (!nodes.has(id)) nodes.set(id, {classList: {remove() {}}, setAttribute() {}});
+    return nodes.get(id);
+  };
+  context.renderReport({name: 'Persona', summary: 'Resumen', items: [], mentions: {
+    web: 10, social: 0, combined: 10,
+    platform_counts: {Bluesky: 0, Reddit: 0},
+    platform_status: {Bluesky: 'error', Reddit: 'error'}
+  }});
+  assert.equal(nodes.get('msocial').textContent, 'N/D');
+  assert.equal(nodes.get('mcombined').textContent, 10);
+  assert.match(nodes.get('report-coverage').textContent, /solo a las noticias/);
+});
+
+test('a successful empty source remains zero and partial coverage names the available network', () => {
+  const nodes = new Map();
+  context.$ = id => {
+    if (!nodes.has(id)) nodes.set(id, {classList: {remove() {}}, setAttribute() {}});
+    return nodes.get(id);
+  };
+  context.renderReport({name: 'Persona', summary: 'Resumen', items: [], mentions: {
+    web: 4, social: 0, combined: 4,
+    platform_counts: {Bluesky: 0, Reddit: 0},
+    platform_status: {Bluesky: 'active', Reddit: 'error'}
+  }});
+  assert.equal(nodes.get('msocial').textContent, 0);
+  assert.match(nodes.get('report-coverage').textContent, /Redes consultadas: Bluesky\./);
+  assert.doesNotMatch(nodes.get('report-coverage').textContent, /Reddit/);
+});

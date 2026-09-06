@@ -1,4 +1,5 @@
 const reportStorageKey = 'radar:report:v1';
+const reportStorage = window.RadarNative?.storage || sessionStorage;
 let currentReport = null;
 let currentQuery = null;
 let currentForm = null;
@@ -92,7 +93,8 @@ function newsSourceLink(item) {
       link.rel = 'noopener noreferrer external';
       link.dataset.newsSource = 'true';
       link.textContent = 'Abrir fuente →';
-      link.setAttribute('aria-label', `Abrir fuente: ${item.title || 'noticia'} (abre en otra pestaña)`);
+      const destination = window.RadarNative ? 'abre en Safari; ciérralo para regresar' : 'abre en otra pestaña';
+      link.setAttribute('aria-label', `Abrir fuente: ${item.title || 'noticia'} (${destination})`);
       return link.outerHTML;
     } catch (_) {
       // Older reports may have only `link`; try that before disabling the link.
@@ -108,7 +110,7 @@ function newsItem(item) {
 function saveReport() {
   if (!currentReport || !currentQuery || $('reporttab').classList.contains('hide') || $('result').classList.contains('hide')) return;
   try {
-    sessionStorage.setItem(reportStorageKey, JSON.stringify({
+    reportStorage.setItem(reportStorageKey, JSON.stringify({
       report: currentReport,
       query: currentQuery,
       form: currentForm,
@@ -124,7 +126,7 @@ function restoreReport() {
   // search elsewhere. Keep the original query attached to the recovered report.
   $('territory').value = 'Colombia';
   try {
-    const saved = JSON.parse(sessionStorage.getItem(reportStorageKey));
+    const saved = JSON.parse(reportStorage.getItem(reportStorageKey));
     if (!saved?.query || !saved.report?.mentions || !Array.isArray(saved.report.items)) return;
     currentReport = withoutX(saved.report);
     currentQuery = saved.query;
@@ -163,7 +165,7 @@ async function go() {
   $('result').classList.add('hide');
   showOfficialProfile(query, form.congress_id, searchSequence);
   try {
-    const response = await fetch('/api/report', {
+    const response = await (window.RadarNative?.request || fetch)('/api/report', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(query)
@@ -179,7 +181,15 @@ async function go() {
     $('report-restored').classList.add('hide');
     saveReport();
   } catch (error) {
-    if (searchSequence === reportSearchSequence) alert(error.message);
+    if (searchSequence === reportSearchSequence) {
+      if (window.RadarNative && currentReport) {
+        renderReport(currentReport);
+        const zone = currentQuery?.territory || 'Sin filtro de zona';
+        $('report-restored').textContent = `No se pudo actualizar. Se muestra la consulta anterior · Zona consultada: ${zone}.`;
+        $('report-restored').classList.remove('hide');
+      }
+      alert(error.message);
+    }
   } finally {
     if (searchSequence === reportSearchSequence) $('loading').classList.add('hide');
   }
@@ -194,9 +204,18 @@ document.addEventListener('visibilitychange', () => {
 });
 
 function renderReport(d) {
+  const counts = d.mentions.platform_counts || {};
+  const measured = Object.entries(d.mentions.platform_status || {})
+    .filter(([source, status]) => source !== 'X' && status === 'active' && Number.isFinite(counts[source]) && counts[source] >= 0)
+    .map(([source]) => source);
   $('mweb').textContent = d.mentions.web;
-  $('msocial').textContent = d.mentions.social;
+  $('msocial').textContent = measured.length ? d.mentions.social : 'N/D';
+  $('msocial').setAttribute?.('aria-label', measured.length ? `${d.mentions.social} menciones en redes disponibles` : 'Redes públicas: no disponible');
   $('mcombined').textContent = d.mentions.combined;
+  const coverage = $('report-coverage');
+  if (coverage) coverage.textContent = measured.length
+    ? `Redes consultadas: ${measured.join(', ')}. El total suma la web y estas fuentes; las demás redes no están disponibles. No es un censo de todas las menciones.`
+    : 'Redes públicas: no disponible (N/D). El total corresponde solo a las noticias detectadas en web; no significa que haya cero menciones en redes.';
   $('rname').textContent = d.name;
   $('summary').textContent = d.summary;
   $('items').innerHTML = (d.items || []).map(newsItem).join('');

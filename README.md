@@ -17,6 +17,10 @@ python app.py
 
 Preparada para despliegue como servicio web Python con `gunicorn app:app`. Incluye `render.yaml`.
 
+## Versión para iPhone
+
+El proyecto iOS se encuentra en [`mobile`](mobile/README.md). Incluye la interfaz actual, apertura de fuentes con regreso a la app, recuperación local de consultas y compartir nativo. La firma, TestFlight y publicación en App Store se completan con la cuenta de organización de Táctika. La preparación técnica no implica que la app esté publicada ni aprobada por Apple.
+
 ## Nota metodológica
 
 El balance contextual es una clasificación heurística de titulares y no equivale a intención de voto, favorabilidad de encuesta ni medición científica de opinión pública. La evolución prevista de RADAR incorporará más fuentes, resolución de entidades, narrativas, evidencia auditable y modelos de scoring versionados.

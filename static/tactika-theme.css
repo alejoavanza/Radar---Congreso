@@ -159,3 +159,10 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
   .tactika-links { gap: 8px; }
   .tactika-links a { flex: 1; flex-direction: column; padding: 10px 8px; font-size: 12px; }
 }
+
+/* A visible entry point to the measurement limits in either mode. */
+.methodology { margin-top: 16px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font-size: 14px; line-height: 1.55; }
+.methodology summary { min-height: 44px; padding: 12px 14px; color: var(--tactika-teal); font-weight: 700; cursor: pointer; }
+.methodology summary:focus-visible { outline: 3px solid var(--tactika-orange); outline-offset: 2px; }
+.methodology-body { padding: 0 14px 8px; }
+.methodology-body p { margin: 0 0 14px; }

@@ -1,0 +1,89 @@
+name: iOS preparation
+
+on:
+  pull_request:
+    paths:
+      - 'mobile/**'
+      - 'static/**'
+      - 'templates/**'
+      - '.github/workflows/ios.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  simulator:
+    runs-on: macos-26
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Bundle and verify iOS resources
+        run: npm run sync
+      - name: Test native adapters and packaged interface
+        run: npm test
+      - name: Check the shared web interface
+        run: node --test ../tests/*.test.cjs
+      - name: Report Apple build tools
+        run: xcodebuild -version
+      - name: Build unsigned iPhone simulator app
+        run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+      - name: Archive Release for iPhone without distribution credentials
+        id: archive
+        run: >-
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release
+          -sdk iphoneos -destination 'generic/platform=iOS'
+          -archivePath build/Radar-Politico.xcarchive
+          -derivedDataPath build CODE_SIGNING_ALLOWED=NO archive
+      - name: Prepare installed iPhone simulator
+        env:
+          RADAR_SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python3 scripts/prepare-simulator.py
+      - name: Run iPhone navigation and live native flows
+        run: >-
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug
+          -destination "platform=iOS Simulator,id=$SIMULATOR_UDID"
+          -derivedDataPath build -resultBundlePath build/Radar-UI.xcresult
+          -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO test
+      - name: Export actual simulator screenshots
+        if: always()
+        run: |
+          if [ -d build/Radar-UI.xcresult ]; then
+            xcrun xcresulttool export attachments --path build/Radar-UI.xcresult --output-path build/evidence/screenshots
+            xcrun xcresulttool get test-results summary --path build/Radar-UI.xcresult > build/evidence/test-summary.json
+          fi
+      - name: Save simulator execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Radar-Politico-iPhone-Evidence
+          path: mobile/build/evidence
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Save simulator build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Radar-Politico-iOS-Simulator
+          path: mobile/build/Build/Products/Debug-iphonesimulator/App.app
+          retention-days: 7
+      - name: Save unsigned Release archive
+        if: always() && steps.archive.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Radar-Politico-iPhone-Unsigned-Archive
+          path: mobile/build/Radar-Politico.xcarchive
+          retention-days: 7

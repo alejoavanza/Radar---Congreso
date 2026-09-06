@@ -1,0 +1,18 @@
+html { -webkit-text-size-adjust: 100%; }
+body { overscroll-behavior-y: none; }
+/* Keep scrolling content clear of the status bar and home indicator. */
+body::before, body::after { content: ""; position: fixed; left: 0; right: 0; z-index: 1000; pointer-events: none; background: #e9e8e6; }
+body::before { top: 0; height: env(safe-area-inset-top); }
+body::after { bottom: 0; height: env(safe-area-inset-bottom); }
+.wrap { padding-bottom: calc(28px + env(safe-area-inset-bottom)); padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); }
+.native-notice { margin: 12px 0; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--tactika-soft); color: var(--text); font-size: 14px; line-height: 1.5; }
+.native-action { min-height: 44px; font-size: 16px; }
+#native-settings { margin-top: 22px; font-size: 14px; line-height: 1.6; }
+#native-settings summary { min-height: 44px; display: list-item; padding-block: 12px; color: var(--tactika-teal); }
+#native-settings a { display: inline-block; min-height: 44px; padding: 10px 12px 10px 0; color: var(--tactika-teal); }
+#native-settings button { font-size: 14px; }
+.item { font-size: 16px; line-height: 1.5; }
+.item a { display: inline-flex; align-items: center; min-height: 44px; }
+label { font-size: 14px; }
+.native-starting:empty { display: none; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
