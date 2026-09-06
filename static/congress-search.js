@@ -177,7 +177,7 @@
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000);
-  fetch('/static/congress-members.json?v=2026-09-06', {signal: controller.signal})
+  root.RadarCongress.catalogReady = fetch('/static/congress-members.json?v=2026-09-06', {signal: controller.signal})
     .then(response => { if (!response.ok) throw new Error('Directory unavailable'); return response.json(); })
     .then(catalog => {
       if (!Array.isArray(catalog.members) || !catalog.members.length || catalog.members.some(member =>
@@ -189,11 +189,13 @@
       if (pendingRestore && pendingRestore.value === input.value) root.RadarCongress.restore(pendingRestore.id);
       pendingRestore = null;
       if (document.activeElement === input) render();
+      return catalog;
     })
     .catch(() => {
       failed = true;
       catalogNote.textContent = 'El directorio no está disponible. La búsqueda libre sigue funcionando.';
       if (document.activeElement === input) render();
+      return null;
     })
     .finally(() => clearTimeout(timeout));
 })(typeof window === 'undefined' ? globalThis : window);

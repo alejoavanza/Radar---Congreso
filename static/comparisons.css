@@ -1,0 +1,44 @@
+.tabs button[aria-selected=false]{border-bottom:1px solid #000}
+.tabs button[aria-selected=true]{border-bottom:4px solid #000}
+#comparetab h2{margin:0 0 8px;font-size:24px}
+#comparetab p{line-height:1.5}
+#comparetab button:disabled{opacity:.5;cursor:not-allowed}
+.compare-selected{list-style:none;padding:0;margin:12px 0}
+.compare-person{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #e6e6e6;font-size:14px}
+.compare-person>div{min-width:0}
+.compare-person-detail{display:block;font-size:12px;color:#666;line-height:1.4;margin:3px 0 8px}
+.compare-person .compare-person-detail{margin-bottom:0}
+#comparetab .compare-remove{flex:0 0 auto;width:auto;padding:9px 12px;margin:0;font-size:12px;font-weight:600;background:#fff;color:#444;border:1px solid #ccc}
+.compare-control-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.compare-progress,.compare-error{font-size:13px;line-height:1.5;margin:14px 0 0}
+.compare-progress:empty,.compare-error:empty,#compare-x-note:empty{display:none}
+.compare-error{font-weight:600}
+.compare-chart{list-style:none;padding:0;margin:20px 0}
+.compare-chart-person{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid #e6e6e6}
+.compare-chart-person h3{font-size:16px;margin:0}
+.compare-bar-row{display:grid;grid-template-columns:42px minmax(0,1fr) 72px;gap:8px;align-items:center;margin-top:7px;min-height:25px}
+.compare-bar-label{font-size:12px;color:#555}
+.compare-track{height:20px;background:#f3f3f3;border-radius:3px;overflow:hidden}
+.compare-bar{height:100%;border-radius:3px}
+.web-bar{background:#111}
+.social-bar{background:#999}
+.compare-value{font-size:13px;font-weight:650;text-align:right;font-variant-numeric:tabular-nums}
+.compare-value.unavailable{font-weight:400;color:#777}
+.compare-order-row{display:flex;gap:12px;align-items:center;margin:16px 0}
+.compare-order-row label{margin:0;flex:0 0 auto}
+.compare-order-row select{width:auto;flex:1;max-width:240px;padding:9px;font-size:14px}
+.compare-table-wrap{overflow-x:auto;margin:12px 0}
+.compare-table{border-collapse:collapse;width:100%;font-size:12px}
+.compare-table caption{text-align:left;font-size:13px;margin-bottom:12px;color:#555}
+.compare-table th,.compare-table td{padding:10px 8px;border-bottom:1px solid #ddd;text-align:right;min-width:65px}
+.compare-table th:first-child{text-align:left;min-width:145px}
+.compare-table tbody th{font-weight:500}
+.compare-method summary,.compare-evidence summary,.compare-news summary{cursor:pointer;font-size:13px;line-height:1.5}
+.compare-method{margin-top:14px}
+.compare-method p,.compare-source-line{font-size:12px;color:#555}
+.compare-evidence{border-top:1px solid #ddd;padding:12px 0}
+.compare-evidence>summary{font-weight:650}
+#comparetab a{color:inherit;text-underline-offset:2px}
+.compare-news ul{padding-left:18px;font-size:12px;line-height:1.5}
+.compare-news li{margin:9px 0}
+@media(max-width:520px){.compare-control-row{grid-template-columns:1fr;gap:0}.compare-bar-row{grid-template-columns:38px minmax(0,1fr) 58px;gap:6px}.compare-person{font-size:13px}.compare-value{font-size:12px}}

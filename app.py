@@ -3,8 +3,10 @@ import feedparser, requests, re, os
 from urllib.parse import quote
 from collections import Counter
 from datetime import datetime, timedelta, timezone
+from comparisons import comparison_api
 
 app = Flask(__name__)
+app.register_blueprint(comparison_api)
 POS={'apoyo','respaldo','logro','avance','acuerdo','lidera','celebra','aprobado','victoria','positivo','defiende','gracias','excelente','bien'}
 NEG={'crítica','critica','denuncia','escándalo','escandalo','rechazo','ataque','investigación','investigacion','crisis','polémica','polemica','fracaso','corrupción','corrupcion','mentira'}
 STOP={'para','como','sobre','entre','desde','ante','tras','este','esta','estos','estas','del','las','los','una','uno','que','por','con','sin','más','mas','sus','han','fue','son','ser','https','esto','pero','porque','cuando','donde'}
@@ -73,13 +75,6 @@ def x_status_detail(code):return {400:'Solicitud rechazada por X.',401:'Token re
 def x_headers():return {'Authorization':f"Bearer {os.getenv('X_BEARER_TOKEN','').strip()}",'User-Agent':UA['User-Agent']}
 def x_get(url,params=None):
     r=requests.get(url,params=params,timeout=15,headers=x_headers());return r,r.json() if r.ok else {}
-def x_user_by_username(username):
-    if not username:return None,None
-    r,d=x_get(f'https://api.x.com/2/users/by/username/{username.lstrip("@")} ',{'user.fields':'name,username,public_metrics,verified,verified_type'})
-    if r.status_code==404 or not r.ok:
-        r,d=x_get(f'https://api.x.com/2/users/by/username/{username.lstrip("@")} ',{'user.fields':'name,username,public_metrics,verified,verified_type'})
-    return (d.get('data') if r.ok else None),r.status_code
-
 def x_intelligence(posts,users,name):
     sc=Counter();words=Counter();authors=Counter();daily=Counter();total_eng=0;post_rows=[];banned=set(re.findall(r"[a-záéíóúñü]+",name.lower()))|STOP
     for p in posts:
@@ -113,65 +108,6 @@ def fetch_x_count(name,aliases,territory,days,max_pages=10):
     except requests.Timeout:return 0,'error',{'code':'timeout','label':'X no respondió a tiempo.'},None
     except Exception:return 0,'error',{'code':'unexpected_error','label':'Error al procesar X.'},None
 
-def mi_red(username,max_followers_pages=3,active_pages=3):
-    username=(username or '').strip().lstrip('@')
-    if not username:return {'status':'needs_username','label':'Escribe tu @usuario de X para analizar MI RED.'}
-    try:
-        fields='name,username,public_metrics,verified,verified_type,verified_followers_count'
-        r,d=x_get(f'https://api.x.com/2/users/by/username/{username}',{'user.fields':fields})
-        if not r.ok:return {'status':'error','label':x_status_detail(r.status_code),'http_status':r.status_code}
-        me=d.get('data') or {};uid=me.get('id');followers=[];token=None
-        total_followers=int((me.get('public_metrics') or {}).get('followers_count',0) or 0)
-        for _ in range(max_followers_pages):
-            params={'max_results':1000,'user.fields':fields}
-            if token:params['pagination_token']=token
-            fr,fd=x_get(f'https://api.x.com/2/users/{uid}/followers',params)
-            if not fr.ok:break
-            followers.extend(fd.get('data') or []);token=(fd.get('meta') or {}).get('next_token')
-            if not token:break
-        def row(u):
-            un=u.get('username','');return {'id':u.get('id'),'name':u.get('name','Cuenta X'),'username':un,'profile_url':f'https://x.com/{un}' if un else '','followers':int((u.get('public_metrics') or {}).get('followers_count',0) or 0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or ''}
-        rows=[row(u) for u in followers]
-        top=sorted(rows,key=lambda x:x['followers'],reverse=True)[:10]
-        verified=sorted([x for x in rows if x['verified']],key=lambda x:x['followers'],reverse=True)[:20]
-        analyzed=len(rows);coverage=round((analyzed/total_followers*100),2) if total_followers else 0
-        verified_total=me.get('verified_followers_count')
-        try:verified_total=int(verified_total) if verified_total is not None else None
-        except:verified_total=None
-
-        active_users={};active_posts=[];nxt=None;active_error=None
-        start=(datetime.now(timezone.utc)-timedelta(days=7)).replace(microsecond=0).isoformat().replace('+00:00','Z')
-        for _ in range(active_pages):
-            params={'query':f'@{username}','max_results':100,'start_time':start,'tweet.fields':'created_at,author_id,public_metrics,referenced_tweets,in_reply_to_user_id','expansions':'author_id','user.fields':'name,username,public_metrics,verified,verified_type'}
-            if nxt:params['next_token']=nxt
-            sr=requests.get('https://api.x.com/2/tweets/search/recent',params=params,timeout=15,headers=x_headers())
-            if not sr.ok:
-                active_error=f'X respondió {sr.status_code} al consultar actividad reciente.';break
-            sd=sr.json()
-            for u in (sd.get('includes') or {}).get('users',[]):active_users[u.get('id')]=u
-            for p in sd.get('data',[]):
-                if p.get('author_id')!=uid:active_posts.append(p)
-            nxt=(sd.get('meta') or {}).get('next_token')
-            if not nxt:break
-        active_rows=[];activity_by_author=Counter();eng_by_author=Counter();reposts=0;quotes=0;replies=0
-        for p in active_posts:
-            aid=p.get('author_id');activity_by_author[aid]+=1;pm=p.get('public_metrics') or {};eng=int(pm.get('like_count',0) or 0)+int(pm.get('repost_count',pm.get('retweet_count',0)) or 0)+int(pm.get('reply_count',0) or 0)+int(pm.get('quote_count',0) or 0);eng_by_author[aid]+=eng
-            refs=p.get('referenced_tweets') or []
-            kinds={x.get('type') for x in refs}
-            if 'retweeted' in kinds:reposts+=1
-            if 'quoted' in kinds:quotes+=1
-            if 'replied_to' in kinds or p.get('in_reply_to_user_id')==uid:replies+=1
-            u=active_users.get(aid,{});un=u.get('username','');followers_count=int((u.get('public_metrics') or {}).get('followers_count',0) or 0);pid=p.get('id','')
-            active_rows.append({'id':pid,'text':p.get('text',''),'created_at':p.get('created_at',''),'name':u.get('name','Cuenta X'),'username':un,'profile_url':f'https://x.com/{un}' if un else '','post_url':f'https://x.com/{un}/status/{pid}' if un and pid else '','followers':followers_count,'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or '','engagement':eng,'reference_types':list(kinds)})
-        active_accounts=[]
-        for aid,count in activity_by_author.items():
-            u=active_users.get(aid,{});un=u.get('username','');active_accounts.append({'id':aid,'name':u.get('name','Cuenta X'),'username':un,'profile_url':f'https://x.com/{un}' if un else '','followers':int((u.get('public_metrics') or {}).get('followers_count',0) or 0),'verified':bool(u.get('verified',False)),'verified_type':u.get('verified_type','') or '','activity_count':count,'engagement_generated':eng_by_author[aid]})
-        active_accounts=sorted(active_accounts,key=lambda x:(x['followers'],x['engagement_generated'],x['activity_count']),reverse=True)[:15]
-        top_active_posts=sorted(active_rows,key=lambda x:(x['engagement'],x['followers']),reverse=True)[:15]
-        verified_active=sorted([x for x in active_accounts if x['verified']],key=lambda x:x['followers'],reverse=True)
-        return {'status':'active','label':f'MI RED conectada: {analyzed} seguidores analizados y {len(active_posts)} interacciones/menciones recientes detectadas.','profile':row(me),'profile_url':f'https://x.com/{username}','total_followers':total_followers,'followers_analyzed':analyzed,'coverage_percent':coverage,'is_full_coverage':not bool(token),'top_followers':top,'verified_count_sample':sum(1 for x in rows if x['verified']),'verified_total':verified_total,'verified_followers':verified,'active_accounts':active_accounts,'verified_active':verified_active,'top_active_posts':top_active_posts,'active_mentions_count':len(active_posts),'reposts_detected':reposts,'quotes_detected':quotes,'replies_detected':replies,'active_error':active_error,'coverage_note':('Cobertura completa de seguidores.' if not token else f'Se analizaron {analyzed} de {total_followers} seguidores ({coverage}%). El Top 10 de seguidores sigue siendo parcial hasta recorrer toda la red. Para evitar consumo excesivo de créditos, RADAR no recorre automáticamente decenas de miles de perfiles.')}
-    except requests.Timeout:return {'status':'error','label':'X no respondió a tiempo al consultar MI RED.'}
-    except Exception:return {'status':'error','label':'No fue posible procesar MI RED.'}
 def fetch_youtube_count(*args,**kwargs):return (0,'credential_required',None) if not os.getenv('YOUTUBE_API_KEY','').strip() else (0,'credential_required',None)
 def restricted_platform(name):return 0,'restricted_access',None
 @app.get('/')
@@ -189,8 +125,6 @@ def report():
     if err:return jsonify({'error':'No fue posible consultar las fuentes en este momento.','detail':err}),502
     counts=Counter(x['sentiment'] for x in items);total=len(items);pos=counts['Positivo'];neg=counts['Negativo'];neu=counts['Neutral'];balance=round((pos-neg)/total*100,1) if total else 0;bsky,bs,_=fetch_bluesky_count(name,aliases,territory,days);reddit,rs,_=fetch_reddit_count(name,aliases,territory,days);xcount,xs,xd,xintel=fetch_x_count(name,aliases,territory,days);yt,ys,_=fetch_youtube_count();fb,fbs,_=restricted_platform('Facebook');ig,igs,_=restricted_platform('Instagram');tt,tts,_=restricted_platform('TikTok');pc={'X':xcount,'YouTube':yt,'Bluesky':bsky,'Reddit':reddit,'Facebook':fb,'Instagram':ig,'TikTok':tt};ps={'X':xs,'YouTube':ys,'Bluesky':bs,'Reddit':rs,'Facebook':fbs,'Instagram':igs,'TikTok':tts};social=sum(pc[k] for k,v in ps.items() if v=='active');active=[k for k,v in ps.items() if v=='active'];summary=f"{name} registra {total} resultados periodísticos en los últimos {days} días. El balance contextual preliminar es {balance:+.1f}, con {pos} titulares positivos, {neg} negativos y {neu} neutrales."
     return jsonify({'name':name,'days':days,'total':total,'positive':pos,'negative':neg,'neutral':neu,'balance':balance,'topics':topics(items,name),'summary':summary,'items':items,'mentions':{'web':total,'social':social,'combined':total+social,'platform_counts':pc,'platform_status':ps,'active_sources':active,'diagnostics':{'X':xd},'x_intelligence':xintel,'note':'Total detectado únicamente en fuentes activas.'}})
-@app.post('/api/mi-red')
-def network():return jsonify(mi_red((request.get_json(force=True) or {}).get('username','')))
 @app.get('/health')
 def health():return {'status':'ok'}
 if __name__=='__main__':app.run(host='0.0.0.0',port=5000,debug=True)
