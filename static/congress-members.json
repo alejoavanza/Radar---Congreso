@@ -30,7 +30,8 @@
       ],
       "party": "Partido Alianza Verde",
       "constituency": "Nariño",
-      "source_url": "https://www.camara.gov.co/representantes/alejandra-gabriela-abasolo-gomez"
+      "source_url": "https://www.camara.gov.co/representantes/alejandra-gabriela-abasolo-gomez",
+      "profile_url": "https://www.camara.gov.co/representantes/alejandra-gabriela-abasolo-gomez/"
     },
     {
       "id": "camara-jose-luis-abdalla-olivera",
@@ -46,7 +47,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Córdoba",
-      "source_url": "https://www.camara.gov.co/representantes/jose-luis-abdalla-olivera"
+      "source_url": "https://www.camara.gov.co/representantes/jose-luis-abdalla-olivera",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-luis-abdalla-olivera/"
     },
     {
       "id": "senado-ana-paola-agudelo-garcia",
@@ -62,7 +64,8 @@
       ],
       "party": "MIRA",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=373&option=com_sppagebuilder&view=page"
     },
     {
       "id": "senado-laura-cristina-ahumada-garcia",
@@ -78,7 +81,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-arledy-alvarado-patino",
@@ -93,7 +97,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Casanare",
-      "source_url": "https://www.camara.gov.co/representantes/arledy-alvarado-patino"
+      "source_url": "https://www.camara.gov.co/representantes/arledy-alvarado-patino",
+      "profile_url": "https://www.camara.gov.co/representantes/arledy-alvarado-patino/"
     },
     {
       "id": "camara-maritza-alvarez-barrera",
@@ -108,7 +113,8 @@
       ],
       "party": "MIRA",
       "constituency": "Cundinamarca",
-      "source_url": "https://www.camara.gov.co/representantes/maritza-alvarez-barrera"
+      "source_url": "https://www.camara.gov.co/representantes/maritza-alvarez-barrera",
+      "profile_url": "https://www.camara.gov.co/representantes/maritza-alvarez-barrera/"
     },
     {
       "id": "camara-luis-carlos-alvarez-morales",
@@ -124,7 +130,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Vichada",
-      "source_url": "https://www.camara.gov.co/representantes/luis-carlos-alvarez-morales"
+      "source_url": "https://www.camara.gov.co/representantes/luis-carlos-alvarez-morales",
+      "profile_url": "https://www.camara.gov.co/representantes/luis-carlos-alvarez-morales/"
     },
     {
       "id": "camara-guillermo-ignacio-alvira-acosta",
@@ -140,7 +147,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Tolima",
-      "source_url": "https://www.camara.gov.co/representantes/guillermo-ignacio-alvira-acosta"
+      "source_url": "https://www.camara.gov.co/representantes/guillermo-ignacio-alvira-acosta",
+      "profile_url": "https://www.camara.gov.co/representantes/guillermo-ignacio-alvira-acosta/"
     },
     {
       "id": "senado-john-edickson-amaya-rodriguez",
@@ -156,7 +164,8 @@
       ],
       "party": "Alianza Verde",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7985&view=page"
     },
     {
       "id": "senado-fabio-raul-amin-saleme",
@@ -172,7 +181,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=378&option=com_sppagebuilder&view=page"
     },
     {
       "id": "senado-selmen-david-arana-cano",
@@ -188,7 +198,8 @@
       ],
       "party": "Coalición Cambio Radical / ALMA",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-juliana-aray-franco",
@@ -203,7 +214,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Bolívar",
-      "source_url": "https://www.camara.gov.co/representantes/juliana-aray-franco"
+      "source_url": "https://www.camara.gov.co/representantes/juliana-aray-franco",
+      "profile_url": "https://www.camara.gov.co/representantes/juliana-aray-franco/"
     },
     {
       "id": "camara-jose-ricardo-ardila-pinedo",
@@ -219,7 +231,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Bolívar",
-      "source_url": "https://www.camara.gov.co/representantes/jose-ricardo-ardila-pinedo"
+      "source_url": "https://www.camara.gov.co/representantes/jose-ricardo-ardila-pinedo",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-ricardo-ardila-pinedo/"
     },
     {
       "id": "camara-fernando-arias-cardona",
@@ -234,7 +247,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Risaralda",
-      "source_url": "https://www.camara.gov.co/representantes/fernando-arias-cardona"
+      "source_url": "https://www.camara.gov.co/representantes/fernando-arias-cardona",
+      "profile_url": "https://www.camara.gov.co/representantes/fernando-arias-cardona/"
     },
     {
       "id": "senado-wilson-neber-arias-castillo",
@@ -250,7 +264,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=381&option=com_sppagebuilder&view=page"
     },
     {
       "id": "camara-jose-fredy-arias-herrera",
@@ -266,7 +281,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Risaralda",
-      "source_url": "https://www.camara.gov.co/representantes/jose-fredy-arias-herrera"
+      "source_url": "https://www.camara.gov.co/representantes/jose-fredy-arias-herrera",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-fredy-arias-herrera/"
     },
     {
       "id": "camara-diego-fran-ariza-perez",
@@ -282,7 +298,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Santander",
-      "source_url": "https://www.camara.gov.co/representantes/diego-fran-ariza-perez"
+      "source_url": "https://www.camara.gov.co/representantes/diego-fran-ariza-perez",
+      "profile_url": "https://www.camara.gov.co/representantes/diego-fran-ariza-perez/"
     },
     {
       "id": "camara-carlos-eduardo-arizabaleta-corral",
@@ -298,7 +315,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/carlos-eduardo-arizabaleta-corral"
+      "source_url": "https://www.camara.gov.co/representantes/carlos-eduardo-arizabaleta-corral",
+      "profile_url": "https://www.camara.gov.co/representantes/carlos-eduardo-arizabaleta-corral/"
     },
     {
       "id": "camara-jaime-ignacio-arizabaleta-fajardo",
@@ -314,7 +332,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/jaime-ignacio-arizabaleta-fajardo"
+      "source_url": "https://www.camara.gov.co/representantes/jaime-ignacio-arizabaleta-fajardo",
+      "profile_url": "https://www.camara.gov.co/representantes/jaime-ignacio-arizabaleta-fajardo/"
     },
     {
       "id": "camara-victor-andres-armero-hernandez",
@@ -330,7 +349,8 @@
       ],
       "party": "Partido Alianza Verde",
       "constituency": "Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/victor-andres-armero-hernandez"
+      "source_url": "https://www.camara.gov.co/representantes/victor-andres-armero-hernandez",
+      "profile_url": "https://www.camara.gov.co/representantes/victor-andres-armero-hernandez/"
     },
     {
       "id": "senado-aida-yolanda-avella-esquivel",
@@ -346,7 +366,8 @@
       ],
       "party": "Unión Patriótica",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4320&view=page"
     },
     {
       "id": "senado-ariel-fernando-avila-martinez",
@@ -362,7 +383,8 @@
       ],
       "party": "Alianza Verde",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4434&view=page"
     },
     {
       "id": "camara-camilo-esteban-avila-morales",
@@ -378,7 +400,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Vaupés",
-      "source_url": "https://www.camara.gov.co/representantes/camilo-esteban-avila-morales"
+      "source_url": "https://www.camara.gov.co/representantes/camilo-esteban-avila-morales",
+      "profile_url": "https://www.camara.gov.co/representantes/camilo-esteban-avila-morales/"
     },
     {
       "id": "camara-luis-fernando-ballesteros",
@@ -393,7 +416,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Córdoba",
-      "source_url": "https://www.camara.gov.co/representantes/luis-fernando-ballesteros"
+      "source_url": "https://www.camara.gov.co/representantes/luis-fernando-ballesteros",
+      "profile_url": "https://www.camara.gov.co/representantes/luis-fernando-ballesteros/"
     },
     {
       "id": "senado-david-alejandro-barguil-assis",
@@ -409,7 +433,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8020&view=page"
     },
     {
       "id": "camara-nicolas-antonio-barguil-cubillos",
@@ -425,7 +450,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Córdoba",
-      "source_url": "https://www.camara.gov.co/representantes/nicolas-antonio-barguil-cubillos"
+      "source_url": "https://www.camara.gov.co/representantes/nicolas-antonio-barguil-cubillos",
+      "profile_url": "https://www.camara.gov.co/representantes/nicolas-antonio-barguil-cubillos/"
     },
     {
       "id": "camara-jezmi-lizeth-barraza-arraut",
@@ -441,7 +467,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Atlántico",
-      "source_url": "https://www.camara.gov.co/representantes/jezmi-lizeth-barraza-arraut"
+      "source_url": "https://www.camara.gov.co/representantes/jezmi-lizeth-barraza-arraut",
+      "profile_url": "https://www.camara.gov.co/representantes/jezmi-lizeth-barraza-arraut/"
     },
     {
       "id": "senado-josue-alirio-barrera-rodriguez",
@@ -458,7 +485,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=5104&view=page"
     },
     {
       "id": "camara-cesar-antonio-barrera-vergara",
@@ -474,7 +502,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Atlántico",
-      "source_url": "https://www.camara.gov.co/representantes/cesar-antonio-barrera-vergara"
+      "source_url": "https://www.camara.gov.co/representantes/cesar-antonio-barrera-vergara",
+      "profile_url": "https://www.camara.gov.co/representantes/cesar-antonio-barrera-vergara/"
     },
     {
       "id": "senado-miguel-angel-barreto-castillo",
@@ -490,7 +519,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=385&option=com_sppagebuilder&view=page"
     },
     {
       "id": "senado-santiago-barreto-triana",
@@ -505,7 +535,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-jorge-hernan-bastidas-rosero",
@@ -521,7 +552,8 @@
       ],
       "party": "Coalición Pacto Histórico",
       "constituency": "Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/jorge-hernan-bastidas-rosero"
+      "source_url": "https://www.camara.gov.co/representantes/jorge-hernan-bastidas-rosero",
+      "profile_url": "https://www.camara.gov.co/representantes/jorge-hernan-bastidas-rosero/"
     },
     {
       "id": "senado-gonzalo-dimas-baute-gonzalez",
@@ -537,7 +569,8 @@
       ],
       "party": "Coalición Cambio Radical / ALMA",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-gabriel-becerra-yanez",
@@ -552,7 +585,8 @@
       ],
       "party": "Coalición Pacto Histórico",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/gabriel-becerra-yanez"
+      "source_url": "https://www.camara.gov.co/representantes/gabriel-becerra-yanez",
+      "profile_url": "https://www.camara.gov.co/representantes/gabriel-becerra-yanez/"
     },
     {
       "id": "camara-jesus-armando-bedoya-rodriguez",
@@ -568,7 +602,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Quindío",
-      "source_url": "https://www.camara.gov.co/representantes/jesus-armando-bedoya-rodriguez"
+      "source_url": "https://www.camara.gov.co/representantes/jesus-armando-bedoya-rodriguez",
+      "profile_url": "https://www.camara.gov.co/representantes/jesus-armando-bedoya-rodriguez/"
     },
     {
       "id": "camara-laura-daniela-beltran-palomares",
@@ -584,7 +619,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/laura-daniela-beltran-palomares"
+      "source_url": "https://www.camara.gov.co/representantes/laura-daniela-beltran-palomares",
+      "profile_url": "https://www.camara.gov.co/representantes/laura-daniela-beltran-palomares/"
     },
     {
       "id": "camara-oscar-david-benavides-angulo",
@@ -600,7 +636,8 @@
       ],
       "party": "Movimiento Libre",
       "constituency": "Circunscripción afrodescendiente",
-      "source_url": "https://www.camara.gov.co/representantes/oscar-david-benavides-angulo"
+      "source_url": "https://www.camara.gov.co/representantes/oscar-david-benavides-angulo",
+      "profile_url": "https://www.camara.gov.co/representantes/oscar-david-benavides-angulo/"
     },
     {
       "id": "senado-carlos-alberto-benavides-mora",
@@ -616,7 +653,8 @@
       ],
       "party": "Polo Democrático Alternativo",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=5106&view=page"
     },
     {
       "id": "senado-diela-liliana-benavides-solarte",
@@ -633,7 +671,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4351&view=page"
     },
     {
       "id": "senado-john-alejandro-bermeo-rodriguez",
@@ -649,7 +688,8 @@
       ],
       "party": "Salvación Nacional",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-alexander-harley-bermudez-lasso",
@@ -665,7 +705,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Guaviare",
-      "source_url": "https://www.camara.gov.co/representantes/alexander-harley-bermudez-lasso"
+      "source_url": "https://www.camara.gov.co/representantes/alexander-harley-bermudez-lasso",
+      "profile_url": "https://www.camara.gov.co/representantes/alexander-harley-bermudez-lasso/"
     },
     {
       "id": "camara-franyela-bermudez-serna",
@@ -680,7 +721,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Risaralda",
-      "source_url": "https://www.camara.gov.co/representantes/franyela-bermudez-serna"
+      "source_url": "https://www.camara.gov.co/representantes/franyela-bermudez-serna",
+      "profile_url": "https://www.camara.gov.co/representantes/franyela-bermudez-serna/"
     },
     {
       "id": "camara-daniel-felipe-bernal-montealegre",
@@ -696,7 +738,8 @@
       ],
       "party": "Partido Demócrata Colombiano",
       "constituency": "Cundinamarca",
-      "source_url": "https://www.camara.gov.co/representantes/daniel-felipe-bernal-montealegre"
+      "source_url": "https://www.camara.gov.co/representantes/daniel-felipe-bernal-montealegre",
+      "profile_url": "https://www.camara.gov.co/representantes/daniel-felipe-bernal-montealegre/"
     },
     {
       "id": "senado-zandra-maria-bernal-rincon",
@@ -712,7 +755,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7973&view=page"
     },
     {
       "id": "camara-jhon-jairo-berrio-lopez",
@@ -728,7 +772,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/jhon-jairo-berrio-lopez"
+      "source_url": "https://www.camara.gov.co/representantes/jhon-jairo-berrio-lopez",
+      "profile_url": "https://www.camara.gov.co/representantes/jhon-jairo-berrio-lopez/"
     },
     {
       "id": "senado-john-moises-besaile-fayad",
@@ -745,7 +790,8 @@
       ],
       "party": "Partido de la Unión por la Gente",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=388&option=com_sppagebuilder&view=page"
     },
     {
       "id": "camara-guillermo-leon-blanco-valencia",
@@ -761,7 +807,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Santander",
-      "source_url": "https://www.camara.gov.co/representantes/guillermo-leon-blanco-valencia"
+      "source_url": "https://www.camara.gov.co/representantes/guillermo-leon-blanco-valencia",
+      "profile_url": "https://www.camara.gov.co/representantes/guillermo-leon-blanco-valencia/"
     },
     {
       "id": "senado-nadya-georgette-blel-scaf",
@@ -777,7 +824,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=389&option=com_sppagebuilder&view=page"
     },
     {
       "id": "camara-monica-karina-bocanegra-pantoja",
@@ -793,7 +841,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Amazonas",
-      "source_url": "https://www.camara.gov.co/representantes/monica-karina-bocanegra-pantoja"
+      "source_url": "https://www.camara.gov.co/representantes/monica-karina-bocanegra-pantoja",
+      "profile_url": "https://www.camara.gov.co/representantes/monica-karina-bocanegra-pantoja/"
     },
     {
       "id": "camara-jose-luis-bohorquez-lopez",
@@ -809,7 +858,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Boyacá",
-      "source_url": "https://www.camara.gov.co/representantes/jose-luis-bohorquez-lopez"
+      "source_url": "https://www.camara.gov.co/representantes/jose-luis-bohorquez-lopez",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-luis-bohorquez-lopez/"
     },
     {
       "id": "camara-carol-stefanny-borda-acevedo",
@@ -825,7 +875,8 @@
       ],
       "party": "Salvación Nacional",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/carol-stefanny-borda-acevedo"
+      "source_url": "https://www.camara.gov.co/representantes/carol-stefanny-borda-acevedo",
+      "profile_url": "https://www.camara.gov.co/representantes/carol-stefanny-borda-acevedo/"
     },
     {
       "id": "camara-lucy-mireya-bravo-obando",
@@ -841,7 +892,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Huila",
-      "source_url": "https://www.camara.gov.co/representantes/lucy-mireya-bravo-obando"
+      "source_url": "https://www.camara.gov.co/representantes/lucy-mireya-bravo-obando",
+      "profile_url": "https://www.camara.gov.co/representantes/lucy-mireya-bravo-obando/"
     },
     {
       "id": "camara-daniel-felipe-briceno-montes",
@@ -857,7 +909,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/daniel-felipe-briceno-montes"
+      "source_url": "https://www.camara.gov.co/representantes/daniel-felipe-briceno-montes",
+      "profile_url": "https://www.camara.gov.co/representantes/daniel-felipe-briceno-montes/"
     },
     {
       "id": "senado-enrique-cabrales-baquero",
@@ -872,7 +925,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4469&view=page"
     },
     {
       "id": "senado-hernan-dario-cadavid-marquez",
@@ -888,7 +942,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-juan-fernando-caicedo-callejas",
@@ -904,7 +959,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-martin-alonso-caicedo-carabali",
@@ -920,7 +976,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-carmen-patricia-caicedo-omar",
@@ -936,7 +993,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-carlos-mario-calvo-largo",
@@ -952,7 +1010,8 @@
       ],
       "party": "Movimiento Unidad en Minga por Colombia",
       "constituency": "Circunscripción indígena",
-      "source_url": "https://www.camara.gov.co/representantes/carlos-mario-calvo-largo"
+      "source_url": "https://www.camara.gov.co/representantes/carlos-mario-calvo-largo",
+      "profile_url": "https://www.camara.gov.co/representantes/carlos-mario-calvo-largo/"
     },
     {
       "id": "camara-jaime-alonso-cano-martinez",
@@ -968,7 +1027,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/jaime-alonso-cano-martinez"
+      "source_url": "https://www.camara.gov.co/representantes/jaime-alonso-cano-martinez",
+      "profile_url": "https://www.camara.gov.co/representantes/jaime-alonso-cano-martinez/"
     },
     {
       "id": "camara-jose-octavio-cardona-leon",
@@ -984,7 +1044,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Caldas",
-      "source_url": "https://www.camara.gov.co/representantes/jose-octavio-cardona-leon"
+      "source_url": "https://www.camara.gov.co/representantes/jose-octavio-cardona-leon",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-octavio-cardona-leon/"
     },
     {
       "id": "camara-maria-fernanda-carrascal-rojas",
@@ -1001,7 +1062,8 @@
       ],
       "party": "Coalición Pacto Histórico",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/maria-fernanda-carrascal-rojas"
+      "source_url": "https://www.camara.gov.co/representantes/maria-fernanda-carrascal-rojas",
+      "profile_url": "https://www.camara.gov.co/representantes/maria-fernanda-carrascal-rojas/"
     },
     {
       "id": "camara-milton-virgilio-carreno-sanchez",
@@ -1017,7 +1079,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Meta",
-      "source_url": "https://www.camara.gov.co/representantes/milton-virgilio-carreno-sanchez"
+      "source_url": "https://www.camara.gov.co/representantes/milton-virgilio-carreno-sanchez",
+      "profile_url": "https://www.camara.gov.co/representantes/milton-virgilio-carreno-sanchez/"
     },
     {
       "id": "senado-wilmer-ramiro-carrillo-mendoza",
@@ -1033,7 +1096,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-mario-jose-carvajal-jaimes",
@@ -1049,7 +1113,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Santander",
-      "source_url": "https://www.camara.gov.co/representantes/mario-jose-carvajal-jaimes"
+      "source_url": "https://www.camara.gov.co/representantes/mario-jose-carvajal-jaimes",
+      "profile_url": "https://www.camara.gov.co/representantes/mario-jose-carvajal-jaimes/"
     },
     {
       "id": "senado-sara-jimena-castellanos-rodriguez",
@@ -1065,7 +1130,8 @@
       ],
       "party": "Salvación Nacional",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-daruin-castellanos-romero",
@@ -1080,7 +1146,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Meta",
-      "source_url": "https://www.camara.gov.co/representantes/daruin-castellanos-romero"
+      "source_url": "https://www.camara.gov.co/representantes/daruin-castellanos-romero",
+      "profile_url": "https://www.camara.gov.co/representantes/daruin-castellanos-romero/"
     },
     {
       "id": "camara-alejandro-castillo-gaitan",
@@ -1095,7 +1162,8 @@
       ],
       "party": "Asoprocacao",
       "constituency": "Meta",
-      "source_url": "https://www.camara.gov.co/representantes/alejandro-castillo-gaitan"
+      "source_url": "https://www.camara.gov.co/representantes/alejandro-castillo-gaitan",
+      "profile_url": "https://www.camara.gov.co/representantes/alejandro-castillo-gaitan/"
     },
     {
       "id": "camara-santiago-castro-gomez",
@@ -1110,7 +1178,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/santiago-castro-gomez"
+      "source_url": "https://www.camara.gov.co/representantes/santiago-castro-gomez",
+      "profile_url": "https://www.camara.gov.co/representantes/santiago-castro-gomez/"
     },
     {
       "id": "camara-mello-castro-gonzales",
@@ -1125,7 +1194,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Cesar",
-      "source_url": "https://www.camara.gov.co/representantes/mello-castro-gonzales"
+      "source_url": "https://www.camara.gov.co/representantes/mello-castro-gonzales",
+      "profile_url": "https://www.camara.gov.co/representantes/mello-castro-gonzales/"
     },
     {
       "id": "senado-ivan-cepeda-castro",
@@ -1140,7 +1210,8 @@
       ],
       "party": "Coalición Pacto Histórico - Polo Democrático",
       "constituency": "Estatuto de la Oposición",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=1858&view=page"
     },
     {
       "id": "camara-hector-david-chaparro-chaparro",
@@ -1156,7 +1227,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Boyacá",
-      "source_url": "https://www.camara.gov.co/representantes/hector-david-chaparro-chaparro"
+      "source_url": "https://www.camara.gov.co/representantes/hector-david-chaparro-chaparro",
+      "profile_url": "https://www.camara.gov.co/representantes/hector-david-chaparro-chaparro/"
     },
     {
       "id": "camara-luis-alfonso-chavez-rivera",
@@ -1172,7 +1244,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/luis-alfonso-chavez-rivera"
+      "source_url": "https://www.camara.gov.co/representantes/luis-alfonso-chavez-rivera",
+      "profile_url": "https://www.camara.gov.co/representantes/luis-alfonso-chavez-rivera/"
     },
     {
       "id": "senado-sandra-claudia-chindoy-jamioy",
@@ -1188,7 +1261,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-yaini-isabel-contreras-jimenez",
@@ -1204,7 +1278,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-diana-carolina-corcho-mejia",
@@ -1221,7 +1296,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-manuel-orlando-correa-bedoya",
@@ -1237,7 +1313,8 @@
       ],
       "party": "Alianza Social Independiente",
       "constituency": "Caldas",
-      "source_url": "https://www.camara.gov.co/representantes/manuel-orlando-correa-bedoya"
+      "source_url": "https://www.camara.gov.co/representantes/manuel-orlando-correa-bedoya",
+      "profile_url": "https://www.camara.gov.co/representantes/manuel-orlando-correa-bedoya/"
     },
     {
       "id": "senado-antonio-jose-correa-jimenez",
@@ -1253,7 +1330,8 @@
       ],
       "party": "Partido de la Unión por la Gente",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4417&view=page"
     },
     {
       "id": "senado-julia-correa-nuttin",
@@ -1268,7 +1346,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8017&view=page"
     },
     {
       "id": "camara-juan-felipe-corzo-alvarez",
@@ -1284,7 +1363,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Norte de Santander",
-      "source_url": "https://www.camara.gov.co/representantes/juan-felipe-corzo-alvarez"
+      "source_url": "https://www.camara.gov.co/representantes/juan-felipe-corzo-alvarez",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-felipe-corzo-alvarez/"
     },
     {
       "id": "camara-david-gerardo-cote-rodriguez",
@@ -1300,7 +1380,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/david-gerardo-cote-rodriguez"
+      "source_url": "https://www.camara.gov.co/representantes/david-gerardo-cote-rodriguez",
+      "profile_url": "https://www.camara.gov.co/representantes/david-gerardo-cote-rodriguez/"
     },
     {
       "id": "senado-jesus-omero-cuasapud-chaspuengal",
@@ -1316,7 +1397,8 @@
       ],
       "party": "AICO",
       "constituency": "Circunscripción indígena",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7951&view=page"
     },
     {
       "id": "camara-alfredo-ape-cuello-baute",
@@ -1332,7 +1414,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Cesar",
-      "source_url": "https://www.camara.gov.co/representantes/alfredo-ape-cuello-baute"
+      "source_url": "https://www.camara.gov.co/representantes/alfredo-ape-cuello-baute",
+      "profile_url": "https://www.camara.gov.co/representantes/alfredo-ape-cuello-baute/"
     },
     {
       "id": "camara-carlos-alberto-cuenca-chaux",
@@ -1348,7 +1431,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Guainía",
-      "source_url": "https://www.camara.gov.co/representantes/carlos-alberto-cuenca-chaux"
+      "source_url": "https://www.camara.gov.co/representantes/carlos-alberto-cuenca-chaux",
+      "profile_url": "https://www.camara.gov.co/representantes/carlos-alberto-cuenca-chaux/"
     },
     {
       "id": "senado-orlando-miguel-de-la-hoz-garcia",
@@ -1364,7 +1448,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-alejandro-de-la-ossa-lacayo",
@@ -1379,7 +1464,8 @@
       ],
       "party": "Partido Político La Fuerza",
       "constituency": "Sucre",
-      "source_url": "https://www.camara.gov.co/representantes/alejandro-de-la-ossa-lacayo"
+      "source_url": "https://www.camara.gov.co/representantes/alejandro-de-la-ossa-lacayo",
+      "profile_url": "https://www.camara.gov.co/representantes/alejandro-de-la-ossa-lacayo/"
     },
     {
       "id": "camara-carlos-gumercindo-de-la-pena-duran",
@@ -1395,7 +1481,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Cesar",
-      "source_url": "https://www.camara.gov.co/representantes/carlos-gumercindo-de-la-pena-duran"
+      "source_url": "https://www.camara.gov.co/representantes/carlos-gumercindo-de-la-pena-duran",
+      "profile_url": "https://www.camara.gov.co/representantes/carlos-gumercindo-de-la-pena-duran/"
     },
     {
       "id": "senado-alfredo-rafael-deluque-zuleta",
@@ -1411,7 +1498,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4374&view=page"
     },
     {
       "id": "camara-laura-vanessa-diaz-cura",
@@ -1427,7 +1515,8 @@
       ],
       "party": "Asociación De Parceleros Retornantes Del Tesoro \"Asodepart\"",
       "constituency": "Córdoba",
-      "source_url": "https://www.camara.gov.co/representantes/laura-vanessa-diaz-cura"
+      "source_url": "https://www.camara.gov.co/representantes/laura-vanessa-diaz-cura",
+      "profile_url": "https://www.camara.gov.co/representantes/laura-vanessa-diaz-cura/"
     },
     {
       "id": "senado-luis-eduardo-diaz-mateus",
@@ -1443,7 +1532,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-jose-luis-duarte-contreras",
@@ -1459,7 +1549,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Norte de Santander",
-      "source_url": "https://www.camara.gov.co/representantes/jose-luis-duarte-contreras"
+      "source_url": "https://www.camara.gov.co/representantes/jose-luis-duarte-contreras",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-luis-duarte-contreras/"
     },
     {
       "id": "camara-juan-pablo-duque-gonzalez",
@@ -1475,7 +1566,8 @@
       ],
       "party": "Partido Nuevo Liberalismo",
       "constituency": "Caquetá",
-      "source_url": "https://www.camara.gov.co/representantes/juan-pablo-duque-gonzalez"
+      "source_url": "https://www.camara.gov.co/representantes/juan-pablo-duque-gonzalez",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-pablo-duque-gonzalez/"
     },
     {
       "id": "senado-carlos-eduardo-enriquez-caicedo",
@@ -1491,7 +1583,8 @@
       ],
       "party": "Alianza Verde",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7952&view=page"
     },
     {
       "id": "camara-ana-leidy-erazo-ruiz",
@@ -1507,7 +1600,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/ana-leidy-erazo-ruiz"
+      "source_url": "https://www.camara.gov.co/representantes/ana-leidy-erazo-ruiz",
+      "profile_url": "https://www.camara.gov.co/representantes/ana-leidy-erazo-ruiz/"
     },
     {
       "id": "senado-agmeth-jose-escaf-tijerino",
@@ -1523,7 +1617,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-wilder-iberson-escobar-ortiz",
@@ -1539,7 +1634,8 @@
       ],
       "party": "ASI",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-juan-fernando-espinal-ramirez",
@@ -1555,7 +1651,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7992&view=page"
     },
     {
       "id": "camara-jose-durgues-espinosa-martinez",
@@ -1571,7 +1668,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Risaralda",
-      "source_url": "https://www.camara.gov.co/representantes/jose-durgues-espinosa-martinez"
+      "source_url": "https://www.camara.gov.co/representantes/jose-durgues-espinosa-martinez",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-durgues-espinosa-martinez/"
     },
     {
       "id": "senado-hector-olimpo-espinosa-oliver",
@@ -1587,7 +1685,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8019&view=page"
     },
     {
       "id": "camara-oscar-fabian-espinosa-torres",
@@ -1603,7 +1702,8 @@
       ],
       "party": "Alianza Social Independiente",
       "constituency": "Vaupés",
-      "source_url": "https://www.camara.gov.co/representantes/oscar-fabian-espinosa-torres"
+      "source_url": "https://www.camara.gov.co/representantes/oscar-fabian-espinosa-torres",
+      "profile_url": "https://www.camara.gov.co/representantes/oscar-fabian-espinosa-torres/"
     },
     {
       "id": "senado-edgardo-miguel-espitia-cabrales",
@@ -1619,7 +1719,8 @@
       ],
       "party": "Coalición Cambio Radical / ALMA",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-luz-veronica-estrada-holguin",
@@ -1635,7 +1736,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/luz-veronica-estrada-holguin"
+      "source_url": "https://www.camara.gov.co/representantes/luz-veronica-estrada-holguin",
+      "profile_url": "https://www.camara.gov.co/representantes/luz-veronica-estrada-holguin/"
     },
     {
       "id": "senado-carlos-mario-farelo-daza",
@@ -1651,7 +1753,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=5147&view=page"
     },
     {
       "id": "camara-jorge-armando-figueroa-angarita",
@@ -1667,7 +1770,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "La Guajira",
-      "source_url": "https://www.camara.gov.co/representantes/jorge-armando-figueroa-angarita"
+      "source_url": "https://www.camara.gov.co/representantes/jorge-armando-figueroa-angarita",
+      "profile_url": "https://www.camara.gov.co/representantes/jorge-armando-figueroa-angarita/"
     },
     {
       "id": "senado-alex-xavier-florez-hernandez",
@@ -1683,7 +1787,8 @@
       ],
       "party": "Coalición Pacto Histórico - Colombia Humana",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=5171&view=page"
     },
     {
       "id": "senado-pedro-hernando-florez-porras",
@@ -1699,7 +1804,8 @@
       ],
       "party": "Colombia Humana - Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4392&view=page"
     },
     {
       "id": "senado-andres-eduardo-forero-molina",
@@ -1715,7 +1821,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-laura-ester-fortich-sanchez",
@@ -1731,7 +1838,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=410&option=com_sppagebuilder&view=page"
     },
     {
       "id": "camara-diver-ney-franco-tejada",
@@ -1747,7 +1855,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/diver-ney-franco-tejada"
+      "source_url": "https://www.camara.gov.co/representantes/diver-ney-franco-tejada",
+      "profile_url": "https://www.camara.gov.co/representantes/diver-ney-franco-tejada/"
     },
     {
       "id": "camara-heiner-de-jesus-gaitan-parra",
@@ -1763,7 +1872,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Cundinamarca",
-      "source_url": "https://www.camara.gov.co/representantes/heiner-de-jesus-gaitan-parra"
+      "source_url": "https://www.camara.gov.co/representantes/heiner-de-jesus-gaitan-parra",
+      "profile_url": "https://www.camara.gov.co/representantes/heiner-de-jesus-gaitan-parra/"
     },
     {
       "id": "senado-leonardo-de-jesus-gallego-arroyave",
@@ -1779,7 +1889,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8013&view=page"
     },
     {
       "id": "camara-tatiana-judith-gaona-pinzon",
@@ -1795,7 +1906,8 @@
       ],
       "party": "Asociación De Víctimas Caminos De Esperanza Las Mercedes",
       "constituency": "Norte de Santander",
-      "source_url": "https://www.camara.gov.co/representantes/tatiana-judith-gaona-pinzon"
+      "source_url": "https://www.camara.gov.co/representantes/tatiana-judith-gaona-pinzon",
+      "profile_url": "https://www.camara.gov.co/representantes/tatiana-judith-gaona-pinzon/"
     },
     {
       "id": "senado-christian-munir-garces-aljure",
@@ -1811,7 +1923,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7987&view=page"
     },
     {
       "id": "senado-juan-carlos-garces-rojas",
@@ -1827,7 +1940,8 @@
       ],
       "party": "Partido de la Unión por la Gente",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4470&view=page"
     },
     {
       "id": "camara-renzo-alexander-garcia",
@@ -1842,7 +1956,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Tolima",
-      "source_url": "https://www.camara.gov.co/representantes/renzo-alexander-garcia"
+      "source_url": "https://www.camara.gov.co/representantes/renzo-alexander-garcia",
+      "profile_url": "https://www.camara.gov.co/representantes/renzo-alexander-garcia/"
     },
     {
       "id": "camara-diego-fernando-garcia-alfonso",
@@ -1858,7 +1973,8 @@
       ],
       "party": "Partido Alianza Verde",
       "constituency": "Casanare",
-      "source_url": "https://www.camara.gov.co/representantes/diego-fernando-garcia-alfonso"
+      "source_url": "https://www.camara.gov.co/representantes/diego-fernando-garcia-alfonso",
+      "profile_url": "https://www.camara.gov.co/representantes/diego-fernando-garcia-alfonso/"
     },
     {
       "id": "senado-juan-carlos-garcia-gomez",
@@ -1874,7 +1990,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=423&view=page"
     },
     {
       "id": "senado-ana-paola-garcia-soto",
@@ -1890,7 +2007,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-lidio-arturo-garcia-turbay",
@@ -1906,7 +2024,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=427&option=com_sppagebuilder&view=page"
     },
     {
       "id": "camara-esneyder-gomez",
@@ -1919,7 +2038,8 @@
       "aliases": [],
       "party": " Resguardo Indígena De Toribío",
       "constituency": "Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/esneyder-gomez"
+      "source_url": "https://www.camara.gov.co/representantes/esneyder-gomez",
+      "profile_url": "https://www.camara.gov.co/representantes/esneyder-gomez/"
     },
     {
       "id": "camara-edgar-gomez-castillo",
@@ -1934,7 +2054,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/edgar-gomez-castillo"
+      "source_url": "https://www.camara.gov.co/representantes/edgar-gomez-castillo",
+      "profile_url": "https://www.camara.gov.co/representantes/edgar-gomez-castillo/"
     },
     {
       "id": "senado-enrique-gomez-martinez",
@@ -1949,7 +2070,8 @@
       ],
       "party": "Salvación Nacional",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-jose-nicolas-gomez-medina",
@@ -1965,7 +2087,8 @@
       ],
       "party": "Coalición Cambio Radical / ALMA",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-camilo-andres-gomez-mosquera",
@@ -1981,7 +2104,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/camilo-andres-gomez-mosquera"
+      "source_url": "https://www.camara.gov.co/representantes/camilo-andres-gomez-mosquera",
+      "profile_url": "https://www.camara.gov.co/representantes/camilo-andres-gomez-mosquera/"
     },
     {
       "id": "senado-cristian-kevin-gomez-paz",
@@ -1997,7 +2121,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7999&view=page"
     },
     {
       "id": "camara-juan-loreto-gomez-soto",
@@ -2013,7 +2138,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "La Guajira",
-      "source_url": "https://www.camara.gov.co/representantes/juan-loreto-gomez-soto"
+      "source_url": "https://www.camara.gov.co/representantes/juan-loreto-gomez-soto",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-loreto-gomez-soto/"
     },
     {
       "id": "camara-hernando-gonzalez",
@@ -2026,7 +2152,8 @@
       "aliases": [],
       "party": "Cambio Radical",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/hernando-gonzalez"
+      "source_url": "https://www.camara.gov.co/representantes/hernando-gonzalez",
+      "profile_url": "https://www.camara.gov.co/representantes/hernando-gonzalez/"
     },
     {
       "id": "camara-kelyn-johana-gonzalez-duarte",
@@ -2042,7 +2169,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Magdalena",
-      "source_url": "https://www.camara.gov.co/representantes/kelyn-johana-gonzalez-duarte"
+      "source_url": "https://www.camara.gov.co/representantes/kelyn-johana-gonzalez-duarte",
+      "profile_url": "https://www.camara.gov.co/representantes/kelyn-johana-gonzalez-duarte/"
     },
     {
       "id": "camara-luz-marina-gordillo-salinas",
@@ -2058,7 +2186,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/luz-marina-gordillo-salinas"
+      "source_url": "https://www.camara.gov.co/representantes/luz-marina-gordillo-salinas",
+      "profile_url": "https://www.camara.gov.co/representantes/luz-marina-gordillo-salinas/"
     },
     {
       "id": "camara-miguel-angel-grisales-suarez",
@@ -2074,7 +2203,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Quindío",
-      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-grisales-suarez"
+      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-grisales-suarez",
+      "profile_url": "https://www.camara.gov.co/representantes/miguel-angel-grisales-suarez/"
     },
     {
       "id": "camara-andres-felipe-guerra-hoyos",
@@ -2090,7 +2220,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/andres-felipe-guerra-hoyos"
+      "source_url": "https://www.camara.gov.co/representantes/andres-felipe-guerra-hoyos",
+      "profile_url": "https://www.camara.gov.co/representantes/andres-felipe-guerra-hoyos/"
     },
     {
       "id": "senado-maria-angelica-guerra-lopez",
@@ -2106,7 +2237,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7268&view=page"
     },
     {
       "id": "camara-rosita-rosaurina-guevara-rosero",
@@ -2122,7 +2254,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Nariño",
-      "source_url": "https://www.camara.gov.co/representantes/rosita-rosaurina-guevara-rosero"
+      "source_url": "https://www.camara.gov.co/representantes/rosita-rosaurina-guevara-rosero",
+      "profile_url": "https://www.camara.gov.co/representantes/rosita-rosaurina-guevara-rosero/"
     },
     {
       "id": "senado-carlos-eduardo-guevara-villabon",
@@ -2138,7 +2271,8 @@
       ],
       "party": "MIRA",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=1859&view=page"
     },
     {
       "id": "camara-hilda-gutierrez",
@@ -2151,7 +2285,8 @@
       "aliases": [],
       "party": "Centro Democrático",
       "constituency": "Cundinamarca",
-      "source_url": "https://www.camara.gov.co/representantes/hilda-gutierrez"
+      "source_url": "https://www.camara.gov.co/representantes/hilda-gutierrez",
+      "profile_url": "https://www.camara.gov.co/representantes/hilda-gutierrez/"
     },
     {
       "id": "camara-estefanel-gutierrez-perez",
@@ -2166,7 +2301,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Atlántico",
-      "source_url": "https://www.camara.gov.co/representantes/estefanel-gutierrez-perez"
+      "source_url": "https://www.camara.gov.co/representantes/estefanel-gutierrez-perez",
+      "profile_url": "https://www.camara.gov.co/representantes/estefanel-gutierrez-perez/"
     },
     {
       "id": "senado-honorio-miguel-henriquez-pinedo",
@@ -2182,7 +2318,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=1860&view=page"
     },
     {
       "id": "camara-jose-felipe-hernandez-polo",
@@ -2198,7 +2335,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Magdalena",
-      "source_url": "https://www.camara.gov.co/representantes/jose-felipe-hernandez-polo"
+      "source_url": "https://www.camara.gov.co/representantes/jose-felipe-hernandez-polo",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-felipe-hernandez-polo/"
     },
     {
       "id": "senado-yuly-esmeralda-hernandez-silva",
@@ -2214,7 +2352,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4337&view=page"
     },
     {
       "id": "camara-mateo-hidalgo-montoya",
@@ -2229,7 +2368,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Caldas",
-      "source_url": "https://www.camara.gov.co/representantes/mateo-hidalgo-montoya"
+      "source_url": "https://www.camara.gov.co/representantes/mateo-hidalgo-montoya",
+      "profile_url": "https://www.camara.gov.co/representantes/mateo-hidalgo-montoya/"
     },
     {
       "id": "camara-marco-emilio-hincapie",
@@ -2244,7 +2384,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Tolima",
-      "source_url": "https://www.camara.gov.co/representantes/marco-emilio-hincapie"
+      "source_url": "https://www.camara.gov.co/representantes/marco-emilio-hincapie",
+      "profile_url": "https://www.camara.gov.co/representantes/marco-emilio-hincapie/"
     },
     {
       "id": "camara-yamit-noe-hurtado-neira",
@@ -2260,7 +2401,8 @@
       ],
       "party": "Partido Alianza Verde",
       "constituency": "Boyacá",
-      "source_url": "https://www.camara.gov.co/representantes/yamit-noe-hurtado-neira"
+      "source_url": "https://www.camara.gov.co/representantes/yamit-noe-hurtado-neira",
+      "profile_url": "https://www.camara.gov.co/representantes/yamit-noe-hurtado-neira/"
     },
     {
       "id": "senado-norma-hurtado-sanchez",
@@ -2275,7 +2417,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=5149&view=page"
     },
     {
       "id": "camara-delcy-esperanza-isaza-buenaventura",
@@ -2291,7 +2434,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Tolima",
-      "source_url": "https://www.camara.gov.co/representantes/delcy-esperanza-isaza-buenaventura"
+      "source_url": "https://www.camara.gov.co/representantes/delcy-esperanza-isaza-buenaventura",
+      "profile_url": "https://www.camara.gov.co/representantes/delcy-esperanza-isaza-buenaventura/"
     },
     {
       "id": "camara-milene-jarava-diaz",
@@ -2306,7 +2450,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Sucre",
-      "source_url": "https://www.camara.gov.co/representantes/milene-jarava-diaz"
+      "source_url": "https://www.camara.gov.co/representantes/milene-jarava-diaz",
+      "profile_url": "https://www.camara.gov.co/representantes/milene-jarava-diaz/"
     },
     {
       "id": "camara-elizabeth-jay-pang-diaz",
@@ -2321,7 +2466,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "San Andrés, Providencia y Santa Catalina",
-      "source_url": "https://www.camara.gov.co/representantes/elizabeth-jay-pang-diaz"
+      "source_url": "https://www.camara.gov.co/representantes/elizabeth-jay-pang-diaz",
+      "profile_url": "https://www.camara.gov.co/representantes/elizabeth-jay-pang-diaz/"
     },
     {
       "id": "camara-amaury-julio-perez",
@@ -2336,7 +2482,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Bolívar",
-      "source_url": "https://www.camara.gov.co/representantes/amaury-julio-perez"
+      "source_url": "https://www.camara.gov.co/representantes/amaury-julio-perez",
+      "profile_url": "https://www.camara.gov.co/representantes/amaury-julio-perez/"
     },
     {
       "id": "senado-mary-jurado-palomino",
@@ -2351,7 +2498,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7988&view=page"
     },
     {
       "id": "camara-catherine-juvinao-clavijo",
@@ -2366,7 +2514,8 @@
       ],
       "party": "Partido Alianza Verde",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/catherine-juvinao-clavijo"
+      "source_url": "https://www.camara.gov.co/representantes/catherine-juvinao-clavijo",
+      "profile_url": "https://www.camara.gov.co/representantes/catherine-juvinao-clavijo/"
     },
     {
       "id": "camara-heraclito-landinez-suarez",
@@ -2381,7 +2530,8 @@
       ],
       "party": "Coalición Pacto Histórico",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/heraclito-landinez-suarez"
+      "source_url": "https://www.camara.gov.co/representantes/heraclito-landinez-suarez",
+      "profile_url": "https://www.camara.gov.co/representantes/heraclito-landinez-suarez/"
     },
     {
       "id": "camara-jairo-leon-vargas",
@@ -2396,7 +2546,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/jairo-leon-vargas"
+      "source_url": "https://www.camara.gov.co/representantes/jairo-leon-vargas",
+      "profile_url": "https://www.camara.gov.co/representantes/jairo-leon-vargas/"
     },
     {
       "id": "senado-didier-lobo-chinchilla",
@@ -2411,7 +2562,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=457&option=com_sppagebuilder&view=page"
     },
     {
       "id": "camara-juan-david-londono-arango",
@@ -2427,7 +2579,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Vichada",
-      "source_url": "https://www.camara.gov.co/representantes/juan-david-londono-arango"
+      "source_url": "https://www.camara.gov.co/representantes/juan-david-londono-arango",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-david-londono-arango/"
     },
     {
       "id": "camara-juan-manuel-londono-jaramillo",
@@ -2443,7 +2596,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Caldas",
-      "source_url": "https://www.camara.gov.co/representantes/juan-manuel-londono-jaramillo"
+      "source_url": "https://www.camara.gov.co/representantes/juan-manuel-londono-jaramillo",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-manuel-londono-jaramillo/"
     },
     {
       "id": "senado-maria-eugenia-londono-ocampo",
@@ -2459,7 +2613,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8012&view=page"
     },
     {
       "id": "senado-maria-eugenia-lopera-monsalve",
@@ -2475,7 +2630,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7972&view=page"
     },
     {
       "id": "camara-luis-miguel-lopez-aristizabal",
@@ -2491,7 +2647,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/luis-miguel-lopez-aristizabal"
+      "source_url": "https://www.camara.gov.co/representantes/luis-miguel-lopez-aristizabal",
+      "profile_url": "https://www.camara.gov.co/representantes/luis-miguel-lopez-aristizabal/"
     },
     {
       "id": "camara-javier-eduardo-lopez-diaz",
@@ -2507,7 +2664,8 @@
       ],
       "party": " Asociación De Víctimas Constructoras De Paz",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/javier-eduardo-lopez-diaz"
+      "source_url": "https://www.camara.gov.co/representantes/javier-eduardo-lopez-diaz",
+      "profile_url": "https://www.camara.gov.co/representantes/javier-eduardo-lopez-diaz/"
     },
     {
       "id": "senado-nelson-javier-lopez-rodriguez",
@@ -2523,7 +2681,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7969&view=page"
     },
     {
       "id": "camara-karen-juliana-lopez-salazar",
@@ -2539,7 +2698,8 @@
       ],
       "party": "Yo soy Urabá",
       "constituency": "Circunscripción de paz",
-      "source_url": "https://www.camara.gov.co/representantes/karen-juliana-lopez-salazar"
+      "source_url": "https://www.camara.gov.co/representantes/karen-juliana-lopez-salazar",
+      "profile_url": "https://www.camara.gov.co/representantes/karen-juliana-lopez-salazar/"
     },
     {
       "id": "camara-jesus-salim-lorduy-martinez",
@@ -2555,7 +2715,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/jesus-salim-lorduy-martinez"
+      "source_url": "https://www.camara.gov.co/representantes/jesus-salim-lorduy-martinez",
+      "profile_url": "https://www.camara.gov.co/representantes/jesus-salim-lorduy-martinez/"
     },
     {
       "id": "camara-franklin-del-cristo-lozano-de-la-ossa",
@@ -2571,7 +2732,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Magdalena",
-      "source_url": "https://www.camara.gov.co/representantes/franklin-del-cristo-lozano-de-la-ossa"
+      "source_url": "https://www.camara.gov.co/representantes/franklin-del-cristo-lozano-de-la-ossa",
+      "profile_url": "https://www.camara.gov.co/representantes/franklin-del-cristo-lozano-de-la-ossa/"
     },
     {
       "id": "senado-jose-gutemberg-macea-gomez",
@@ -2587,7 +2749,8 @@
       ],
       "party": "Alianza por Colombia / En Marcha",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8001&view=page"
     },
     {
       "id": "camara-karen-astrith-manrique-olarte",
@@ -2603,7 +2766,8 @@
       ],
       "party": "Asociación de Víctimas Intercultural y Regional",
       "constituency": "Circunscripción de paz",
-      "source_url": "https://www.camara.gov.co/representantes/karen-astrith-manrique-olarte"
+      "source_url": "https://www.camara.gov.co/representantes/karen-astrith-manrique-olarte",
+      "profile_url": "https://www.camara.gov.co/representantes/karen-astrith-manrique-olarte/"
     },
     {
       "id": "camara-jose-alejandro-martinez-sanchez",
@@ -2619,7 +2783,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Tolima",
-      "source_url": "https://www.camara.gov.co/representantes/jose-alejandro-martinez-sanchez"
+      "source_url": "https://www.camara.gov.co/representantes/jose-alejandro-martinez-sanchez",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-alejandro-martinez-sanchez/"
     },
     {
       "id": "camara-lourdes-paola-mateus-serrano",
@@ -2635,7 +2800,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Huila",
-      "source_url": "https://www.camara.gov.co/representantes/lourdes-paola-mateus-serrano"
+      "source_url": "https://www.camara.gov.co/representantes/lourdes-paola-mateus-serrano",
+      "profile_url": "https://www.camara.gov.co/representantes/lourdes-paola-mateus-serrano/"
     },
     {
       "id": "camara-maria-del-carmen-mayusa-de-cruz",
@@ -2651,7 +2817,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Meta",
-      "source_url": "https://www.camara.gov.co/representantes/maria-del-carmen-mayusa-de-cruz"
+      "source_url": "https://www.camara.gov.co/representantes/maria-del-carmen-mayusa-de-cruz",
+      "profile_url": "https://www.camara.gov.co/representantes/maria-del-carmen-mayusa-de-cruz/"
     },
     {
       "id": "senado-carlos-manuel-meisel-vergara",
@@ -2667,7 +2834,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/el-senado/index.php?id=473&option=com_sppagebuilder&view=page"
     },
     {
       "id": "senado-luis-alfonso-mejia-nunez",
@@ -2683,7 +2851,8 @@
       ],
       "party": "Coalición Alianza Verdes / En Marcha",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-jorge-mendez-hernandez",
@@ -2698,7 +2867,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "San Andrés, Providencia y Santa Catalina",
-      "source_url": "https://www.camara.gov.co/representantes/jorge-mendez-hernandez"
+      "source_url": "https://www.camara.gov.co/representantes/jorge-mendez-hernandez",
+      "profile_url": "https://www.camara.gov.co/representantes/jorge-mendez-hernandez/"
     },
     {
       "id": "camara-welfran-junior-mendoza-torres",
@@ -2714,7 +2884,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Atlántico",
-      "source_url": "https://www.camara.gov.co/representantes/welfran-junior-mendoza-torres"
+      "source_url": "https://www.camara.gov.co/representantes/welfran-junior-mendoza-torres",
+      "profile_url": "https://www.camara.gov.co/representantes/welfran-junior-mendoza-torres/"
     },
     {
       "id": "camara-arnulfo-mina",
@@ -2727,7 +2898,8 @@
       "aliases": [],
       "party": "Corp Red De Consejos Comunitarios Del Pacífico Sur",
       "constituency": "Nariño",
-      "source_url": "https://www.camara.gov.co/representantes/arnulfo-mina"
+      "source_url": "https://www.camara.gov.co/representantes/arnulfo-mina",
+      "profile_url": "https://www.camara.gov.co/representantes/arnulfo-mina/"
     },
     {
       "id": "camara-jhonn-alexander-molina-betancur",
@@ -2743,7 +2915,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Guainía",
-      "source_url": "https://www.camara.gov.co/representantes/jhonn-alexander-molina-betancur"
+      "source_url": "https://www.camara.gov.co/representantes/jhonn-alexander-molina-betancur",
+      "profile_url": "https://www.camara.gov.co/representantes/jhonn-alexander-molina-betancur/"
     },
     {
       "id": "camara-elizabeth-sabina-molina-campo",
@@ -2759,7 +2932,8 @@
       ],
       "party": "Partido Demócrata Colombiano",
       "constituency": "Magdalena",
-      "source_url": "https://www.camara.gov.co/representantes/elizabeth-sabina-molina-campo"
+      "source_url": "https://www.camara.gov.co/representantes/elizabeth-sabina-molina-campo",
+      "profile_url": "https://www.camara.gov.co/representantes/elizabeth-sabina-molina-campo/"
     },
     {
       "id": "camara-simon-molina-gomez",
@@ -2774,7 +2948,8 @@
       ],
       "party": "Creemos",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/simon-molina-gomez"
+      "source_url": "https://www.camara.gov.co/representantes/simon-molina-gomez",
+      "profile_url": "https://www.camara.gov.co/representantes/simon-molina-gomez/"
     },
     {
       "id": "camara-luz-miryan-moncayo",
@@ -2789,7 +2964,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/luz-miryan-moncayo"
+      "source_url": "https://www.camara.gov.co/representantes/luz-miryan-moncayo",
+      "profile_url": "https://www.camara.gov.co/representantes/luz-miryan-moncayo/"
     },
     {
       "id": "camara-alfredo-mondragon-garzon",
@@ -2804,7 +2980,8 @@
       ],
       "party": "Coalición Pacto Histórico",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/alfredo-mondragon-garzon"
+      "source_url": "https://www.camara.gov.co/representantes/alfredo-mondragon-garzon",
+      "profile_url": "https://www.camara.gov.co/representantes/alfredo-mondragon-garzon/"
     },
     {
       "id": "senado-alvaro-henry-monedero-rivera",
@@ -2820,7 +2997,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-daniel-mauricio-monroy-hernandez",
@@ -2836,7 +3014,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/daniel-mauricio-monroy-hernandez"
+      "source_url": "https://www.camara.gov.co/representantes/daniel-mauricio-monroy-hernandez",
+      "profile_url": "https://www.camara.gov.co/representantes/daniel-mauricio-monroy-hernandez/"
     },
     {
       "id": "camara-andres-guillermo-montes-celedon",
@@ -2852,7 +3031,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Bolívar",
-      "source_url": "https://www.camara.gov.co/representantes/andres-guillermo-montes-celedon"
+      "source_url": "https://www.camara.gov.co/representantes/andres-guillermo-montes-celedon",
+      "profile_url": "https://www.camara.gov.co/representantes/andres-guillermo-montes-celedon/"
     },
     {
       "id": "senado-santiago-montoya-montoya",
@@ -2867,7 +3047,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-ana-ligia-mora-martinez",
@@ -2883,7 +3064,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/ana-ligia-mora-martinez"
+      "source_url": "https://www.camara.gov.co/representantes/ana-ligia-mora-martinez",
+      "profile_url": "https://www.camara.gov.co/representantes/ana-ligia-mora-martinez/"
     },
     {
       "id": "senado-gustavo-adolfo-moreno-hurtado",
@@ -2899,7 +3081,8 @@
       ],
       "party": "Partido Alianza Social Independiente – ASI",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=5111&view=page"
     },
     {
       "id": "camara-francy-natalia-moreno-puin",
@@ -2915,7 +3098,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Cundinamarca",
-      "source_url": "https://www.camara.gov.co/representantes/francy-natalia-moreno-puin"
+      "source_url": "https://www.camara.gov.co/representantes/francy-natalia-moreno-puin",
+      "profile_url": "https://www.camara.gov.co/representantes/francy-natalia-moreno-puin/"
     },
     {
       "id": "camara-nelly-patricia-mosquera-murcia",
@@ -2931,7 +3115,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/nelly-patricia-mosquera-murcia"
+      "source_url": "https://www.camara.gov.co/representantes/nelly-patricia-mosquera-murcia",
+      "profile_url": "https://www.camara.gov.co/representantes/nelly-patricia-mosquera-murcia/"
     },
     {
       "id": "camara-james-hermenegildo-mosquera-torres",
@@ -2947,7 +3132,8 @@
       ],
       "party": "Consejo Comunitario Mayor De Novita “Cocoman”",
       "constituency": "Circunscripción de paz",
-      "source_url": "https://www.camara.gov.co/representantes/james-hermenegildo-mosquera-torres"
+      "source_url": "https://www.camara.gov.co/representantes/james-hermenegildo-mosquera-torres",
+      "profile_url": "https://www.camara.gov.co/representantes/james-hermenegildo-mosquera-torres/"
     },
     {
       "id": "camara-pedro-alejandro-murcia-lamprea",
@@ -2963,7 +3149,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Colombianos en el exterior",
-      "source_url": "https://www.camara.gov.co/representantes/pedro-alejandro-murcia-lamprea"
+      "source_url": "https://www.camara.gov.co/representantes/pedro-alejandro-murcia-lamprea",
+      "profile_url": "https://www.camara.gov.co/representantes/pedro-alejandro-murcia-lamprea/"
     },
     {
       "id": "camara-hernan-muriel-perez",
@@ -2978,7 +3165,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/hernan-muriel-perez"
+      "source_url": "https://www.camara.gov.co/representantes/hernan-muriel-perez",
+      "profile_url": "https://www.camara.gov.co/representantes/hernan-muriel-perez/"
     },
     {
       "id": "senado-rafael-nieto-loaiza",
@@ -2993,7 +3181,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7982&view=page"
     },
     {
       "id": "senado-maria-irma-norena-arboleda",
@@ -3009,7 +3198,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7950&view=page"
     },
     {
       "id": "senado-jorge-alejandro-ocampo-giraldo",
@@ -3025,7 +3215,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-deyci-alejandra-omana-ortiz",
@@ -3041,7 +3232,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8007&view=page"
     },
     {
       "id": "camara-jose-gregorio-orjuela-perez",
@@ -3057,7 +3249,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/jose-gregorio-orjuela-perez"
+      "source_url": "https://www.camara.gov.co/representantes/jose-gregorio-orjuela-perez",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-gregorio-orjuela-perez/"
     },
     {
       "id": "camara-melissa-orrego-eusse",
@@ -3072,7 +3265,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/melissa-orrego-eusse"
+      "source_url": "https://www.camara.gov.co/representantes/melissa-orrego-eusse",
+      "profile_url": "https://www.camara.gov.co/representantes/melissa-orrego-eusse/"
     },
     {
       "id": "camara-carlos-edward-osorio-aguiar",
@@ -3088,7 +3282,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Tolima",
-      "source_url": "https://www.camara.gov.co/representantes/carlos-edward-osorio-aguiar"
+      "source_url": "https://www.camara.gov.co/representantes/carlos-edward-osorio-aguiar",
+      "profile_url": "https://www.camara.gov.co/representantes/carlos-edward-osorio-aguiar/"
     },
     {
       "id": "camara-santiago-osorio-marin",
@@ -3103,7 +3298,8 @@
       ],
       "party": "Partido Alianza Verde",
       "constituency": "Caldas",
-      "source_url": "https://www.camara.gov.co/representantes/santiago-osorio-marin"
+      "source_url": "https://www.camara.gov.co/representantes/santiago-osorio-marin",
+      "profile_url": "https://www.camara.gov.co/representantes/santiago-osorio-marin/"
     },
     {
       "id": "senado-deisy-johana-osorio-marquez",
@@ -3119,7 +3315,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-andrea-padilla-villarraga",
@@ -3134,7 +3331,8 @@
       ],
       "party": "Alianza Verde",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4404&view=page"
     },
     {
       "id": "camara-jorge-augusto-palacio-garzon",
@@ -3150,7 +3348,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/jorge-augusto-palacio-garzon"
+      "source_url": "https://www.camara.gov.co/representantes/jorge-augusto-palacio-garzon",
+      "profile_url": "https://www.camara.gov.co/representantes/jorge-augusto-palacio-garzon/"
     },
     {
       "id": "camara-christian-hosep-palacios-ledezma",
@@ -3166,7 +3365,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Nariño",
-      "source_url": "https://www.camara.gov.co/representantes/christian-hosep-palacios-ledezma"
+      "source_url": "https://www.camara.gov.co/representantes/christian-hosep-palacios-ledezma",
+      "profile_url": "https://www.camara.gov.co/representantes/christian-hosep-palacios-ledezma/"
     },
     {
       "id": "camara-carlos-alberto-pantoja-cortes",
@@ -3182,7 +3382,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Nariño",
-      "source_url": "https://www.camara.gov.co/representantes/carlos-alberto-pantoja-cortes"
+      "source_url": "https://www.camara.gov.co/representantes/carlos-alberto-pantoja-cortes",
+      "profile_url": "https://www.camara.gov.co/representantes/carlos-alberto-pantoja-cortes/"
     },
     {
       "id": "camara-pedro-antonio-paternina-gulfo",
@@ -3198,7 +3399,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Sucre",
-      "source_url": "https://www.camara.gov.co/representantes/pedro-antonio-paternina-gulfo"
+      "source_url": "https://www.camara.gov.co/representantes/pedro-antonio-paternina-gulfo",
+      "profile_url": "https://www.camara.gov.co/representantes/pedro-antonio-paternina-gulfo/"
     },
     {
       "id": "camara-luis-guillermo-patino-aristizabal",
@@ -3214,7 +3416,8 @@
       ],
       "party": "Creemos",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/luis-guillermo-patino-aristizabal"
+      "source_url": "https://www.camara.gov.co/representantes/luis-guillermo-patino-aristizabal",
+      "profile_url": "https://www.camara.gov.co/representantes/luis-guillermo-patino-aristizabal/"
     },
     {
       "id": "senado-jennifer-dalley-pedraza-sandoval",
@@ -3230,7 +3433,8 @@
       ],
       "party": "Dignidad & Compromiso",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8000&view=page"
     },
     {
       "id": "senado-martha-isabel-peralta-epieyu",
@@ -3246,7 +3450,8 @@
       ],
       "party": "Movimiento Alternativo Indígena y Social MAIS",
       "constituency": "Circunscripción indígena",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4418&view=page"
     },
     {
       "id": "camara-flora-perdomo-andrade",
@@ -3261,7 +3466,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Huila",
-      "source_url": "https://www.camara.gov.co/representantes/flora-perdomo-andrade"
+      "source_url": "https://www.camara.gov.co/representantes/flora-perdomo-andrade",
+      "profile_url": "https://www.camara.gov.co/representantes/flora-perdomo-andrade/"
     },
     {
       "id": "camara-nixon-perdomo-juragaro",
@@ -3276,7 +3482,8 @@
       ],
       "party": "Circunscripción Transitoria Especial de Paz",
       "constituency": "Caquetá",
-      "source_url": "https://www.camara.gov.co/representantes/nixon-perdomo-juragaro"
+      "source_url": "https://www.camara.gov.co/representantes/nixon-perdomo-juragaro",
+      "profile_url": "https://www.camara.gov.co/representantes/nixon-perdomo-juragaro/"
     },
     {
       "id": "camara-manuel-alexander-perez",
@@ -3291,7 +3498,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Arauca",
-      "source_url": "https://www.camara.gov.co/representantes/manuel-alexander-perez"
+      "source_url": "https://www.camara.gov.co/representantes/manuel-alexander-perez",
+      "profile_url": "https://www.camara.gov.co/representantes/manuel-alexander-perez/"
     },
     {
       "id": "camara-bleidy-del-carmen-perez-ballestas",
@@ -3307,7 +3515,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/bleidy-del-carmen-perez-ballestas"
+      "source_url": "https://www.camara.gov.co/representantes/bleidy-del-carmen-perez-ballestas",
+      "profile_url": "https://www.camara.gov.co/representantes/bleidy-del-carmen-perez-ballestas/"
     },
     {
       "id": "camara-oscar-dario-perez-pineda",
@@ -3323,7 +3532,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/oscar-dario-perez-pineda"
+      "source_url": "https://www.camara.gov.co/representantes/oscar-dario-perez-pineda",
+      "profile_url": "https://www.camara.gov.co/representantes/oscar-dario-perez-pineda/"
     },
     {
       "id": "camara-john-edgar-perez-rojas",
@@ -3339,7 +3549,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Quindío",
-      "source_url": "https://www.camara.gov.co/representantes/john-edgar-perez-rojas"
+      "source_url": "https://www.camara.gov.co/representantes/john-edgar-perez-rojas",
+      "profile_url": "https://www.camara.gov.co/representantes/john-edgar-perez-rojas/"
     },
     {
       "id": "senado-marcos-daniel-pineda-garcia",
@@ -3355,7 +3566,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4339&view=page"
     },
     {
       "id": "camara-jonathan-eduardo-pineda-lopez",
@@ -3371,7 +3583,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Santander",
-      "source_url": "https://www.camara.gov.co/representantes/jonathan-eduardo-pineda-lopez"
+      "source_url": "https://www.camara.gov.co/representantes/jonathan-eduardo-pineda-lopez",
+      "profile_url": "https://www.camara.gov.co/representantes/jonathan-eduardo-pineda-lopez/"
     },
     {
       "id": "camara-alexandra-pineda-ortiz",
@@ -3386,7 +3599,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Cesar",
-      "source_url": "https://www.camara.gov.co/representantes/alexandra-pineda-ortiz"
+      "source_url": "https://www.camara.gov.co/representantes/alexandra-pineda-ortiz",
+      "profile_url": "https://www.camara.gov.co/representantes/alexandra-pineda-ortiz/"
     },
     {
       "id": "camara-david-pinilla-calero",
@@ -3401,7 +3615,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/david-pinilla-calero"
+      "source_url": "https://www.camara.gov.co/representantes/david-pinilla-calero",
+      "profile_url": "https://www.camara.gov.co/representantes/david-pinilla-calero/"
     },
     {
       "id": "camara-miguel-angel-pinto-rueda",
@@ -3417,7 +3632,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Santander",
-      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-pinto-rueda"
+      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-pinto-rueda",
+      "profile_url": "https://www.camara.gov.co/representantes/miguel-angel-pinto-rueda/"
     },
     {
       "id": "camara-maria-del-mar-pizarro-garcia",
@@ -3433,7 +3649,8 @@
       ],
       "party": "Coalición Pacto Histórico",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/maria-del-mar-pizarro-garcia"
+      "source_url": "https://www.camara.gov.co/representantes/maria-del-mar-pizarro-garcia",
+      "profile_url": "https://www.camara.gov.co/representantes/maria-del-mar-pizarro-garcia/"
     },
     {
       "id": "senado-maria-clara-posada-caicedo",
@@ -3449,7 +3666,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-yessid-enrique-pulgar-daza",
@@ -3465,7 +3683,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-jonathan-ferney-pulido-hernandez",
@@ -3483,7 +3702,8 @@
       ],
       "party": "Alianza Verde",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4329&view=page"
     },
     {
       "id": "camara-jorge-alexander-quevedo-herrera",
@@ -3499,7 +3719,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Guaviare",
-      "source_url": "https://www.camara.gov.co/representantes/jorge-alexander-quevedo-herrera"
+      "source_url": "https://www.camara.gov.co/representantes/jorge-alexander-quevedo-herrera",
+      "profile_url": "https://www.camara.gov.co/representantes/jorge-alexander-quevedo-herrera/"
     },
     {
       "id": "camara-aida-marina-quilcue-vivas",
@@ -3515,7 +3736,8 @@
       ],
       "party": "C.P. Art. 112, A.L. 02 de 2015 Art. 1 y Est. de Oposición Ley, 1909 de 2018 Art. 24",
       "constituency": "Estatuto de la Oposición",
-      "source_url": "https://www.camara.gov.co/representantes/aida-marina-quilcue-vivas"
+      "source_url": "https://www.camara.gov.co/representantes/aida-marina-quilcue-vivas",
+      "profile_url": "https://www.camara.gov.co/representantes/aida-marina-quilcue-vivas/"
     },
     {
       "id": "camara-paola-andrea-quinones-d-haro",
@@ -3531,7 +3753,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/paola-andrea-quinones-dharo"
+      "source_url": "https://www.camara.gov.co/representantes/paola-andrea-quinones-dharo",
+      "profile_url": "https://www.camara.gov.co/representantes/paola-andrea-quinones-dharo/"
     },
     {
       "id": "senado-esteban-quintero-cardona",
@@ -3546,7 +3769,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4358&view=page"
     },
     {
       "id": "senado-david-ricardo-racero-mayorca",
@@ -3562,7 +3786,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8014&view=page"
     },
     {
       "id": "camara-samir-eduardo-radi-chemas",
@@ -3578,7 +3803,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Atlántico",
-      "source_url": "https://www.camara.gov.co/representantes/samir-eduardo-radi-chemas"
+      "source_url": "https://www.camara.gov.co/representantes/samir-eduardo-radi-chemas",
+      "profile_url": "https://www.camara.gov.co/representantes/samir-eduardo-radi-chemas/"
     },
     {
       "id": "camara-leonardo-ramon-ramirez",
@@ -3593,7 +3819,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Caquetá",
-      "source_url": "https://www.camara.gov.co/representantes/leonardo-ramon-ramirez"
+      "source_url": "https://www.camara.gov.co/representantes/leonardo-ramon-ramirez",
+      "profile_url": "https://www.camara.gov.co/representantes/leonardo-ramon-ramirez/"
     },
     {
       "id": "camara-juan-david-rangel-yanez",
@@ -3609,7 +3836,8 @@
       ],
       "party": "Partido Colombia Renaciente",
       "constituency": "Córdoba",
-      "source_url": "https://www.camara.gov.co/representantes/juan-david-rangel-yanez"
+      "source_url": "https://www.camara.gov.co/representantes/juan-david-rangel-yanez",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-david-rangel-yanez/"
     },
     {
       "id": "camara-orlando-rayo-acosta",
@@ -3624,7 +3852,8 @@
       ],
       "party": "Movimiento Alternativo Indígena y Social (MAIS)",
       "constituency": "Amazonas",
-      "source_url": "https://www.camara.gov.co/representantes/orlando-rayo-acosta"
+      "source_url": "https://www.camara.gov.co/representantes/orlando-rayo-acosta",
+      "profile_url": "https://www.camara.gov.co/representantes/orlando-rayo-acosta/"
     },
     {
       "id": "senado-daniel-restrepo-carmona",
@@ -3639,7 +3868,8 @@
       ],
       "party": "Partido Conservador",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-luis-ramiro-ricardo-buelvas",
@@ -3655,7 +3885,8 @@
       ],
       "party": "Asomontemaría",
       "constituency": "Circunscripción de paz",
-      "source_url": "https://www.camara.gov.co/representantes/luis-ramiro-ricardo-buelvas"
+      "source_url": "https://www.camara.gov.co/representantes/luis-ramiro-ricardo-buelvas",
+      "profile_url": "https://www.camara.gov.co/representantes/luis-ramiro-ricardo-buelvas/"
     },
     {
       "id": "camara-diana-carolina-riveros-paez",
@@ -3671,7 +3902,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Norte de Santander",
-      "source_url": "https://www.camara.gov.co/representantes/diana-carolina-riveros-paez"
+      "source_url": "https://www.camara.gov.co/representantes/diana-carolina-riveros-paez",
+      "profile_url": "https://www.camara.gov.co/representantes/diana-carolina-riveros-paez/"
     },
     {
       "id": "camara-luis-ariel-francisco-rodriguez-beltran",
@@ -3687,7 +3919,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Norte de Santander",
-      "source_url": "https://www.camara.gov.co/representantes/luis-ariel-francisco-rodriguez-beltran"
+      "source_url": "https://www.camara.gov.co/representantes/luis-ariel-francisco-rodriguez-beltran",
+      "profile_url": "https://www.camara.gov.co/representantes/luis-ariel-francisco-rodriguez-beltran/"
     },
     {
       "id": "camara-edinson-rodriguez-canchimbo",
@@ -3702,7 +3935,8 @@
       ],
       "party": "Consejo Comunitario Del Rio Cajanbre",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/edinson-rodriguez-canchimbo"
+      "source_url": "https://www.camara.gov.co/representantes/edinson-rodriguez-canchimbo",
+      "profile_url": "https://www.camara.gov.co/representantes/edinson-rodriguez-canchimbo/"
     },
     {
       "id": "senado-walter-alfonso-rodriguez-chaparro",
@@ -3718,7 +3952,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7974&view=page"
     },
     {
       "id": "senado-german-andres-rodriguez-prieto",
@@ -3734,7 +3969,8 @@
       ],
       "party": "Salvación Nacional",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7958&view=page"
     },
     {
       "id": "camara-juan-pablo-rojas-suarez",
@@ -3750,7 +3986,8 @@
       ],
       "party": "Partido Nuevo Liberalismo",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/juan-pablo-rojas-suarez"
+      "source_url": "https://www.camara.gov.co/representantes/juan-pablo-rojas-suarez",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-pablo-rojas-suarez/"
     },
     {
       "id": "camara-claudia-teresa-romero-nader",
@@ -3766,7 +4003,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/claudia-teresa-romero-nader"
+      "source_url": "https://www.camara.gov.co/representantes/claudia-teresa-romero-nader",
+      "profile_url": "https://www.camara.gov.co/representantes/claudia-teresa-romero-nader/"
     },
     {
       "id": "camara-chadan-francisco-rosado-taylor",
@@ -3782,7 +4020,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Magdalena",
-      "source_url": "https://www.camara.gov.co/representantes/chadan-francisco-rosado-taylor"
+      "source_url": "https://www.camara.gov.co/representantes/chadan-francisco-rosado-taylor",
+      "profile_url": "https://www.camara.gov.co/representantes/chadan-francisco-rosado-taylor/"
     },
     {
       "id": "camara-german-rogelio-rozo-anis",
@@ -3798,7 +4037,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Arauca",
-      "source_url": "https://www.camara.gov.co/representantes/german-rogelio-rozo-anis"
+      "source_url": "https://www.camara.gov.co/representantes/german-rogelio-rozo-anis",
+      "profile_url": "https://www.camara.gov.co/representantes/german-rogelio-rozo-anis/"
     },
     {
       "id": "senado-luis-carlos-rua-sanchez",
@@ -3814,7 +4054,8 @@
       ],
       "party": "ASI",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=8004&view=page"
     },
     {
       "id": "camara-miguel-angel-rubio-bravo",
@@ -3830,7 +4071,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Putumayo",
-      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-rubio-bravo"
+      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-rubio-bravo",
+      "profile_url": "https://www.camara.gov.co/representantes/miguel-angel-rubio-bravo/"
     },
     {
       "id": "camara-martha-isabel-ruiz-solera",
@@ -3846,7 +4088,8 @@
       ],
       "party": "Partido Colombia Renaciente",
       "constituency": "Córdoba",
-      "source_url": "https://www.camara.gov.co/representantes/martha-isabel-ruiz-solera"
+      "source_url": "https://www.camara.gov.co/representantes/martha-isabel-ruiz-solera",
+      "profile_url": "https://www.camara.gov.co/representantes/martha-isabel-ruiz-solera/"
     },
     {
       "id": "camara-maria-janeth-sabogal-robles",
@@ -3862,7 +4105,8 @@
       ],
       "party": "Asoambeima",
       "constituency": "Tolima",
-      "source_url": "https://www.camara.gov.co/representantes/maria-janeth-sabogal-robles"
+      "source_url": "https://www.camara.gov.co/representantes/maria-janeth-sabogal-robles",
+      "profile_url": "https://www.camara.gov.co/representantes/maria-janeth-sabogal-robles/"
     },
     {
       "id": "camara-jaime-raul-salamanca-torres",
@@ -3878,7 +4122,8 @@
       ],
       "party": "Partido Alianza Verde",
       "constituency": "Boyacá",
-      "source_url": "https://www.camara.gov.co/representantes/jaime-raul-salamanca-torres"
+      "source_url": "https://www.camara.gov.co/representantes/jaime-raul-salamanca-torres",
+      "profile_url": "https://www.camara.gov.co/representantes/jaime-raul-salamanca-torres/"
     },
     {
       "id": "camara-maria-camila-salas-salas",
@@ -3894,7 +4139,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Bolívar",
-      "source_url": "https://www.camara.gov.co/representantes/maria-camila-salas-salas"
+      "source_url": "https://www.camara.gov.co/representantes/maria-camila-salas-salas",
+      "profile_url": "https://www.camara.gov.co/representantes/maria-camila-salas-salas/"
     },
     {
       "id": "camara-julio-roberto-salazar-perdomo",
@@ -3910,7 +4156,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Cundinamarca",
-      "source_url": "https://www.camara.gov.co/representantes/julio-roberto-salazar-perdomo"
+      "source_url": "https://www.camara.gov.co/representantes/julio-roberto-salazar-perdomo",
+      "profile_url": "https://www.camara.gov.co/representantes/julio-roberto-salazar-perdomo/"
     },
     {
       "id": "camara-victor-manuel-salcedo-guerrero",
@@ -3926,7 +4173,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/victor-manuel-salcedo-guerrero"
+      "source_url": "https://www.camara.gov.co/representantes/victor-manuel-salcedo-guerrero",
+      "profile_url": "https://www.camara.gov.co/representantes/victor-manuel-salcedo-guerrero/"
     },
     {
       "id": "senado-duvalier-sanchez-arango",
@@ -3941,7 +4189,8 @@
       ],
       "party": "Alianza Verdes",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7986&view=page"
     },
     {
       "id": "senado-oscar-hernan-sanchez-leon",
@@ -3957,7 +4206,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7953&view=page"
     },
     {
       "id": "camara-astrid-sanchez-montes-de-oca",
@@ -3972,7 +4222,8 @@
       ],
       "party": "Partido de la U",
       "constituency": "Chocó",
-      "source_url": "https://www.camara.gov.co/representantes/astrid-sanchez-montes-de-oca"
+      "source_url": "https://www.camara.gov.co/representantes/astrid-sanchez-montes-de-oca",
+      "profile_url": "https://www.camara.gov.co/representantes/astrid-sanchez-montes-de-oca/"
     },
     {
       "id": "camara-winsner-nessir-sandoval-ibanez",
@@ -3988,7 +4239,8 @@
       ],
       "party": "Partido Demócrata Colombiano",
       "constituency": "Circunscripción afrodescendiente",
-      "source_url": "https://www.camara.gov.co/representantes/winsner-nessir-sandoval-ibanez"
+      "source_url": "https://www.camara.gov.co/representantes/winsner-nessir-sandoval-ibanez",
+      "profile_url": "https://www.camara.gov.co/representantes/winsner-nessir-sandoval-ibanez/"
     },
     {
       "id": "camara-jaime-arturo-santamaria-acosta",
@@ -4004,7 +4256,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Atlántico",
-      "source_url": "https://www.camara.gov.co/representantes/jaime-arturo-santamaria-acosta"
+      "source_url": "https://www.camara.gov.co/representantes/jaime-arturo-santamaria-acosta",
+      "profile_url": "https://www.camara.gov.co/representantes/jaime-arturo-santamaria-acosta/"
     },
     {
       "id": "senado-ferney-silva-idrobo",
@@ -4019,7 +4272,8 @@
       ],
       "party": "Colombia Humana - Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=6141&view=page"
     },
     {
       "id": "camara-yolanda-silva-romero",
@@ -4034,7 +4288,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Santander",
-      "source_url": "https://www.camara.gov.co/representantes/yolanda-silva-romero"
+      "source_url": "https://www.camara.gov.co/representantes/yolanda-silva-romero",
+      "profile_url": "https://www.camara.gov.co/representantes/yolanda-silva-romero/"
     },
     {
       "id": "camara-ingrid-marlen-sogamoso-alfonso",
@@ -4050,7 +4305,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Boyacá",
-      "source_url": "https://www.camara.gov.co/representantes/ingrid-marlen-sogamoso-alfonso"
+      "source_url": "https://www.camara.gov.co/representantes/ingrid-marlen-sogamoso-alfonso",
+      "profile_url": "https://www.camara.gov.co/representantes/ingrid-marlen-sogamoso-alfonso/"
     },
     {
       "id": "camara-yeisson-gerardo-sua-cajamarca-zapata",
@@ -4068,7 +4324,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Cundinamarca",
-      "source_url": "https://www.camara.gov.co/representantes/yeisson-gerardo-sua-cajamarca-zapata"
+      "source_url": "https://www.camara.gov.co/representantes/yeisson-gerardo-sua-cajamarca-zapata",
+      "profile_url": "https://www.camara.gov.co/representantes/yeisson-gerardo-sua-cajamarca-zapata/"
     },
     {
       "id": "camara-eimy-julieth-suarez-gonzalez",
@@ -4084,7 +4341,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Norte de Santander",
-      "source_url": "https://www.camara.gov.co/representantes/eimy-julieth-suarez-gonzalez"
+      "source_url": "https://www.camara.gov.co/representantes/eimy-julieth-suarez-gonzalez",
+      "profile_url": "https://www.camara.gov.co/representantes/eimy-julieth-suarez-gonzalez/"
     },
     {
       "id": "camara-mauricio-andres-toro-orjuela",
@@ -4100,7 +4358,8 @@
       ],
       "party": "Partido Alianza Verde",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/mauricio-andres-toro-orjuela"
+      "source_url": "https://www.camara.gov.co/representantes/mauricio-andres-toro-orjuela",
+      "profile_url": "https://www.camara.gov.co/representantes/mauricio-andres-toro-orjuela/"
     },
     {
       "id": "camara-david-alejandro-toro-ramirez",
@@ -4117,7 +4376,8 @@
       ],
       "party": "Coalición Pacto Histórico",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/david-alejandro-toro-ramirez"
+      "source_url": "https://www.camara.gov.co/representantes/david-alejandro-toro-ramirez",
+      "profile_url": "https://www.camara.gov.co/representantes/david-alejandro-toro-ramirez/"
     },
     {
       "id": "camara-camilo-alfonso-torres-prada",
@@ -4133,7 +4393,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Santander",
-      "source_url": "https://www.camara.gov.co/representantes/camilo-alfonso-torres-prada"
+      "source_url": "https://www.camara.gov.co/representantes/camilo-alfonso-torres-prada",
+      "profile_url": "https://www.camara.gov.co/representantes/camilo-alfonso-torres-prada/"
     },
     {
       "id": "senado-camilo-andres-torres-villalba",
@@ -4149,7 +4410,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7949&view=page"
     },
     {
       "id": "camara-jorge-rodrigo-tovar-velez",
@@ -4165,7 +4427,8 @@
       ],
       "party": "Asociación Paz es Vida (PA-VIDA)",
       "constituency": "Circunscripción de paz",
-      "source_url": "https://www.camara.gov.co/representantes/jorge-rodrigo-tovar-velez"
+      "source_url": "https://www.camara.gov.co/representantes/jorge-rodrigo-tovar-velez",
+      "profile_url": "https://www.camara.gov.co/representantes/jorge-rodrigo-tovar-velez/"
     },
     {
       "id": "camara-julio-cesar-triana-quintero",
@@ -4181,7 +4444,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Huila",
-      "source_url": "https://www.camara.gov.co/representantes/julio-cesar-triana-quintero"
+      "source_url": "https://www.camara.gov.co/representantes/julio-cesar-triana-quintero",
+      "profile_url": "https://www.camara.gov.co/representantes/julio-cesar-triana-quintero/"
     },
     {
       "id": "camara-eduar-alexis-triana-rincon",
@@ -4197,7 +4461,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Boyacá",
-      "source_url": "https://www.camara.gov.co/representantes/eduar-alexis-triana-rincon"
+      "source_url": "https://www.camara.gov.co/representantes/eduar-alexis-triana-rincon",
+      "profile_url": "https://www.camara.gov.co/representantes/eduar-alexis-triana-rincon/"
     },
     {
       "id": "camara-jose-jaime-uscategui-pastrana",
@@ -4213,7 +4478,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Bogotá",
-      "source_url": "https://www.camara.gov.co/representantes/jose-jaime-uscategui-pastrana"
+      "source_url": "https://www.camara.gov.co/representantes/jose-jaime-uscategui-pastrana",
+      "profile_url": "https://www.camara.gov.co/representantes/jose-jaime-uscategui-pastrana/"
     },
     {
       "id": "camara-jhon-fredi-valencia-caicedo",
@@ -4229,7 +4495,8 @@
       ],
       "party": "Consejo Comunitario los Andes",
       "constituency": "Circunscripción de paz",
-      "source_url": "https://www.camara.gov.co/representantes/jhon-fredi-valencia-caicedo"
+      "source_url": "https://www.camara.gov.co/representantes/jhon-fredi-valencia-caicedo",
+      "profile_url": "https://www.camara.gov.co/representantes/jhon-fredi-valencia-caicedo/"
     },
     {
       "id": "camara-andrea-camila-vargas-de-la-hoz",
@@ -4245,7 +4512,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Atlántico",
-      "source_url": "https://www.camara.gov.co/representantes/andrea-camila-vargas-de-la-hoz"
+      "source_url": "https://www.camara.gov.co/representantes/andrea-camila-vargas-de-la-hoz",
+      "profile_url": "https://www.camara.gov.co/representantes/andrea-camila-vargas-de-la-hoz/"
     },
     {
       "id": "camara-juan-carlos-vargas-soler",
@@ -4261,7 +4529,8 @@
       ],
       "party": "Asociación de Productores de Cacao (Aprocasur)",
       "constituency": "Circunscripción de paz",
-      "source_url": "https://www.camara.gov.co/representantes/juan-carlos-vargas-soler"
+      "source_url": "https://www.camara.gov.co/representantes/juan-carlos-vargas-soler",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-carlos-vargas-soler/"
     },
     {
       "id": "senado-alix-yirley-vargas-torrado",
@@ -4277,7 +4546,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7964&view=page"
     },
     {
       "id": "senado-gersson-vargas-valdeleon",
@@ -4292,7 +4562,8 @@
       ],
       "party": "Partido Liberal",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-erick-adrian-velasco-burbano",
@@ -4308,7 +4579,8 @@
       ],
       "party": "Coalición Pacto Histórico",
       "constituency": "Nariño",
-      "source_url": "https://www.camara.gov.co/representantes/erick-adrian-velasco-burbano"
+      "source_url": "https://www.camara.gov.co/representantes/erick-adrian-velasco-burbano",
+      "profile_url": "https://www.camara.gov.co/representantes/erick-adrian-velasco-burbano/"
     },
     {
       "id": "camara-nataly-velez-lopera",
@@ -4323,7 +4595,8 @@
       ],
       "party": "Cambio Radical",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/nataly-velez-lopera"
+      "source_url": "https://www.camara.gov.co/representantes/nataly-velez-lopera",
+      "profile_url": "https://www.camara.gov.co/representantes/nataly-velez-lopera/"
     },
     {
       "id": "camara-laura-isabel-vera-zapata",
@@ -4339,7 +4612,8 @@
       ],
       "party": "Partido Pacto Histórico",
       "constituency": "Valle del Cauca",
-      "source_url": "https://www.camara.gov.co/representantes/laura-isabel-vera-zapata"
+      "source_url": "https://www.camara.gov.co/representantes/laura-isabel-vera-zapata",
+      "profile_url": "https://www.camara.gov.co/representantes/laura-isabel-vera-zapata/"
     },
     {
       "id": "camara-omar-francisco-vidal-rojas",
@@ -4355,7 +4629,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Chocó",
-      "source_url": "https://www.camara.gov.co/representantes/omar-francisco-vidal-rojas"
+      "source_url": "https://www.camara.gov.co/representantes/omar-francisco-vidal-rojas",
+      "profile_url": "https://www.camara.gov.co/representantes/omar-francisco-vidal-rojas/"
     },
     {
       "id": "senado-maria-lucia-villalba-gomez",
@@ -4371,7 +4646,8 @@
       ],
       "party": "Nuevo Liberalismo",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7965&view=page"
     },
     {
       "id": "senado-oscar-leonardo-villamizar-meneses",
@@ -4387,7 +4663,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=7983&view=page"
     },
     {
       "id": "senado-manuel-antonio-virguez-piraquive",
@@ -4403,7 +4680,8 @@
       ],
       "party": "MIRA",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=4369&view=page"
     },
     {
       "id": "camara-yolanda-wong-baldiris",
@@ -4418,7 +4696,8 @@
       ],
       "party": "Partido Liberal Colombiano",
       "constituency": "Bolívar",
-      "source_url": "https://www.camara.gov.co/representantes/yolanda-wong-baldiris"
+      "source_url": "https://www.camara.gov.co/representantes/yolanda-wong-baldiris",
+      "profile_url": "https://www.camara.gov.co/representantes/yolanda-wong-baldiris/"
     },
     {
       "id": "camara-diego-fernando-zambrano-pardo",
@@ -4434,7 +4713,8 @@
       ],
       "party": "Partido Conservador Colombiano",
       "constituency": "Putumayo",
-      "source_url": "https://www.camara.gov.co/representantes/diego-fernando-zambrano-pardo"
+      "source_url": "https://www.camara.gov.co/representantes/diego-fernando-zambrano-pardo",
+      "profile_url": "https://www.camara.gov.co/representantes/diego-fernando-zambrano-pardo/"
     },
     {
       "id": "senado-isabel-cristina-zuleta-lopez",
@@ -4450,7 +4730,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": "https://www.senado.gov.co/index.php/component/sppagebuilder/?id=5154&view=page"
     },
     {
       "id": "senado-claudia-margarita-zuleta-murgas",
@@ -4466,7 +4747,8 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "senado-kamelia-edith-zuluaga-navarro",
@@ -4482,7 +4764,8 @@
       ],
       "party": "Pacto Histórico",
       "constituency": "Circunscripción nacional",
-      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "profile_url": null
     },
     {
       "id": "camara-juan-david-zuluaga-zuluaga",
@@ -4498,7 +4781,9 @@
       ],
       "party": "Centro Democrático",
       "constituency": "Antioquia",
-      "source_url": "https://www.camara.gov.co/representantes/juan-david-zuluaga-zuluaga"
+      "source_url": "https://www.camara.gov.co/representantes/juan-david-zuluaga-zuluaga",
+      "profile_url": "https://www.camara.gov.co/representantes/juan-david-zuluaga-zuluaga/"
     }
-  ]
+  ],
+  "profile_links_checked_at": "2026-09-06"
 }

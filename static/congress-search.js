@@ -37,7 +37,20 @@
     return {name: member.search_name, aliases: aliases.join(', ')};
   }
 
-  const api = {normalize, createIndex, findMatches, buildSearch};
+  function resolveMember(index, value, selectedId = null) {
+    // Resolve complete known names, not the first autocomplete suggestion.
+    // Sorting words also accepts surnames first, with or without the comma.
+    const key = name => normalize(name).split(' ').sort().join(' ');
+    const query = key(value);
+    if (!query || query.split(' ').length < 2) return null;
+    const matches = index.filter(({member}) => [
+      member.full_name, member.display_name, member.search_name, ...member.aliases
+    ].some(name => key(name) === query)).map(({member}) => member);
+    const selected = matches.find(member => member.id === selectedId);
+    return selected || (matches.length === 1 ? matches[0] : null);
+  }
+
+  const api = {normalize, createIndex, findMatches, buildSearch, resolveMember};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (!root.document) return;
 
@@ -168,6 +181,7 @@
     ...api,
     query: () => buildSearch(input.value, document.getElementById('aliases').value, selected),
     selectedId: () => selected?.id || null,
+    findMember: (name, selectedId) => resolveMember(index, name, selectedId),
     restore: id => {
       if (!ready) { pendingRestore = {id, value: input.value}; return; }
       const member = index.find(entry => entry.member.id === id)?.member;
@@ -177,7 +191,7 @@
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10000);
-  root.RadarCongress.catalogReady = fetch('/static/congress-members.json?v=2026-09-06', {signal: controller.signal})
+  root.RadarCongress.catalogReady = fetch('/static/congress-members.json?v=profiles-2026-09-06', {signal: controller.signal})
     .then(response => { if (!response.ok) throw new Error('Directory unavailable'); return response.json(); })
     .then(catalog => {
       if (!Array.isArray(catalog.members) || !catalog.members.length || catalog.members.some(member =>
