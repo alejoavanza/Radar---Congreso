@@ -42,6 +42,12 @@ jobs:
         run: xcodebuild -version
       - name: Build unsigned iPhone simulator app
         run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+      - name: Archive Release for iPhone without distribution credentials
+        run: >-
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release
+          -sdk iphoneos -destination 'generic/platform=iOS'
+          -archivePath build/Radar-Politico.xcarchive
+          -derivedDataPath build CODE_SIGNING_ALLOWED=NO archive
       - name: Prepare installed iPhone simulator
         env:
           RADAR_SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -72,4 +78,10 @@ jobs:
         with:
           name: Radar-Politico-iOS-Simulator
           path: mobile/build/Build/Products/Debug-iphonesimulator/App.app
+          retention-days: 7
+      - name: Save unsigned Release archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: Radar-Politico-iPhone-Unsigned-Archive
+          path: mobile/build/Radar-Politico.xcarchive
           retention-days: 7
