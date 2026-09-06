@@ -11,7 +11,7 @@
 #comparetab .compare-remove{flex:0 0 auto;width:auto;padding:9px 12px;margin:0;font-size:12px;font-weight:600;background:#fff;color:#444;border:1px solid #ccc}
 .compare-control-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .compare-progress,.compare-error{font-size:13px;line-height:1.5;margin:14px 0 0}
-.compare-progress:empty,.compare-error:empty,#compare-x-note:empty{display:none}
+.compare-progress:empty,.compare-error:empty{display:none}
 .compare-error{font-weight:600}
 .compare-chart{list-style:none;padding:0;margin:20px 0}
 .compare-chart-person{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid #e6e6e6}
@@ -21,7 +21,6 @@
 .compare-track{height:20px;background:#f3f3f3;border-radius:3px;overflow:hidden}
 .compare-bar{height:100%;border-radius:3px}
 .web-bar{background:#111}
-.social-bar{background:#999}
 .compare-value{font-size:13px;font-weight:650;text-align:right;font-variant-numeric:tabular-nums}
 .compare-value.unavailable{font-weight:400;color:#777}
 .compare-order-row{display:flex;gap:12px;align-items:center;margin:16px 0}

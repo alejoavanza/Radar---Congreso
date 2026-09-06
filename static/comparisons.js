@@ -1,19 +1,15 @@
 (function (root) {
   'use strict';
-  const SOCIAL = ['X', 'Bluesky', 'Reddit'];
-  const ALL_SOURCES = ['Web', ...SOCIAL];
   const isAvailable = source => source?.status === 'available' && Number.isFinite(source.count) && source.count >= 0;
 
   function summarize(rows) {
-    const common = rows.length ? SOCIAL.filter(source => rows.every(row => isAvailable(row.sources?.[source]))) : [];
     return {
-      common,
       rows: rows.map(row => ({
         ...row,
+        // Saved comparisons may still contain social results; only web is displayed.
+        sources: {Web: row.sources?.Web},
         web: isAvailable(row.sources?.Web) ? row.sources.Web.count : null,
-        webLimited: !!row.sources?.Web?.limited,
-        social: common.length ? common.reduce((sum, source) => sum + row.sources[source].count, 0) : null,
-        socialLimited: common.some(source => row.sources[source].limited)
+        webLimited: !!row.sources?.Web?.limited
       }))
     };
   }
@@ -23,7 +19,7 @@
     return [...rows].sort((a, b) => {
       const names = collator.compare(a.member.display_name, b.member.display_name);
       if (order === 'name') return names;
-      const left = a[order], right = b[order];
+      const left = a.web, right = b.web;
       if (left === null) return right === null ? names : 1;
       if (right === null) return -1;
       return right - left || names;
@@ -194,15 +190,13 @@
       detail.append(el('summary', '', row.member.display_name));
       const terms = catalog?.members.find(member => member.id === row.member.id);
       if (terms) detail.append(el('p', 'note', `Búsqueda: ${terms.search_name}. Incluye su nombre completo y las variantes del directorio.`));
-      for (const source of ALL_SOURCES) {
-        const data = row.sources[source];
-        const line = el('p', 'compare-source-line');
-        line.append(el('strong', '', `${source}: ${valueText(isAvailable(data) ? data.count : null, data?.limited)}. `));
-        line.append(document.createTextNode(data?.message || 'La consulta no pudo completarse.'));
-        if (data?.url) { line.append(document.createTextNode(' '), link('Abrir fuente ↗', data.url)); }
-        detail.append(line);
-      }
-      const items = row.sources.Web?.items || [];
+      const data = row.sources.Web;
+      const line = el('p', 'compare-source-line');
+      line.append(el('strong', '', `Web: ${valueText(isAvailable(data) ? data.count : null, data?.limited)}. `));
+      line.append(document.createTextNode(data?.message || 'La consulta no pudo completarse.'));
+      if (data?.url) { line.append(document.createTextNode(' '), link('Abrir fuente ↗', data.url)); }
+      detail.append(line);
+      const items = data?.items || [];
       if (items.length) {
         const news = el('details', 'compare-news');
         news.append(el('summary', '', `Ver ${items.length} noticias detectadas`));
@@ -218,30 +212,24 @@
 
   function renderSnapshot() {
     if (!snapshot) return;
-    const {common, rows} = summarize(snapshot.rows);
+    const {rows} = summarize(snapshot.rows);
     const ordered = sortRows(rows, $('compare-order').value);
-    const max = Math.max(0, ...rows.flatMap(row => [row.web || 0, row.social || 0]));
+    const max = Math.max(0, ...rows.map(row => row.web || 0));
     const when = new Intl.DateTimeFormat('es-CO', {timeZone: 'America/Bogota', dateStyle: 'medium', timeStyle: 'short'});
     $('compare-summary').textContent = `${rows.length} congresistas · ${snapshot.meta.days === 1 ? 'Últimas 24 horas' : snapshot.meta.days + ' días'} · Zona: ${snapshot.meta.territory || 'Sin filtro de zona'}.`;
     $('compare-window').textContent = `${when.format(new Date(snapshot.meta.start_time))} — ${when.format(new Date(snapshot.meta.end_time))} (hora de Colombia).`;
-    $('compare-coverage').textContent = common.length
-      ? `Redes comparadas para todos: ${common.join(', ')}. Las redes sin datos para alguno se excluyen de las barras de redes; su detalle está abajo.`
-      : 'No hay una red con datos disponibles para todos los seleccionados. Las barras de redes muestran N/D; consulta el detalle de cada fuente.';
-    const xMissing = rows.filter(row => !isAvailable(row.sources.X));
-    $('compare-x-note').textContent = xMissing.length ? `X no está disponible para ${xMissing.length} de ${rows.length}. ${xMissing[0].sources.X?.message || ''}` : '';
     chart.replaceChildren();
     for (const row of ordered) {
       const group = el('li', 'compare-chart-person');
       group.append(el('h3', '', row.member.search_name), el('p', 'compare-person-detail', `${row.member.chamber === 'camara' ? 'Cámara' : 'Senado'} · ${row.member.constituency}`));
-      group.append(drawBar('Web', row.web, row.webLimited, max, 'web-bar'), drawBar('Redes', row.social, row.socialLimited, max, 'social-bar'));
+      group.append(drawBar('Web', row.web, row.webLimited, max, 'web-bar'));
       chart.append(group);
     }
-    $('compare-scale').textContent = `Escala común: 0 a ${fmt(max)} menciones detectadas. N/D = no disponible. + = resultado limitado; puede haber más menciones.`;
+    $('compare-scale').textContent = `Escala común: 0 a ${fmt(max)} menciones detectadas en web. N/D = no disponible. + = resultado limitado; puede haber más menciones.`;
     const table = $('compare-table-body'); table.replaceChildren();
     for (const row of ordered) {
       const tr = el('tr'); const th = el('th', '', row.member.search_name); th.scope = 'row'; tr.append(th);
-      tr.append(el('td', '', valueText(row.web, row.webLimited)), el('td', '', valueText(row.social, row.socialLimited)));
-      for (const source of SOCIAL) tr.append(el('td', '', valueText(isAvailable(row.sources[source]) ? row.sources[source].count : null, row.sources[source]?.limited)));
+      tr.append(el('td', '', valueText(row.web, row.webLimited)));
       table.append(tr);
     }
     renderDetails(ordered); results.hidden = false;
@@ -259,7 +247,7 @@
   }
 
   function failedRow(member, message) {
-    return {member, sources: Object.fromEntries(ALL_SOURCES.map(source => [source, {status: 'unavailable', count: null, message}]))};
+    return {member, sources: {Web: {status: 'unavailable', count: null, message}}};
   }
 
   async function compare(event) {
@@ -291,7 +279,7 @@
       // Two people at a time: bounded traffic, progress feedback and independent failures.
       await Promise.all([worker(), worker()]);
       snapshot = {meta, rows}; renderSnapshot(); persist();
-      progress.textContent = `Comparativo listo: ${rows.length} congresistas. Revisa la disponibilidad de las fuentes.`;
+      progress.textContent = `Comparativo web listo: ${rows.length} congresistas.`;
     } catch (error) {
       progress.textContent = '';
       $('compare-error').textContent = error.name === 'AbortError' ? 'La consulta tardó demasiado. Intenta de nuevo.' : error.message;
@@ -317,7 +305,8 @@
         selected = [...new Set(saved.ids)].map(id => catalog.members.find(member => member.id === id)).filter(Boolean).slice(0, 10);
         if ([90, 60, 30, 7, 1].includes(saved.days)) $('compare-days').value = saved.days;
         if (typeof saved.territory === 'string') $('compare-territory').value = saved.territory;
-        if (['web', 'social', 'name'].includes(saved.order)) $('compare-order').value = saved.order;
+        // Migrate the old social sort to web while preserving saved web results.
+        $('compare-order').value = saved.order === 'name' ? 'name' : 'web';
         if (saved.snapshot?.meta && Array.isArray(saved.snapshot.rows) && saved.snapshot.rows.length === selected.length
           && saved.snapshot.meta.days === +$('compare-days').value && saved.snapshot.meta.territory === $('compare-territory').value.trim()
           && saved.snapshot.rows.every((row, i) => row.member?.id === selected[i].id && row.sources)

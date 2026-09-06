@@ -1,11 +1,9 @@
-"""Comparable, bounded source counts. Missing data is never a zero."""
-from concurrent.futures import ThreadPoolExecutor
+"""Comparable, bounded web counts. Missing data is never a zero."""
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from functools import lru_cache
 from pathlib import Path
 from urllib.parse import urlencode, urlparse
-import hashlib
 import json
 import os
 
@@ -222,15 +220,13 @@ def source_count(name, fn, query, start, end):
 
 
 @lru_cache(maxsize=128)
-def collect(member_id, days, end_time, territory, access_key):
+def collect(member_id, days, end_time, territory):
     member = members()[member_id]
     end = date(end_time)
     start = end - timedelta(days=days)
     query = query_for(member, territory)
-    sources = {'Web': count_news, 'X': count_x, 'Bluesky': count_bluesky, 'Reddit': count_reddit}
-    with ThreadPoolExecutor(max_workers=4) as executor:
-        futures = {name: executor.submit(source_count, name, fn, query, start, end) for name, fn in sources.items()}
-        counts = {name: future.result() for name, future in futures.items()}
+    # Social comparisons are paused. Even older clients only trigger a web query.
+    counts = {'Web': source_count('Web', count_news, query, start, end)}
     return {'member': public_member(member), 'sources': counts,
             'start_time': iso(start), 'end_time': end_time, 'days': days, 'territory': territory}
 
@@ -275,5 +271,4 @@ def compare_member():
             raise ValueError('La ventana de consulta venció. Genera el comparativo de nuevo.')
     except ValueError as error:
         return jsonify({'error': str(error)}), 400
-    access_key = hashlib.sha256(os.getenv('X_BEARER_TOKEN', '').strip().encode()).hexdigest()
-    return jsonify(collect(member_id, days, iso(end), territory, access_key))
+    return jsonify(collect(member_id, days, iso(end), territory))
