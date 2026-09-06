@@ -1,0 +1,16 @@
+.congress-combobox{position:relative}
+.congress-options{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:20;max-height:360px;overflow-y:auto;overscroll-behavior:contain;list-style:none;margin:0;padding:4px;background:#fff;border:1px solid #bdbdbd;border-radius:8px;box-shadow:0 8px 24px #0002}
+.congress-options[hidden]{display:none}
+.congress-options [role=option]{padding:12px 10px;border-radius:4px;cursor:pointer;line-height:1.4}
+.congress-options [role=option]+[role=option]{border-top:1px solid #eee}
+.congress-options [role=option]:hover,.congress-options [aria-selected=true]{background:#efefef;outline:1px solid #ccc}
+.congress-option-name{display:block;font-size:15px;font-weight:650;color:#111}
+.congress-option-detail{display:block;margin-top:3px;font-size:12px;color:#555;overflow-wrap:anywhere}
+.congress-help,.congress-status,.congress-selected,.congress-catalog{font-size:12px;line-height:1.5;color:#666;margin:7px 0 0}
+.congress-status:empty{display:none}
+.congress-selected{color:#222;padding:8px 10px;background:#f5f5f5;border-left:2px solid #111}
+.congress-sources{margin-top:8px;font-size:11px;color:#666}
+.congress-sources summary{cursor:pointer;width:fit-content}
+.congress-sources a{color:inherit;text-underline-offset:2px}
+.congress-sources p{margin:6px 0}
+@media(max-width:520px){.congress-options{max-height:min(340px,45vh)}.congress-options [role=option]{padding:12px 8px}}

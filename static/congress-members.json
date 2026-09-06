@@ -1,0 +1,4504 @@
+{
+  "schema_version": 1,
+  "period": "2026-2030",
+  "checked_at": "2026-09-06",
+  "coverage": "Personas publicadas en los directorios oficiales consultados; la fecha indica la revisión del listado, no una actualización automática.",
+  "sources": [
+    {
+      "label": "Cámara de Representantes",
+      "url": "https://www.camara.gov.co/representantes/",
+      "count": 182
+    },
+    {
+      "label": "Senado de la República",
+      "url": "https://www.senado.gov.co/index.php/el-senado/senadores",
+      "count": 102
+    }
+  ],
+  "members": [
+    {
+      "id": "camara-alejandra-gabriela-abasolo-gomez",
+      "chamber": "camara",
+      "given_names": "Alejandra Gabriela",
+      "surnames": "Abasolo Gómez",
+      "full_name": "Alejandra Gabriela Abasolo Gómez",
+      "display_name": "Abasolo Gómez, Alejandra Gabriela",
+      "search_name": "Alejandra Gabriela Abasolo",
+      "aliases": [
+        "Alejandra Abasolo",
+        "Alejandra Gabriela Abasolo Gómez"
+      ],
+      "party": "Partido Alianza Verde",
+      "constituency": "Nariño",
+      "source_url": "https://www.camara.gov.co/representantes/alejandra-gabriela-abasolo-gomez"
+    },
+    {
+      "id": "camara-jose-luis-abdalla-olivera",
+      "chamber": "camara",
+      "given_names": "José Luis",
+      "surnames": "Abdalla Olivera",
+      "full_name": "José Luis Abdalla Olivera",
+      "display_name": "Abdalla Olivera, José Luis",
+      "search_name": "José Luis Abdalla",
+      "aliases": [
+        "José Abdalla",
+        "José Luis Abdalla Olivera"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Córdoba",
+      "source_url": "https://www.camara.gov.co/representantes/jose-luis-abdalla-olivera"
+    },
+    {
+      "id": "senado-ana-paola-agudelo-garcia",
+      "chamber": "senado",
+      "given_names": "Ana Paola",
+      "surnames": "Agudelo García",
+      "full_name": "Ana Paola Agudelo García",
+      "display_name": "Agudelo García, Ana Paola",
+      "search_name": "Ana Paola Agudelo",
+      "aliases": [
+        "Ana Agudelo",
+        "Ana Paola Agudelo García"
+      ],
+      "party": "MIRA",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-laura-cristina-ahumada-garcia",
+      "chamber": "senado",
+      "given_names": "Laura Cristina",
+      "surnames": "Ahumada García",
+      "full_name": "Laura Cristina Ahumada García",
+      "display_name": "Ahumada García, Laura Cristina",
+      "search_name": "Laura Cristina Ahumada",
+      "aliases": [
+        "Laura Ahumada",
+        "Laura Cristina Ahumada García"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-arledy-alvarado-patino",
+      "chamber": "camara",
+      "given_names": "Arledy",
+      "surnames": "Alvarado Patiño",
+      "full_name": "Arledy Alvarado Patiño",
+      "display_name": "Alvarado Patiño, Arledy",
+      "search_name": "Arledy Alvarado",
+      "aliases": [
+        "Arledy Alvarado Patiño"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Casanare",
+      "source_url": "https://www.camara.gov.co/representantes/arledy-alvarado-patino"
+    },
+    {
+      "id": "camara-maritza-alvarez-barrera",
+      "chamber": "camara",
+      "given_names": "Maritza",
+      "surnames": "Álvarez Barrera",
+      "full_name": "Maritza Álvarez Barrera",
+      "display_name": "Álvarez Barrera, Maritza",
+      "search_name": "Maritza Álvarez",
+      "aliases": [
+        "Maritza Álvarez Barrera"
+      ],
+      "party": "MIRA",
+      "constituency": "Cundinamarca",
+      "source_url": "https://www.camara.gov.co/representantes/maritza-alvarez-barrera"
+    },
+    {
+      "id": "camara-luis-carlos-alvarez-morales",
+      "chamber": "camara",
+      "given_names": "Luis Carlos",
+      "surnames": "Álvarez Morales",
+      "full_name": "Luis Carlos Álvarez Morales",
+      "display_name": "Álvarez Morales, Luis Carlos",
+      "search_name": "Luis Carlos Álvarez",
+      "aliases": [
+        "Luis Álvarez",
+        "Luis Carlos Álvarez Morales"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Vichada",
+      "source_url": "https://www.camara.gov.co/representantes/luis-carlos-alvarez-morales"
+    },
+    {
+      "id": "camara-guillermo-ignacio-alvira-acosta",
+      "chamber": "camara",
+      "given_names": "Guillermo Ignacio",
+      "surnames": "Alvira Acosta",
+      "full_name": "Guillermo Ignacio Alvira Acosta",
+      "display_name": "Alvira Acosta, Guillermo Ignacio",
+      "search_name": "Guillermo Ignacio Alvira",
+      "aliases": [
+        "Guillermo Alvira",
+        "Guillermo Ignacio Alvira Acosta"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Tolima",
+      "source_url": "https://www.camara.gov.co/representantes/guillermo-ignacio-alvira-acosta"
+    },
+    {
+      "id": "senado-john-edickson-amaya-rodriguez",
+      "chamber": "senado",
+      "given_names": "John Edickson",
+      "surnames": "Amaya Rodríguez",
+      "full_name": "John Edickson Amaya Rodríguez",
+      "display_name": "Amaya Rodríguez, John Edickson",
+      "search_name": "John Edickson Amaya",
+      "aliases": [
+        "John Amaya",
+        "John Edickson Amaya Rodríguez"
+      ],
+      "party": "Alianza Verde",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-fabio-raul-amin-saleme",
+      "chamber": "senado",
+      "given_names": "Fabio Raúl",
+      "surnames": "Amín Saleme",
+      "full_name": "Fabio Raúl Amín Saleme",
+      "display_name": "Amín Saleme, Fabio Raúl",
+      "search_name": "Fabio Raúl Amín",
+      "aliases": [
+        "Fabio Amín",
+        "Fabio Raúl Amín Saleme"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-selmen-david-arana-cano",
+      "chamber": "senado",
+      "given_names": "Selmen David",
+      "surnames": "Arana Cano",
+      "full_name": "Selmen David Arana Cano",
+      "display_name": "Arana Cano, Selmen David",
+      "search_name": "Selmen David Arana",
+      "aliases": [
+        "Selmen Arana",
+        "Selmen David Arana Cano"
+      ],
+      "party": "Coalición Cambio Radical / ALMA",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-juliana-aray-franco",
+      "chamber": "camara",
+      "given_names": "Juliana",
+      "surnames": "Aray Franco",
+      "full_name": "Juliana Aray Franco",
+      "display_name": "Aray Franco, Juliana",
+      "search_name": "Juliana Aray",
+      "aliases": [
+        "Juliana Aray Franco"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Bolívar",
+      "source_url": "https://www.camara.gov.co/representantes/juliana-aray-franco"
+    },
+    {
+      "id": "camara-jose-ricardo-ardila-pinedo",
+      "chamber": "camara",
+      "given_names": "José Ricardo",
+      "surnames": "Ardila Pinedo",
+      "full_name": "José Ricardo Ardila Pinedo",
+      "display_name": "Ardila Pinedo, José Ricardo",
+      "search_name": "José Ricardo Ardila",
+      "aliases": [
+        "José Ardila",
+        "José Ricardo Ardila Pinedo"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Bolívar",
+      "source_url": "https://www.camara.gov.co/representantes/jose-ricardo-ardila-pinedo"
+    },
+    {
+      "id": "camara-fernando-arias-cardona",
+      "chamber": "camara",
+      "given_names": "Fernando",
+      "surnames": "Arias Cardona",
+      "full_name": "Fernando Arias Cardona",
+      "display_name": "Arias Cardona, Fernando",
+      "search_name": "Fernando Arias",
+      "aliases": [
+        "Fernando Arias Cardona"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Risaralda",
+      "source_url": "https://www.camara.gov.co/representantes/fernando-arias-cardona"
+    },
+    {
+      "id": "senado-wilson-neber-arias-castillo",
+      "chamber": "senado",
+      "given_names": "Wilson Neber",
+      "surnames": "Arias Castillo",
+      "full_name": "Wilson Neber Arias Castillo",
+      "display_name": "Arias Castillo, Wilson Neber",
+      "search_name": "Wilson Neber Arias",
+      "aliases": [
+        "Wilson Arias",
+        "Wilson Neber Arias Castillo"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jose-fredy-arias-herrera",
+      "chamber": "camara",
+      "given_names": "José Fredy",
+      "surnames": "Arias Herrera",
+      "full_name": "José Fredy Arias Herrera",
+      "display_name": "Arias Herrera, José Fredy",
+      "search_name": "José Fredy Arias",
+      "aliases": [
+        "José Arias",
+        "José Fredy Arias Herrera"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Risaralda",
+      "source_url": "https://www.camara.gov.co/representantes/jose-fredy-arias-herrera"
+    },
+    {
+      "id": "camara-diego-fran-ariza-perez",
+      "chamber": "camara",
+      "given_names": "Diego Fran",
+      "surnames": "Ariza Pérez",
+      "full_name": "Diego Fran Ariza Pérez",
+      "display_name": "Ariza Pérez, Diego Fran",
+      "search_name": "Diego Fran Ariza",
+      "aliases": [
+        "Diego Ariza",
+        "Diego Fran Ariza Pérez"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Santander",
+      "source_url": "https://www.camara.gov.co/representantes/diego-fran-ariza-perez"
+    },
+    {
+      "id": "camara-carlos-eduardo-arizabaleta-corral",
+      "chamber": "camara",
+      "given_names": "Carlos Eduardo",
+      "surnames": "Arizabaleta Corral",
+      "full_name": "Carlos Eduardo Arizabaleta Corral",
+      "display_name": "Arizabaleta Corral, Carlos Eduardo",
+      "search_name": "Carlos Eduardo Arizabaleta",
+      "aliases": [
+        "Carlos Arizabaleta",
+        "Carlos Eduardo Arizabaleta Corral"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/carlos-eduardo-arizabaleta-corral"
+    },
+    {
+      "id": "camara-jaime-ignacio-arizabaleta-fajardo",
+      "chamber": "camara",
+      "given_names": "Jaime Ignacio",
+      "surnames": "Arizabaleta Fajardo",
+      "full_name": "Jaime Ignacio Arizabaleta Fajardo",
+      "display_name": "Arizabaleta Fajardo, Jaime Ignacio",
+      "search_name": "Jaime Ignacio Arizabaleta",
+      "aliases": [
+        "Jaime Arizabaleta",
+        "Jaime Ignacio Arizabaleta Fajardo"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/jaime-ignacio-arizabaleta-fajardo"
+    },
+    {
+      "id": "camara-victor-andres-armero-hernandez",
+      "chamber": "camara",
+      "given_names": "Víctor Andrés",
+      "surnames": "Armero Hernandez",
+      "full_name": "Víctor Andrés Armero Hernandez",
+      "display_name": "Armero Hernandez, Víctor Andrés",
+      "search_name": "Víctor Andrés Armero",
+      "aliases": [
+        "Víctor Armero",
+        "Víctor Andrés Armero Hernandez"
+      ],
+      "party": "Partido Alianza Verde",
+      "constituency": "Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/victor-andres-armero-hernandez"
+    },
+    {
+      "id": "senado-aida-yolanda-avella-esquivel",
+      "chamber": "senado",
+      "given_names": "Aída Yolanda",
+      "surnames": "Avella Esquivel",
+      "full_name": "Aída Yolanda Avella Esquivel",
+      "display_name": "Avella Esquivel, Aída Yolanda",
+      "search_name": "Aída Yolanda Avella",
+      "aliases": [
+        "Aída Avella",
+        "Aída Yolanda Avella Esquivel"
+      ],
+      "party": "Unión Patriótica",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-ariel-fernando-avila-martinez",
+      "chamber": "senado",
+      "given_names": "Ariel Fernando",
+      "surnames": "Ávila Martínez",
+      "full_name": "Ariel Fernando Ávila Martínez",
+      "display_name": "Ávila Martínez, Ariel Fernando",
+      "search_name": "Ariel Fernando Ávila",
+      "aliases": [
+        "Ariel Ávila",
+        "Ariel Fernando Ávila Martínez"
+      ],
+      "party": "Alianza Verde",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-camilo-esteban-avila-morales",
+      "chamber": "camara",
+      "given_names": "Camilo Esteban",
+      "surnames": "Ávila Morales",
+      "full_name": "Camilo Esteban Ávila Morales",
+      "display_name": "Ávila Morales, Camilo Esteban",
+      "search_name": "Camilo Esteban Ávila",
+      "aliases": [
+        "Camilo Ávila",
+        "Camilo Esteban Ávila Morales"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Vaupés",
+      "source_url": "https://www.camara.gov.co/representantes/camilo-esteban-avila-morales"
+    },
+    {
+      "id": "camara-luis-fernando-ballesteros",
+      "chamber": "camara",
+      "given_names": "Luis Fernando",
+      "surnames": "Ballesteros",
+      "full_name": "Luis Fernando Ballesteros",
+      "display_name": "Ballesteros, Luis Fernando",
+      "search_name": "Luis Fernando Ballesteros",
+      "aliases": [
+        "Luis Ballesteros"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Córdoba",
+      "source_url": "https://www.camara.gov.co/representantes/luis-fernando-ballesteros"
+    },
+    {
+      "id": "senado-david-alejandro-barguil-assis",
+      "chamber": "senado",
+      "given_names": "David Alejandro",
+      "surnames": "Barguil Assis",
+      "full_name": "David Alejandro Barguil Assis",
+      "display_name": "Barguil Assis, David Alejandro",
+      "search_name": "David Alejandro Barguil",
+      "aliases": [
+        "David Barguil",
+        "David Alejandro Barguil Assis"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-nicolas-antonio-barguil-cubillos",
+      "chamber": "camara",
+      "given_names": "Nicolás Antonio",
+      "surnames": "Barguil Cubillos",
+      "full_name": "Nicolás Antonio Barguil Cubillos",
+      "display_name": "Barguil Cubillos, Nicolás Antonio",
+      "search_name": "Nicolás Antonio Barguil",
+      "aliases": [
+        "Nicolás Barguil",
+        "Nicolás Antonio Barguil Cubillos"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Córdoba",
+      "source_url": "https://www.camara.gov.co/representantes/nicolas-antonio-barguil-cubillos"
+    },
+    {
+      "id": "camara-jezmi-lizeth-barraza-arraut",
+      "chamber": "camara",
+      "given_names": "Jezmi Lizeth",
+      "surnames": "Barraza Arraut",
+      "full_name": "Jezmi Lizeth Barraza Arraut",
+      "display_name": "Barraza Arraut, Jezmi Lizeth",
+      "search_name": "Jezmi Lizeth Barraza",
+      "aliases": [
+        "Jezmi Barraza",
+        "Jezmi Lizeth Barraza Arraut"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Atlántico",
+      "source_url": "https://www.camara.gov.co/representantes/jezmi-lizeth-barraza-arraut"
+    },
+    {
+      "id": "senado-josue-alirio-barrera-rodriguez",
+      "chamber": "senado",
+      "given_names": "Josué Alirio",
+      "surnames": "Barrera Rodríguez",
+      "full_name": "Josué Alirio Barrera Rodríguez",
+      "display_name": "Barrera Rodríguez, Josué Alirio",
+      "search_name": "Alirio Barrera",
+      "aliases": [
+        "Josué Alirio Barrera",
+        "Josué Barrera",
+        "Josué Alirio Barrera Rodríguez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-cesar-antonio-barrera-vergara",
+      "chamber": "camara",
+      "given_names": "Cesar Antonio",
+      "surnames": "Barrera Vergara",
+      "full_name": "Cesar Antonio Barrera Vergara",
+      "display_name": "Barrera Vergara, Cesar Antonio",
+      "search_name": "Cesar Antonio Barrera",
+      "aliases": [
+        "Cesar Barrera",
+        "Cesar Antonio Barrera Vergara"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Atlántico",
+      "source_url": "https://www.camara.gov.co/representantes/cesar-antonio-barrera-vergara"
+    },
+    {
+      "id": "senado-miguel-angel-barreto-castillo",
+      "chamber": "senado",
+      "given_names": "Miguel Ángel",
+      "surnames": "Barreto Castillo",
+      "full_name": "Miguel Ángel Barreto Castillo",
+      "display_name": "Barreto Castillo, Miguel Ángel",
+      "search_name": "Miguel Ángel Barreto",
+      "aliases": [
+        "Miguel Barreto",
+        "Miguel Ángel Barreto Castillo"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-santiago-barreto-triana",
+      "chamber": "senado",
+      "given_names": "Santiago",
+      "surnames": "Barreto Triana",
+      "full_name": "Santiago Barreto Triana",
+      "display_name": "Barreto Triana, Santiago",
+      "search_name": "Santiago Barreto",
+      "aliases": [
+        "Santiago Barreto Triana"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jorge-hernan-bastidas-rosero",
+      "chamber": "camara",
+      "given_names": "Jorge Hernán",
+      "surnames": "Bastidas Rosero",
+      "full_name": "Jorge Hernán Bastidas Rosero",
+      "display_name": "Bastidas Rosero, Jorge Hernán",
+      "search_name": "Jorge Hernán Bastidas",
+      "aliases": [
+        "Jorge Bastidas",
+        "Jorge Hernán Bastidas Rosero"
+      ],
+      "party": "Coalición Pacto Histórico",
+      "constituency": "Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/jorge-hernan-bastidas-rosero"
+    },
+    {
+      "id": "senado-gonzalo-dimas-baute-gonzalez",
+      "chamber": "senado",
+      "given_names": "Gonzalo Dimas",
+      "surnames": "Baute González",
+      "full_name": "Gonzalo Dimas Baute González",
+      "display_name": "Baute González, Gonzalo Dimas",
+      "search_name": "Gonzalo Dimas Baute",
+      "aliases": [
+        "Gonzalo Baute",
+        "Gonzalo Dimas Baute González"
+      ],
+      "party": "Coalición Cambio Radical / ALMA",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-gabriel-becerra-yanez",
+      "chamber": "camara",
+      "given_names": "Gabriel",
+      "surnames": "Becerra Yáñez",
+      "full_name": "Gabriel Becerra Yáñez",
+      "display_name": "Becerra Yáñez, Gabriel",
+      "search_name": "Gabriel Becerra",
+      "aliases": [
+        "Gabriel Becerra Yáñez"
+      ],
+      "party": "Coalición Pacto Histórico",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/gabriel-becerra-yanez"
+    },
+    {
+      "id": "camara-jesus-armando-bedoya-rodriguez",
+      "chamber": "camara",
+      "given_names": "Jesús Armando",
+      "surnames": "Bedoya Rodríguez",
+      "full_name": "Jesús Armando Bedoya Rodríguez",
+      "display_name": "Bedoya Rodríguez, Jesús Armando",
+      "search_name": "Jesús Armando Bedoya",
+      "aliases": [
+        "Jesús Bedoya",
+        "Jesús Armando Bedoya Rodríguez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Quindío",
+      "source_url": "https://www.camara.gov.co/representantes/jesus-armando-bedoya-rodriguez"
+    },
+    {
+      "id": "camara-laura-daniela-beltran-palomares",
+      "chamber": "camara",
+      "given_names": "Laura Daniela",
+      "surnames": "Beltrán Palomares",
+      "full_name": "Laura Daniela Beltrán Palomares",
+      "display_name": "Beltrán Palomares, Laura Daniela",
+      "search_name": "Laura Daniela Beltrán",
+      "aliases": [
+        "Laura Beltrán",
+        "Laura Daniela Beltrán Palomares"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/laura-daniela-beltran-palomares"
+    },
+    {
+      "id": "camara-oscar-david-benavides-angulo",
+      "chamber": "camara",
+      "given_names": "Óscar David",
+      "surnames": "Benavides Angulo",
+      "full_name": "Óscar David Benavides Angulo",
+      "display_name": "Benavides Angulo, Óscar David",
+      "search_name": "Óscar David Benavides",
+      "aliases": [
+        "Óscar Benavides",
+        "Óscar David Benavides Angulo"
+      ],
+      "party": "Movimiento Libre",
+      "constituency": "Circunscripción afrodescendiente",
+      "source_url": "https://www.camara.gov.co/representantes/oscar-david-benavides-angulo"
+    },
+    {
+      "id": "senado-carlos-alberto-benavides-mora",
+      "chamber": "senado",
+      "given_names": "Carlos Alberto",
+      "surnames": "Benavides Mora",
+      "full_name": "Carlos Alberto Benavides Mora",
+      "display_name": "Benavides Mora, Carlos Alberto",
+      "search_name": "Carlos Alberto Benavides",
+      "aliases": [
+        "Carlos Benavides",
+        "Carlos Alberto Benavides Mora"
+      ],
+      "party": "Polo Democrático Alternativo",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-diela-liliana-benavides-solarte",
+      "chamber": "senado",
+      "given_names": "Diela Liliana",
+      "surnames": "Benavides Solarte",
+      "full_name": "Diela Liliana Benavides Solarte",
+      "display_name": "Benavides Solarte, Diela Liliana",
+      "search_name": "Liliana Benavides",
+      "aliases": [
+        "Diela Liliana Benavides",
+        "Diela Benavides",
+        "Diela Liliana Benavides Solarte"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-john-alejandro-bermeo-rodriguez",
+      "chamber": "senado",
+      "given_names": "John Alejandro",
+      "surnames": "Bermeo Rodríguez",
+      "full_name": "John Alejandro Bermeo Rodríguez",
+      "display_name": "Bermeo Rodríguez, John Alejandro",
+      "search_name": "John Alejandro Bermeo",
+      "aliases": [
+        "John Bermeo",
+        "John Alejandro Bermeo Rodríguez"
+      ],
+      "party": "Salvación Nacional",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-alexander-harley-bermudez-lasso",
+      "chamber": "camara",
+      "given_names": "Alexander Harley",
+      "surnames": "Bermúdez Lasso",
+      "full_name": "Alexander Harley Bermúdez Lasso",
+      "display_name": "Bermúdez Lasso, Alexander Harley",
+      "search_name": "Alexander Harley Bermúdez",
+      "aliases": [
+        "Alexander Bermúdez",
+        "Alexander Harley Bermúdez Lasso"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Guaviare",
+      "source_url": "https://www.camara.gov.co/representantes/alexander-harley-bermudez-lasso"
+    },
+    {
+      "id": "camara-franyela-bermudez-serna",
+      "chamber": "camara",
+      "given_names": "Franyela",
+      "surnames": "Bermúdez Serna",
+      "full_name": "Franyela Bermúdez Serna",
+      "display_name": "Bermúdez Serna, Franyela",
+      "search_name": "Franyela Bermúdez",
+      "aliases": [
+        "Franyela Bermúdez Serna"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Risaralda",
+      "source_url": "https://www.camara.gov.co/representantes/franyela-bermudez-serna"
+    },
+    {
+      "id": "camara-daniel-felipe-bernal-montealegre",
+      "chamber": "camara",
+      "given_names": "Daniel Felipe",
+      "surnames": "Bernal Montealegre",
+      "full_name": "Daniel Felipe Bernal Montealegre",
+      "display_name": "Bernal Montealegre, Daniel Felipe",
+      "search_name": "Daniel Felipe Bernal",
+      "aliases": [
+        "Daniel Bernal",
+        "Daniel Felipe Bernal Montealegre"
+      ],
+      "party": "Partido Demócrata Colombiano",
+      "constituency": "Cundinamarca",
+      "source_url": "https://www.camara.gov.co/representantes/daniel-felipe-bernal-montealegre"
+    },
+    {
+      "id": "senado-zandra-maria-bernal-rincon",
+      "chamber": "senado",
+      "given_names": "Zandra María",
+      "surnames": "Bernal Rincón",
+      "full_name": "Zandra María Bernal Rincón",
+      "display_name": "Bernal Rincón, Zandra María",
+      "search_name": "Zandra María Bernal",
+      "aliases": [
+        "Zandra Bernal",
+        "Zandra María Bernal Rincón"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jhon-jairo-berrio-lopez",
+      "chamber": "camara",
+      "given_names": "Jhon Jairo",
+      "surnames": "Berrío López",
+      "full_name": "Jhon Jairo Berrío López",
+      "display_name": "Berrío López, Jhon Jairo",
+      "search_name": "Jhon Jairo Berrío",
+      "aliases": [
+        "Jhon Berrío",
+        "Jhon Jairo Berrío López"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/jhon-jairo-berrio-lopez"
+    },
+    {
+      "id": "senado-john-moises-besaile-fayad",
+      "chamber": "senado",
+      "given_names": "John Moisés",
+      "surnames": "Besaile Fayad",
+      "full_name": "John Moisés Besaile Fayad",
+      "display_name": "Besaile Fayad, John Moisés",
+      "search_name": "Jhony Besaile",
+      "aliases": [
+        "John Moisés Besaile",
+        "John Besaile",
+        "John Moisés Besaile Fayad"
+      ],
+      "party": "Partido de la Unión por la Gente",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-guillermo-leon-blanco-valencia",
+      "chamber": "camara",
+      "given_names": "Guillermo León",
+      "surnames": "Blanco Valencia",
+      "full_name": "Guillermo León Blanco Valencia",
+      "display_name": "Blanco Valencia, Guillermo León",
+      "search_name": "Guillermo León Blanco",
+      "aliases": [
+        "Guillermo Blanco",
+        "Guillermo León Blanco Valencia"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Santander",
+      "source_url": "https://www.camara.gov.co/representantes/guillermo-leon-blanco-valencia"
+    },
+    {
+      "id": "senado-nadya-georgette-blel-scaf",
+      "chamber": "senado",
+      "given_names": "Nadya Georgette",
+      "surnames": "Blel Scaf",
+      "full_name": "Nadya Georgette Blel Scaf",
+      "display_name": "Blel Scaf, Nadya Georgette",
+      "search_name": "Nadya Georgette Blel",
+      "aliases": [
+        "Nadya Blel",
+        "Nadya Georgette Blel Scaf"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-monica-karina-bocanegra-pantoja",
+      "chamber": "camara",
+      "given_names": "Mónica Karina",
+      "surnames": "Bocanegra Pantoja",
+      "full_name": "Mónica Karina Bocanegra Pantoja",
+      "display_name": "Bocanegra Pantoja, Mónica Karina",
+      "search_name": "Mónica Karina Bocanegra",
+      "aliases": [
+        "Mónica Bocanegra",
+        "Mónica Karina Bocanegra Pantoja"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Amazonas",
+      "source_url": "https://www.camara.gov.co/representantes/monica-karina-bocanegra-pantoja"
+    },
+    {
+      "id": "camara-jose-luis-bohorquez-lopez",
+      "chamber": "camara",
+      "given_names": "José Luis",
+      "surnames": "Bohorquez López",
+      "full_name": "José Luis Bohorquez López",
+      "display_name": "Bohorquez López, José Luis",
+      "search_name": "José Luis Bohorquez",
+      "aliases": [
+        "José Bohorquez",
+        "José Luis Bohorquez López"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Boyacá",
+      "source_url": "https://www.camara.gov.co/representantes/jose-luis-bohorquez-lopez"
+    },
+    {
+      "id": "camara-carol-stefanny-borda-acevedo",
+      "chamber": "camara",
+      "given_names": "Carol Stefanny",
+      "surnames": "Borda Acevedo",
+      "full_name": "Carol Stefanny Borda Acevedo",
+      "display_name": "Borda Acevedo, Carol Stefanny",
+      "search_name": "Carol Stefanny Borda",
+      "aliases": [
+        "Carol Borda",
+        "Carol Stefanny Borda Acevedo"
+      ],
+      "party": "Salvación Nacional",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/carol-stefanny-borda-acevedo"
+    },
+    {
+      "id": "camara-lucy-mireya-bravo-obando",
+      "chamber": "camara",
+      "given_names": "Lucy Mireya",
+      "surnames": "Bravo Obando",
+      "full_name": "Lucy Mireya Bravo Obando",
+      "display_name": "Bravo Obando, Lucy Mireya",
+      "search_name": "Lucy Mireya Bravo",
+      "aliases": [
+        "Lucy Bravo",
+        "Lucy Mireya Bravo Obando"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Huila",
+      "source_url": "https://www.camara.gov.co/representantes/lucy-mireya-bravo-obando"
+    },
+    {
+      "id": "camara-daniel-felipe-briceno-montes",
+      "chamber": "camara",
+      "given_names": "Daniel Felipe",
+      "surnames": "Briceño Montes",
+      "full_name": "Daniel Felipe Briceño Montes",
+      "display_name": "Briceño Montes, Daniel Felipe",
+      "search_name": "Daniel Felipe Briceño",
+      "aliases": [
+        "Daniel Briceño",
+        "Daniel Felipe Briceño Montes"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/daniel-felipe-briceno-montes"
+    },
+    {
+      "id": "senado-enrique-cabrales-baquero",
+      "chamber": "senado",
+      "given_names": "Enrique",
+      "surnames": "Cabrales Baquero",
+      "full_name": "Enrique Cabrales Baquero",
+      "display_name": "Cabrales Baquero, Enrique",
+      "search_name": "Enrique Cabrales",
+      "aliases": [
+        "Enrique Cabrales Baquero"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-hernan-dario-cadavid-marquez",
+      "chamber": "senado",
+      "given_names": "Hernán Darío",
+      "surnames": "Cadavid Márquez",
+      "full_name": "Hernán Darío Cadavid Márquez",
+      "display_name": "Cadavid Márquez, Hernán Darío",
+      "search_name": "Hernán Darío Cadavid",
+      "aliases": [
+        "Hernán Cadavid",
+        "Hernán Darío Cadavid Márquez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-juan-fernando-caicedo-callejas",
+      "chamber": "senado",
+      "given_names": "Juan Fernando",
+      "surnames": "Caicedo Callejas",
+      "full_name": "Juan Fernando Caicedo Callejas",
+      "display_name": "Caicedo Callejas, Juan Fernando",
+      "search_name": "Juan Fernando Caicedo",
+      "aliases": [
+        "Juan Caicedo",
+        "Juan Fernando Caicedo Callejas"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-martin-alonso-caicedo-carabali",
+      "chamber": "senado",
+      "given_names": "Martín Alonso",
+      "surnames": "Caicedo Carabali",
+      "full_name": "Martín Alonso Caicedo Carabali",
+      "display_name": "Caicedo Carabali, Martín Alonso",
+      "search_name": "Martín Alonso Caicedo",
+      "aliases": [
+        "Martín Caicedo",
+        "Martín Alonso Caicedo Carabali"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-carmen-patricia-caicedo-omar",
+      "chamber": "senado",
+      "given_names": "Cármen Patricia",
+      "surnames": "Caicedo Omar",
+      "full_name": "Cármen Patricia Caicedo Omar",
+      "display_name": "Caicedo Omar, Cármen Patricia",
+      "search_name": "Cármen Patricia Caicedo",
+      "aliases": [
+        "Cármen Caicedo",
+        "Cármen Patricia Caicedo Omar"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-carlos-mario-calvo-largo",
+      "chamber": "camara",
+      "given_names": "Carlos Mario",
+      "surnames": "Calvo Largo",
+      "full_name": "Carlos Mario Calvo Largo",
+      "display_name": "Calvo Largo, Carlos Mario",
+      "search_name": "Carlos Mario Calvo",
+      "aliases": [
+        "Carlos Calvo",
+        "Carlos Mario Calvo Largo"
+      ],
+      "party": "Movimiento Unidad en Minga por Colombia",
+      "constituency": "Circunscripción indígena",
+      "source_url": "https://www.camara.gov.co/representantes/carlos-mario-calvo-largo"
+    },
+    {
+      "id": "camara-jaime-alonso-cano-martinez",
+      "chamber": "camara",
+      "given_names": "Jaime Alonso",
+      "surnames": "Cano Martínez",
+      "full_name": "Jaime Alonso Cano Martínez",
+      "display_name": "Cano Martínez, Jaime Alonso",
+      "search_name": "Jaime Alonso Cano",
+      "aliases": [
+        "Jaime Cano",
+        "Jaime Alonso Cano Martínez"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/jaime-alonso-cano-martinez"
+    },
+    {
+      "id": "camara-jose-octavio-cardona-leon",
+      "chamber": "camara",
+      "given_names": "José Octavio",
+      "surnames": "Cardona León",
+      "full_name": "José Octavio Cardona León",
+      "display_name": "Cardona León, José Octavio",
+      "search_name": "José Octavio Cardona",
+      "aliases": [
+        "José Cardona",
+        "José Octavio Cardona León"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Caldas",
+      "source_url": "https://www.camara.gov.co/representantes/jose-octavio-cardona-leon"
+    },
+    {
+      "id": "camara-maria-fernanda-carrascal-rojas",
+      "chamber": "camara",
+      "given_names": "María Fernanda",
+      "surnames": "Carrascal Rojas",
+      "full_name": "María Fernanda Carrascal Rojas",
+      "display_name": "Carrascal Rojas, María Fernanda",
+      "search_name": "María Fernanda Carrascal",
+      "aliases": [
+        "María Carrascal",
+        "María Fernanda Carrascal Rojas",
+        "Mafe Carrascal"
+      ],
+      "party": "Coalición Pacto Histórico",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/maria-fernanda-carrascal-rojas"
+    },
+    {
+      "id": "camara-milton-virgilio-carreno-sanchez",
+      "chamber": "camara",
+      "given_names": "Milton Virgilio",
+      "surnames": "Carreño Sánchez",
+      "full_name": "Milton Virgilio Carreño Sánchez",
+      "display_name": "Carreño Sánchez, Milton Virgilio",
+      "search_name": "Milton Virgilio Carreño",
+      "aliases": [
+        "Milton Carreño",
+        "Milton Virgilio Carreño Sánchez"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Meta",
+      "source_url": "https://www.camara.gov.co/representantes/milton-virgilio-carreno-sanchez"
+    },
+    {
+      "id": "senado-wilmer-ramiro-carrillo-mendoza",
+      "chamber": "senado",
+      "given_names": "Wilmer Ramiro",
+      "surnames": "Carrillo Mendoza",
+      "full_name": "Wilmer Ramiro Carrillo Mendoza",
+      "display_name": "Carrillo Mendoza, Wilmer Ramiro",
+      "search_name": "Wilmer Ramiro Carrillo",
+      "aliases": [
+        "Wilmer Carrillo",
+        "Wilmer Ramiro Carrillo Mendoza"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-mario-jose-carvajal-jaimes",
+      "chamber": "camara",
+      "given_names": "Mario José",
+      "surnames": "Carvajal Jaimes",
+      "full_name": "Mario José Carvajal Jaimes",
+      "display_name": "Carvajal Jaimes, Mario José",
+      "search_name": "Mario José Carvajal",
+      "aliases": [
+        "Mario Carvajal",
+        "Mario José Carvajal Jaimes"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Santander",
+      "source_url": "https://www.camara.gov.co/representantes/mario-jose-carvajal-jaimes"
+    },
+    {
+      "id": "senado-sara-jimena-castellanos-rodriguez",
+      "chamber": "senado",
+      "given_names": "Sara Jimena",
+      "surnames": "Castellanos Rodríguez",
+      "full_name": "Sara Jimena Castellanos Rodríguez",
+      "display_name": "Castellanos Rodríguez, Sara Jimena",
+      "search_name": "Sara Jimena Castellanos",
+      "aliases": [
+        "Sara Castellanos",
+        "Sara Jimena Castellanos Rodríguez"
+      ],
+      "party": "Salvación Nacional",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-daruin-castellanos-romero",
+      "chamber": "camara",
+      "given_names": "Daruin",
+      "surnames": "Castellanos Romero",
+      "full_name": "Daruin Castellanos Romero",
+      "display_name": "Castellanos Romero, Daruin",
+      "search_name": "Daruin Castellanos",
+      "aliases": [
+        "Daruin Castellanos Romero"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Meta",
+      "source_url": "https://www.camara.gov.co/representantes/daruin-castellanos-romero"
+    },
+    {
+      "id": "camara-alejandro-castillo-gaitan",
+      "chamber": "camara",
+      "given_names": "Alejandro",
+      "surnames": "Castillo Gaitán",
+      "full_name": "Alejandro Castillo Gaitán",
+      "display_name": "Castillo Gaitán, Alejandro",
+      "search_name": "Alejandro Castillo",
+      "aliases": [
+        "Alejandro Castillo Gaitán"
+      ],
+      "party": "Asoprocacao",
+      "constituency": "Meta",
+      "source_url": "https://www.camara.gov.co/representantes/alejandro-castillo-gaitan"
+    },
+    {
+      "id": "camara-santiago-castro-gomez",
+      "chamber": "camara",
+      "given_names": "Santiago",
+      "surnames": "Castro Gómez",
+      "full_name": "Santiago Castro Gómez",
+      "display_name": "Castro Gómez, Santiago",
+      "search_name": "Santiago Castro",
+      "aliases": [
+        "Santiago Castro Gómez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/santiago-castro-gomez"
+    },
+    {
+      "id": "camara-mello-castro-gonzales",
+      "chamber": "camara",
+      "given_names": "Mello",
+      "surnames": "Castro Gonzales",
+      "full_name": "Mello Castro Gonzales",
+      "display_name": "Castro Gonzales, Mello",
+      "search_name": "Mello Castro",
+      "aliases": [
+        "Mello Castro Gonzales"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Cesar",
+      "source_url": "https://www.camara.gov.co/representantes/mello-castro-gonzales"
+    },
+    {
+      "id": "senado-ivan-cepeda-castro",
+      "chamber": "senado",
+      "given_names": "Iván",
+      "surnames": "Cepeda Castro",
+      "full_name": "Iván Cepeda Castro",
+      "display_name": "Cepeda Castro, Iván",
+      "search_name": "Iván Cepeda",
+      "aliases": [
+        "Iván Cepeda Castro"
+      ],
+      "party": "Coalición Pacto Histórico - Polo Democrático",
+      "constituency": "Estatuto de la Oposición",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-hector-david-chaparro-chaparro",
+      "chamber": "camara",
+      "given_names": "Héctor David",
+      "surnames": "Chaparro Chaparro",
+      "full_name": "Héctor David Chaparro Chaparro",
+      "display_name": "Chaparro Chaparro, Héctor David",
+      "search_name": "Héctor David Chaparro",
+      "aliases": [
+        "Héctor Chaparro",
+        "Héctor David Chaparro Chaparro"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Boyacá",
+      "source_url": "https://www.camara.gov.co/representantes/hector-david-chaparro-chaparro"
+    },
+    {
+      "id": "camara-luis-alfonso-chavez-rivera",
+      "chamber": "camara",
+      "given_names": "Luis Alfonso",
+      "surnames": "Chávez Rivera",
+      "full_name": "Luis Alfonso Chávez Rivera",
+      "display_name": "Chávez Rivera, Luis Alfonso",
+      "search_name": "Luis Alfonso Chávez",
+      "aliases": [
+        "Luis Chávez",
+        "Luis Alfonso Chávez Rivera"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/luis-alfonso-chavez-rivera"
+    },
+    {
+      "id": "senado-sandra-claudia-chindoy-jamioy",
+      "chamber": "senado",
+      "given_names": "Sandra Claudia",
+      "surnames": "Chindoy Jamioy",
+      "full_name": "Sandra Claudia Chindoy Jamioy",
+      "display_name": "Chindoy Jamioy, Sandra Claudia",
+      "search_name": "Sandra Claudia Chindoy",
+      "aliases": [
+        "Sandra Chindoy",
+        "Sandra Claudia Chindoy Jamioy"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-yaini-isabel-contreras-jimenez",
+      "chamber": "senado",
+      "given_names": "Yaini Isabel",
+      "surnames": "Contreras Jiménez",
+      "full_name": "Yaini Isabel Contreras Jiménez",
+      "display_name": "Contreras Jiménez, Yaini Isabel",
+      "search_name": "Yaini Isabel Contreras",
+      "aliases": [
+        "Yaini Contreras",
+        "Yaini Isabel Contreras Jiménez"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-diana-carolina-corcho-mejia",
+      "chamber": "senado",
+      "given_names": "Diana Carolina",
+      "surnames": "Corcho Mejía",
+      "full_name": "Diana Carolina Corcho Mejía",
+      "display_name": "Corcho Mejía, Diana Carolina",
+      "search_name": "Carolina Corcho",
+      "aliases": [
+        "Diana Carolina Corcho",
+        "Diana Corcho",
+        "Diana Carolina Corcho Mejía"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-manuel-orlando-correa-bedoya",
+      "chamber": "camara",
+      "given_names": "Manuel Orlando",
+      "surnames": "Correa Bedoya",
+      "full_name": "Manuel Orlando Correa Bedoya",
+      "display_name": "Correa Bedoya, Manuel Orlando",
+      "search_name": "Manuel Orlando Correa",
+      "aliases": [
+        "Manuel Correa",
+        "Manuel Orlando Correa Bedoya"
+      ],
+      "party": "Alianza Social Independiente",
+      "constituency": "Caldas",
+      "source_url": "https://www.camara.gov.co/representantes/manuel-orlando-correa-bedoya"
+    },
+    {
+      "id": "senado-antonio-jose-correa-jimenez",
+      "chamber": "senado",
+      "given_names": "Antonio José",
+      "surnames": "Correa Jiménez",
+      "full_name": "Antonio José Correa Jiménez",
+      "display_name": "Correa Jiménez, Antonio José",
+      "search_name": "Antonio José Correa",
+      "aliases": [
+        "Antonio Correa",
+        "Antonio José Correa Jiménez"
+      ],
+      "party": "Partido de la Unión por la Gente",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-julia-correa-nuttin",
+      "chamber": "senado",
+      "given_names": "Julia",
+      "surnames": "Correa Nuttin",
+      "full_name": "Julia Correa Nuttin",
+      "display_name": "Correa Nuttin, Julia",
+      "search_name": "Julia Correa",
+      "aliases": [
+        "Julia Correa Nuttin"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-juan-felipe-corzo-alvarez",
+      "chamber": "camara",
+      "given_names": "Juan Felipe",
+      "surnames": "Corzo Álvarez",
+      "full_name": "Juan Felipe Corzo Álvarez",
+      "display_name": "Corzo Álvarez, Juan Felipe",
+      "search_name": "Juan Felipe Corzo",
+      "aliases": [
+        "Juan Corzo",
+        "Juan Felipe Corzo Álvarez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Norte de Santander",
+      "source_url": "https://www.camara.gov.co/representantes/juan-felipe-corzo-alvarez"
+    },
+    {
+      "id": "camara-david-gerardo-cote-rodriguez",
+      "chamber": "camara",
+      "given_names": "David Gerardo",
+      "surnames": "Cote Rodríguez",
+      "full_name": "David Gerardo Cote Rodríguez",
+      "display_name": "Cote Rodríguez, David Gerardo",
+      "search_name": "David Gerardo Cote",
+      "aliases": [
+        "David Cote",
+        "David Gerardo Cote Rodríguez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/david-gerardo-cote-rodriguez"
+    },
+    {
+      "id": "senado-jesus-omero-cuasapud-chaspuengal",
+      "chamber": "senado",
+      "given_names": "Jesús Omero",
+      "surnames": "Cuasapud Chaspuengal",
+      "full_name": "Jesús Omero Cuasapud Chaspuengal",
+      "display_name": "Cuasapud Chaspuengal, Jesús Omero",
+      "search_name": "Jesús Omero Cuasapud",
+      "aliases": [
+        "Jesús Cuasapud",
+        "Jesús Omero Cuasapud Chaspuengal"
+      ],
+      "party": "AICO",
+      "constituency": "Circunscripción indígena",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-alfredo-ape-cuello-baute",
+      "chamber": "camara",
+      "given_names": "Alfredo Ape",
+      "surnames": "Cuello Baute",
+      "full_name": "Alfredo Ape Cuello Baute",
+      "display_name": "Cuello Baute, Alfredo Ape",
+      "search_name": "Alfredo Ape Cuello",
+      "aliases": [
+        "Alfredo Cuello",
+        "Alfredo Ape Cuello Baute"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Cesar",
+      "source_url": "https://www.camara.gov.co/representantes/alfredo-ape-cuello-baute"
+    },
+    {
+      "id": "camara-carlos-alberto-cuenca-chaux",
+      "chamber": "camara",
+      "given_names": "Carlos Alberto",
+      "surnames": "Cuenca Chaux",
+      "full_name": "Carlos Alberto Cuenca Chaux",
+      "display_name": "Cuenca Chaux, Carlos Alberto",
+      "search_name": "Carlos Alberto Cuenca",
+      "aliases": [
+        "Carlos Cuenca",
+        "Carlos Alberto Cuenca Chaux"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Guainía",
+      "source_url": "https://www.camara.gov.co/representantes/carlos-alberto-cuenca-chaux"
+    },
+    {
+      "id": "senado-orlando-miguel-de-la-hoz-garcia",
+      "chamber": "senado",
+      "given_names": "Orlando Miguel",
+      "surnames": "De La Hoz García",
+      "full_name": "Orlando Miguel De La Hoz García",
+      "display_name": "De La Hoz García, Orlando Miguel",
+      "search_name": "Orlando Miguel De La Hoz",
+      "aliases": [
+        "Orlando De La Hoz",
+        "Orlando Miguel De La Hoz García"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-alejandro-de-la-ossa-lacayo",
+      "chamber": "camara",
+      "given_names": "Alejandro",
+      "surnames": "De la Ossa Lacayo",
+      "full_name": "Alejandro De la Ossa Lacayo",
+      "display_name": "De la Ossa Lacayo, Alejandro",
+      "search_name": "Alejandro De la Ossa",
+      "aliases": [
+        "Alejandro De la Ossa Lacayo"
+      ],
+      "party": "Partido Político La Fuerza",
+      "constituency": "Sucre",
+      "source_url": "https://www.camara.gov.co/representantes/alejandro-de-la-ossa-lacayo"
+    },
+    {
+      "id": "camara-carlos-gumercindo-de-la-pena-duran",
+      "chamber": "camara",
+      "given_names": "Carlos Gumercindo",
+      "surnames": "de la Peña Duran",
+      "full_name": "Carlos Gumercindo de la Peña Duran",
+      "display_name": "de la Peña Duran, Carlos Gumercindo",
+      "search_name": "Carlos Gumercindo de la Peña",
+      "aliases": [
+        "Carlos de la Peña",
+        "Carlos Gumercindo de la Peña Duran"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Cesar",
+      "source_url": "https://www.camara.gov.co/representantes/carlos-gumercindo-de-la-pena-duran"
+    },
+    {
+      "id": "senado-alfredo-rafael-deluque-zuleta",
+      "chamber": "senado",
+      "given_names": "Alfredo Rafael",
+      "surnames": "Deluque Zuleta",
+      "full_name": "Alfredo Rafael Deluque Zuleta",
+      "display_name": "Deluque Zuleta, Alfredo Rafael",
+      "search_name": "Alfredo Rafael Deluque",
+      "aliases": [
+        "Alfredo Deluque",
+        "Alfredo Rafael Deluque Zuleta"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-laura-vanessa-diaz-cura",
+      "chamber": "camara",
+      "given_names": "Laura Vanessa",
+      "surnames": "Diaz Cura",
+      "full_name": "Laura Vanessa Diaz Cura",
+      "display_name": "Diaz Cura, Laura Vanessa",
+      "search_name": "Laura Vanessa Diaz",
+      "aliases": [
+        "Laura Diaz",
+        "Laura Vanessa Diaz Cura"
+      ],
+      "party": "Asociación De Parceleros Retornantes Del Tesoro \"Asodepart\"",
+      "constituency": "Córdoba",
+      "source_url": "https://www.camara.gov.co/representantes/laura-vanessa-diaz-cura"
+    },
+    {
+      "id": "senado-luis-eduardo-diaz-mateus",
+      "chamber": "senado",
+      "given_names": "Luis Eduardo",
+      "surnames": "Díaz Mateus",
+      "full_name": "Luis Eduardo Díaz Mateus",
+      "display_name": "Díaz Mateus, Luis Eduardo",
+      "search_name": "Luis Eduardo Díaz",
+      "aliases": [
+        "Luis Díaz",
+        "Luis Eduardo Díaz Mateus"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jose-luis-duarte-contreras",
+      "chamber": "camara",
+      "given_names": "José Luis",
+      "surnames": "Duarte Contreras",
+      "full_name": "José Luis Duarte Contreras",
+      "display_name": "Duarte Contreras, José Luis",
+      "search_name": "José Luis Duarte",
+      "aliases": [
+        "José Duarte",
+        "José Luis Duarte Contreras"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Norte de Santander",
+      "source_url": "https://www.camara.gov.co/representantes/jose-luis-duarte-contreras"
+    },
+    {
+      "id": "camara-juan-pablo-duque-gonzalez",
+      "chamber": "camara",
+      "given_names": "Juan Pablo",
+      "surnames": "Duqué González",
+      "full_name": "Juan Pablo Duqué González",
+      "display_name": "Duqué González, Juan Pablo",
+      "search_name": "Juan Pablo Duqué",
+      "aliases": [
+        "Juan Duqué",
+        "Juan Pablo Duqué González"
+      ],
+      "party": "Partido Nuevo Liberalismo",
+      "constituency": "Caquetá",
+      "source_url": "https://www.camara.gov.co/representantes/juan-pablo-duque-gonzalez"
+    },
+    {
+      "id": "senado-carlos-eduardo-enriquez-caicedo",
+      "chamber": "senado",
+      "given_names": "Carlos Eduardo",
+      "surnames": "Enriquez Caicedo",
+      "full_name": "Carlos Eduardo Enriquez Caicedo",
+      "display_name": "Enriquez Caicedo, Carlos Eduardo",
+      "search_name": "Carlos Eduardo Enriquez",
+      "aliases": [
+        "Carlos Enriquez",
+        "Carlos Eduardo Enriquez Caicedo"
+      ],
+      "party": "Alianza Verde",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-ana-leidy-erazo-ruiz",
+      "chamber": "camara",
+      "given_names": "Ana Leidy",
+      "surnames": "Erazo Ruiz",
+      "full_name": "Ana Leidy Erazo Ruiz",
+      "display_name": "Erazo Ruiz, Ana Leidy",
+      "search_name": "Ana Leidy Erazo",
+      "aliases": [
+        "Ana Erazo",
+        "Ana Leidy Erazo Ruiz"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/ana-leidy-erazo-ruiz"
+    },
+    {
+      "id": "senado-agmeth-jose-escaf-tijerino",
+      "chamber": "senado",
+      "given_names": "Agmeth José",
+      "surnames": "Escaf Tijerino",
+      "full_name": "Agmeth José Escaf Tijerino",
+      "display_name": "Escaf Tijerino, Agmeth José",
+      "search_name": "Agmeth José Escaf",
+      "aliases": [
+        "Agmeth Escaf",
+        "Agmeth José Escaf Tijerino"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-wilder-iberson-escobar-ortiz",
+      "chamber": "senado",
+      "given_names": "Wilder Iberson",
+      "surnames": "Escobar Ortiz",
+      "full_name": "Wilder Iberson Escobar Ortiz",
+      "display_name": "Escobar Ortiz, Wilder Iberson",
+      "search_name": "Wilder Iberson Escobar",
+      "aliases": [
+        "Wilder Escobar",
+        "Wilder Iberson Escobar Ortiz"
+      ],
+      "party": "ASI",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-juan-fernando-espinal-ramirez",
+      "chamber": "senado",
+      "given_names": "Juan Fernando",
+      "surnames": "Espinal Ramírez",
+      "full_name": "Juan Fernando Espinal Ramírez",
+      "display_name": "Espinal Ramírez, Juan Fernando",
+      "search_name": "Juan Fernando Espinal",
+      "aliases": [
+        "Juan Espinal",
+        "Juan Fernando Espinal Ramírez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jose-durgues-espinosa-martinez",
+      "chamber": "camara",
+      "given_names": "José Durgués",
+      "surnames": "Espinosa Martínez",
+      "full_name": "José Durgués Espinosa Martínez",
+      "display_name": "Espinosa Martínez, José Durgués",
+      "search_name": "José Durgués Espinosa",
+      "aliases": [
+        "José Espinosa",
+        "José Durgués Espinosa Martínez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Risaralda",
+      "source_url": "https://www.camara.gov.co/representantes/jose-durgues-espinosa-martinez"
+    },
+    {
+      "id": "senado-hector-olimpo-espinosa-oliver",
+      "chamber": "senado",
+      "given_names": "Héctor Olimpo",
+      "surnames": "Espinosa Oliver",
+      "full_name": "Héctor Olimpo Espinosa Oliver",
+      "display_name": "Espinosa Oliver, Héctor Olimpo",
+      "search_name": "Héctor Olimpo Espinosa",
+      "aliases": [
+        "Héctor Espinosa",
+        "Héctor Olimpo Espinosa Oliver"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-oscar-fabian-espinosa-torres",
+      "chamber": "camara",
+      "given_names": "Oscar Fabian",
+      "surnames": "Espinosa Torres",
+      "full_name": "Oscar Fabian Espinosa Torres",
+      "display_name": "Espinosa Torres, Oscar Fabian",
+      "search_name": "Oscar Fabian Espinosa",
+      "aliases": [
+        "Oscar Espinosa",
+        "Oscar Fabian Espinosa Torres"
+      ],
+      "party": "Alianza Social Independiente",
+      "constituency": "Vaupés",
+      "source_url": "https://www.camara.gov.co/representantes/oscar-fabian-espinosa-torres"
+    },
+    {
+      "id": "senado-edgardo-miguel-espitia-cabrales",
+      "chamber": "senado",
+      "given_names": "Edgardo Miguel",
+      "surnames": "Espitia Cabrales",
+      "full_name": "Edgardo Miguel Espitia Cabrales",
+      "display_name": "Espitia Cabrales, Edgardo Miguel",
+      "search_name": "Edgardo Miguel Espitia",
+      "aliases": [
+        "Edgardo Espitia",
+        "Edgardo Miguel Espitia Cabrales"
+      ],
+      "party": "Coalición Cambio Radical / ALMA",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-luz-veronica-estrada-holguin",
+      "chamber": "camara",
+      "given_names": "Luz Verónica",
+      "surnames": "Estrada Holguín",
+      "full_name": "Luz Verónica Estrada Holguín",
+      "display_name": "Estrada Holguín, Luz Verónica",
+      "search_name": "Luz Verónica Estrada",
+      "aliases": [
+        "Luz Estrada",
+        "Luz Verónica Estrada Holguín"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/luz-veronica-estrada-holguin"
+    },
+    {
+      "id": "senado-carlos-mario-farelo-daza",
+      "chamber": "senado",
+      "given_names": "Carlos Mario",
+      "surnames": "Farelo Daza",
+      "full_name": "Carlos Mario Farelo Daza",
+      "display_name": "Farelo Daza, Carlos Mario",
+      "search_name": "Carlos Mario Farelo",
+      "aliases": [
+        "Carlos Farelo",
+        "Carlos Mario Farelo Daza"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jorge-armando-figueroa-angarita",
+      "chamber": "camara",
+      "given_names": "Jorge Armando",
+      "surnames": "Figueroa Angarita",
+      "full_name": "Jorge Armando Figueroa Angarita",
+      "display_name": "Figueroa Angarita, Jorge Armando",
+      "search_name": "Jorge Armando Figueroa",
+      "aliases": [
+        "Jorge Figueroa",
+        "Jorge Armando Figueroa Angarita"
+      ],
+      "party": "Partido de la U",
+      "constituency": "La Guajira",
+      "source_url": "https://www.camara.gov.co/representantes/jorge-armando-figueroa-angarita"
+    },
+    {
+      "id": "senado-alex-xavier-florez-hernandez",
+      "chamber": "senado",
+      "given_names": "Alex Xavier",
+      "surnames": "Flórez Hernández",
+      "full_name": "Alex Xavier Flórez Hernández",
+      "display_name": "Flórez Hernández, Alex Xavier",
+      "search_name": "Alex Xavier Flórez",
+      "aliases": [
+        "Alex Flórez",
+        "Alex Xavier Flórez Hernández"
+      ],
+      "party": "Coalición Pacto Histórico - Colombia Humana",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-pedro-hernando-florez-porras",
+      "chamber": "senado",
+      "given_names": "Pedro Hernando",
+      "surnames": "Flórez Porras",
+      "full_name": "Pedro Hernando Flórez Porras",
+      "display_name": "Flórez Porras, Pedro Hernando",
+      "search_name": "Pedro Hernando Flórez",
+      "aliases": [
+        "Pedro Flórez",
+        "Pedro Hernando Flórez Porras"
+      ],
+      "party": "Colombia Humana - Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-andres-eduardo-forero-molina",
+      "chamber": "senado",
+      "given_names": "Andrés Eduardo",
+      "surnames": "Forero Molina",
+      "full_name": "Andrés Eduardo Forero Molina",
+      "display_name": "Forero Molina, Andrés Eduardo",
+      "search_name": "Andrés Eduardo Forero",
+      "aliases": [
+        "Andrés Forero",
+        "Andrés Eduardo Forero Molina"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-laura-ester-fortich-sanchez",
+      "chamber": "senado",
+      "given_names": "Laura Ester",
+      "surnames": "Fortich Sánchez",
+      "full_name": "Laura Ester Fortich Sánchez",
+      "display_name": "Fortich Sánchez, Laura Ester",
+      "search_name": "Laura Ester Fortich",
+      "aliases": [
+        "Laura Fortich",
+        "Laura Ester Fortich Sánchez"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-diver-ney-franco-tejada",
+      "chamber": "camara",
+      "given_names": "Diver Ney",
+      "surnames": "Franco Tejada",
+      "full_name": "Diver Ney Franco Tejada",
+      "display_name": "Franco Tejada, Diver Ney",
+      "search_name": "Diver Ney Franco",
+      "aliases": [
+        "Diver Franco",
+        "Diver Ney Franco Tejada"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/diver-ney-franco-tejada"
+    },
+    {
+      "id": "camara-heiner-de-jesus-gaitan-parra",
+      "chamber": "camara",
+      "given_names": "Heiner de Jesús",
+      "surnames": "Gaitán Parra",
+      "full_name": "Heiner de Jesús Gaitán Parra",
+      "display_name": "Gaitán Parra, Heiner de Jesús",
+      "search_name": "Heiner de Jesús Gaitán",
+      "aliases": [
+        "Heiner Gaitán",
+        "Heiner de Jesús Gaitán Parra"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Cundinamarca",
+      "source_url": "https://www.camara.gov.co/representantes/heiner-de-jesus-gaitan-parra"
+    },
+    {
+      "id": "senado-leonardo-de-jesus-gallego-arroyave",
+      "chamber": "senado",
+      "given_names": "Leonardo de Jesús",
+      "surnames": "Gallego Arroyave",
+      "full_name": "Leonardo de Jesús Gallego Arroyave",
+      "display_name": "Gallego Arroyave, Leonardo de Jesús",
+      "search_name": "Leonardo de Jesús Gallego",
+      "aliases": [
+        "Leonardo Gallego",
+        "Leonardo de Jesús Gallego Arroyave"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-tatiana-judith-gaona-pinzon",
+      "chamber": "camara",
+      "given_names": "Tatiana Judith",
+      "surnames": "Gaona Pinzon",
+      "full_name": "Tatiana Judith Gaona Pinzon",
+      "display_name": "Gaona Pinzon, Tatiana Judith",
+      "search_name": "Tatiana Judith Gaona",
+      "aliases": [
+        "Tatiana Gaona",
+        "Tatiana Judith Gaona Pinzon"
+      ],
+      "party": "Asociación De Víctimas Caminos De Esperanza Las Mercedes",
+      "constituency": "Norte de Santander",
+      "source_url": "https://www.camara.gov.co/representantes/tatiana-judith-gaona-pinzon"
+    },
+    {
+      "id": "senado-christian-munir-garces-aljure",
+      "chamber": "senado",
+      "given_names": "Christian Munir",
+      "surnames": "Garcés Aljure",
+      "full_name": "Christian Munir Garcés Aljure",
+      "display_name": "Garcés Aljure, Christian Munir",
+      "search_name": "Christian Munir Garcés",
+      "aliases": [
+        "Christian Garcés",
+        "Christian Munir Garcés Aljure"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-juan-carlos-garces-rojas",
+      "chamber": "senado",
+      "given_names": "Juan Carlos",
+      "surnames": "Garcés Rojas",
+      "full_name": "Juan Carlos Garcés Rojas",
+      "display_name": "Garcés Rojas, Juan Carlos",
+      "search_name": "Juan Carlos Garcés",
+      "aliases": [
+        "Juan Garcés",
+        "Juan Carlos Garcés Rojas"
+      ],
+      "party": "Partido de la Unión por la Gente",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-renzo-alexander-garcia",
+      "chamber": "camara",
+      "given_names": "Renzo Alexander",
+      "surnames": "García",
+      "full_name": "Renzo Alexander García",
+      "display_name": "García, Renzo Alexander",
+      "search_name": "Renzo Alexander García",
+      "aliases": [
+        "Renzo García"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Tolima",
+      "source_url": "https://www.camara.gov.co/representantes/renzo-alexander-garcia"
+    },
+    {
+      "id": "camara-diego-fernando-garcia-alfonso",
+      "chamber": "camara",
+      "given_names": "Diego Fernando",
+      "surnames": "García Alfonso",
+      "full_name": "Diego Fernando García Alfonso",
+      "display_name": "García Alfonso, Diego Fernando",
+      "search_name": "Diego Fernando García",
+      "aliases": [
+        "Diego García",
+        "Diego Fernando García Alfonso"
+      ],
+      "party": "Partido Alianza Verde",
+      "constituency": "Casanare",
+      "source_url": "https://www.camara.gov.co/representantes/diego-fernando-garcia-alfonso"
+    },
+    {
+      "id": "senado-juan-carlos-garcia-gomez",
+      "chamber": "senado",
+      "given_names": "Juan Carlos",
+      "surnames": "García Gómez",
+      "full_name": "Juan Carlos García Gómez",
+      "display_name": "García Gómez, Juan Carlos",
+      "search_name": "Juan Carlos García",
+      "aliases": [
+        "Juan García",
+        "Juan Carlos García Gómez"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-ana-paola-garcia-soto",
+      "chamber": "senado",
+      "given_names": "Ana Paola",
+      "surnames": "García Soto",
+      "full_name": "Ana Paola García Soto",
+      "display_name": "García Soto, Ana Paola",
+      "search_name": "Ana Paola García",
+      "aliases": [
+        "Ana García",
+        "Ana Paola García Soto"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-lidio-arturo-garcia-turbay",
+      "chamber": "senado",
+      "given_names": "Lidio Arturo",
+      "surnames": "García Turbay",
+      "full_name": "Lidio Arturo García Turbay",
+      "display_name": "García Turbay, Lidio Arturo",
+      "search_name": "Lidio Arturo García",
+      "aliases": [
+        "Lidio García",
+        "Lidio Arturo García Turbay"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-esneyder-gomez",
+      "chamber": "camara",
+      "given_names": "Esneyder",
+      "surnames": "Gómez",
+      "full_name": "Esneyder Gómez",
+      "display_name": "Gómez, Esneyder",
+      "search_name": "Esneyder Gómez",
+      "aliases": [],
+      "party": " Resguardo Indígena De Toribío",
+      "constituency": "Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/esneyder-gomez"
+    },
+    {
+      "id": "camara-edgar-gomez-castillo",
+      "chamber": "camara",
+      "given_names": "Edgar",
+      "surnames": "Gómez Castillo",
+      "full_name": "Edgar Gómez Castillo",
+      "display_name": "Gómez Castillo, Edgar",
+      "search_name": "Edgar Gómez",
+      "aliases": [
+        "Edgar Gómez Castillo"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/edgar-gomez-castillo"
+    },
+    {
+      "id": "senado-enrique-gomez-martinez",
+      "chamber": "senado",
+      "given_names": "Enrique",
+      "surnames": "Gómez Martínez",
+      "full_name": "Enrique Gómez Martínez",
+      "display_name": "Gómez Martínez, Enrique",
+      "search_name": "Enrique Gómez",
+      "aliases": [
+        "Enrique Gómez Martínez"
+      ],
+      "party": "Salvación Nacional",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-jose-nicolas-gomez-medina",
+      "chamber": "senado",
+      "given_names": "José Nicolás",
+      "surnames": "Gómez Medina",
+      "full_name": "José Nicolás Gómez Medina",
+      "display_name": "Gómez Medina, José Nicolás",
+      "search_name": "José Nicolás Gómez",
+      "aliases": [
+        "José Gómez",
+        "José Nicolás Gómez Medina"
+      ],
+      "party": "Coalición Cambio Radical / ALMA",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-camilo-andres-gomez-mosquera",
+      "chamber": "camara",
+      "given_names": "Camilo Andrés",
+      "surnames": "Gómez Mosquera",
+      "full_name": "Camilo Andrés Gómez Mosquera",
+      "display_name": "Gómez Mosquera, Camilo Andrés",
+      "search_name": "Camilo Andrés Gómez",
+      "aliases": [
+        "Camilo Gómez",
+        "Camilo Andrés Gómez Mosquera"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/camilo-andres-gomez-mosquera"
+    },
+    {
+      "id": "senado-cristian-kevin-gomez-paz",
+      "chamber": "senado",
+      "given_names": "Cristian Kevin",
+      "surnames": "Gómez Paz",
+      "full_name": "Cristian Kevin Gómez Paz",
+      "display_name": "Gómez Paz, Cristian Kevin",
+      "search_name": "Cristian Kevin Gómez",
+      "aliases": [
+        "Cristian Gómez",
+        "Cristian Kevin Gómez Paz"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-juan-loreto-gomez-soto",
+      "chamber": "camara",
+      "given_names": "Juan Loreto",
+      "surnames": "Gómez Soto",
+      "full_name": "Juan Loreto Gómez Soto",
+      "display_name": "Gómez Soto, Juan Loreto",
+      "search_name": "Juan Loreto Gómez",
+      "aliases": [
+        "Juan Gómez",
+        "Juan Loreto Gómez Soto"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "La Guajira",
+      "source_url": "https://www.camara.gov.co/representantes/juan-loreto-gomez-soto"
+    },
+    {
+      "id": "camara-hernando-gonzalez",
+      "chamber": "camara",
+      "given_names": "Hernando",
+      "surnames": "González",
+      "full_name": "Hernando González",
+      "display_name": "González, Hernando",
+      "search_name": "Hernando González",
+      "aliases": [],
+      "party": "Cambio Radical",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/hernando-gonzalez"
+    },
+    {
+      "id": "camara-kelyn-johana-gonzalez-duarte",
+      "chamber": "camara",
+      "given_names": "Kelyn Johana",
+      "surnames": "González Duarte",
+      "full_name": "Kelyn Johana González Duarte",
+      "display_name": "González Duarte, Kelyn Johana",
+      "search_name": "Kelyn Johana González",
+      "aliases": [
+        "Kelyn González",
+        "Kelyn Johana González Duarte"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Magdalena",
+      "source_url": "https://www.camara.gov.co/representantes/kelyn-johana-gonzalez-duarte"
+    },
+    {
+      "id": "camara-luz-marina-gordillo-salinas",
+      "chamber": "camara",
+      "given_names": "Luz Marina",
+      "surnames": "Gordillo Salinas",
+      "full_name": "Luz Marina Gordillo Salinas",
+      "display_name": "Gordillo Salinas, Luz Marina",
+      "search_name": "Luz Marina Gordillo",
+      "aliases": [
+        "Luz Gordillo",
+        "Luz Marina Gordillo Salinas"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/luz-marina-gordillo-salinas"
+    },
+    {
+      "id": "camara-miguel-angel-grisales-suarez",
+      "chamber": "camara",
+      "given_names": "Miguel Ángel",
+      "surnames": "Grisales Suarez",
+      "full_name": "Miguel Ángel Grisales Suarez",
+      "display_name": "Grisales Suarez, Miguel Ángel",
+      "search_name": "Miguel Ángel Grisales",
+      "aliases": [
+        "Miguel Grisales",
+        "Miguel Ángel Grisales Suarez"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Quindío",
+      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-grisales-suarez"
+    },
+    {
+      "id": "camara-andres-felipe-guerra-hoyos",
+      "chamber": "camara",
+      "given_names": "Andrés Felipe",
+      "surnames": "Guerra Hoyos",
+      "full_name": "Andrés Felipe Guerra Hoyos",
+      "display_name": "Guerra Hoyos, Andrés Felipe",
+      "search_name": "Andrés Felipe Guerra",
+      "aliases": [
+        "Andrés Guerra",
+        "Andrés Felipe Guerra Hoyos"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/andres-felipe-guerra-hoyos"
+    },
+    {
+      "id": "senado-maria-angelica-guerra-lopez",
+      "chamber": "senado",
+      "given_names": "María Angélica",
+      "surnames": "Guerra López",
+      "full_name": "María Angélica Guerra López",
+      "display_name": "Guerra López, María Angélica",
+      "search_name": "María Angélica Guerra",
+      "aliases": [
+        "María Guerra",
+        "María Angélica Guerra López"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-rosita-rosaurina-guevara-rosero",
+      "chamber": "camara",
+      "given_names": "Rosita Rosaurina",
+      "surnames": "Guevara Rosero",
+      "full_name": "Rosita Rosaurina Guevara Rosero",
+      "display_name": "Guevara Rosero, Rosita Rosaurina",
+      "search_name": "Rosita Rosaurina Guevara",
+      "aliases": [
+        "Rosita Guevara",
+        "Rosita Rosaurina Guevara Rosero"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Nariño",
+      "source_url": "https://www.camara.gov.co/representantes/rosita-rosaurina-guevara-rosero"
+    },
+    {
+      "id": "senado-carlos-eduardo-guevara-villabon",
+      "chamber": "senado",
+      "given_names": "Carlos Eduardo",
+      "surnames": "Guevara Villabon",
+      "full_name": "Carlos Eduardo Guevara Villabon",
+      "display_name": "Guevara Villabon, Carlos Eduardo",
+      "search_name": "Carlos Eduardo Guevara",
+      "aliases": [
+        "Carlos Guevara",
+        "Carlos Eduardo Guevara Villabon"
+      ],
+      "party": "MIRA",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-hilda-gutierrez",
+      "chamber": "camara",
+      "given_names": "Hilda",
+      "surnames": "Gutiérrez",
+      "full_name": "Hilda Gutiérrez",
+      "display_name": "Gutiérrez, Hilda",
+      "search_name": "Hilda Gutiérrez",
+      "aliases": [],
+      "party": "Centro Democrático",
+      "constituency": "Cundinamarca",
+      "source_url": "https://www.camara.gov.co/representantes/hilda-gutierrez"
+    },
+    {
+      "id": "camara-estefanel-gutierrez-perez",
+      "chamber": "camara",
+      "given_names": "Estefanel",
+      "surnames": "Gutiérrez Pérez",
+      "full_name": "Estefanel Gutiérrez Pérez",
+      "display_name": "Gutiérrez Pérez, Estefanel",
+      "search_name": "Estefanel Gutiérrez",
+      "aliases": [
+        "Estefanel Gutiérrez Pérez"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Atlántico",
+      "source_url": "https://www.camara.gov.co/representantes/estefanel-gutierrez-perez"
+    },
+    {
+      "id": "senado-honorio-miguel-henriquez-pinedo",
+      "chamber": "senado",
+      "given_names": "Honorio Miguel",
+      "surnames": "Henríquez Pinedo",
+      "full_name": "Honorio Miguel Henríquez Pinedo",
+      "display_name": "Henríquez Pinedo, Honorio Miguel",
+      "search_name": "Honorio Miguel Henríquez",
+      "aliases": [
+        "Honorio Henríquez",
+        "Honorio Miguel Henríquez Pinedo"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jose-felipe-hernandez-polo",
+      "chamber": "camara",
+      "given_names": "José Felipe",
+      "surnames": "Hernandez Polo",
+      "full_name": "José Felipe Hernandez Polo",
+      "display_name": "Hernandez Polo, José Felipe",
+      "search_name": "José Felipe Hernandez",
+      "aliases": [
+        "José Hernandez",
+        "José Felipe Hernandez Polo"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Magdalena",
+      "source_url": "https://www.camara.gov.co/representantes/jose-felipe-hernandez-polo"
+    },
+    {
+      "id": "senado-yuly-esmeralda-hernandez-silva",
+      "chamber": "senado",
+      "given_names": "Yuly Esmeralda",
+      "surnames": "Hernández Silva",
+      "full_name": "Yuly Esmeralda Hernández Silva",
+      "display_name": "Hernández Silva, Yuly Esmeralda",
+      "search_name": "Yuly Esmeralda Hernández",
+      "aliases": [
+        "Yuly Hernández",
+        "Yuly Esmeralda Hernández Silva"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-mateo-hidalgo-montoya",
+      "chamber": "camara",
+      "given_names": "Mateo",
+      "surnames": "Hidalgo Montoya",
+      "full_name": "Mateo Hidalgo Montoya",
+      "display_name": "Hidalgo Montoya, Mateo",
+      "search_name": "Mateo Hidalgo",
+      "aliases": [
+        "Mateo Hidalgo Montoya"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Caldas",
+      "source_url": "https://www.camara.gov.co/representantes/mateo-hidalgo-montoya"
+    },
+    {
+      "id": "camara-marco-emilio-hincapie",
+      "chamber": "camara",
+      "given_names": "Marco Emilio",
+      "surnames": "Hincapie",
+      "full_name": "Marco Emilio Hincapie",
+      "display_name": "Hincapie, Marco Emilio",
+      "search_name": "Marco Emilio Hincapie",
+      "aliases": [
+        "Marco Hincapie"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Tolima",
+      "source_url": "https://www.camara.gov.co/representantes/marco-emilio-hincapie"
+    },
+    {
+      "id": "camara-yamit-noe-hurtado-neira",
+      "chamber": "camara",
+      "given_names": "Yamit Noe",
+      "surnames": "Hurtado Neira",
+      "full_name": "Yamit Noe Hurtado Neira",
+      "display_name": "Hurtado Neira, Yamit Noe",
+      "search_name": "Yamit Noe Hurtado",
+      "aliases": [
+        "Yamit Hurtado",
+        "Yamit Noe Hurtado Neira"
+      ],
+      "party": "Partido Alianza Verde",
+      "constituency": "Boyacá",
+      "source_url": "https://www.camara.gov.co/representantes/yamit-noe-hurtado-neira"
+    },
+    {
+      "id": "senado-norma-hurtado-sanchez",
+      "chamber": "senado",
+      "given_names": "Norma",
+      "surnames": "Hurtado Sánchez",
+      "full_name": "Norma Hurtado Sánchez",
+      "display_name": "Hurtado Sánchez, Norma",
+      "search_name": "Norma Hurtado",
+      "aliases": [
+        "Norma Hurtado Sánchez"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-delcy-esperanza-isaza-buenaventura",
+      "chamber": "camara",
+      "given_names": "Delcy Esperanza",
+      "surnames": "Isaza Buenaventura",
+      "full_name": "Delcy Esperanza Isaza Buenaventura",
+      "display_name": "Isaza Buenaventura, Delcy Esperanza",
+      "search_name": "Delcy Esperanza Isaza",
+      "aliases": [
+        "Delcy Isaza",
+        "Delcy Esperanza Isaza Buenaventura"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Tolima",
+      "source_url": "https://www.camara.gov.co/representantes/delcy-esperanza-isaza-buenaventura"
+    },
+    {
+      "id": "camara-milene-jarava-diaz",
+      "chamber": "camara",
+      "given_names": "Milene",
+      "surnames": "Jarava Díaz",
+      "full_name": "Milene Jarava Díaz",
+      "display_name": "Jarava Díaz, Milene",
+      "search_name": "Milene Jarava",
+      "aliases": [
+        "Milene Jarava Díaz"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Sucre",
+      "source_url": "https://www.camara.gov.co/representantes/milene-jarava-diaz"
+    },
+    {
+      "id": "camara-elizabeth-jay-pang-diaz",
+      "chamber": "camara",
+      "given_names": "Elizabeth",
+      "surnames": "Jay-Pang Díaz",
+      "full_name": "Elizabeth Jay-Pang Díaz",
+      "display_name": "Jay-Pang Díaz, Elizabeth",
+      "search_name": "Elizabeth Jay-Pang",
+      "aliases": [
+        "Elizabeth Jay-Pang Díaz"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "San Andrés, Providencia y Santa Catalina",
+      "source_url": "https://www.camara.gov.co/representantes/elizabeth-jay-pang-diaz"
+    },
+    {
+      "id": "camara-amaury-julio-perez",
+      "chamber": "camara",
+      "given_names": "Amaury",
+      "surnames": "Julio Pérez",
+      "full_name": "Amaury Julio Pérez",
+      "display_name": "Julio Pérez, Amaury",
+      "search_name": "Amaury Julio",
+      "aliases": [
+        "Amaury Julio Pérez"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Bolívar",
+      "source_url": "https://www.camara.gov.co/representantes/amaury-julio-perez"
+    },
+    {
+      "id": "senado-mary-jurado-palomino",
+      "chamber": "senado",
+      "given_names": "Mary",
+      "surnames": "Jurado Palomino",
+      "full_name": "Mary Jurado Palomino",
+      "display_name": "Jurado Palomino, Mary",
+      "search_name": "Mary Jurado",
+      "aliases": [
+        "Mary Jurado Palomino"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-catherine-juvinao-clavijo",
+      "chamber": "camara",
+      "given_names": "Catherine",
+      "surnames": "Juvinao Clavijo",
+      "full_name": "Catherine Juvinao Clavijo",
+      "display_name": "Juvinao Clavijo, Catherine",
+      "search_name": "Catherine Juvinao",
+      "aliases": [
+        "Catherine Juvinao Clavijo"
+      ],
+      "party": "Partido Alianza Verde",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/catherine-juvinao-clavijo"
+    },
+    {
+      "id": "camara-heraclito-landinez-suarez",
+      "chamber": "camara",
+      "given_names": "Heráclito",
+      "surnames": "Landínez Suárez",
+      "full_name": "Heráclito Landínez Suárez",
+      "display_name": "Landínez Suárez, Heráclito",
+      "search_name": "Heráclito Landínez",
+      "aliases": [
+        "Heráclito Landínez Suárez"
+      ],
+      "party": "Coalición Pacto Histórico",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/heraclito-landinez-suarez"
+    },
+    {
+      "id": "camara-jairo-leon-vargas",
+      "chamber": "camara",
+      "given_names": "Jairo",
+      "surnames": "León Vargas",
+      "full_name": "Jairo León Vargas",
+      "display_name": "León Vargas, Jairo",
+      "search_name": "Jairo León",
+      "aliases": [
+        "Jairo León Vargas"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/jairo-leon-vargas"
+    },
+    {
+      "id": "senado-didier-lobo-chinchilla",
+      "chamber": "senado",
+      "given_names": "Didier",
+      "surnames": "Lobo Chinchilla",
+      "full_name": "Didier Lobo Chinchilla",
+      "display_name": "Lobo Chinchilla, Didier",
+      "search_name": "Didier Lobo",
+      "aliases": [
+        "Didier Lobo Chinchilla"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-juan-david-londono-arango",
+      "chamber": "camara",
+      "given_names": "Juan David",
+      "surnames": "Londoño Arango",
+      "full_name": "Juan David Londoño Arango",
+      "display_name": "Londoño Arango, Juan David",
+      "search_name": "Juan David Londoño",
+      "aliases": [
+        "Juan Londoño",
+        "Juan David Londoño Arango"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Vichada",
+      "source_url": "https://www.camara.gov.co/representantes/juan-david-londono-arango"
+    },
+    {
+      "id": "camara-juan-manuel-londono-jaramillo",
+      "chamber": "camara",
+      "given_names": "Juan Manuel",
+      "surnames": "Londoño Jaramillo",
+      "full_name": "Juan Manuel Londoño Jaramillo",
+      "display_name": "Londoño Jaramillo, Juan Manuel",
+      "search_name": "Juan Manuel Londoño",
+      "aliases": [
+        "Juan Londoño",
+        "Juan Manuel Londoño Jaramillo"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Caldas",
+      "source_url": "https://www.camara.gov.co/representantes/juan-manuel-londono-jaramillo"
+    },
+    {
+      "id": "senado-maria-eugenia-londono-ocampo",
+      "chamber": "senado",
+      "given_names": "María Eugenia",
+      "surnames": "Londoño Ocampo",
+      "full_name": "María Eugenia Londoño Ocampo",
+      "display_name": "Londoño Ocampo, María Eugenia",
+      "search_name": "María Eugenia Londoño",
+      "aliases": [
+        "María Londoño",
+        "María Eugenia Londoño Ocampo"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-maria-eugenia-lopera-monsalve",
+      "chamber": "senado",
+      "given_names": "María Eugenia",
+      "surnames": "Lopera Monsalve",
+      "full_name": "María Eugenia Lopera Monsalve",
+      "display_name": "Lopera Monsalve, María Eugenia",
+      "search_name": "María Eugenia Lopera",
+      "aliases": [
+        "María Lopera",
+        "María Eugenia Lopera Monsalve"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-luis-miguel-lopez-aristizabal",
+      "chamber": "camara",
+      "given_names": "Luis Miguel",
+      "surnames": "López Aristizábal",
+      "full_name": "Luis Miguel López Aristizábal",
+      "display_name": "López Aristizábal, Luis Miguel",
+      "search_name": "Luis Miguel López",
+      "aliases": [
+        "Luis López",
+        "Luis Miguel López Aristizábal"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/luis-miguel-lopez-aristizabal"
+    },
+    {
+      "id": "camara-javier-eduardo-lopez-diaz",
+      "chamber": "camara",
+      "given_names": "Javier Eduardo",
+      "surnames": "López Diaz",
+      "full_name": "Javier Eduardo López Diaz",
+      "display_name": "López Diaz, Javier Eduardo",
+      "search_name": "Javier Eduardo López",
+      "aliases": [
+        "Javier López",
+        "Javier Eduardo López Diaz"
+      ],
+      "party": " Asociación De Víctimas Constructoras De Paz",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/javier-eduardo-lopez-diaz"
+    },
+    {
+      "id": "senado-nelson-javier-lopez-rodriguez",
+      "chamber": "senado",
+      "given_names": "Nelson Javier",
+      "surnames": "López Rodríguez",
+      "full_name": "Nelson Javier López Rodríguez",
+      "display_name": "López Rodríguez, Nelson Javier",
+      "search_name": "Nelson Javier López",
+      "aliases": [
+        "Nelson López",
+        "Nelson Javier López Rodríguez"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-karen-juliana-lopez-salazar",
+      "chamber": "camara",
+      "given_names": "Karen Juliana",
+      "surnames": "López Salazar",
+      "full_name": "Karen Juliana López Salazar",
+      "display_name": "López Salazar, Karen Juliana",
+      "search_name": "Karen Juliana López",
+      "aliases": [
+        "Karen López",
+        "Karen Juliana López Salazar"
+      ],
+      "party": "Yo soy Urabá",
+      "constituency": "Circunscripción de paz",
+      "source_url": "https://www.camara.gov.co/representantes/karen-juliana-lopez-salazar"
+    },
+    {
+      "id": "camara-jesus-salim-lorduy-martinez",
+      "chamber": "camara",
+      "given_names": "Jesús Salim",
+      "surnames": "Lorduy Martínez",
+      "full_name": "Jesús Salim Lorduy Martínez",
+      "display_name": "Lorduy Martínez, Jesús Salim",
+      "search_name": "Jesús Salim Lorduy",
+      "aliases": [
+        "Jesús Lorduy",
+        "Jesús Salim Lorduy Martínez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/jesus-salim-lorduy-martinez"
+    },
+    {
+      "id": "camara-franklin-del-cristo-lozano-de-la-ossa",
+      "chamber": "camara",
+      "given_names": "Franklin Del Cristo",
+      "surnames": "Lozano De La Ossa",
+      "full_name": "Franklin Del Cristo Lozano De La Ossa",
+      "display_name": "Lozano De La Ossa, Franklin Del Cristo",
+      "search_name": "Franklin Del Cristo Lozano",
+      "aliases": [
+        "Franklin Lozano",
+        "Franklin Del Cristo Lozano De La Ossa"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Magdalena",
+      "source_url": "https://www.camara.gov.co/representantes/franklin-del-cristo-lozano-de-la-ossa"
+    },
+    {
+      "id": "senado-jose-gutemberg-macea-gomez",
+      "chamber": "senado",
+      "given_names": "José Gutemberg",
+      "surnames": "Macea Gómez",
+      "full_name": "José Gutemberg Macea Gómez",
+      "display_name": "Macea Gómez, José Gutemberg",
+      "search_name": "José Gutemberg Macea",
+      "aliases": [
+        "José Macea",
+        "José Gutemberg Macea Gómez"
+      ],
+      "party": "Alianza por Colombia / En Marcha",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-karen-astrith-manrique-olarte",
+      "chamber": "camara",
+      "given_names": "Karen Astrith",
+      "surnames": "Manrique Olarte",
+      "full_name": "Karen Astrith Manrique Olarte",
+      "display_name": "Manrique Olarte, Karen Astrith",
+      "search_name": "Karen Astrith Manrique",
+      "aliases": [
+        "Karen Manrique",
+        "Karen Astrith Manrique Olarte"
+      ],
+      "party": "Asociación de Víctimas Intercultural y Regional",
+      "constituency": "Circunscripción de paz",
+      "source_url": "https://www.camara.gov.co/representantes/karen-astrith-manrique-olarte"
+    },
+    {
+      "id": "camara-jose-alejandro-martinez-sanchez",
+      "chamber": "camara",
+      "given_names": "José Alejandro",
+      "surnames": "Martínez Sánchez",
+      "full_name": "José Alejandro Martínez Sánchez",
+      "display_name": "Martínez Sánchez, José Alejandro",
+      "search_name": "José Alejandro Martínez",
+      "aliases": [
+        "José Martínez",
+        "José Alejandro Martínez Sánchez"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Tolima",
+      "source_url": "https://www.camara.gov.co/representantes/jose-alejandro-martinez-sanchez"
+    },
+    {
+      "id": "camara-lourdes-paola-mateus-serrano",
+      "chamber": "camara",
+      "given_names": "Lourdes Paola",
+      "surnames": "Mateus Serrano",
+      "full_name": "Lourdes Paola Mateus Serrano",
+      "display_name": "Mateus Serrano, Lourdes Paola",
+      "search_name": "Lourdes Paola Mateus",
+      "aliases": [
+        "Lourdes Mateus",
+        "Lourdes Paola Mateus Serrano"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Huila",
+      "source_url": "https://www.camara.gov.co/representantes/lourdes-paola-mateus-serrano"
+    },
+    {
+      "id": "camara-maria-del-carmen-mayusa-de-cruz",
+      "chamber": "camara",
+      "given_names": "Maria del Carmen",
+      "surnames": "Mayusa de Cruz",
+      "full_name": "Maria del Carmen Mayusa de Cruz",
+      "display_name": "Mayusa de Cruz, Maria del Carmen",
+      "search_name": "Maria del Carmen Mayusa",
+      "aliases": [
+        "Maria Mayusa",
+        "Maria del Carmen Mayusa de Cruz"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Meta",
+      "source_url": "https://www.camara.gov.co/representantes/maria-del-carmen-mayusa-de-cruz"
+    },
+    {
+      "id": "senado-carlos-manuel-meisel-vergara",
+      "chamber": "senado",
+      "given_names": "Carlos Manuel",
+      "surnames": "Meisel Vergara",
+      "full_name": "Carlos Manuel Meisel Vergara",
+      "display_name": "Meisel Vergara, Carlos Manuel",
+      "search_name": "Carlos Manuel Meisel",
+      "aliases": [
+        "Carlos Meisel",
+        "Carlos Manuel Meisel Vergara"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-luis-alfonso-mejia-nunez",
+      "chamber": "senado",
+      "given_names": "Luis Alfonso",
+      "surnames": "Mejía Nuñez",
+      "full_name": "Luis Alfonso Mejía Nuñez",
+      "display_name": "Mejía Nuñez, Luis Alfonso",
+      "search_name": "Luis Alfonso Mejía",
+      "aliases": [
+        "Luis Mejía",
+        "Luis Alfonso Mejía Nuñez"
+      ],
+      "party": "Coalición Alianza Verdes / En Marcha",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jorge-mendez-hernandez",
+      "chamber": "camara",
+      "given_names": "Jorge",
+      "surnames": "Méndez Hernández",
+      "full_name": "Jorge Méndez Hernández",
+      "display_name": "Méndez Hernández, Jorge",
+      "search_name": "Jorge Méndez",
+      "aliases": [
+        "Jorge Méndez Hernández"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "San Andrés, Providencia y Santa Catalina",
+      "source_url": "https://www.camara.gov.co/representantes/jorge-mendez-hernandez"
+    },
+    {
+      "id": "camara-welfran-junior-mendoza-torres",
+      "chamber": "camara",
+      "given_names": "Welfran Junior",
+      "surnames": "Mendoza Torres",
+      "full_name": "Welfran Junior Mendoza Torres",
+      "display_name": "Mendoza Torres, Welfran Junior",
+      "search_name": "Welfran Junior Mendoza",
+      "aliases": [
+        "Welfran Mendoza",
+        "Welfran Junior Mendoza Torres"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Atlántico",
+      "source_url": "https://www.camara.gov.co/representantes/welfran-junior-mendoza-torres"
+    },
+    {
+      "id": "camara-arnulfo-mina",
+      "chamber": "camara",
+      "given_names": "Arnulfo",
+      "surnames": "Mina",
+      "full_name": "Arnulfo Mina",
+      "display_name": "Mina, Arnulfo",
+      "search_name": "Arnulfo Mina",
+      "aliases": [],
+      "party": "Corp Red De Consejos Comunitarios Del Pacífico Sur",
+      "constituency": "Nariño",
+      "source_url": "https://www.camara.gov.co/representantes/arnulfo-mina"
+    },
+    {
+      "id": "camara-jhonn-alexander-molina-betancur",
+      "chamber": "camara",
+      "given_names": "Jhonn Alexander",
+      "surnames": "Molina Betancur",
+      "full_name": "Jhonn Alexander Molina Betancur",
+      "display_name": "Molina Betancur, Jhonn Alexander",
+      "search_name": "Jhonn Alexander Molina",
+      "aliases": [
+        "Jhonn Molina",
+        "Jhonn Alexander Molina Betancur"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Guainía",
+      "source_url": "https://www.camara.gov.co/representantes/jhonn-alexander-molina-betancur"
+    },
+    {
+      "id": "camara-elizabeth-sabina-molina-campo",
+      "chamber": "camara",
+      "given_names": "Elizabeth Sabina",
+      "surnames": "Molina Campo",
+      "full_name": "Elizabeth Sabina Molina Campo",
+      "display_name": "Molina Campo, Elizabeth Sabina",
+      "search_name": "Elizabeth Sabina Molina",
+      "aliases": [
+        "Elizabeth Molina",
+        "Elizabeth Sabina Molina Campo"
+      ],
+      "party": "Partido Demócrata Colombiano",
+      "constituency": "Magdalena",
+      "source_url": "https://www.camara.gov.co/representantes/elizabeth-sabina-molina-campo"
+    },
+    {
+      "id": "camara-simon-molina-gomez",
+      "chamber": "camara",
+      "given_names": "Simón",
+      "surnames": "Molina Gómez",
+      "full_name": "Simón Molina Gómez",
+      "display_name": "Molina Gómez, Simón",
+      "search_name": "Simón Molina",
+      "aliases": [
+        "Simón Molina Gómez"
+      ],
+      "party": "Creemos",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/simon-molina-gomez"
+    },
+    {
+      "id": "camara-luz-miryan-moncayo",
+      "chamber": "camara",
+      "given_names": "Luz Miryan",
+      "surnames": "Moncayo",
+      "full_name": "Luz Miryan Moncayo",
+      "display_name": "Moncayo, Luz Miryan",
+      "search_name": "Luz Miryan Moncayo",
+      "aliases": [
+        "Luz Moncayo"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/luz-miryan-moncayo"
+    },
+    {
+      "id": "camara-alfredo-mondragon-garzon",
+      "chamber": "camara",
+      "given_names": "Alfredo",
+      "surnames": "Mondragón Garzón",
+      "full_name": "Alfredo Mondragón Garzón",
+      "display_name": "Mondragón Garzón, Alfredo",
+      "search_name": "Alfredo Mondragón",
+      "aliases": [
+        "Alfredo Mondragón Garzón"
+      ],
+      "party": "Coalición Pacto Histórico",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/alfredo-mondragon-garzon"
+    },
+    {
+      "id": "senado-alvaro-henry-monedero-rivera",
+      "chamber": "senado",
+      "given_names": "Álvaro Henry",
+      "surnames": "Monedero Rivera",
+      "full_name": "Álvaro Henry Monedero Rivera",
+      "display_name": "Monedero Rivera, Álvaro Henry",
+      "search_name": "Álvaro Henry Monedero",
+      "aliases": [
+        "Álvaro Monedero",
+        "Álvaro Henry Monedero Rivera"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-daniel-mauricio-monroy-hernandez",
+      "chamber": "camara",
+      "given_names": "Daniel Mauricio",
+      "surnames": "Monroy Hernandez",
+      "full_name": "Daniel Mauricio Monroy Hernandez",
+      "display_name": "Monroy Hernandez, Daniel Mauricio",
+      "search_name": "Daniel Mauricio Monroy",
+      "aliases": [
+        "Daniel Monroy",
+        "Daniel Mauricio Monroy Hernandez"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/daniel-mauricio-monroy-hernandez"
+    },
+    {
+      "id": "camara-andres-guillermo-montes-celedon",
+      "chamber": "camara",
+      "given_names": "Andrés Guillermo",
+      "surnames": "Montes Celedón",
+      "full_name": "Andrés Guillermo Montes Celedón",
+      "display_name": "Montes Celedón, Andrés Guillermo",
+      "search_name": "Andrés Guillermo Montes",
+      "aliases": [
+        "Andrés Montes",
+        "Andrés Guillermo Montes Celedón"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Bolívar",
+      "source_url": "https://www.camara.gov.co/representantes/andres-guillermo-montes-celedon"
+    },
+    {
+      "id": "senado-santiago-montoya-montoya",
+      "chamber": "senado",
+      "given_names": "Santiago",
+      "surnames": "Montoya Montoya",
+      "full_name": "Santiago Montoya Montoya",
+      "display_name": "Montoya Montoya, Santiago",
+      "search_name": "Santiago Montoya",
+      "aliases": [
+        "Santiago Montoya Montoya"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-ana-ligia-mora-martinez",
+      "chamber": "camara",
+      "given_names": "Ana Ligia",
+      "surnames": "Mora Martínez",
+      "full_name": "Ana Ligia Mora Martínez",
+      "display_name": "Mora Martínez, Ana Ligia",
+      "search_name": "Ana Ligia Mora",
+      "aliases": [
+        "Ana Mora",
+        "Ana Ligia Mora Martínez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/ana-ligia-mora-martinez"
+    },
+    {
+      "id": "senado-gustavo-adolfo-moreno-hurtado",
+      "chamber": "senado",
+      "given_names": "Gustavo Adolfo",
+      "surnames": "Moreno Hurtado",
+      "full_name": "Gustavo Adolfo Moreno Hurtado",
+      "display_name": "Moreno Hurtado, Gustavo Adolfo",
+      "search_name": "Gustavo Adolfo Moreno",
+      "aliases": [
+        "Gustavo Moreno",
+        "Gustavo Adolfo Moreno Hurtado"
+      ],
+      "party": "Partido Alianza Social Independiente – ASI",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-francy-natalia-moreno-puin",
+      "chamber": "camara",
+      "given_names": "Francy Natalia",
+      "surnames": "Moreno Puin",
+      "full_name": "Francy Natalia Moreno Puin",
+      "display_name": "Moreno Puin, Francy Natalia",
+      "search_name": "Francy Natalia Moreno",
+      "aliases": [
+        "Francy Moreno",
+        "Francy Natalia Moreno Puin"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Cundinamarca",
+      "source_url": "https://www.camara.gov.co/representantes/francy-natalia-moreno-puin"
+    },
+    {
+      "id": "camara-nelly-patricia-mosquera-murcia",
+      "chamber": "camara",
+      "given_names": "Nelly Patricia",
+      "surnames": "Mosquera Murcia",
+      "full_name": "Nelly Patricia Mosquera Murcia",
+      "display_name": "Mosquera Murcia, Nelly Patricia",
+      "search_name": "Nelly Patricia Mosquera",
+      "aliases": [
+        "Nelly Mosquera",
+        "Nelly Patricia Mosquera Murcia"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/nelly-patricia-mosquera-murcia"
+    },
+    {
+      "id": "camara-james-hermenegildo-mosquera-torres",
+      "chamber": "camara",
+      "given_names": "James Hermenegildo",
+      "surnames": "Mosquera Torres",
+      "full_name": "James Hermenegildo Mosquera Torres",
+      "display_name": "Mosquera Torres, James Hermenegildo",
+      "search_name": "James Hermenegildo Mosquera",
+      "aliases": [
+        "James Mosquera",
+        "James Hermenegildo Mosquera Torres"
+      ],
+      "party": "Consejo Comunitario Mayor De Novita “Cocoman”",
+      "constituency": "Circunscripción de paz",
+      "source_url": "https://www.camara.gov.co/representantes/james-hermenegildo-mosquera-torres"
+    },
+    {
+      "id": "camara-pedro-alejandro-murcia-lamprea",
+      "chamber": "camara",
+      "given_names": "Pedro Alejandro",
+      "surnames": "Murcia Lamprea",
+      "full_name": "Pedro Alejandro Murcia Lamprea",
+      "display_name": "Murcia Lamprea, Pedro Alejandro",
+      "search_name": "Pedro Alejandro Murcia",
+      "aliases": [
+        "Pedro Murcia",
+        "Pedro Alejandro Murcia Lamprea"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Colombianos en el exterior",
+      "source_url": "https://www.camara.gov.co/representantes/pedro-alejandro-murcia-lamprea"
+    },
+    {
+      "id": "camara-hernan-muriel-perez",
+      "chamber": "camara",
+      "given_names": "Hernán",
+      "surnames": "Muriel Pérez",
+      "full_name": "Hernán Muriel Pérez",
+      "display_name": "Muriel Pérez, Hernán",
+      "search_name": "Hernán Muriel",
+      "aliases": [
+        "Hernán Muriel Pérez"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/hernan-muriel-perez"
+    },
+    {
+      "id": "senado-rafael-nieto-loaiza",
+      "chamber": "senado",
+      "given_names": "Rafael",
+      "surnames": "Nieto Loaiza",
+      "full_name": "Rafael Nieto Loaiza",
+      "display_name": "Nieto Loaiza, Rafael",
+      "search_name": "Rafael Nieto",
+      "aliases": [
+        "Rafael Nieto Loaiza"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-maria-irma-norena-arboleda",
+      "chamber": "senado",
+      "given_names": "María Irma",
+      "surnames": "Noreña Arboleda",
+      "full_name": "María Irma Noreña Arboleda",
+      "display_name": "Noreña Arboleda, María Irma",
+      "search_name": "María Irma Noreña",
+      "aliases": [
+        "María Noreña",
+        "María Irma Noreña Arboleda"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-jorge-alejandro-ocampo-giraldo",
+      "chamber": "senado",
+      "given_names": "Jorge Alejandro",
+      "surnames": "Ocampo Giraldo",
+      "full_name": "Jorge Alejandro Ocampo Giraldo",
+      "display_name": "Ocampo Giraldo, Jorge Alejandro",
+      "search_name": "Jorge Alejandro Ocampo",
+      "aliases": [
+        "Jorge Ocampo",
+        "Jorge Alejandro Ocampo Giraldo"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-deyci-alejandra-omana-ortiz",
+      "chamber": "senado",
+      "given_names": "Deyci Alejandra",
+      "surnames": "Omaña Ortiz",
+      "full_name": "Deyci Alejandra Omaña Ortiz",
+      "display_name": "Omaña Ortiz, Deyci Alejandra",
+      "search_name": "Deyci Alejandra Omaña",
+      "aliases": [
+        "Deyci Omaña",
+        "Deyci Alejandra Omaña Ortiz"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jose-gregorio-orjuela-perez",
+      "chamber": "camara",
+      "given_names": "José Gregorio",
+      "surnames": "Orjuela Pérez",
+      "full_name": "José Gregorio Orjuela Pérez",
+      "display_name": "Orjuela Pérez, José Gregorio",
+      "search_name": "José Gregorio Orjuela",
+      "aliases": [
+        "José Orjuela",
+        "José Gregorio Orjuela Pérez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/jose-gregorio-orjuela-perez"
+    },
+    {
+      "id": "camara-melissa-orrego-eusse",
+      "chamber": "camara",
+      "given_names": "Melissa",
+      "surnames": "Orrego Eusse",
+      "full_name": "Melissa Orrego Eusse",
+      "display_name": "Orrego Eusse, Melissa",
+      "search_name": "Melissa Orrego",
+      "aliases": [
+        "Melissa Orrego Eusse"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/melissa-orrego-eusse"
+    },
+    {
+      "id": "camara-carlos-edward-osorio-aguiar",
+      "chamber": "camara",
+      "given_names": "Carlos Edward",
+      "surnames": "Osorio Aguiar",
+      "full_name": "Carlos Edward Osorio Aguiar",
+      "display_name": "Osorio Aguiar, Carlos Edward",
+      "search_name": "Carlos Edward Osorio",
+      "aliases": [
+        "Carlos Osorio",
+        "Carlos Edward Osorio Aguiar"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Tolima",
+      "source_url": "https://www.camara.gov.co/representantes/carlos-edward-osorio-aguiar"
+    },
+    {
+      "id": "camara-santiago-osorio-marin",
+      "chamber": "camara",
+      "given_names": "Santiago",
+      "surnames": "Osorio Marín",
+      "full_name": "Santiago Osorio Marín",
+      "display_name": "Osorio Marín, Santiago",
+      "search_name": "Santiago Osorio",
+      "aliases": [
+        "Santiago Osorio Marín"
+      ],
+      "party": "Partido Alianza Verde",
+      "constituency": "Caldas",
+      "source_url": "https://www.camara.gov.co/representantes/santiago-osorio-marin"
+    },
+    {
+      "id": "senado-deisy-johana-osorio-marquez",
+      "chamber": "senado",
+      "given_names": "Deisy Johana",
+      "surnames": "Osorio Marquéz",
+      "full_name": "Deisy Johana Osorio Marquéz",
+      "display_name": "Osorio Marquéz, Deisy Johana",
+      "search_name": "Deisy Johana Osorio",
+      "aliases": [
+        "Deisy Osorio",
+        "Deisy Johana Osorio Marquéz"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-andrea-padilla-villarraga",
+      "chamber": "senado",
+      "given_names": "Andrea",
+      "surnames": "Padilla Villarraga",
+      "full_name": "Andrea Padilla Villarraga",
+      "display_name": "Padilla Villarraga, Andrea",
+      "search_name": "Andrea Padilla",
+      "aliases": [
+        "Andrea Padilla Villarraga"
+      ],
+      "party": "Alianza Verde",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jorge-augusto-palacio-garzon",
+      "chamber": "camara",
+      "given_names": "Jorge Augusto",
+      "surnames": "Palacio Garzón",
+      "full_name": "Jorge Augusto Palacio Garzón",
+      "display_name": "Palacio Garzón, Jorge Augusto",
+      "search_name": "Jorge Augusto Palacio",
+      "aliases": [
+        "Jorge Palacio",
+        "Jorge Augusto Palacio Garzón"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/jorge-augusto-palacio-garzon"
+    },
+    {
+      "id": "camara-christian-hosep-palacios-ledezma",
+      "chamber": "camara",
+      "given_names": "Christian Hosep",
+      "surnames": "Palacios Ledezma",
+      "full_name": "Christian Hosep Palacios Ledezma",
+      "display_name": "Palacios Ledezma, Christian Hosep",
+      "search_name": "Christian Hosep Palacios",
+      "aliases": [
+        "Christian Palacios",
+        "Christian Hosep Palacios Ledezma"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Nariño",
+      "source_url": "https://www.camara.gov.co/representantes/christian-hosep-palacios-ledezma"
+    },
+    {
+      "id": "camara-carlos-alberto-pantoja-cortes",
+      "chamber": "camara",
+      "given_names": "Carlos Alberto",
+      "surnames": "Pantoja Cortes",
+      "full_name": "Carlos Alberto Pantoja Cortes",
+      "display_name": "Pantoja Cortes, Carlos Alberto",
+      "search_name": "Carlos Alberto Pantoja",
+      "aliases": [
+        "Carlos Pantoja",
+        "Carlos Alberto Pantoja Cortes"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Nariño",
+      "source_url": "https://www.camara.gov.co/representantes/carlos-alberto-pantoja-cortes"
+    },
+    {
+      "id": "camara-pedro-antonio-paternina-gulfo",
+      "chamber": "camara",
+      "given_names": "Pedro Antonio",
+      "surnames": "Paternina Gulfo",
+      "full_name": "Pedro Antonio Paternina Gulfo",
+      "display_name": "Paternina Gulfo, Pedro Antonio",
+      "search_name": "Pedro Antonio Paternina",
+      "aliases": [
+        "Pedro Paternina",
+        "Pedro Antonio Paternina Gulfo"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Sucre",
+      "source_url": "https://www.camara.gov.co/representantes/pedro-antonio-paternina-gulfo"
+    },
+    {
+      "id": "camara-luis-guillermo-patino-aristizabal",
+      "chamber": "camara",
+      "given_names": "Luis Guillermo",
+      "surnames": "Patiño Aristizábal",
+      "full_name": "Luis Guillermo Patiño Aristizábal",
+      "display_name": "Patiño Aristizábal, Luis Guillermo",
+      "search_name": "Luis Guillermo Patiño",
+      "aliases": [
+        "Luis Patiño",
+        "Luis Guillermo Patiño Aristizábal"
+      ],
+      "party": "Creemos",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/luis-guillermo-patino-aristizabal"
+    },
+    {
+      "id": "senado-jennifer-dalley-pedraza-sandoval",
+      "chamber": "senado",
+      "given_names": "Jennifer Dalley",
+      "surnames": "Pedraza Sandoval",
+      "full_name": "Jennifer Dalley Pedraza Sandoval",
+      "display_name": "Pedraza Sandoval, Jennifer Dalley",
+      "search_name": "Jennifer Dalley Pedraza",
+      "aliases": [
+        "Jennifer Pedraza",
+        "Jennifer Dalley Pedraza Sandoval"
+      ],
+      "party": "Dignidad & Compromiso",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-martha-isabel-peralta-epieyu",
+      "chamber": "senado",
+      "given_names": "Martha Isabel",
+      "surnames": "Peralta Epieyú",
+      "full_name": "Martha Isabel Peralta Epieyú",
+      "display_name": "Peralta Epieyú, Martha Isabel",
+      "search_name": "Martha Isabel Peralta",
+      "aliases": [
+        "Martha Peralta",
+        "Martha Isabel Peralta Epieyú"
+      ],
+      "party": "Movimiento Alternativo Indígena y Social MAIS",
+      "constituency": "Circunscripción indígena",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-flora-perdomo-andrade",
+      "chamber": "camara",
+      "given_names": "Flora",
+      "surnames": "Perdomo Andrade",
+      "full_name": "Flora Perdomo Andrade",
+      "display_name": "Perdomo Andrade, Flora",
+      "search_name": "Flora Perdomo",
+      "aliases": [
+        "Flora Perdomo Andrade"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Huila",
+      "source_url": "https://www.camara.gov.co/representantes/flora-perdomo-andrade"
+    },
+    {
+      "id": "camara-nixon-perdomo-juragaro",
+      "chamber": "camara",
+      "given_names": "Nixon",
+      "surnames": "Perdomo Juragaro",
+      "full_name": "Nixon Perdomo Juragaro",
+      "display_name": "Perdomo Juragaro, Nixon",
+      "search_name": "Nixon Perdomo",
+      "aliases": [
+        "Nixon Perdomo Juragaro"
+      ],
+      "party": "Circunscripción Transitoria Especial de Paz",
+      "constituency": "Caquetá",
+      "source_url": "https://www.camara.gov.co/representantes/nixon-perdomo-juragaro"
+    },
+    {
+      "id": "camara-manuel-alexander-perez",
+      "chamber": "camara",
+      "given_names": "Manuel Alexander",
+      "surnames": "Pérez",
+      "full_name": "Manuel Alexander Pérez",
+      "display_name": "Pérez, Manuel Alexander",
+      "search_name": "Manuel Alexander Pérez",
+      "aliases": [
+        "Manuel Pérez"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Arauca",
+      "source_url": "https://www.camara.gov.co/representantes/manuel-alexander-perez"
+    },
+    {
+      "id": "camara-bleidy-del-carmen-perez-ballestas",
+      "chamber": "camara",
+      "given_names": "Bleidy del Carmen",
+      "surnames": "Pérez Ballestas",
+      "full_name": "Bleidy del Carmen Pérez Ballestas",
+      "display_name": "Pérez Ballestas, Bleidy del Carmen",
+      "search_name": "Bleidy del Carmen Pérez",
+      "aliases": [
+        "Bleidy Pérez",
+        "Bleidy del Carmen Pérez Ballestas"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/bleidy-del-carmen-perez-ballestas"
+    },
+    {
+      "id": "camara-oscar-dario-perez-pineda",
+      "chamber": "camara",
+      "given_names": "Óscar Darío",
+      "surnames": "Pérez Pineda",
+      "full_name": "Óscar Darío Pérez Pineda",
+      "display_name": "Pérez Pineda, Óscar Darío",
+      "search_name": "Óscar Darío Pérez",
+      "aliases": [
+        "Óscar Pérez",
+        "Óscar Darío Pérez Pineda"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/oscar-dario-perez-pineda"
+    },
+    {
+      "id": "camara-john-edgar-perez-rojas",
+      "chamber": "camara",
+      "given_names": "John Edgar",
+      "surnames": "Pérez Rojas",
+      "full_name": "John Edgar Pérez Rojas",
+      "display_name": "Pérez Rojas, John Edgar",
+      "search_name": "John Edgar Pérez",
+      "aliases": [
+        "John Pérez",
+        "John Edgar Pérez Rojas"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Quindío",
+      "source_url": "https://www.camara.gov.co/representantes/john-edgar-perez-rojas"
+    },
+    {
+      "id": "senado-marcos-daniel-pineda-garcia",
+      "chamber": "senado",
+      "given_names": "Marcos Daniel",
+      "surnames": "Pineda García",
+      "full_name": "Marcos Daniel Pineda García",
+      "display_name": "Pineda García, Marcos Daniel",
+      "search_name": "Marcos Daniel Pineda",
+      "aliases": [
+        "Marcos Pineda",
+        "Marcos Daniel Pineda García"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jonathan-eduardo-pineda-lopez",
+      "chamber": "camara",
+      "given_names": "Jonathan Eduardo",
+      "surnames": "Pineda López",
+      "full_name": "Jonathan Eduardo Pineda López",
+      "display_name": "Pineda López, Jonathan Eduardo",
+      "search_name": "Jonathan Eduardo Pineda",
+      "aliases": [
+        "Jonathan Pineda",
+        "Jonathan Eduardo Pineda López"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Santander",
+      "source_url": "https://www.camara.gov.co/representantes/jonathan-eduardo-pineda-lopez"
+    },
+    {
+      "id": "camara-alexandra-pineda-ortiz",
+      "chamber": "camara",
+      "given_names": "Alexandra",
+      "surnames": "Pineda Ortiz",
+      "full_name": "Alexandra Pineda Ortiz",
+      "display_name": "Pineda Ortiz, Alexandra",
+      "search_name": "Alexandra Pineda",
+      "aliases": [
+        "Alexandra Pineda Ortiz"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Cesar",
+      "source_url": "https://www.camara.gov.co/representantes/alexandra-pineda-ortiz"
+    },
+    {
+      "id": "camara-david-pinilla-calero",
+      "chamber": "camara",
+      "given_names": "David",
+      "surnames": "Pinilla Calero",
+      "full_name": "David Pinilla Calero",
+      "display_name": "Pinilla Calero, David",
+      "search_name": "David Pinilla",
+      "aliases": [
+        "David Pinilla Calero"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/david-pinilla-calero"
+    },
+    {
+      "id": "camara-miguel-angel-pinto-rueda",
+      "chamber": "camara",
+      "given_names": "Miguel Ángel",
+      "surnames": "Pinto Rueda",
+      "full_name": "Miguel Ángel Pinto Rueda",
+      "display_name": "Pinto Rueda, Miguel Ángel",
+      "search_name": "Miguel Ángel Pinto",
+      "aliases": [
+        "Miguel Pinto",
+        "Miguel Ángel Pinto Rueda"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Santander",
+      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-pinto-rueda"
+    },
+    {
+      "id": "camara-maria-del-mar-pizarro-garcia",
+      "chamber": "camara",
+      "given_names": "María del Mar",
+      "surnames": "Pizarro García",
+      "full_name": "María del Mar Pizarro García",
+      "display_name": "Pizarro García, María del Mar",
+      "search_name": "María del Mar Pizarro",
+      "aliases": [
+        "María Pizarro",
+        "María del Mar Pizarro García"
+      ],
+      "party": "Coalición Pacto Histórico",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/maria-del-mar-pizarro-garcia"
+    },
+    {
+      "id": "senado-maria-clara-posada-caicedo",
+      "chamber": "senado",
+      "given_names": "María Clara",
+      "surnames": "Posada Caicedo",
+      "full_name": "María Clara Posada Caicedo",
+      "display_name": "Posada Caicedo, María Clara",
+      "search_name": "María Clara Posada",
+      "aliases": [
+        "María Posada",
+        "María Clara Posada Caicedo"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-yessid-enrique-pulgar-daza",
+      "chamber": "senado",
+      "given_names": "Yessid Enrique",
+      "surnames": "Pulgar Daza",
+      "full_name": "Yessid Enrique Pulgar Daza",
+      "display_name": "Pulgar Daza, Yessid Enrique",
+      "search_name": "Yessid Enrique Pulgar",
+      "aliases": [
+        "Yessid Pulgar",
+        "Yessid Enrique Pulgar Daza"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-jonathan-ferney-pulido-hernandez",
+      "chamber": "senado",
+      "given_names": "Jonathan Ferney",
+      "surnames": "Pulido Hernández",
+      "full_name": "Jonathan Ferney Pulido Hernández",
+      "display_name": "Pulido Hernández, Jonathan Ferney",
+      "search_name": "Jota Pe Hernández",
+      "aliases": [
+        "Jonathan Ferney Pulido",
+        "Jonathan Pulido",
+        "Jonathan Ferney Pulido Hernández",
+        "JotaPe Hernández"
+      ],
+      "party": "Alianza Verde",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jorge-alexander-quevedo-herrera",
+      "chamber": "camara",
+      "given_names": "Jorge Alexander",
+      "surnames": "Quevedo Herrera",
+      "full_name": "Jorge Alexander Quevedo Herrera",
+      "display_name": "Quevedo Herrera, Jorge Alexander",
+      "search_name": "Jorge Alexander Quevedo",
+      "aliases": [
+        "Jorge Quevedo",
+        "Jorge Alexander Quevedo Herrera"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Guaviare",
+      "source_url": "https://www.camara.gov.co/representantes/jorge-alexander-quevedo-herrera"
+    },
+    {
+      "id": "camara-aida-marina-quilcue-vivas",
+      "chamber": "camara",
+      "given_names": "Aída Marina",
+      "surnames": "Quilcué Vivas",
+      "full_name": "Aída Marina Quilcué Vivas",
+      "display_name": "Quilcué Vivas, Aída Marina",
+      "search_name": "Aída Marina Quilcué",
+      "aliases": [
+        "Aída Quilcué",
+        "Aída Marina Quilcué Vivas"
+      ],
+      "party": "C.P. Art. 112, A.L. 02 de 2015 Art. 1 y Est. de Oposición Ley, 1909 de 2018 Art. 24",
+      "constituency": "Estatuto de la Oposición",
+      "source_url": "https://www.camara.gov.co/representantes/aida-marina-quilcue-vivas"
+    },
+    {
+      "id": "camara-paola-andrea-quinones-d-haro",
+      "chamber": "camara",
+      "given_names": "Paola Andrea",
+      "surnames": "Quiñones D’Haro",
+      "full_name": "Paola Andrea Quiñones D’Haro",
+      "display_name": "Quiñones D’Haro, Paola Andrea",
+      "search_name": "Paola Andrea Quiñones",
+      "aliases": [
+        "Paola Quiñones",
+        "Paola Andrea Quiñones D’Haro"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/paola-andrea-quinones-dharo"
+    },
+    {
+      "id": "senado-esteban-quintero-cardona",
+      "chamber": "senado",
+      "given_names": "Esteban",
+      "surnames": "Quintero Cardona",
+      "full_name": "Esteban Quintero Cardona",
+      "display_name": "Quintero Cardona, Esteban",
+      "search_name": "Esteban Quintero",
+      "aliases": [
+        "Esteban Quintero Cardona"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-david-ricardo-racero-mayorca",
+      "chamber": "senado",
+      "given_names": "David Ricardo",
+      "surnames": "Racero Mayorca",
+      "full_name": "David Ricardo Racero Mayorca",
+      "display_name": "Racero Mayorca, David Ricardo",
+      "search_name": "David Ricardo Racero",
+      "aliases": [
+        "David Racero",
+        "David Ricardo Racero Mayorca"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-samir-eduardo-radi-chemas",
+      "chamber": "camara",
+      "given_names": "Samir Eduardo",
+      "surnames": "Radi Chemas",
+      "full_name": "Samir Eduardo Radi Chemas",
+      "display_name": "Radi Chemas, Samir Eduardo",
+      "search_name": "Samir Eduardo Radi",
+      "aliases": [
+        "Samir Radi",
+        "Samir Eduardo Radi Chemas"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Atlántico",
+      "source_url": "https://www.camara.gov.co/representantes/samir-eduardo-radi-chemas"
+    },
+    {
+      "id": "camara-leonardo-ramon-ramirez",
+      "chamber": "camara",
+      "given_names": "Leonardo",
+      "surnames": "Ramón Ramírez",
+      "full_name": "Leonardo Ramón Ramírez",
+      "display_name": "Ramón Ramírez, Leonardo",
+      "search_name": "Leonardo Ramón",
+      "aliases": [
+        "Leonardo Ramón Ramírez"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Caquetá",
+      "source_url": "https://www.camara.gov.co/representantes/leonardo-ramon-ramirez"
+    },
+    {
+      "id": "camara-juan-david-rangel-yanez",
+      "chamber": "camara",
+      "given_names": "Juan David",
+      "surnames": "Rangel Yánez",
+      "full_name": "Juan David Rangel Yánez",
+      "display_name": "Rangel Yánez, Juan David",
+      "search_name": "Juan David Rangel",
+      "aliases": [
+        "Juan Rangel",
+        "Juan David Rangel Yánez"
+      ],
+      "party": "Partido Colombia Renaciente",
+      "constituency": "Córdoba",
+      "source_url": "https://www.camara.gov.co/representantes/juan-david-rangel-yanez"
+    },
+    {
+      "id": "camara-orlando-rayo-acosta",
+      "chamber": "camara",
+      "given_names": "Orlando",
+      "surnames": "Rayo Acosta",
+      "full_name": "Orlando Rayo Acosta",
+      "display_name": "Rayo Acosta, Orlando",
+      "search_name": "Orlando Rayo",
+      "aliases": [
+        "Orlando Rayo Acosta"
+      ],
+      "party": "Movimiento Alternativo Indígena y Social (MAIS)",
+      "constituency": "Amazonas",
+      "source_url": "https://www.camara.gov.co/representantes/orlando-rayo-acosta"
+    },
+    {
+      "id": "senado-daniel-restrepo-carmona",
+      "chamber": "senado",
+      "given_names": "Daniel",
+      "surnames": "Restrepo Carmona",
+      "full_name": "Daniel Restrepo Carmona",
+      "display_name": "Restrepo Carmona, Daniel",
+      "search_name": "Daniel Restrepo",
+      "aliases": [
+        "Daniel Restrepo Carmona"
+      ],
+      "party": "Partido Conservador",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-luis-ramiro-ricardo-buelvas",
+      "chamber": "camara",
+      "given_names": "Luis Ramiro",
+      "surnames": "Ricardo Buelvas",
+      "full_name": "Luis Ramiro Ricardo Buelvas",
+      "display_name": "Ricardo Buelvas, Luis Ramiro",
+      "search_name": "Luis Ramiro Ricardo",
+      "aliases": [
+        "Luis Ricardo",
+        "Luis Ramiro Ricardo Buelvas"
+      ],
+      "party": "Asomontemaría",
+      "constituency": "Circunscripción de paz",
+      "source_url": "https://www.camara.gov.co/representantes/luis-ramiro-ricardo-buelvas"
+    },
+    {
+      "id": "camara-diana-carolina-riveros-paez",
+      "chamber": "camara",
+      "given_names": "Diana Carolina",
+      "surnames": "Riveros Paez",
+      "full_name": "Diana Carolina Riveros Paez",
+      "display_name": "Riveros Paez, Diana Carolina",
+      "search_name": "Diana Carolina Riveros",
+      "aliases": [
+        "Diana Riveros",
+        "Diana Carolina Riveros Paez"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Norte de Santander",
+      "source_url": "https://www.camara.gov.co/representantes/diana-carolina-riveros-paez"
+    },
+    {
+      "id": "camara-luis-ariel-francisco-rodriguez-beltran",
+      "chamber": "camara",
+      "given_names": "Luis Ariel Francisco",
+      "surnames": "Rodríguez Beltrán",
+      "full_name": "Luis Ariel Francisco Rodríguez Beltrán",
+      "display_name": "Rodríguez Beltrán, Luis Ariel Francisco",
+      "search_name": "Luis Ariel Francisco Rodríguez",
+      "aliases": [
+        "Luis Rodríguez",
+        "Luis Ariel Francisco Rodríguez Beltrán"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Norte de Santander",
+      "source_url": "https://www.camara.gov.co/representantes/luis-ariel-francisco-rodriguez-beltran"
+    },
+    {
+      "id": "camara-edinson-rodriguez-canchimbo",
+      "chamber": "camara",
+      "given_names": "Edinson",
+      "surnames": "Rodríguez Canchimbo",
+      "full_name": "Edinson Rodríguez Canchimbo",
+      "display_name": "Rodríguez Canchimbo, Edinson",
+      "search_name": "Edinson Rodríguez",
+      "aliases": [
+        "Edinson Rodríguez Canchimbo"
+      ],
+      "party": "Consejo Comunitario Del Rio Cajanbre",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/edinson-rodriguez-canchimbo"
+    },
+    {
+      "id": "senado-walter-alfonso-rodriguez-chaparro",
+      "chamber": "senado",
+      "given_names": "Walter Alfonso",
+      "surnames": "Rodríguez Chaparro",
+      "full_name": "Walter Alfonso Rodríguez Chaparro",
+      "display_name": "Rodríguez Chaparro, Walter Alfonso",
+      "search_name": "Walter Alfonso Rodríguez",
+      "aliases": [
+        "Walter Rodríguez",
+        "Walter Alfonso Rodríguez Chaparro"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-german-andres-rodriguez-prieto",
+      "chamber": "senado",
+      "given_names": "Germán Andrés",
+      "surnames": "Rodríguez Prieto",
+      "full_name": "Germán Andrés Rodríguez Prieto",
+      "display_name": "Rodríguez Prieto, Germán Andrés",
+      "search_name": "Germán Andrés Rodríguez",
+      "aliases": [
+        "Germán Rodríguez",
+        "Germán Andrés Rodríguez Prieto"
+      ],
+      "party": "Salvación Nacional",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-juan-pablo-rojas-suarez",
+      "chamber": "camara",
+      "given_names": "Juan Pablo",
+      "surnames": "Rojas Suarez",
+      "full_name": "Juan Pablo Rojas Suarez",
+      "display_name": "Rojas Suarez, Juan Pablo",
+      "search_name": "Juan Pablo Rojas",
+      "aliases": [
+        "Juan Rojas",
+        "Juan Pablo Rojas Suarez"
+      ],
+      "party": "Partido Nuevo Liberalismo",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/juan-pablo-rojas-suarez"
+    },
+    {
+      "id": "camara-claudia-teresa-romero-nader",
+      "chamber": "camara",
+      "given_names": "Claudia Teresa",
+      "surnames": "Romero Nader",
+      "full_name": "Claudia Teresa Romero Nader",
+      "display_name": "Romero Nader, Claudia Teresa",
+      "search_name": "Claudia Teresa Romero",
+      "aliases": [
+        "Claudia Romero",
+        "Claudia Teresa Romero Nader"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/claudia-teresa-romero-nader"
+    },
+    {
+      "id": "camara-chadan-francisco-rosado-taylor",
+      "chamber": "camara",
+      "given_names": "Chadan Francisco",
+      "surnames": "Rosado Taylor",
+      "full_name": "Chadan Francisco Rosado Taylor",
+      "display_name": "Rosado Taylor, Chadan Francisco",
+      "search_name": "Chadan Francisco Rosado",
+      "aliases": [
+        "Chadan Rosado",
+        "Chadan Francisco Rosado Taylor"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Magdalena",
+      "source_url": "https://www.camara.gov.co/representantes/chadan-francisco-rosado-taylor"
+    },
+    {
+      "id": "camara-german-rogelio-rozo-anis",
+      "chamber": "camara",
+      "given_names": "Germán Rogelio",
+      "surnames": "Rozo Anís",
+      "full_name": "Germán Rogelio Rozo Anís",
+      "display_name": "Rozo Anís, Germán Rogelio",
+      "search_name": "Germán Rogelio Rozo",
+      "aliases": [
+        "Germán Rozo",
+        "Germán Rogelio Rozo Anís"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Arauca",
+      "source_url": "https://www.camara.gov.co/representantes/german-rogelio-rozo-anis"
+    },
+    {
+      "id": "senado-luis-carlos-rua-sanchez",
+      "chamber": "senado",
+      "given_names": "Luis Carlos",
+      "surnames": "Rua Sánchez",
+      "full_name": "Luis Carlos Rua Sánchez",
+      "display_name": "Rua Sánchez, Luis Carlos",
+      "search_name": "Luis Carlos Rua",
+      "aliases": [
+        "Luis Rua",
+        "Luis Carlos Rua Sánchez"
+      ],
+      "party": "ASI",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-miguel-angel-rubio-bravo",
+      "chamber": "camara",
+      "given_names": "Miguel Ángel",
+      "surnames": "Rubio Bravo",
+      "full_name": "Miguel Ángel Rubio Bravo",
+      "display_name": "Rubio Bravo, Miguel Ángel",
+      "search_name": "Miguel Ángel Rubio",
+      "aliases": [
+        "Miguel Rubio",
+        "Miguel Ángel Rubio Bravo"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Putumayo",
+      "source_url": "https://www.camara.gov.co/representantes/miguel-angel-rubio-bravo"
+    },
+    {
+      "id": "camara-martha-isabel-ruiz-solera",
+      "chamber": "camara",
+      "given_names": "Martha Isabel",
+      "surnames": "Ruiz Solera",
+      "full_name": "Martha Isabel Ruiz Solera",
+      "display_name": "Ruiz Solera, Martha Isabel",
+      "search_name": "Martha Isabel Ruiz",
+      "aliases": [
+        "Martha Ruiz",
+        "Martha Isabel Ruiz Solera"
+      ],
+      "party": "Partido Colombia Renaciente",
+      "constituency": "Córdoba",
+      "source_url": "https://www.camara.gov.co/representantes/martha-isabel-ruiz-solera"
+    },
+    {
+      "id": "camara-maria-janeth-sabogal-robles",
+      "chamber": "camara",
+      "given_names": "Maria Janeth",
+      "surnames": "Sabogal Robles",
+      "full_name": "Maria Janeth Sabogal Robles",
+      "display_name": "Sabogal Robles, Maria Janeth",
+      "search_name": "Maria Janeth Sabogal",
+      "aliases": [
+        "Maria Sabogal",
+        "Maria Janeth Sabogal Robles"
+      ],
+      "party": "Asoambeima",
+      "constituency": "Tolima",
+      "source_url": "https://www.camara.gov.co/representantes/maria-janeth-sabogal-robles"
+    },
+    {
+      "id": "camara-jaime-raul-salamanca-torres",
+      "chamber": "camara",
+      "given_names": "Jaime Raúl",
+      "surnames": "Salamanca Torres",
+      "full_name": "Jaime Raúl Salamanca Torres",
+      "display_name": "Salamanca Torres, Jaime Raúl",
+      "search_name": "Jaime Raúl Salamanca",
+      "aliases": [
+        "Jaime Salamanca",
+        "Jaime Raúl Salamanca Torres"
+      ],
+      "party": "Partido Alianza Verde",
+      "constituency": "Boyacá",
+      "source_url": "https://www.camara.gov.co/representantes/jaime-raul-salamanca-torres"
+    },
+    {
+      "id": "camara-maria-camila-salas-salas",
+      "chamber": "camara",
+      "given_names": "Maria Camila",
+      "surnames": "Salas Salas",
+      "full_name": "Maria Camila Salas Salas",
+      "display_name": "Salas Salas, Maria Camila",
+      "search_name": "Maria Camila Salas",
+      "aliases": [
+        "Maria Salas",
+        "Maria Camila Salas Salas"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Bolívar",
+      "source_url": "https://www.camara.gov.co/representantes/maria-camila-salas-salas"
+    },
+    {
+      "id": "camara-julio-roberto-salazar-perdomo",
+      "chamber": "camara",
+      "given_names": "Julio Roberto",
+      "surnames": "Salazar Perdomo",
+      "full_name": "Julio Roberto Salazar Perdomo",
+      "display_name": "Salazar Perdomo, Julio Roberto",
+      "search_name": "Julio Roberto Salazar",
+      "aliases": [
+        "Julio Salazar",
+        "Julio Roberto Salazar Perdomo"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Cundinamarca",
+      "source_url": "https://www.camara.gov.co/representantes/julio-roberto-salazar-perdomo"
+    },
+    {
+      "id": "camara-victor-manuel-salcedo-guerrero",
+      "chamber": "camara",
+      "given_names": "Víctor Manuel",
+      "surnames": "Salcedo Guerrero",
+      "full_name": "Víctor Manuel Salcedo Guerrero",
+      "display_name": "Salcedo Guerrero, Víctor Manuel",
+      "search_name": "Víctor Manuel Salcedo",
+      "aliases": [
+        "Víctor Salcedo",
+        "Víctor Manuel Salcedo Guerrero"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/victor-manuel-salcedo-guerrero"
+    },
+    {
+      "id": "senado-duvalier-sanchez-arango",
+      "chamber": "senado",
+      "given_names": "Duvalier",
+      "surnames": "Sánchez Arango",
+      "full_name": "Duvalier Sánchez Arango",
+      "display_name": "Sánchez Arango, Duvalier",
+      "search_name": "Duvalier Sánchez",
+      "aliases": [
+        "Duvalier Sánchez Arango"
+      ],
+      "party": "Alianza Verdes",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-oscar-hernan-sanchez-leon",
+      "chamber": "senado",
+      "given_names": "Óscar Hernán",
+      "surnames": "Sánchez León",
+      "full_name": "Óscar Hernán Sánchez León",
+      "display_name": "Sánchez León, Óscar Hernán",
+      "search_name": "Óscar Hernán Sánchez",
+      "aliases": [
+        "Óscar Sánchez",
+        "Óscar Hernán Sánchez León"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-astrid-sanchez-montes-de-oca",
+      "chamber": "camara",
+      "given_names": "Astrid",
+      "surnames": "Sánchez Montes de Oca",
+      "full_name": "Astrid Sánchez Montes de Oca",
+      "display_name": "Sánchez Montes de Oca, Astrid",
+      "search_name": "Astrid Sánchez",
+      "aliases": [
+        "Astrid Sánchez Montes de Oca"
+      ],
+      "party": "Partido de la U",
+      "constituency": "Chocó",
+      "source_url": "https://www.camara.gov.co/representantes/astrid-sanchez-montes-de-oca"
+    },
+    {
+      "id": "camara-winsner-nessir-sandoval-ibanez",
+      "chamber": "camara",
+      "given_names": "Winsner Nessir",
+      "surnames": "Sandoval Ibañez",
+      "full_name": "Winsner Nessir Sandoval Ibañez",
+      "display_name": "Sandoval Ibañez, Winsner Nessir",
+      "search_name": "Winsner Nessir Sandoval",
+      "aliases": [
+        "Winsner Sandoval",
+        "Winsner Nessir Sandoval Ibañez"
+      ],
+      "party": "Partido Demócrata Colombiano",
+      "constituency": "Circunscripción afrodescendiente",
+      "source_url": "https://www.camara.gov.co/representantes/winsner-nessir-sandoval-ibanez"
+    },
+    {
+      "id": "camara-jaime-arturo-santamaria-acosta",
+      "chamber": "camara",
+      "given_names": "Jaime Arturo",
+      "surnames": "Santamaria Acosta",
+      "full_name": "Jaime Arturo Santamaria Acosta",
+      "display_name": "Santamaria Acosta, Jaime Arturo",
+      "search_name": "Jaime Arturo Santamaria",
+      "aliases": [
+        "Jaime Santamaria",
+        "Jaime Arturo Santamaria Acosta"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Atlántico",
+      "source_url": "https://www.camara.gov.co/representantes/jaime-arturo-santamaria-acosta"
+    },
+    {
+      "id": "senado-ferney-silva-idrobo",
+      "chamber": "senado",
+      "given_names": "Ferney",
+      "surnames": "Silva Idrobo",
+      "full_name": "Ferney Silva Idrobo",
+      "display_name": "Silva Idrobo, Ferney",
+      "search_name": "Ferney Silva",
+      "aliases": [
+        "Ferney Silva Idrobo"
+      ],
+      "party": "Colombia Humana - Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-yolanda-silva-romero",
+      "chamber": "camara",
+      "given_names": "Yolanda",
+      "surnames": "Silva Romero",
+      "full_name": "Yolanda Silva Romero",
+      "display_name": "Silva Romero, Yolanda",
+      "search_name": "Yolanda Silva",
+      "aliases": [
+        "Yolanda Silva Romero"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Santander",
+      "source_url": "https://www.camara.gov.co/representantes/yolanda-silva-romero"
+    },
+    {
+      "id": "camara-ingrid-marlen-sogamoso-alfonso",
+      "chamber": "camara",
+      "given_names": "Ingrid Marlen",
+      "surnames": "Sogamoso Alfonso",
+      "full_name": "Ingrid Marlen Sogamoso Alfonso",
+      "display_name": "Sogamoso Alfonso, Ingrid Marlen",
+      "search_name": "Ingrid Marlen Sogamoso",
+      "aliases": [
+        "Ingrid Sogamoso",
+        "Ingrid Marlen Sogamoso Alfonso"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Boyacá",
+      "source_url": "https://www.camara.gov.co/representantes/ingrid-marlen-sogamoso-alfonso"
+    },
+    {
+      "id": "camara-yeisson-gerardo-sua-cajamarca-zapata",
+      "chamber": "camara",
+      "given_names": "Yeisson Gerardo",
+      "surnames": "Sua Cajamarca Zapata",
+      "full_name": "Yeisson Gerardo Sua Cajamarca Zapata",
+      "display_name": "Sua Cajamarca Zapata, Yeisson Gerardo",
+      "search_name": "Yeisson Cajamarca",
+      "aliases": [
+        "Yeisson Gerardo Sua Cajamarca",
+        "Yeisson Sua Cajamarca",
+        "Yeisson Gerardo Sua Cajamarca Zapata",
+        "Yeisson Sua"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Cundinamarca",
+      "source_url": "https://www.camara.gov.co/representantes/yeisson-gerardo-sua-cajamarca-zapata"
+    },
+    {
+      "id": "camara-eimy-julieth-suarez-gonzalez",
+      "chamber": "camara",
+      "given_names": "Eimy Julieth",
+      "surnames": "Suarez González",
+      "full_name": "Eimy Julieth Suarez González",
+      "display_name": "Suarez González, Eimy Julieth",
+      "search_name": "Eimy Julieth Suarez",
+      "aliases": [
+        "Eimy Suarez",
+        "Eimy Julieth Suarez González"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Norte de Santander",
+      "source_url": "https://www.camara.gov.co/representantes/eimy-julieth-suarez-gonzalez"
+    },
+    {
+      "id": "camara-mauricio-andres-toro-orjuela",
+      "chamber": "camara",
+      "given_names": "Mauricio Andrés",
+      "surnames": "Toro Orjuela",
+      "full_name": "Mauricio Andrés Toro Orjuela",
+      "display_name": "Toro Orjuela, Mauricio Andrés",
+      "search_name": "Mauricio Andrés Toro",
+      "aliases": [
+        "Mauricio Toro",
+        "Mauricio Andrés Toro Orjuela"
+      ],
+      "party": "Partido Alianza Verde",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/mauricio-andres-toro-orjuela"
+    },
+    {
+      "id": "camara-david-alejandro-toro-ramirez",
+      "chamber": "camara",
+      "given_names": "David Alejandro",
+      "surnames": "Toro Ramírez",
+      "full_name": "David Alejandro Toro Ramírez",
+      "display_name": "Toro Ramírez, David Alejandro",
+      "search_name": "Alejandro Toro",
+      "aliases": [
+        "David Alejandro Toro",
+        "David Toro",
+        "David Alejandro Toro Ramírez"
+      ],
+      "party": "Coalición Pacto Histórico",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/david-alejandro-toro-ramirez"
+    },
+    {
+      "id": "camara-camilo-alfonso-torres-prada",
+      "chamber": "camara",
+      "given_names": "Camilo Alfonso",
+      "surnames": "Torres Prada",
+      "full_name": "Camilo Alfonso Torres Prada",
+      "display_name": "Torres Prada, Camilo Alfonso",
+      "search_name": "Camilo Alfonso Torres",
+      "aliases": [
+        "Camilo Torres",
+        "Camilo Alfonso Torres Prada"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Santander",
+      "source_url": "https://www.camara.gov.co/representantes/camilo-alfonso-torres-prada"
+    },
+    {
+      "id": "senado-camilo-andres-torres-villalba",
+      "chamber": "senado",
+      "given_names": "Camilo Andrés",
+      "surnames": "Torres Villalba",
+      "full_name": "Camilo Andrés Torres Villalba",
+      "display_name": "Torres Villalba, Camilo Andrés",
+      "search_name": "Camilo Andrés Torres",
+      "aliases": [
+        "Camilo Torres",
+        "Camilo Andrés Torres Villalba"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-jorge-rodrigo-tovar-velez",
+      "chamber": "camara",
+      "given_names": "Jorge Rodrigo",
+      "surnames": "Tovar Vélez",
+      "full_name": "Jorge Rodrigo Tovar Vélez",
+      "display_name": "Tovar Vélez, Jorge Rodrigo",
+      "search_name": "Jorge Rodrigo Tovar",
+      "aliases": [
+        "Jorge Tovar",
+        "Jorge Rodrigo Tovar Vélez"
+      ],
+      "party": "Asociación Paz es Vida (PA-VIDA)",
+      "constituency": "Circunscripción de paz",
+      "source_url": "https://www.camara.gov.co/representantes/jorge-rodrigo-tovar-velez"
+    },
+    {
+      "id": "camara-julio-cesar-triana-quintero",
+      "chamber": "camara",
+      "given_names": "Julio César",
+      "surnames": "Triana Quintero",
+      "full_name": "Julio César Triana Quintero",
+      "display_name": "Triana Quintero, Julio César",
+      "search_name": "Julio César Triana",
+      "aliases": [
+        "Julio Triana",
+        "Julio César Triana Quintero"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Huila",
+      "source_url": "https://www.camara.gov.co/representantes/julio-cesar-triana-quintero"
+    },
+    {
+      "id": "camara-eduar-alexis-triana-rincon",
+      "chamber": "camara",
+      "given_names": "Eduar Alexis",
+      "surnames": "Triana Rincón",
+      "full_name": "Eduar Alexis Triana Rincón",
+      "display_name": "Triana Rincón, Eduar Alexis",
+      "search_name": "Eduar Alexis Triana",
+      "aliases": [
+        "Eduar Triana",
+        "Eduar Alexis Triana Rincón"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Boyacá",
+      "source_url": "https://www.camara.gov.co/representantes/eduar-alexis-triana-rincon"
+    },
+    {
+      "id": "camara-jose-jaime-uscategui-pastrana",
+      "chamber": "camara",
+      "given_names": "José Jaime",
+      "surnames": "Uscátegui Pastrana",
+      "full_name": "José Jaime Uscátegui Pastrana",
+      "display_name": "Uscátegui Pastrana, José Jaime",
+      "search_name": "José Jaime Uscátegui",
+      "aliases": [
+        "José Uscátegui",
+        "José Jaime Uscátegui Pastrana"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Bogotá",
+      "source_url": "https://www.camara.gov.co/representantes/jose-jaime-uscategui-pastrana"
+    },
+    {
+      "id": "camara-jhon-fredi-valencia-caicedo",
+      "chamber": "camara",
+      "given_names": "Jhon Fredi",
+      "surnames": "Valencia Caicedo",
+      "full_name": "Jhon Fredi Valencia Caicedo",
+      "display_name": "Valencia Caicedo, Jhon Fredi",
+      "search_name": "Jhon Fredi Valencia",
+      "aliases": [
+        "Jhon Valencia",
+        "Jhon Fredi Valencia Caicedo"
+      ],
+      "party": "Consejo Comunitario los Andes",
+      "constituency": "Circunscripción de paz",
+      "source_url": "https://www.camara.gov.co/representantes/jhon-fredi-valencia-caicedo"
+    },
+    {
+      "id": "camara-andrea-camila-vargas-de-la-hoz",
+      "chamber": "camara",
+      "given_names": "Andrea Camila",
+      "surnames": "Vargas De la Hoz",
+      "full_name": "Andrea Camila Vargas De la Hoz",
+      "display_name": "Vargas De la Hoz, Andrea Camila",
+      "search_name": "Andrea Camila Vargas",
+      "aliases": [
+        "Andrea Vargas",
+        "Andrea Camila Vargas De la Hoz"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Atlántico",
+      "source_url": "https://www.camara.gov.co/representantes/andrea-camila-vargas-de-la-hoz"
+    },
+    {
+      "id": "camara-juan-carlos-vargas-soler",
+      "chamber": "camara",
+      "given_names": "Juan Carlos",
+      "surnames": "Vargas Soler",
+      "full_name": "Juan Carlos Vargas Soler",
+      "display_name": "Vargas Soler, Juan Carlos",
+      "search_name": "Juan Carlos Vargas",
+      "aliases": [
+        "Juan Vargas",
+        "Juan Carlos Vargas Soler"
+      ],
+      "party": "Asociación de Productores de Cacao (Aprocasur)",
+      "constituency": "Circunscripción de paz",
+      "source_url": "https://www.camara.gov.co/representantes/juan-carlos-vargas-soler"
+    },
+    {
+      "id": "senado-alix-yirley-vargas-torrado",
+      "chamber": "senado",
+      "given_names": "Alix Yirley",
+      "surnames": "Vargas Torrado",
+      "full_name": "Alix Yirley Vargas Torrado",
+      "display_name": "Vargas Torrado, Alix Yirley",
+      "search_name": "Alix Yirley Vargas",
+      "aliases": [
+        "Alix Vargas",
+        "Alix Yirley Vargas Torrado"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-gersson-vargas-valdeleon",
+      "chamber": "senado",
+      "given_names": "Gersson",
+      "surnames": "Vargas Valdeleon",
+      "full_name": "Gersson Vargas Valdeleon",
+      "display_name": "Vargas Valdeleon, Gersson",
+      "search_name": "Gersson Vargas",
+      "aliases": [
+        "Gersson Vargas Valdeleon"
+      ],
+      "party": "Partido Liberal",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-erick-adrian-velasco-burbano",
+      "chamber": "camara",
+      "given_names": "Erick Adrián",
+      "surnames": "Velasco Burbano",
+      "full_name": "Erick Adrián Velasco Burbano",
+      "display_name": "Velasco Burbano, Erick Adrián",
+      "search_name": "Erick Adrián Velasco",
+      "aliases": [
+        "Erick Velasco",
+        "Erick Adrián Velasco Burbano"
+      ],
+      "party": "Coalición Pacto Histórico",
+      "constituency": "Nariño",
+      "source_url": "https://www.camara.gov.co/representantes/erick-adrian-velasco-burbano"
+    },
+    {
+      "id": "camara-nataly-velez-lopera",
+      "chamber": "camara",
+      "given_names": "Nataly",
+      "surnames": "Vélez Lopera",
+      "full_name": "Nataly Vélez Lopera",
+      "display_name": "Vélez Lopera, Nataly",
+      "search_name": "Nataly Vélez",
+      "aliases": [
+        "Nataly Vélez Lopera"
+      ],
+      "party": "Cambio Radical",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/nataly-velez-lopera"
+    },
+    {
+      "id": "camara-laura-isabel-vera-zapata",
+      "chamber": "camara",
+      "given_names": "Laura Isabel",
+      "surnames": "Vera Zapata",
+      "full_name": "Laura Isabel Vera Zapata",
+      "display_name": "Vera Zapata, Laura Isabel",
+      "search_name": "Laura Isabel Vera",
+      "aliases": [
+        "Laura Vera",
+        "Laura Isabel Vera Zapata"
+      ],
+      "party": "Partido Pacto Histórico",
+      "constituency": "Valle del Cauca",
+      "source_url": "https://www.camara.gov.co/representantes/laura-isabel-vera-zapata"
+    },
+    {
+      "id": "camara-omar-francisco-vidal-rojas",
+      "chamber": "camara",
+      "given_names": "Omar Francisco",
+      "surnames": "Vidal Rojas",
+      "full_name": "Omar Francisco Vidal Rojas",
+      "display_name": "Vidal Rojas, Omar Francisco",
+      "search_name": "Omar Francisco Vidal",
+      "aliases": [
+        "Omar Vidal",
+        "Omar Francisco Vidal Rojas"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Chocó",
+      "source_url": "https://www.camara.gov.co/representantes/omar-francisco-vidal-rojas"
+    },
+    {
+      "id": "senado-maria-lucia-villalba-gomez",
+      "chamber": "senado",
+      "given_names": "María Lucia",
+      "surnames": "Villalba Gómez",
+      "full_name": "María Lucia Villalba Gómez",
+      "display_name": "Villalba Gómez, María Lucia",
+      "search_name": "María Lucia Villalba",
+      "aliases": [
+        "María Villalba",
+        "María Lucia Villalba Gómez"
+      ],
+      "party": "Nuevo Liberalismo",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-oscar-leonardo-villamizar-meneses",
+      "chamber": "senado",
+      "given_names": "Óscar Leonardo",
+      "surnames": "Villamizar Meneses",
+      "full_name": "Óscar Leonardo Villamizar Meneses",
+      "display_name": "Villamizar Meneses, Óscar Leonardo",
+      "search_name": "Óscar Leonardo Villamizar",
+      "aliases": [
+        "Óscar Villamizar",
+        "Óscar Leonardo Villamizar Meneses"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-manuel-antonio-virguez-piraquive",
+      "chamber": "senado",
+      "given_names": "Manuel Antonio",
+      "surnames": "Virgüez Piraquive",
+      "full_name": "Manuel Antonio Virgüez Piraquive",
+      "display_name": "Virgüez Piraquive, Manuel Antonio",
+      "search_name": "Manuel Antonio Virgüez",
+      "aliases": [
+        "Manuel Virgüez",
+        "Manuel Antonio Virgüez Piraquive"
+      ],
+      "party": "MIRA",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-yolanda-wong-baldiris",
+      "chamber": "camara",
+      "given_names": "Yolanda",
+      "surnames": "Wong Baldiris",
+      "full_name": "Yolanda Wong Baldiris",
+      "display_name": "Wong Baldiris, Yolanda",
+      "search_name": "Yolanda Wong",
+      "aliases": [
+        "Yolanda Wong Baldiris"
+      ],
+      "party": "Partido Liberal Colombiano",
+      "constituency": "Bolívar",
+      "source_url": "https://www.camara.gov.co/representantes/yolanda-wong-baldiris"
+    },
+    {
+      "id": "camara-diego-fernando-zambrano-pardo",
+      "chamber": "camara",
+      "given_names": "Diego Fernando",
+      "surnames": "Zambrano Pardo",
+      "full_name": "Diego Fernando Zambrano Pardo",
+      "display_name": "Zambrano Pardo, Diego Fernando",
+      "search_name": "Diego Fernando Zambrano",
+      "aliases": [
+        "Diego Zambrano",
+        "Diego Fernando Zambrano Pardo"
+      ],
+      "party": "Partido Conservador Colombiano",
+      "constituency": "Putumayo",
+      "source_url": "https://www.camara.gov.co/representantes/diego-fernando-zambrano-pardo"
+    },
+    {
+      "id": "senado-isabel-cristina-zuleta-lopez",
+      "chamber": "senado",
+      "given_names": "Isabel Cristina",
+      "surnames": "Zuleta López",
+      "full_name": "Isabel Cristina Zuleta López",
+      "display_name": "Zuleta López, Isabel Cristina",
+      "search_name": "Isabel Cristina Zuleta",
+      "aliases": [
+        "Isabel Zuleta",
+        "Isabel Cristina Zuleta López"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-claudia-margarita-zuleta-murgas",
+      "chamber": "senado",
+      "given_names": "Claudia Margarita",
+      "surnames": "Zuleta Murgas",
+      "full_name": "Claudia Margarita Zuleta Murgas",
+      "display_name": "Zuleta Murgas, Claudia Margarita",
+      "search_name": "Claudia Margarita Zuleta",
+      "aliases": [
+        "Claudia Zuleta",
+        "Claudia Margarita Zuleta Murgas"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "senado-kamelia-edith-zuluaga-navarro",
+      "chamber": "senado",
+      "given_names": "Kamelia Edith",
+      "surnames": "Zuluaga Navarro",
+      "full_name": "Kamelia Edith Zuluaga Navarro",
+      "display_name": "Zuluaga Navarro, Kamelia Edith",
+      "search_name": "Kamelia Edith Zuluaga",
+      "aliases": [
+        "Kamelia Zuluaga",
+        "Kamelia Edith Zuluaga Navarro"
+      ],
+      "party": "Pacto Histórico",
+      "constituency": "Circunscripción nacional",
+      "source_url": "https://www.senado.gov.co/index.php/el-senado/senadores"
+    },
+    {
+      "id": "camara-juan-david-zuluaga-zuluaga",
+      "chamber": "camara",
+      "given_names": "Juan David",
+      "surnames": "Zuluaga Zuluaga",
+      "full_name": "Juan David Zuluaga Zuluaga",
+      "display_name": "Zuluaga Zuluaga, Juan David",
+      "search_name": "Juan David Zuluaga",
+      "aliases": [
+        "Juan Zuluaga",
+        "Juan David Zuluaga Zuluaga"
+      ],
+      "party": "Centro Democrático",
+      "constituency": "Antioquia",
+      "source_url": "https://www.camara.gov.co/representantes/juan-david-zuluaga-zuluaga"
+    }
+  ]
+}
