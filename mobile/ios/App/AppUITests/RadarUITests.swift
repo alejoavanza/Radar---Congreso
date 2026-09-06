@@ -50,6 +50,22 @@ final class RadarUITests: XCTestCase {
         tab.tap()
     }
 
+    private func frameResult(_ firstControl: XCUIElement) {
+        reveal(firstControl)
+        // Position the beginning of the result below the safe area using real
+        // scrolling, so the original screenshot retains the result's context.
+        for _ in 0..<5 {
+            let delta = firstControl.frame.minY - app.frame.minY - app.frame.height * 0.12
+            if abs(delta) < 24 { return }
+            let distance = min(abs(delta) / app.frame.height, 0.4)
+            let startY = delta > 0 ? 0.75 : 0.25
+            let endY = startY + (delta > 0 ? -distance : distance)
+            let view = app.webViews.firstMatch
+            view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: startY))
+                .press(forDuration: 0.05, thenDragTo: view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: endY)))
+        }
+    }
+
     private func dismissKeyboard() {
         let done = app.toolbars.buttons.matching(NSPredicate(format: "label IN %@ OR identifier == 'Done'", ["OK", "Listo", "Done"])).firstMatch
         if done.exists && done.isHittable { done.tap() }
@@ -145,13 +161,14 @@ final class RadarUITests: XCTestCase {
         let source = app.links.matching(NSPredicate(format: "label BEGINSWITH %@", "Abrir fuente:")).firstMatch
         XCTAssertTrue(source.waitForExistence(timeout: 100), "La consulta real debe devolver al menos una noticia; un fallo de la fuente no se sustituye por datos inventados.")
         let originalSource = source.label
-        reveal(control("Compartir reporte"))
-        app.webViews.firstMatch.swipeUp()
+        frameResult(control("Compartir reporte"))
         capture("03-Reporte-real-iPhone")
         cancelShare("Compartir reporte")
         reveal(source)
         source.tap()
-        let safariDone = app.buttons.matching(NSPredicate(format: "identifier == 'Done' OR label IN %@", ["OK", "Listo", "Done"])).firstMatch
+        // The observed iOS 26 Safari toolbar exposes Close instead of Done.
+        // Match exact native identifiers to avoid a site's cookie-dialog button.
+        let safariDone = app.buttons.matching(NSPredicate(format: "identifier IN %@ OR label IN %@", ["Close", "Done"], ["OK", "Listo", "Done", "Cerrar", "Close"])).firstMatch
         XCTAssertTrue(safariDone.waitForExistence(timeout: 20), "La fuente debe abrir en Safari integrado con salida a Radar.")
         capture("QA-Fuente-Safari")
         safariDone.tap()
@@ -184,8 +201,7 @@ final class RadarUITests: XCTestCase {
         compare.tap()
         let comparisonShare = control("Compartir comparativo")
         XCTAssertTrue(comparisonShare.waitForExistence(timeout: 100), "Comparativos debe terminar con los datos reales y los fallos que correspondan.")
-        reveal(comparisonShare)
-        app.webViews.firstMatch.swipeUp()
+        frameResult(comparisonShare)
         capture("04-Comparativo-real-iPhone")
         cancelShare("Compartir comparativo")
 
