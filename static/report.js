@@ -1,6 +1,7 @@
 const reportStorageKey = 'radar:report:v1';
 let currentReport = null;
 let currentQuery = null;
+let currentForm = null;
 
 function newsSourceLink(item) {
   for (const value of [item.url, item.link]) {
@@ -34,6 +35,7 @@ function saveReport() {
     sessionStorage.setItem(reportStorageKey, JSON.stringify({
       report: currentReport,
       query: currentQuery,
+      form: currentForm,
       scrollY: window.scrollY
     }));
   } catch (_) {
@@ -47,8 +49,15 @@ function restoreReport() {
     if (!saved?.query || !saved.report?.mentions || !Array.isArray(saved.report.items)) return;
     currentReport = saved.report;
     currentQuery = saved.query;
+    currentForm = saved.form || null;
     for (const field of ['name', 'aliases', 'territory', 'days']) {
       if (currentQuery[field] !== undefined) $(field).value = currentQuery[field];
+    }
+    if (currentForm) {
+      // Keep a usable news query while the directory is loading or unavailable.
+      $('name').value = currentForm.congress_id ? currentQuery.name : currentForm.name;
+      $('aliases').value = currentForm.aliases;
+      if (currentForm.congress_id) window.RadarCongress?.restore(currentForm.congress_id);
     }
     renderReport(currentReport);
     $('report-restored').classList.remove('hide');
@@ -61,7 +70,9 @@ function restoreReport() {
 async function go() {
   const name = $('name').value.trim();
   if (!name) return alert('Escribe un nombre');
-  const query = {name, aliases: $('aliases').value, territory: $('territory').value, days: +$('days').value, limit: 60};
+  const search = window.RadarCongress?.query() || {name, aliases: $('aliases').value};
+  const form = {name: $('name').value, aliases: $('aliases').value, congress_id: window.RadarCongress?.selectedId() || null};
+  const query = {...search, territory: $('territory').value, days: +$('days').value, limit: 60};
   $('loading').classList.remove('hide');
   $('result').classList.add('hide');
   try {
@@ -75,6 +86,7 @@ async function go() {
     renderReport(data);
     currentReport = data;
     currentQuery = query;
+    currentForm = form;
     $('report-restored').classList.add('hide');
     saveReport();
   } catch (error) {
