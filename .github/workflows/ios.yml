@@ -1,0 +1,50 @@
+name: iOS preparation
+
+on:
+  pull_request:
+    paths:
+      - 'mobile/**'
+      - 'static/**'
+      - 'templates/**'
+      - '.github/workflows/ios.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  simulator:
+    runs-on: macos-26
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Bundle and verify iOS resources
+        run: npm run sync
+      - name: Test native adapters and packaged interface
+        run: npm test
+      - name: Check the shared web interface
+        run: node --test ../tests/*.test.cjs
+      - name: Report Apple build tools
+        run: xcodebuild -version
+      - name: Build unsigned iPhone simulator app
+        run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+      - name: Save simulator build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Radar-Politico-iOS-Simulator
+          path: mobile/build/Build/Products/Debug-iphonesimulator/App.app
+          retention-days: 7

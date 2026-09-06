@@ -1,4 +1,5 @@
 const reportStorageKey = 'radar:report:v1';
+const reportStorage = window.RadarNative?.storage || sessionStorage;
 let currentReport = null;
 let currentQuery = null;
 let currentForm = null;
@@ -108,7 +109,7 @@ function newsItem(item) {
 function saveReport() {
   if (!currentReport || !currentQuery || $('reporttab').classList.contains('hide') || $('result').classList.contains('hide')) return;
   try {
-    sessionStorage.setItem(reportStorageKey, JSON.stringify({
+    reportStorage.setItem(reportStorageKey, JSON.stringify({
       report: currentReport,
       query: currentQuery,
       form: currentForm,
@@ -124,7 +125,7 @@ function restoreReport() {
   // search elsewhere. Keep the original query attached to the recovered report.
   $('territory').value = 'Colombia';
   try {
-    const saved = JSON.parse(sessionStorage.getItem(reportStorageKey));
+    const saved = JSON.parse(reportStorage.getItem(reportStorageKey));
     if (!saved?.query || !saved.report?.mentions || !Array.isArray(saved.report.items)) return;
     currentReport = withoutX(saved.report);
     currentQuery = saved.query;
@@ -163,7 +164,7 @@ async function go() {
   $('result').classList.add('hide');
   showOfficialProfile(query, form.congress_id, searchSequence);
   try {
-    const response = await fetch('/api/report', {
+    const response = await (window.RadarNative?.request || fetch)('/api/report', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(query)
@@ -179,7 +180,15 @@ async function go() {
     $('report-restored').classList.add('hide');
     saveReport();
   } catch (error) {
-    if (searchSequence === reportSearchSequence) alert(error.message);
+    if (searchSequence === reportSearchSequence) {
+      if (window.RadarNative && currentReport) {
+        renderReport(currentReport);
+        const zone = currentQuery?.territory || 'Sin filtro de zona';
+        $('report-restored').textContent = `No se pudo actualizar. Se muestra la consulta anterior · Zona consultada: ${zone}.`;
+        $('report-restored').classList.remove('hide');
+      }
+      alert(error.message);
+    }
   } finally {
     if (searchSequence === reportSearchSequence) $('loading').classList.add('hide');
   }

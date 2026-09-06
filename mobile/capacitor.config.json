@@ -1,0 +1,13 @@
+{
+  "appId": "com.tactikacomunicaciones.radarpolitico",
+  "appName": "Radar Político",
+  "webDir": "www",
+  "backgroundColor": "#e9e8e6",
+  "ios": {
+    "contentInset": "never",
+    "scrollEnabled": true,
+    "preferredContentMode": "mobile",
+    "backgroundColor": "#e9e8e6",
+    "webContentsDebuggingEnabled": false
+  }
+}

@@ -75,6 +75,10 @@ def fetch_youtube_count(*args,**kwargs):return (0,'credential_required',None) if
 def restricted_platform(name):return 0,'restricted_access',None
 @app.get('/')
 def home():return render_template('index.html')
+@app.get('/support')
+def support():return render_template('support.html')
+@app.get('/privacy')
+def privacy():return render_template('privacy.html')
 @app.errorhandler(404)
 def not_found(error):
     if request.path.startswith('/api/'):
