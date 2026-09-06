@@ -136,6 +136,16 @@
   }
 
   input.addEventListener('input', renderPicker);
+  for (const [field, buttonId] of [[input, 'clear-compare-name'], [$('compare-territory'), 'clear-compare-territory']]) {
+    const button = $(buttonId);
+    button?.addEventListener('mousedown', event => event.preventDefault());
+    button?.addEventListener('click', () => {
+      if (field.disabled) return;
+      field.value = '';
+      field.dispatchEvent(new Event('input', {bubbles: true}));
+      field.focus();
+    });
+  }
   input.addEventListener('focus', renderPicker);
   input.addEventListener('blur', () => { if (!choosing) closePicker(); });
   input.addEventListener('keydown', event => {
