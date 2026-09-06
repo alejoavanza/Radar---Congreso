@@ -8,12 +8,12 @@
   "primary_language": "es-MX",
   "category_proposed": "News",
   "keywords": "política,Colombia,congreso,noticias,menciones,comparativos,análisis",
-  "description": "Radar Político es una herramienta de Táctika Comunicaciones para consultar menciones en fuentes públicas y comparar la presencia periodística de congresistas.\n\nBUSCA Y REVISA LAS FUENTES\nConsulta un nombre o selecciona una persona del directorio de Cámara y Senado. Ajusta la zona y el periodo: 90, 60, 30, 7 o 1 día. Abre los enlaces de las noticias y regresa al reporte.\n\nCOMPARA CON EL MISMO CRITERIO\nSelecciona entre 2 y 10 congresistas. Revisa sus menciones periodísticas mediante barras, tabla y detalle de noticias, usando el mismo periodo y zona.\n\nRECUPERA Y COMPARTE\nConserva el último reporte y comparativo en tu iPhone. Comparte sus resúmenes y enlaces con la hoja de compartir de iOS. Puedes borrar las consultas guardadas desde los ajustes de la app.\n\nLas búsquedas nuevas requieren conexión a internet. Las fuentes pueden tener cobertura limitada o no estar disponibles. Los conteos representan menciones detectadas: no equivalen a alcance, seguidores, personas únicas, intención de voto o una encuesta. La zona agrega términos a la búsqueda y no determina la ubicación de quienes publican. El análisis de titulares es preliminar.\n\nRadar Político es una herramienta independiente de Táctika Comunicaciones; no es una aplicación oficial del Congreso de Colombia.",
+  "description": "Radar Político es una herramienta de Táctika Comunicaciones para consultar la visibilidad y las menciones de políticos en fuentes públicas, con enfoque en Colombia.\n\nDirigida a unidades de trabajo legislativo, congresistas y otros políticos, periodistas, analistas, escritores, investigadores, estudiantes universitarios y cualquier persona interesada en seguir la conversación pública. Esta primera versión es gratuita.\n\nBUSCA Y REVISA LAS FUENTES\nConsulta un nombre o selecciona una persona del directorio de Cámara y Senado. Ajusta la zona y el periodo: 90, 60, 30, 7 o 1 día. Abre los enlaces de las noticias y regresa al reporte.\n\nCOMPARA CON EL MISMO CRITERIO\nSelecciona entre 2 y 10 congresistas. Revisa sus menciones periodísticas mediante barras, tabla y detalle de noticias, usando el mismo periodo y zona.\n\nRECUPERA Y COMPARTE\nConserva el último reporte y comparativo en tu iPhone. Comparte sus resúmenes y enlaces con la hoja de compartir de iOS. Puedes borrar las consultas guardadas desde los ajustes de la app.\n\nLas búsquedas nuevas requieren conexión a internet. Las fuentes pueden tener cobertura limitada o no estar disponibles. Los conteos representan menciones detectadas: no equivalen a alcance, seguidores, personas únicas, intención de voto o una encuesta. La zona agrega términos a la búsqueda y no determina la ubicación de quienes publican. El análisis de titulares es preliminar.\n\nRadar Político es una herramienta independiente de Táctika Comunicaciones; no es una aplicación oficial del Congreso de Colombia.",
   "support_url_pending_publication": "https://radar-congreso.vercel.app/support",
   "privacy_url_pending_publication": "https://radar-congreso.vercel.app/privacy",
   "marketing_url": "https://www.tactikacomunicaciones.com/",
   "support_email": "tactikacomunicaciones@gmail.com",
-  "review_notes_draft": "La app no requiere inicio de sesión. Para probar Radar, escriba Toro y elija una coincidencia del directorio, mantenga Colombia y seleccione 7 días. Genere el reporte y abra una fuente; Safari integrado permite cerrarla para regresar. En Comparativos, seleccione dos congresistas y elija el mismo periodo y zona. Los botones × borran el texto del nombre o de la zona con un toque. La disponibilidad de fuentes puede variar y se informa en la interfaz.\n\nLa interfaz y el directorio están incluidos en el paquete. Las búsquedas usan el servidor HTTPS de Radar. La app conserva la última consulta en el dispositivo y permite borrarla desde Soporte, privacidad y datos guardados. Compartir reporte y Compartir comparativo utilizan la hoja nativa de iOS. Sin conexión se puede recuperar la última consulta guardada; no se generan resultados nuevos.\n\nLos conteos no son alcance, seguidores, intención de voto ni encuestas. La aplicación es independiente del Congreso de Colombia.",
+  "review_notes_draft": "Esta versión es gratuita, no tiene compras integradas y no requiere una suscripción. Se dirige al público general interesado en la actividad política de Colombia, incluidos profesionales, equipos legislativos y estudiantes.\n\nLa app no requiere inicio de sesión. Para probar Radar, escriba Toro y elija una coincidencia del directorio, mantenga Colombia y seleccione 7 días. Genere el reporte y abra una fuente; Safari integrado permite cerrarla para regresar. En Comparativos, seleccione dos congresistas y elija el mismo periodo y zona. Los botones × borran el texto del nombre o de la zona con un toque. La disponibilidad de fuentes puede variar y se informa en la interfaz.\n\nLa interfaz y el directorio están incluidos en el paquete. Las búsquedas usan el servidor HTTPS de Radar. La app conserva la última consulta en el dispositivo y permite borrarla desde Soporte, privacidad y datos guardados. Compartir reporte y Compartir comparativo utilizan la hoja nativa de iOS. Sin conexión se puede recuperar la última consulta guardada; no se generan resultados nuevos.\n\nLos conteos no son alcance, seguidores, intención de voto ni encuestas. La aplicación es independiente del Congreso de Colombia.",
   "pending": [
     "Nombre y Bundle ID en Apple",
     "Firma del equipo de la empresa",
@@ -22,7 +22,8 @@
     "Clasificación por edad",
     "Declaración de privacidad",
     "Validación y publicación de URLs",
-    "Disponibilidad y modelo comercial"
+    "Configurar el precio gratuito en App Store Connect",
+    "Confirmar la lista de países de distribución; Colombia es el mercado principal"
   ],
   "editorial_market": "Colombia",
   "locale_note": "Apple usa Español (México) para la ficha de Colombia. La app mantiene su redacción y formatos colombianos.",
@@ -30,7 +31,35 @@
   "promotional_text": "Consulta menciones en fuentes públicas, compara congresistas con el mismo periodo y zona, y revisa los enlaces que respaldan cada resultado.",
   "copyright": "2026 TACTIKA COMUNICACIONES S.A.S",
   "sku_proposed": "radar-politico-ios-001",
-  "price_pending_decision": null,
   "territories_pending_decision": null,
-  "age_rating_pending_questionnaire": null
+  "age_rating_pending_questionnaire": null,
+  "launch_price": {
+    "model": "free",
+    "amount": 0,
+    "decision_status": "Confirmado por el responsable del proyecto",
+    "app_store_connect_status": "Pendiente de configuración"
+  },
+  "audience": [
+    "Unidades de trabajo legislativo",
+    "Congresistas y otros políticos",
+    "Periodistas",
+    "Analistas",
+    "Escritores",
+    "Investigadores",
+    "Estudiantes universitarios",
+    "Personas interesadas en la visibilidad y menciones de políticos en Colombia"
+  ],
+  "distribution_plan": {
+    "primary_market": "Colombia",
+    "final_storefront_list": null,
+    "note": "El enfoque principal en Colombia no implica restringir la descarga exclusivamente a este país."
+  },
+  "future_plus": {
+    "status": "Segunda etapa; no implementada ni ofrecida en esta versión",
+    "purpose": "Información adicional de pago",
+    "features": null,
+    "price": null,
+    "billing_period": null,
+    "ios_payment_plan": "Planificar compras integradas de Apple para contenido digital y revisar las reglas de los países elegidos antes de implementar."
+  }
 }

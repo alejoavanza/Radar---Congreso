@@ -31,8 +31,10 @@ const manifest = await read('ios/App/App/PrivacyInfo.xcprivacy');
 assert.ok(manifest.includes('NSPrivacyAccessedAPICategoryUserDefaults') && manifest.includes('CA92.1'));
 const project = await read('ios/App/App.xcodeproj/project.pbxproj');
 assert.ok(project.includes('A10200000000000000000001 /* PrivacyInfo.xcprivacy in Resources */,'));
-assert.equal((project.match(/PRODUCT_BUNDLE_IDENTIFIER = com\.tactikacomunicaciones\.radarpolitico;/g) || []).length, 2);
-assert.equal((project.match(/TARGETED_DEVICE_FAMILY = 1;/g) || []).length, 2);
+const appConfigurations = [...project.matchAll(/isa = XCBuildConfiguration;[\s\S]*?buildSettings = \{([\s\S]*?)\n\s*};/g)]
+  .map(match => match[1]).filter(settings => settings.includes(`PRODUCT_BUNDLE_IDENTIFIER = ${config.appId};`));
+assert.equal(appConfigurations.length, 2, 'Debug and Release must use the app Bundle ID');
+for (const settings of appConfigurations) assert.match(settings, /TARGETED_DEVICE_FAMILY = 1;/, 'The app targets iPhone');
 const icon = await sharp(resolve(mobile, 'ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png')).metadata();
 assert.equal(icon.width, 1024); assert.equal(icon.height, 1024); assert.equal(icon.hasAlpha, false);
 const generated = JSON.parse(await read('ios/App/App/capacitor.config.json'));

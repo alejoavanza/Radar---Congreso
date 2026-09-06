@@ -42,6 +42,31 @@ jobs:
         run: xcodebuild -version
       - name: Build unsigned iPhone simulator app
         run: xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build
+      - name: Prepare installed iPhone simulator
+        env:
+          RADAR_SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python3 scripts/prepare-simulator.py
+      - name: Run iPhone navigation and clear-control checks
+        run: >-
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug
+          -destination "platform=iOS Simulator,id=$SIMULATOR_UDID"
+          -derivedDataPath build -resultBundlePath build/Radar-UI.xcresult
+          -parallel-testing-enabled NO CODE_SIGNING_ALLOWED=NO test
+      - name: Export actual simulator screenshots
+        if: always()
+        run: |
+          if [ -d build/Radar-UI.xcresult ]; then
+            xcrun xcresulttool export attachments --path build/Radar-UI.xcresult --output-path build/evidence/screenshots
+            xcrun xcresulttool get test-results summary --path build/Radar-UI.xcresult > build/evidence/test-summary.json
+          fi
+      - name: Save simulator execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Radar-Politico-iPhone-Evidence
+          path: mobile/build/evidence
+          if-no-files-found: warn
+          retention-days: 30
       - name: Save simulator build
         uses: actions/upload-artifact@v4
         with:

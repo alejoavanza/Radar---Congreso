@@ -19,14 +19,16 @@ Actualizado: 6 de septiembre de 2026. Material de trabajo; no se ha enviado una 
 | Nombre | Radar Político; disponibilidad en Apple pendiente |
 | Subtítulo | Menciones y comparativos |
 | Localización de la ficha | Español (México), `es-MX`, utilizado por Apple para Colombia |
-| Público editorial | Colombia; esto no define los países de distribución |
+| Público | UTL, congresistas y otros políticos, periodistas, analistas, escritores, investigadores, estudiantes universitarios y personas interesadas |
+| Mercado principal | Colombia; lista final de países de distribución pendiente |
 | Empresa | TACTIKA COMUNICACIONES S.A.S |
 | Identificador propuesto | `com.tactikacomunicaciones.radarpolitico`; sin registrar en Apple |
 | SKU propuesto | `radar-politico-ios-001`; identificador interno, sin registrar |
 | Categoría propuesta | Noticias |
 | Versión preparada | 1.0.0 |
 | Soporte actual | tactikacomunicaciones@gmail.com |
-| Precio y disponibilidad | Pendientes de decisión; no se han configurado |
+| Precio inicial | Gratuito, confirmado; configuración en Apple pendiente |
+| Versión Plus | Segunda etapa con información de pago; funciones, precio y modalidad pendientes |
 | Clasificación por edad | Pendiente del cuestionario vigente de Apple |
 
 El correo de soporte de la ficha no reemplaza el correo corporativo necesario para inscribir a la organización. La persona propuesta para gestionar la cuenta no se considera representante autorizada hasta que Táctika lo confirme.
@@ -37,13 +39,15 @@ El correo de soporte de la ficha no reemplaza el correo corporativo necesario pa
 2. Ejecutar pruebas en simulador y preparar las pruebas en dispositivo. Las capturas pueden obtenerse de la app ejecutada en un simulador compatible o en un iPhone; aún no se han producido las capturas de esta entrega.
 3. Confirmar la política de conservación, proveedores, contacto y procedimiento de solicitudes de datos.
 4. Validar las páginas de soporte y privacidad y preparar su publicación.
-5. Decidir público, precio y países de lanzamiento; revisar el contenido accesible para completar la clasificación por edad.
+5. Configurar el lanzamiento gratuito cuando esté disponible la cuenta, confirmar la lista de países y revisar el contenido accesible para completar la clasificación por edad.
+
+El público, el lanzamiento gratuito y el enfoque principal en Colombia están confirmados. El [alcance del lanzamiento y la futura versión Plus](lanzamiento-y-plus.md) documenta estas decisiones sin anunciar prestaciones que aún no existen.
 
 ## Qué depende de la cuenta de Táctika
 
 La inscripción, los acuerdos y el pago de la membresía corresponden a la empresa. Una vez activa, se registran el identificador y la ficha, se configura la firma, se sube una compilación a App Store Connect y se distribuye para pruebas mediante TestFlight si se elige ese paso. El envío a revisión requiere completar la información obligatoria y resolver las incidencias de la versión candidata.
 
-No se ha aceptado un acuerdo de Apple, asignado una clasificación por edad, reservado un nombre ni confirmado un precio. Tampoco se ha declarado que no se recopilan datos.
+No se ha aceptado un acuerdo de Apple, asignado una clasificación por edad, reservado un nombre ni configurado el precio en App Store Connect. Tampoco se ha declarado que no se recopilan datos.
 
 ## Fuentes de requisitos
 

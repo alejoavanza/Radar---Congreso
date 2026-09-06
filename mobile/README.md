@@ -45,11 +45,13 @@ Para regenerar el icono desde el vector existente: `node scripts/icons.mjs`. Los
 
 `npm test` comprueba transporte nativo, errores, cancelación, persistencia/borrado, contenido compartido y la interfaz empaquetada de Radar y Comparativos con respuestas controladas. `npm run verify` comprueba recursos locales, plugins, identidad, icono y manifiesto.
 
-El flujo `.github/workflows/ios.yml` ejecuta las pruebas y compila para el simulador en un Mac de GitHub, sin certificados de distribución. Una compilación del simulador no sustituye pruebas en un iPhone físico ni certifica la aprobación de Apple.
+El flujo `.github/workflows/ios.yml` ejecuta las pruebas y compila para el simulador en un Mac de GitHub, sin certificados de distribución. El esquema App incluye `AppUITests`: abre la app, navega entre Radar y Comparativos y comprueba los botones para borrar nombres y zonas con el teclado de iOS. Usa el directorio incluido, sin inventar reportes ni depender de fuentes remotas. Las capturas de ambas pestañas, el resultado de las pruebas y la identificación del simulador se guardan en el artefacto `Radar-Politico-iPhone-Evidence`. Una compilación o ejecución del simulador no sustituye pruebas en un iPhone físico ni certifica la aprobación de Apple.
 
 ## Material de publicación preparado
 
 La [guía de publicación](app-store/README.md) reúne la ficha en español, el [inventario de privacidad](app-store/privacidad.md) y el [guion de pruebas y capturas](app-store/pruebas-iphone.md). La ficha usa `es-MX`, la localización que Apple asigna por defecto a Colombia. El idioma de la aplicación y sus formatos colombianos se conservan.
+
+El [alcance del lanzamiento](app-store/lanzamiento-y-plus.md) incorpora las decisiones confirmadas: acceso inicial gratuito, público interesado en la actividad política colombiana y Colombia como mercado principal. Plus queda para una segunda etapa con funciones, precio y modalidad por definir.
 
 ## Pendientes antes de TestFlight y App Store
 
