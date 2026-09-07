@@ -11,6 +11,7 @@ from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 import re
 import unicodedata
 import logging
+import json
 
 import feedparser
 import requests
@@ -20,6 +21,8 @@ UA = {'User-Agent': 'Radar-Politico/2.1 (public-news-monitor)'}
 MAX_NAMES = 6
 MAX_BYTES = 2_000_000
 CONF_FEED = 'https://confidencialnoticias.com/feed/'
+CONF_API = ('https://confidencialnoticias.com/wp-json/wp/v2/posts?per_page=50'
+            '&_embed=author&_fields=link,slug,status,date_gmt,title,excerpt,content,_links,_embedded')
 CHIVA_HOME = 'https://www.lachivadeuraba.com/'
 SOCIAL_HOSTS = ('facebook.com', 'instagram.com', 'twitter.com', 'x.com', 'tiktok.com',
                 'reddit.com', 'bsky.app', 'youtube.com', 'youtu.be', 'threads.com', 'threads.net')
@@ -190,7 +193,36 @@ def google_news(term, territory, start, end):
 
 
 def confidencial_news(terms, territory, start, end):
-    return feed_items(source_bytes(CONF_FEED), start, end, source='Confidencial Noticias', terms=terms, territory=territory)
+    try:
+        return feed_items(source_bytes(CONF_FEED), start, end, source='Confidencial Noticias', terms=terms, territory=territory)
+    except (requests.RequestException, ValueError):
+        # The publisher advertises this public REST interface in its article HTML.
+        # Read only published posts; do not use credentials or alter client identity.
+        posts = json.loads(source_bytes(CONF_API))
+        if not isinstance(posts, list):
+            raise ValueError('The publisher did not return public posts')
+        items, skipped = [], 0
+        for post in posts[:50]:
+            if not isinstance(post, dict) or post.get('status') != 'publish':
+                continue
+            title = unescape(post.get('title', {}).get('rendered', '')).strip()
+            authors = post.get('_embedded', {}).get('author', [])
+            text = ' '.join([title, post.get('slug', ''),
+                             post.get('excerpt', {}).get('rendered', ''),
+                             post.get('content', {}).get('rendered', ''),
+                             *[author.get('name', '') for author in authors if isinstance(author, dict)]])
+            if not matches(text, terms) or not in_zone(text, territory):
+                continue
+            # WordPress date_gmt has no offset in JSON but is explicitly UTC.
+            published = publication_date(str(post.get('date_gmt', '')) + 'Z')
+            link = safe_url(post.get('link'))
+            if not title or not published or not link or urlsplit(link).hostname not in ('confidencialnoticias.com', 'www.confidencialnoticias.com'):
+                skipped += 1
+                continue
+            if start <= published < end:
+                items.append({'title': title, 'url': link, 'link': link, 'published': iso(published),
+                              'source': 'Confidencial Noticias', 'discovery': 'publisher'})
+        return items, skipped, len(posts) >= 50
 
 
 def chiva_news(terms, territory, start, end):

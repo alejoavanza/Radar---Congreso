@@ -1,4 +1,5 @@
 import unittest
+import json
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 from unittest.mock import Mock, patch
@@ -63,6 +64,29 @@ class NewsRegressionTest(unittest.TestCase):
              patch.object(news, 'google_news', return_value=([], 0, False)):
             result = news.search_news(self.query, self.end-timedelta(days=1), self.end)
         self.assertEqual([item['url'] for item in result['items']], [CONF_URL])
+
+    def test_public_api_recovers_authored_column_when_feed_is_unavailable(self):
+        post = {'status': 'publish', 'link': CONF_URL, 'slug': 'una-columna',
+                'date_gmt': '2026-09-06T06:45:00',
+                'title': {'rendered': 'Mientras la IA corre Colombia sigue en la línea de salida'},
+                '_embedded': {'author': [{'name': 'Alejandro Toro'}]}}
+        old = dict(post, link='https://confidencialnoticias.com/columna-anterior/',
+                   date_gmt='2026-08-01T06:45:00', modified_gmt='2026-09-06T06:45:00')
+        private = dict(post, status='private')
+        forbidden = news.requests.HTTPError(response=Mock(status_code=403))
+        with patch.object(news, 'source_bytes', side_effect=[forbidden, json.dumps([post, old, private]).encode()]):
+            items, missing, limited = news.confidencial_news(self.query.terms, 'Colombia', self.start, self.end)
+        self.assertEqual([item['url'] for item in items], [CONF_URL])
+        self.assertEqual(items[0]['published'], '2026-09-06T06:45:00Z')
+        self.assertEqual(missing, 0)
+        self.assertFalse(limited)
+
+    def test_api_access_error_is_unavailable_and_does_not_become_zero(self):
+        forbidden = news.requests.HTTPError(response=Mock(status_code=403))
+        with patch.object(news, 'get_bytes', side_effect=forbidden):
+            result = news.search_news(self.query, self.start, self.end)
+        self.assertEqual(result['status'], 'unavailable')
+        self.assertIsNone(result['count'])
 
     def test_google_and_publisher_same_story_count_once_with_direct_url(self):
         title = 'Mientras la IA corre Colombia sigue en la línea de salida'
