@@ -1,4 +1,4 @@
-const reportStorageKey = 'radar:report:web:v3';
+const reportStorageKey = 'radar:report:web:v4';
 const reportStorage = window.RadarNative?.storage || sessionStorage;
 let currentReport = null;
 let currentQuery = null;

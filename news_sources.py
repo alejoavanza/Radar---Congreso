@@ -5,13 +5,11 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from functools import lru_cache
 from html import unescape
-from html.parser import HTMLParser
 from time import time
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 import re
 import unicodedata
 import logging
-import json
 
 import feedparser
 import requests
@@ -20,10 +18,6 @@ TIMEOUT = (3, 8)
 UA = {'User-Agent': 'Radar-Politico/2.1 (public-news-monitor)'}
 MAX_NAMES = 6
 MAX_BYTES = 2_000_000
-CONF_FEED = 'https://confidencialnoticias.com/feed/'
-CONF_API = ('https://confidencialnoticias.com/wp-json/wp/v2/posts?per_page=50'
-            '&_embed=author&_fields=link,slug,status,date_gmt,title,excerpt,content,_links,_embedded')
-CHIVA_HOME = 'https://www.lachivadeuraba.com/'
 SOCIAL_HOSTS = ('facebook.com', 'instagram.com', 'twitter.com', 'x.com', 'tiktok.com',
                 'reddit.com', 'bsky.app', 'youtube.com', 'youtu.be', 'threads.com', 'threads.net')
 SOCIAL_LABELS = {'facebook', 'instagram', 'twitter', 'x', 'tiktok', 'reddit', 'bluesky', 'youtube', 'threads'}
@@ -98,56 +92,14 @@ def get_bytes(url, **kwargs):
     return response.content
 
 
-@lru_cache(maxsize=16)
+@lru_cache(maxsize=64)
 def cached_source(url, bucket):
-    # The fixed publisher URLs and same-host article links never come from user URLs.
+    # Cached index URLs use fixed hosts and encoded search parameters.
     return get_bytes(url)
 
 
 def source_bytes(url):
     return cached_source(url, int(time() // 300))
-
-
-class Page(HTMLParser):
-    def __init__(self, html):
-        super().__init__()
-        self.meta, self.links, self.article_text = {}, [], []
-        self.anchor, self.article_depth, self.skip = None, 0, 0
-        self.feed(html)
-
-    def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-        if tag == 'meta':
-            self.meta[attrs.get('property', attrs.get('name', ''))] = attrs.get('content', '')
-        if tag == 'a' and attrs.get('href'):
-            self.anchor = [attrs['href'], '']
-        if tag == 'article':
-            self.article_depth += 1
-        if tag in ('script', 'style'):
-            self.skip += 1
-
-    def handle_data(self, text):
-        if self.skip:
-            return
-        if self.anchor is not None:
-            self.anchor[1] += ' ' + text
-        if self.article_depth:
-            self.article_text.append(text)
-
-    def handle_endtag(self, tag):
-        if tag == 'a' and self.anchor is not None:
-            self.links.append(self.anchor)
-            self.anchor = None
-        if tag == 'article':
-            self.article_depth = max(0, self.article_depth - 1)
-        if tag in ('script', 'style'):
-            self.skip = max(0, self.skip - 1)
-
-
-def in_zone(text, territory):
-    # These feeds belong to Colombian publishers. Requiring the word Colombia
-    # would discard local reporting that already has this country context.
-    return not territory or normalize(territory) == 'colombia' or matches(text, [territory])
 
 
 def feed_items(raw, start, end, *, source=None, terms=(), territory=''):
@@ -161,7 +113,7 @@ def feed_items(raw, start, end, *, source=None, terms=(), territory=''):
         title = unescape(entry.get('title', '')).strip()
         text = ' '.join([title, entry.get('author', ''), entry.get('summary', ''),
                          *[c.get('value', '') for c in entry.get('content', [])]])
-        if terms and (not matches(text, terms) or not in_zone(text, territory)):
+        if terms and not matches(text, terms):
             continue
         published = publication_date(entry.get('published'))
         link = safe_url(entry.get('link'))
@@ -171,13 +123,10 @@ def feed_items(raw, start, end, *, source=None, terms=(), territory=''):
         if not start <= published < end:
             continue
         publisher = source or (entry.get('source') or {}).get('title', '')
-        if source and urlsplit(link).hostname not in ('confidencialnoticias.com', 'www.confidencialnoticias.com'):
-            skipped += 1
-            continue
         if not source and publisher and title.endswith(' - ' + publisher):
             title = title[:-len(' - ' + publisher)]
         items.append({'title': title, 'url': link, 'link': link, 'published': iso(published),
-                      'source': publisher, 'discovery': 'publisher' if source else 'google_news'})
+                      'source': publisher, 'publisher_domain': (urlsplit((entry.get('source') or {}).get('href', '')).hostname or '').removeprefix('www.'), 'discovery': 'publisher' if source else 'google_news'})
     return items, skipped, len(feed.entries) >= 100
 
 
@@ -192,88 +141,14 @@ def google_news(term, territory, start, end):
     return feed_items(raw, start, end)
 
 
-def confidencial_news(terms, territory, start, end):
-    try:
-        return feed_items(source_bytes(CONF_FEED), start, end, source='Confidencial Noticias', terms=terms, territory=territory)
-    except (requests.RequestException, ValueError):
-        # The publisher advertises this public REST interface in its article HTML.
-        # Read only published posts; do not use credentials or alter client identity.
-        posts = json.loads(source_bytes(CONF_API))
-        if not isinstance(posts, list):
-            raise ValueError('The publisher did not return public posts')
-        items, skipped = [], 0
-        for post in posts[:50]:
-            if not isinstance(post, dict) or post.get('status') != 'publish':
-                continue
-            title = unescape(post.get('title', {}).get('rendered', '')).strip()
-            authors = post.get('_embedded', {}).get('author', [])
-            text = ' '.join([title, post.get('slug', ''),
-                             post.get('excerpt', {}).get('rendered', ''),
-                             post.get('content', {}).get('rendered', ''),
-                             *[author.get('name', '') for author in authors if isinstance(author, dict)]])
-            if not matches(text, terms) or not in_zone(text, territory):
-                continue
-            # WordPress date_gmt has no offset in JSON but is explicitly UTC.
-            published = publication_date(str(post.get('date_gmt', '')) + 'Z')
-            link = safe_url(post.get('link'))
-            if not title or not published or not link or urlsplit(link).hostname not in ('confidencialnoticias.com', 'www.confidencialnoticias.com'):
-                skipped += 1
-                continue
-            if start <= published < end:
-                items.append({'title': title, 'url': link, 'link': link, 'published': iso(published),
-                              'source': 'Confidencial Noticias', 'discovery': 'publisher'})
-        return items, skipped, len(posts) >= 50
-
-
-def chiva_news(terms, territory, start, end):
-    page = Page(source_bytes(CHIVA_HOME).decode('utf-8', errors='replace'))
-    if not page.links:
-        raise ValueError('The publisher did not return an article listing')
-    links = []
-    for href, title in page.links:
-        link = urljoin(CHIVA_HOME, href)
-        parsed = urlsplit(link)
-        if parsed.scheme != 'https' or parsed.netloc != 'www.lachivadeuraba.com' or not parsed.path.startswith('/articulo/'):
-            continue
-        if matches(parsed.path + ' ' + title, terms) and link not in links:
-            links.append(link)
-
-    def read_article(link):
-        article = Page(source_bytes(link).decode('utf-8', errors='replace'))
-        title = article.meta.get('og:title', '')
-        text = ' '.join([title, article.meta.get('og:description', ''), *article.article_text])
-        if not matches(text, terms) or not in_zone(text, territory):
-            return None, 0
-        published = publication_date(article.meta.get('article:published_time'))
-        # Never substitute dateModified or sitemap lastmod for publication time.
-        if not published or not title:
-            return None, 1
-        if not start <= published < end:
-            return None, 0
-        return {'title': ' '.join(title.split()), 'url': link, 'link': link,
-                'published': iso(published), 'source': 'La Chiva de Urabá', 'discovery': 'publisher'}, 0
-
-    items, skipped = [], 0
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        futures = [pool.submit(read_article, link) for link in links[:5]]
-        for future in futures:
-            try:
-                item, missing = future.result()
-                skipped += missing
-                if item:
-                    items.append(item)
-            except (requests.RequestException, ValueError, TypeError):
-                skipped += 1
-    return items, skipped, len(links) > 5
-
-
 def search_news(query, start, end, limit=100):
+    from web_discovery import bing_web, gdelt_web, verify_candidates
     if isinstance(query, str):
         query = NewsQuery((query,), '')
     terms = list(dict.fromkeys(t.replace('"', ' ').strip() for t in query.terms if t.strip()))
     jobs = [('Google Noticias', google_news, (term, query.territory, start, end)) for term in terms[:MAX_NAMES]]
-    jobs.extend([('Confidencial Noticias', confidencial_news, (terms, query.territory, start, end)),
-                 ('La Chiva de Urabá', chiva_news, (terms, query.territory, start, end))])
+    jobs.extend([('Bing web', bing_web, (terms[:MAX_NAMES], query.territory, start, end)),
+                 ('GDELT', gdelt_web, (terms[:MAX_NAMES], query.territory, start, end))])
     items, sources, missing = [], [], 0
     limited = len(terms) > MAX_NAMES
     with ThreadPoolExecutor(max_workers=8) as pool:
@@ -289,17 +164,25 @@ def search_news(query, start, end, limit=100):
                 status = getattr(getattr(error, 'response', None), 'status_code', None)
                 logging.getLogger(__name__).warning('News source unavailable: %s; %s; HTTP %s', name, type(error).__name__, status)
                 sources.append({'source': name, 'status': 'unavailable', 'retrieved': None})
+    candidates = [item for item in items if item.get('candidate')]
+    items = [item for item in items if not item.get('candidate')]
+    if candidates:
+        verified, skipped, capped = verify_candidates(candidates, terms, start, end)
+        items.extend(verified)
+        missing += skipped
+        limited |= capped or bool(skipped)
+    logging.getLogger(__name__).warning('Search indexes: %s', [(s['source'], s['status'], s['retrieved']) for s in sources])
     active = sorted({s['source'] for s in sources if s['status'] == 'available'})
     failed = sorted({s['source'] for s in sources if s['status'] == 'unavailable'})
     if not active:
         return {'status': 'unavailable', 'count': None, 'items': [], 'limited': True,
                 'sources': sources, 'message': 'No fue posible consultar las fuentes. Intenta de nuevo.'}
     # Prefer publisher URLs when the same headline also arrives through Google.
-    items.sort(key=lambda i: i['discovery'] != 'publisher')
+    items.sort(key=lambda i: i['discovery'] == 'google_news')
     unique, urls, titles = [], set(), set()
     for item in items:
         key = url_key(item['url'])
-        title_key = (normalize(item['title']), normalize(item['source']), item['published'][:10])
+        title_key = (normalize(item['title']), normalize(item.get('publisher_domain') or item['source']), item['published'][:10])
         if key in urls or title_key in titles:
             continue
         urls.add(key)
@@ -307,11 +190,11 @@ def search_news(query, start, end, limit=100):
         unique.append(item)
     unique.sort(key=lambda i: i['published'], reverse=True)
     limited |= len(unique) > limit or bool(failed)
-    message = 'Fuentes consultadas: ' + ', '.join(active) + '. Cobertura parcial de la web; pueden existir otras publicaciones.'
+    message = 'Búsqueda en noticias y páginas web. Cobertura parcial; no incluye redes sociales.'
     if failed:
-        message += ' No se completaron todas las consultas de: ' + ', '.join(failed) + '.'
+        message = 'Consulta parcial: no se completó la búsqueda en todos los buscadores. Se muestran los resultados disponibles.'
     if missing:
-        message += f' Se omitieron {missing} registros sin fecha, enlace o respuesta verificable.'
+        message += ' Algunas páginas se omitieron por falta de fecha o contenido verificable.'
     if len(unique) > limit:
         message += f' Se muestran las {limit} publicaciones más recientes recuperadas.'
     return {'status': 'available', 'count': len(unique[:limit]), 'items': unique[:limit], 'limited': limited,

@@ -3,6 +3,7 @@ from unittest.mock import Mock, patch
 
 import app as radar
 import news_sources
+import web_discovery
 from datetime import datetime, timezone
 from email.utils import format_datetime
 
@@ -19,7 +20,9 @@ class SourceLinksTest(unittest.TestCase):
                 '<source url="https://example.com">Medio</source>'
                 '</item></channel></rss>')
         response = Mock(content=feed.encode())
-        with patch.object(news_sources.requests, 'get', return_value=response):
+        with patch.object(news_sources.requests, 'get', return_value=response), \
+             patch.object(web_discovery, 'bing_web', return_value=([], 0, False)), \
+             patch.object(web_discovery, 'gdelt_web', return_value=([], 0, False)):
             result = radar.app.test_client().post('/api/report', json={
                 'name': 'Alejandro Toro', 'days': 30, 'territory': 'Colombia'
             })
