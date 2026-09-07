@@ -1,4 +1,4 @@
-const reportStorageKey = 'radar:report:v1';
+const reportStorageKey = 'radar:report:v2';
 const reportStorage = window.RadarNative?.storage || sessionStorage;
 let currentReport = null;
 let currentQuery = null;
@@ -104,7 +104,9 @@ function newsSourceLink(item) {
 }
 
 function newsItem(item) {
-  return `<div class="item"><b>${esc(item.title)}</b><br><span>${esc(item.sentiment)}</span> · ${esc(item.source)}<br>${newsSourceLink(item)}</div>`;
+  const date = new Date(item.published);
+  const published = Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat('es-CO', {day:'numeric', month:'short', year:'numeric', timeZone:'UTC'}).format(date);
+  return `<div class="item"><b>${esc(item.title)}</b><br><span>${esc(item.sentiment)}</span> · ${esc(item.source)}${published ? ` · ${esc(published)}` : ''}<br>${newsSourceLink(item)}</div>`;
 }
 
 function saveReport() {
@@ -216,6 +218,7 @@ function renderReport(d) {
   if (coverage) coverage.textContent = measured.length
     ? `Redes consultadas: ${measured.join(', ')}. El total suma la web y estas fuentes; las demás redes no están disponibles. No es un censo de todas las menciones.`
     : 'Redes públicas: no disponible (N/D). El total corresponde solo a las noticias detectadas en web; no significa que haya cero menciones en redes.';
+  if (coverage && d.web_coverage?.message) coverage.textContent = d.web_coverage.message + ' ' + coverage.textContent;
   $('rname').textContent = d.name;
   $('summary').textContent = d.summary;
   $('items').innerHTML = (d.items || []).map(newsItem).join('');

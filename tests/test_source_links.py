@@ -2,13 +2,19 @@ import unittest
 from unittest.mock import Mock, patch
 
 import app as radar
+import news_sources
+from datetime import datetime, timezone
+from email.utils import format_datetime
 
 
 class SourceLinksTest(unittest.TestCase):
+    def setUp(self):
+        news_sources.cached_source.cache_clear()
+
     def test_report_keeps_the_exact_article_url_from_the_feed(self):
         article_url = 'https://news.google.com/rss/articles/CBMiExample?oc=5&hl=es-419'
         feed = ('<rss version="2.0"><channel><item>'
-                '<title>Alejandro Toro - Medio</title>'
+                '<title>Alejandro Toro - Medio</title><pubDate>' + format_datetime(datetime.now(timezone.utc)) + '</pubDate>'
                 '<link>' + article_url.replace('&', '&amp;') + '</link>'
                 '<source url="https://example.com">Medio</source>'
                 '</item></channel></rss>')

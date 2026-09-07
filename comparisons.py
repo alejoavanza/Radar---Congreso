@@ -9,6 +9,7 @@ import os
 
 import feedparser
 import requests
+from news_sources import NewsQuery, search_news
 from flask import Blueprint, jsonify, request
 
 comparison_api = Blueprint('comparison', __name__)
@@ -36,11 +37,8 @@ def public_member(member):
 
 
 def query_for(member, territory):
-    # Parentheses apply the same zone filter to every spelling of the person's name.
-    terms = list(dict.fromkeys([member['search_name'], *member['aliases'], member['full_name']]))
-    quoted = ['"' + term.replace('"', ' ').strip() + '"' for term in terms]
-    query = '(' + ' OR '.join(quoted) + ')'
-    return query + (' "' + territory.replace('"', ' ').strip() + '"' if territory else '')
+    terms = tuple(dict.fromkeys([member['search_name'], *member['aliases'], member['full_name']]))
+    return NewsQuery(terms, territory)
 
 
 def unavailable(message):
@@ -74,45 +72,7 @@ def safe_url(value):
 
 
 def count_news(query, start, end):
-    # Fetch a date envelope, then enforce the exact shared hours locally (also for 1 day).
-    dated_query = query + f' after:{(start-timedelta(days=1)):%Y-%m-%d} before:{(end+timedelta(days=1)):%Y-%m-%d}'
-    params = {'q': dated_query, 'hl': 'es-419', 'gl': 'CO', 'ceid': 'CO:es-419'}
-    response = requests.get('https://news.google.com/rss/search', params=params, headers=UA, timeout=TIMEOUT)
-    if not response.ok:
-        return http_error('Google Noticias', response)
-    feed = feedparser.parse(response.content)
-    if not feed.get('version'):
-        return unavailable('Google Noticias no devolvió un listado válido.')
-    items, seen, skipped = [], set(), 0
-    for entry in feed.entries[:100]:
-        try:
-            published = parsedate_to_datetime(entry.get('published', ''))
-            if not published.tzinfo:
-                raise ValueError('Missing timezone')
-        except (TypeError, ValueError, IndexError):
-            skipped += 1
-            continue
-        if not start <= published < end:
-            continue
-        link = safe_url(entry.get('link'))
-        if not link:
-            skipped += 1
-            continue
-        if link in seen:
-            continue
-        seen.add(link)
-        source = entry.get('source') or {}
-        items.append({'title': entry.get('title', ''), 'url': link, 'published': iso(published),
-                      'source': source.get('title', '') if isinstance(source, dict) else ''})
-    items.sort(key=lambda item: item['published'], reverse=True)
-    limited = len(feed.entries) >= 100 or skipped > 0
-    message = 'Noticias recuperadas en Google Noticias; no es un censo de toda la web.'
-    if len(feed.entries) >= 100:
-        message += ' La fuente devolvió el máximo de 100 resultados antes del filtro de fechas.'
-    if skipped:
-        message += f' Se excluyeron {skipped} registros sin fecha o enlace verificable.'
-    return available(len(items), message, limited=limited, items=items,
-                     url='https://news.google.com/search?' + urlencode(params))
+    return search_news(query, start, end, limit=100)
 
 
 def count_x(query, start, end):

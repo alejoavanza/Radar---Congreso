@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, jsonify
-import feedparser, requests, re, os
-from urllib.parse import quote
+import requests, re, os
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from comparisons import comparison_api
+from news_sources import NewsQuery, search_news
 
 app = Flask(__name__)
 app.register_blueprint(comparison_api)
@@ -25,16 +25,10 @@ def search_terms(name,aliases):return [name]+[a.strip() for a in aliases.split('
 def build_query(name,aliases,territory=''):
     q=' OR '.join('"'+t+'"' for t in search_terms(name,aliases)); return q+(' '+territory.strip() if territory.strip() else '')
 def fetch_news(name,aliases,territory,days,limit):
-    url='https://news.google.com/rss/search?q='+quote(build_query(name,aliases,territory)+f' when:{days}d')+'&hl=es-419&gl=CO&ceid=CO:es-419'
-    try:r=requests.get(url,timeout=15,headers=UA);r.raise_for_status();feed=feedparser.parse(r.content)
-    except Exception as e:return [],str(e)
-    out=[];seen=set()
-    for e in feed.entries[:limit]:
-        link=e.get('link','#')
-        if link in seen:continue
-        seen.add(link);title=e.get('title','').strip();source=e.get('source',{}).get('title','') if isinstance(e.get('source',{}),dict) else ''
-        out.append({'title':title,'url':link,'link':link,'published':e.get('published',''),'source':source,'sentiment':sentiment(title)})
-    return out,None
+    end=datetime.now(timezone.utc)
+    coverage=search_news(NewsQuery(tuple(search_terms(name,aliases)),territory.strip()),end-timedelta(days=days),end,limit)
+    items=[{**item,'sentiment':sentiment(item['title'])} for item in coverage['items']]
+    return items,coverage['message'] if coverage['status']=='unavailable' else None,coverage
 def fetch_bluesky_count(name,aliases,territory,days,max_pages=5):
     cutoff=datetime.now(timezone.utc)-timedelta(days=days);cursor=None;seen=set()
     try:
@@ -82,12 +76,26 @@ def not_found(error):
     return render_template('not_found.html'),404
 @app.post('/api/report')
 def report():
-    d=request.get_json(force=True);name=(d.get('name') or '').strip()
+    d=request.get_json(silent=True)
+    if not isinstance(d,dict):return jsonify({'error':'La consulta no es válida.'}),400
+    name=d.get('name','')
+    if not isinstance(name,str):return jsonify({'error':'Escribe un nombre.'}),400
+    name=name.strip()
     if not name:return jsonify({'error':'Escribe un nombre.'}),400
-    days=max(1,min(int(d.get('days',30)),90));limit=max(10,min(int(d.get('limit',60)),100));aliases=d.get('aliases','');territory=d.get('territory','Colombia');items,err=fetch_news(name,aliases,territory,days,limit)
+    try:
+        days=max(1,min(int(d.get('days',30)),90));limit=max(10,min(int(d.get('limit',60)),100))
+    except (TypeError,ValueError):return jsonify({'error':'Elige un periodo válido.'}),400
+    aliases=d.get('aliases','');territory=d.get('territory','Colombia')
+    if not isinstance(aliases,str) or not isinstance(territory,str) or len(name)>200 or len(aliases)>1000 or len(territory)>100:
+        return jsonify({'error':'Revisa el nombre, los términos asociados y la zona.'}),400
+    items,err,coverage=fetch_news(name,aliases,territory,days,limit)
     if err:return jsonify({'error':'No fue posible consultar las fuentes en este momento.','detail':err}),502
-    counts=Counter(x['sentiment'] for x in items);total=len(items);pos=counts['Positivo'];neg=counts['Negativo'];neu=counts['Neutral'];balance=round((pos-neg)/total*100,1) if total else 0;bsky,bs,_=fetch_bluesky_count(name,aliases,territory,days);reddit,rs,_=fetch_reddit_count(name,aliases,territory,days);yt,ys,_=fetch_youtube_count();fb,fbs,_=restricted_platform('Facebook');ig,igs,_=restricted_platform('Instagram');tt,tts,_=restricted_platform('TikTok');pc={'YouTube':yt,'Bluesky':bsky,'Reddit':reddit,'Facebook':fb,'Instagram':ig,'TikTok':tt};ps={'YouTube':ys,'Bluesky':bs,'Reddit':rs,'Facebook':fbs,'Instagram':igs,'TikTok':tts};social=sum(pc[k] for k,v in ps.items() if v=='active');active=[k for k,v in ps.items() if v=='active'];summary=f"{name} registra {total} resultados periodísticos en los últimos {days} días. El balance contextual preliminar es {balance:+.1f}, con {pos} titulares positivos, {neg} negativos y {neu} neutrales."
-    return jsonify({'name':name,'days':days,'total':total,'positive':pos,'negative':neg,'neutral':neu,'balance':balance,'topics':topics(items,name),'summary':summary,'items':items,'mentions':{'web':total,'social':social,'combined':total+social,'platform_counts':pc,'platform_status':ps,'active_sources':active,'note':'Total detectado únicamente en fuentes activas.'}})
+    counts=Counter(x['sentiment'] for x in items);total=len(items);pos=counts['Positivo'];neg=counts['Negativo'];neu=counts['Neutral'];balance=round((pos-neg)/total*100,1) if total else 0;bsky,bs,_=fetch_bluesky_count(name,aliases,territory,days);reddit,rs,_=fetch_reddit_count(name,aliases,territory,days);yt,ys,_=fetch_youtube_count();fb,fbs,_=restricted_platform('Facebook');ig,igs,_=restricted_platform('Instagram');tt,tts,_=restricted_platform('TikTok');pc={'YouTube':yt,'Bluesky':bsky,'Reddit':reddit,'Facebook':fb,'Instagram':ig,'TikTok':tt};ps={'YouTube':ys,'Bluesky':bs,'Reddit':rs,'Facebook':fbs,'Instagram':igs,'TikTok':tts};social=sum(pc[k] for k,v in ps.items() if v=='active');active=[k for k,v in ps.items() if v=='active']
+    summary=(f"Se encontraron {total} publicaciones para {name} en los últimos {days} días. "
+             "El conteo corresponde a las fuentes consultadas, no a todas las publicaciones existentes.") if total else (
+             f"No se encontraron publicaciones para {name} en las fuentes consultadas durante los últimos {days} días. "
+             "Esto no prueba que no existan menciones: la cobertura puede omitir medios o publicaciones recientes.")
+    return jsonify({'name':name,'days':days,'total':total,'positive':pos,'negative':neg,'neutral':neu,'balance':balance,'topics':topics(items,name),'summary':summary,'items':items,'web_coverage':{k:v for k,v in coverage.items() if k!='items'},'mentions':{'web':total,'social':social,'combined':total+social,'platform_counts':pc,'platform_status':ps,'active_sources':active,'note':'Total detectado únicamente en fuentes activas.'}})
 @app.get('/health')
 def health():return {'status':'ok'}
 if __name__=='__main__':app.run(host='0.0.0.0',port=5000,debug=True)

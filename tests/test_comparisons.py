@@ -4,11 +4,13 @@ from email.utils import format_datetime
 from unittest.mock import Mock, patch
 
 import comparisons as comp
+import news_sources
 from app import app
 
 
 class ComparisonTest(unittest.TestCase):
     def setUp(self):
+        news_sources.cached_source.cache_clear()
         self.client = app.test_client()
         self.ids = list(comp.members())[:10]
         self.end = datetime(2026, 9, 6, 12, tzinfo=timezone.utc)
@@ -77,7 +79,7 @@ class ComparisonTest(unittest.TestCase):
 
     def test_zone_applies_to_all_aliases_and_contains_no_injected_quotes(self):
         member = {'search_name': 'Alejandro Toro', 'full_name': 'David Alejandro Toro Ramírez', 'aliases': ['Alejandro Toro']}
-        self.assertEqual(comp.query_for(member, 'Colombia'), '("Alejandro Toro" OR "David Alejandro Toro Ramírez") "Colombia"')
+        self.assertEqual(comp.query_for(member, 'Colombia'), news_sources.NewsQuery(('Alejandro Toro', 'David Alejandro Toro Ramírez'), 'Colombia'))
 
     def test_news_enforces_exact_last_24_hours_and_deduplicates(self):
         def item(title, date, link):
@@ -92,6 +94,7 @@ class ComparisonTest(unittest.TestCase):
             result = comp.count_news('test', self.end - timedelta(days=1), self.end)
         self.assertEqual(result['count'], 1)
         self.assertEqual(result['items'][0]['url'], 'https://example.org/a')
+        news_sources.cached_source.cache_clear()
         with patch.object(comp.requests, 'get', return_value=Mock(ok=True, content=b'<html>Access denied</html>')):
             self.assertIsNone(comp.count_news('test', self.end - timedelta(days=1), self.end)['count'])
 
