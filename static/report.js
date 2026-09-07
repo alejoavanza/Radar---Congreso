@@ -1,34 +1,14 @@
-const reportStorageKey = 'radar:report:v2';
+const reportStorageKey = 'radar:report:web:v3';
 const reportStorage = window.RadarNative?.storage || sessionStorage;
 let currentReport = null;
 let currentQuery = null;
 let currentForm = null;
 let reportSearchSequence = 0;
 
-function withoutX(report) {
-  const mentions = {...report.mentions};
-  const counts = {...mentions.platform_counts};
-  const statuses = {...mentions.platform_status};
-  delete counts.X;
-  delete statuses.X;
-  // Old saved reports can include X in their aggregate totals. Recalculate
-  // from the remaining measured sources instead of keeping that hidden count.
-  if (mentions.platform_counts && mentions.platform_status) {
-    mentions.social = Object.entries(counts).reduce((sum, [source, count]) =>
-      sum + (statuses[source] === 'active' && Number.isFinite(count) && count >= 0 ? count : 0), 0);
-    mentions.combined = mentions.web + mentions.social;
-  }
-  mentions.platform_counts = counts;
-  mentions.platform_status = statuses;
-  mentions.active_sources = (Array.isArray(mentions.active_sources) ? mentions.active_sources : [])
-    .filter(source => source !== 'X');
-  if (mentions.diagnostics) {
-    mentions.diagnostics = {...mentions.diagnostics};
-    delete mentions.diagnostics.X;
-    if (!Object.keys(mentions.diagnostics).length) delete mentions.diagnostics;
-  }
-  delete mentions.x_intelligence;
-  return {...report, mentions};
+function webOnlyReport(report) {
+  const web = Number.isFinite(report.mentions?.web) ? report.mentions.web : Number(report.total) || 0;
+  // Older clients may restore totals that included social networks.
+  return {...report, total:web, mentions:{web, combined:web, note:'Publicaciones detectadas en medios web.'}};
 }
 
 async function showOfficialProfile(query, selectedId, searchSequence) {
@@ -130,7 +110,7 @@ function restoreReport() {
   try {
     const saved = JSON.parse(reportStorage.getItem(reportStorageKey));
     if (!saved?.query || !saved.report?.mentions || !Array.isArray(saved.report.items)) return;
-    currentReport = withoutX(saved.report);
+    currentReport = webOnlyReport(saved.report);
     currentQuery = saved.query;
     currentForm = saved.form || null;
     for (const field of ['name', 'aliases', 'days']) {
@@ -175,7 +155,7 @@ async function go() {
     const data = await response.json();
     if (searchSequence !== reportSearchSequence) return;
     if (!response.ok) throw new Error(data.error || 'Error');
-    const reportData = withoutX(data);
+    const reportData = webOnlyReport(data);
     renderReport(reportData);
     currentReport = reportData;
     currentQuery = query;
@@ -206,19 +186,9 @@ document.addEventListener('visibilitychange', () => {
 });
 
 function renderReport(d) {
-  const counts = d.mentions.platform_counts || {};
-  const measured = Object.entries(d.mentions.platform_status || {})
-    .filter(([source, status]) => source !== 'X' && status === 'active' && Number.isFinite(counts[source]) && counts[source] >= 0)
-    .map(([source]) => source);
   $('mweb').textContent = d.mentions.web;
-  $('msocial').textContent = measured.length ? d.mentions.social : 'N/D';
-  $('msocial').setAttribute?.('aria-label', measured.length ? `${d.mentions.social} menciones en redes disponibles` : 'Redes públicas: no disponible');
-  $('mcombined').textContent = d.mentions.combined;
   const coverage = $('report-coverage');
-  if (coverage) coverage.textContent = measured.length
-    ? `Redes consultadas: ${measured.join(', ')}. El total suma la web y estas fuentes; las demás redes no están disponibles. No es un censo de todas las menciones.`
-    : 'Redes públicas: no disponible (N/D). El total corresponde solo a las noticias detectadas en web; no significa que haya cero menciones en redes.';
-  if (coverage && d.web_coverage?.message) coverage.textContent = d.web_coverage.message + ' ' + coverage.textContent;
+  if (coverage) coverage.textContent = d.web_coverage?.message || 'Publicaciones detectadas en medios web. La cobertura es parcial; pueden existir otras publicaciones.';
   $('rname').textContent = d.name;
   $('summary').textContent = d.summary;
   $('items').innerHTML = (d.items || []).map(newsItem).join('');

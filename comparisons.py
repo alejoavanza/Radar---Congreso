@@ -1,21 +1,15 @@
 """Comparable, bounded web counts. Missing data is never a zero."""
 from datetime import datetime, timedelta, timezone
-from email.utils import parsedate_to_datetime
 from functools import lru_cache
 from pathlib import Path
-from urllib.parse import urlencode, urlparse
 import json
-import os
 
-import feedparser
 import requests
 from news_sources import NewsQuery, search_news
 from flask import Blueprint, jsonify, request
 
 comparison_api = Blueprint('comparison', __name__)
 PERIODS = (90, 60, 30, 7, 1)
-UA = {'User-Agent': 'RADAR-Congreso/2.0 (public-source-comparison)'}
-TIMEOUT = (3, 6)
 
 
 def now():
@@ -63,111 +57,8 @@ def date(value):
         return None
 
 
-def safe_url(value):
-    try:
-        parsed = urlparse(value or '')
-        return value if parsed.scheme in ('http', 'https') and parsed.netloc and not parsed.username and not parsed.password else None
-    except ValueError:
-        return None
-
-
 def count_news(query, start, end):
     return search_news(query, start, end, limit=100)
-
-
-def count_x(query, start, end):
-    token = os.getenv('X_BEARER_TOKEN', '').strip()
-    if not token:
-        return unavailable('X requiere configurar el acceso a su API.')
-    # A frozen seven-day window starts outside the moving recent-search boundary.
-    endpoint = 'recent' if start > now() - timedelta(days=7) else 'all'
-    params = {'query': query, 'start_time': iso(start), 'end_time': iso(end), 'granularity': 'day'}
-    headers = {**UA, 'Authorization': f'Bearer {token}'}
-    buckets, pages = {}, set()
-    for _ in range(4):
-        response = requests.get(f'https://api.x.com/2/tweets/counts/{endpoint}', params=params, headers=headers, timeout=TIMEOUT)
-        if not response.ok:
-            return http_error('X', response)
-        payload = response.json()
-        if payload.get('errors') or not isinstance(payload.get('data'), list):
-            return unavailable('X no devolvió un conteo completo para el periodo.')
-        for bucket in payload['data']:
-            value = bucket.get('tweet_count', bucket.get('post_count'))
-            if type(value) is not int or value < 0 or not bucket.get('start') or not bucket.get('end'):
-                return unavailable('X devolvió un conteo que no se pudo verificar.')
-            buckets[(bucket['start'], bucket['end'])] = value
-        meta = payload.get('meta') or {}
-        if not payload['data'] and meta.get('total_tweet_count', meta.get('total_post_count')) != 0:
-            return unavailable('X no devolvió un conteo verificable.')
-        next_token = meta.get('next_token')
-        if not next_token:
-            return available(sum(buckets.values()), 'Conteo de publicaciones coincidentes informado por X.',
-                             url='https://x.com/search?' + urlencode({'q': query + f' since:{start:%Y-%m-%d} until:{(end+timedelta(days=1)):%Y-%m-%d}', 'f': 'live'}))
-        if next_token in pages:
-            break
-        pages.add(next_token)
-        params['next_token'] = next_token
-    return unavailable('X no completó el conteo del periodo dentro del límite de consulta.')
-
-
-def count_bluesky(query, start, end):
-    params = {'q': query, 'sort': 'latest', 'limit': 100, 'since': iso(start), 'until': iso(end)}
-    seen, cursors, skipped = set(), set(), 0
-    for _ in range(3):
-        response = requests.get('https://public.api.bsky.app/xrpc/app.bsky.feed.searchPosts', params=params, headers=UA, timeout=TIMEOUT)
-        if not response.ok:
-            return http_error('Bluesky', response)
-        payload = response.json()
-        if not isinstance(payload.get('posts'), list):
-            return unavailable('Bluesky no devolvió un listado verificable.')
-        for post in payload['posts']:
-            created = date((post.get('record') or {}).get('createdAt'))
-            if not created or not post.get('uri'):
-                skipped += 1
-            elif start <= created < end:
-                seen.add(post['uri'])
-        cursor = payload.get('cursor')
-        if not cursor or not payload['posts']:
-            return available(len(seen), 'Publicaciones recuperadas en Bluesky.', limited=bool(skipped),
-                             url='https://bsky.app/search?' + urlencode({'q': query}))
-        if cursor in cursors:
-            break
-        cursors.add(cursor)
-        params['cursor'] = cursor
-    return available(len(seen), 'Muestra de hasta 300 publicaciones recuperadas en Bluesky; puede haber más.', limited=True,
-                     url='https://bsky.app/search?' + urlencode({'q': query}))
-
-
-def count_reddit(query, start, end):
-    params = {'q': query, 'sort': 'new', 'limit': 100, 'raw_json': 1, 'restrict_sr': 'false'}
-    seen, cursors, skipped = set(), set(), 0
-    for _ in range(3):
-        response = requests.get('https://www.reddit.com/search.json', params=params, headers=UA, timeout=TIMEOUT)
-        if not response.ok:
-            return http_error('Reddit', response)
-        payload = response.json().get('data') or {}
-        if not isinstance(payload.get('children'), list):
-            return unavailable('Reddit no devolvió un listado verificable.')
-        old = False
-        for child in payload['children']:
-            post = child.get('data') or {}
-            created = post.get('created_utc')
-            if not isinstance(created, (int, float)) or not post.get('name'):
-                skipped += 1
-            elif created < start.timestamp():
-                old = True
-            elif created < end.timestamp():
-                seen.add(post['name'])
-        cursor = payload.get('after')
-        if old or not cursor or not payload['children']:
-            return available(len(seen), 'Publicaciones recuperadas en Reddit.', limited=bool(skipped),
-                             url='https://www.reddit.com/search/?' + urlencode({'q': query, 'sort': 'new'}))
-        if cursor in cursors:
-            break
-        cursors.add(cursor)
-        params['after'] = cursor
-    return available(len(seen), 'Muestra de hasta 300 publicaciones recuperadas en Reddit; puede haber más.', limited=True,
-                     url='https://www.reddit.com/search/?' + urlencode({'q': query, 'sort': 'new'}))
 
 
 def source_count(name, fn, query, start, end):

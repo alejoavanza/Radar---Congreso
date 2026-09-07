@@ -166,3 +166,5 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
 .methodology summary:focus-visible { outline: 3px solid var(--tactika-orange); outline-offset: 2px; }
 .methodology-body { padding: 0 14px 8px; }
 .methodology-body p { margin: 0 0 14px; }
+
+.mentions.mentions-web { grid-template-columns: 1fr; }

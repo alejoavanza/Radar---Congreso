@@ -6,7 +6,7 @@ La pestaña Comparativos reemplaza Mi Red. Se pueden seleccionar de 2 a 10 congr
 
 - Web: hasta 6 variantes del nombre y 100 entradas de Google Noticias por variante; se añaden coincidencias del feed reciente de Confidencial Noticias y hasta 5 artículos cuyo título o enlace en la portada de La Chiva de Urabá coincide con el nombre. No se recorren los archivos completos de los medios. Se muestran hasta 100 publicaciones por persona, deduplicadas por enlace normalizado o por titular/medio/fecha, con preferencia por el enlace directo del medio y filtro local de fecha de publicación dentro de la ventana. No es un censo de toda la web. La consulta solicita un intervalo de días que contiene la ventana, pero los registros fuera de las horas exactas se excluyen.
 
-La comparación en redes está pausada. Las rutas de Comparativos no consultan X, Bluesky, Reddit ni ninguna otra red, incluso con credenciales configuradas o solicitudes desde una versión anterior del navegador. Los contadores de redes se conservan como funciones sin conexión al flujo de Comparativos para una futura revisión; el reporte individual mantiene sus fuentes actuales.
+Radar y Comparativos consultan solo medios web. Se retiraron los contadores y las llamadas a redes sociales, incluso con credenciales configuradas. También se excluyen entradas de redes reconocidas por dominio o por el identificador de fuente en Google Noticias. Los enlaces del pie de página a Táctika Comunicaciones se conservan.
 
 El signo + indica que la muestra alcanzó un límite, excluyó registros no verificables o no pudo consultar alguna fuente. Los ceros solo se muestran cuando una consulta válida devolvió cero resultados dentro del periodo. Una respuesta de error o malformada nunca significa cero.
 

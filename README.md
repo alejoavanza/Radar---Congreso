@@ -2,7 +2,7 @@
 
 Aplicación móvil/web de inteligencia política para consultar un actor por nombre y generar un reporte preliminar de visibilidad, contexto de titulares, temas dominantes y fuentes.
 
-Radar ya no consulta X ni muestra su estado, análisis o métricas. Los reportes guardados excluyen X de los totales al recuperarse. El pie de página presenta los servicios de Táctika Comunicaciones sobre los enlaces de web, Instagram y Facebook.
+Radar y Comparativos consultan solo medios web. No se ejecutan consultas a APIs de redes sociales, no se suman sus métricas y se descartan publicaciones de esas plataformas cuando llegan a través de Google Noticias. El pie de página conserva los enlaces de servicios de Táctika Comunicaciones.
 
 La pestaña **Comparativos** permite elegir entre 2 y 10 congresistas y contrastar menciones detectadas en web con barras y una tabla. Ofrece periodos de 90, 60, 30, 7 y 1 día; distingue datos no disponibles de ceros y permite revisar las noticias. La comparación en redes está pausada y no realiza consultas a esas plataformas. Consulta [la metodología y las pruebas](docs/comparisons.md).
 

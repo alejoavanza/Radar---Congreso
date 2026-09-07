@@ -92,10 +92,16 @@ class NewsRegressionTest(unittest.TestCase):
         self.assertTrue(news.in_zone('Urabá tiene noticias locales', 'Colombia'))
         self.assertFalse(news.in_zone('Urabá tiene noticias locales', 'Bogotá'))
 
+    def test_social_posts_indexed_by_google_are_excluded_from_web_count(self):
+        raw = rss('Una publicación social', 'https://news.google.com/rss/articles/facebook-post',
+                  self.end-timedelta(days=2), 'facebook.com')
+        self.assertEqual(news.feed_items(raw, self.start, self.end)[0], [])
+        self.assertTrue(news.social_result('https://m.facebook.com/noticia', {}))
+        self.assertTrue(news.social_result('https://news.google.com/rss/articles/post', {'href':'https://www.instagram.com'}))
+        self.assertFalse(news.social_result('https://medio.co/noticia-sobre-facebook', {'title':'Medio'}))
+
     def test_zero_report_explains_coverage_and_total_outage_returns_error(self):
-        with patch.object(radar, 'fetch_news', return_value=([], None, {'status': 'available', 'message': 'Cobertura parcial'})), \
-             patch.object(radar, 'fetch_bluesky_count', return_value=(0, 'error', None)), \
-             patch.object(radar, 'fetch_reddit_count', return_value=(0, 'error', None)):
+        with patch.object(radar, 'fetch_news', return_value=([], None, {'status': 'available', 'message': 'Cobertura parcial'})):
             result = radar.app.test_client().post('/api/report', json={'name': 'Persona', 'days': 7})
         self.assertEqual(result.status_code, 200)
         self.assertIn('No se encontraron', result.json['summary'])

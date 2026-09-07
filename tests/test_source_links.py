@@ -19,9 +19,7 @@ class SourceLinksTest(unittest.TestCase):
                 '<source url="https://example.com">Medio</source>'
                 '</item></channel></rss>')
         response = Mock(content=feed.encode())
-        with patch.object(radar.requests, 'get', return_value=response), \
-             patch.object(radar, 'fetch_bluesky_count', return_value=(0, 'error', None)), \
-             patch.object(radar, 'fetch_reddit_count', return_value=(0, 'error', None)):
+        with patch.object(news_sources.requests, 'get', return_value=response):
             result = radar.app.test_client().post('/api/report', json={
                 'name': 'Alejandro Toro', 'days': 30, 'territory': 'Colombia'
             })

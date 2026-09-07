@@ -21,6 +21,9 @@ MAX_NAMES = 6
 MAX_BYTES = 2_000_000
 CONF_FEED = 'https://confidencialnoticias.com/feed/'
 CHIVA_HOME = 'https://www.lachivadeuraba.com/'
+SOCIAL_HOSTS = ('facebook.com', 'instagram.com', 'twitter.com', 'x.com', 'tiktok.com',
+                'reddit.com', 'bsky.app', 'youtube.com', 'youtu.be', 'threads.com', 'threads.net')
+SOCIAL_LABELS = {'facebook', 'instagram', 'twitter', 'x', 'tiktok', 'reddit', 'bluesky', 'youtube', 'threads'}
 
 
 @dataclass(frozen=True)
@@ -60,6 +63,21 @@ def safe_url(value):
         return value if parsed.scheme in ('https', 'http') and parsed.hostname and not parsed.username and not parsed.password else None
     except ValueError:
         return None
+
+
+def social_result(link, source):
+    label = source.get('title', '') if isinstance(source, dict) else str(source or '')
+    href = source.get('href', '') if isinstance(source, dict) else ''
+    if normalize(label) in SOCIAL_LABELS:
+        return True
+    for value in (link, href, label if '.' in label and ' ' not in label else ''):
+        try:
+            host = (urlsplit(value if '://' in value else 'https://' + value).hostname or '').lower()
+        except ValueError:
+            continue
+        if any(host == domain or host.endswith('.' + domain) for domain in SOCIAL_HOSTS):
+            return True
+    return False
 
 
 def url_key(value):
@@ -135,6 +153,8 @@ def feed_items(raw, start, end, *, source=None, terms=(), territory=''):
         raise ValueError('The source did not return a news feed')
     items, skipped = [], 0
     for entry in feed.entries[:100]:
+        if social_result(entry.get('link', ''), entry.get('source') or {}):
+            continue
         title = unescape(entry.get('title', '')).strip()
         text = ' '.join([title, entry.get('author', ''), entry.get('summary', ''),
                          *[c.get('value', '') for c in entry.get('content', [])]])
