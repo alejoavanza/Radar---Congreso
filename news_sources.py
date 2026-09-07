@@ -85,7 +85,7 @@ def url_key(value):
 
 
 def get_bytes(url, **kwargs):
-    response = requests.get(url, timeout=TIMEOUT, headers=UA, **kwargs)
+    response = requests.get(url, timeout=kwargs.pop('timeout', TIMEOUT), headers=UA, **kwargs)
     response.raise_for_status()
     if len(response.content) > MAX_BYTES:
         raise ValueError('Source response exceeds the retrieval limit')
@@ -95,7 +95,8 @@ def get_bytes(url, **kwargs):
 @lru_cache(maxsize=64)
 def cached_source(url, bucket):
     # Cached index URLs use fixed hosts and encoded search parameters.
-    return get_bytes(url)
+    timeout = (3, 20) if urlsplit(url).hostname == 'api.gdeltproject.org' else TIMEOUT
+    return get_bytes(url, timeout=timeout)
 
 
 def source_bytes(url):

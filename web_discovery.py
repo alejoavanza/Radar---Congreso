@@ -41,7 +41,10 @@ def bing_web(terms, territory, start, end):
     # General web search: no publisher allowlist and no dependence on Google News.
     query = indexed_query(terms, territory)
     query += ' -site:facebook.com -site:instagram.com -site:x.com -site:youtube.com -site:tiktok.com'
-    url = 'https://www.bing.com/search?' + urlencode({'q': query, 'format': 'rss', 'count': 30, 'mkt': 'es-CO'})
+    # Index freshness is a discovery hint only; verify the original date on the page.
+    first_day, last_day = int(start.timestamp() // 86400), int(end.timestamp() // 86400)
+    url = 'https://www.bing.com/search?' + urlencode({'q': query, 'format': 'rss', 'count': 30, 'mkt': 'es-CO',
+                                                    'filters': f'ex1:"ez5_{first_day}_{last_day}"'})
     feed = feedparser.parse(source_bytes(url))
     if not feed.get('version'):
         raise ValueError('Web search did not return a feed')
@@ -170,8 +173,10 @@ def verify_page(candidate, terms, start, end):
     article = objects[0] if objects else {}
     published = publication_date(page.meta.get('article:published_time') or article.get('datePublished'))
     if not published:
+        logging.getLogger(__name__).warning('Page omitted: host=%s; reason=publication_date', urlsplit(url).hostname)
         return None, 1
     if not start <= published < end:
+        logging.getLogger(__name__).warning('Page omitted: host=%s; reason=outside_window', urlsplit(url).hostname)
         return None, 0
     title = page.meta.get('og:title') or article.get('headline') or candidate['title']
     text = ' '.join([title, candidate.get('summary', ''), page.meta.get('description', ''),
@@ -205,13 +210,14 @@ def verify_candidates(found, terms, start, end):
     items, skipped = [], 0
     with ThreadPoolExecutor(max_workers=8) as pool:
         futures = [pool.submit(verify_page, candidate, terms, start, end) for candidate in ordered[:MAX_CANDIDATES]]
-        for future in futures:
+        for candidate, future in zip(ordered[:MAX_CANDIDATES], futures):
             try:
                 item, missing = future.result()
                 skipped += missing
                 if item:
                     items.append(item)
-            except (ValueError, TypeError, AttributeError, RecursionError, OSError, urllib3.exceptions.HTTPError):
+            except (ValueError, TypeError, AttributeError, RecursionError, OSError, urllib3.exceptions.HTTPError) as error:
+                logging.getLogger(__name__).warning('Page omitted: host=%s; reason=%s', urlsplit(candidate['url']).hostname, type(error).__name__)
                 skipped += 1
     logging.getLogger(__name__).warning('Web verification: candidates=%s; verified=%s; unavailable=%s', len(ordered), len(items), skipped)
     return items, skipped, len(ordered) > MAX_CANDIDATES
