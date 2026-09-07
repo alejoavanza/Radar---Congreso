@@ -36,10 +36,10 @@ class BroadSearchTest(unittest.TestCase):
     def test_web_pages_are_discovered_for_any_person_when_google_is_empty(self):
         first, second = 'https://regional.example/columna', 'https://revista.example/nota'
         def index(url):
-            if url.startswith('https://www.bing.com/search?'):
-                return rss('Columna de opinión', first)
-            if url.startswith('https://api.gdeltproject.org/'):
-                return json.dumps({'articles':[{'title':'Otra noticia','url':second,'seendate':'20260906T120000Z'}]}).encode()
+            if url.startswith('https://html.duckduckgo.com/html/?'):
+                return (f'<a class="result__a" href="{first}">Columna de opinión</a>'
+                        f'<a class="result__a" href="{second}">Otra noticia</a>'
+                        '<a class="result__a" href="https://facebook.com/post">Red social</a>').encode()
             raise AssertionError('No hardcoded publishers: ' + url)
         def article(url, bucket):
             return url, page('Columna de opinión' if url == first else 'Otra noticia', '2026-09-06T02:00:00-05:00')
@@ -48,10 +48,24 @@ class BroadSearchTest(unittest.TestCase):
             result = news.search_news(self.query, self.start, self.end)
         self.assertEqual(result['count'], 2)
         self.assertCountEqual([item['url'] for item in result['items']], [first,second])
-        self.assertCountEqual([item['discovery'] for item in result['items']], ['Bing web','GDELT'])
+        self.assertCountEqual([item['discovery'] for item in result['items']], ['DuckDuckGo web','DuckDuckGo web'])
         self.assertTrue(all(item['published'] == '2026-09-06T07:00:00Z' for item in result['items']))
         self.assertNotIn('La Chiva', result['message'])
         self.assertNotIn('Confidencial', result['message'])
+
+    def test_search_challenge_cannot_be_reported_as_an_empty_search(self):
+        with patch.object(web, 'source_bytes', return_value=b'<form id="challenge-form">Challenge</form>'):
+            with self.assertRaises(ValueError):
+                web.duckduckgo_web(self.query.terms, 'Colombia', self.start, self.end)
+
+    def test_explicit_publication_time_is_supported_but_updated_time_is_not(self):
+        candidate = {'url':'https://regional.example/a','title':'María Ejemplo','engine':'DuckDuckGo web'}
+        for field in ('<time class="entry-date published" datetime="2026-09-06T12:00:00Z"></time>',
+                      '<meta itemprop="datePublished" content="2026-09-06T12:00:00Z">'):
+            with patch.object(web, 'cached_page', return_value=(candidate['url'], field)):
+                self.assertIsNotNone(web.verify_page(candidate, self.query.terms, self.start, self.end)[0])
+        with patch.object(web, 'cached_page', return_value=(candidate['url'], '<time class="updated" datetime="2026-09-06T12:00:00Z"></time>')):
+            self.assertIsNone(web.verify_page(candidate, self.query.terms, self.start, self.end)[0])
 
     def test_name_variants_remain_independent_on_google(self):
         def response(url, **kwargs):
@@ -61,12 +75,12 @@ class BroadSearchTest(unittest.TestCase):
             return Mock(content=rss('Mención', 'https://regional.example/nota', self.end-timedelta(days=2))
                         if query.startswith('"María Ejemplo"') else EMPTY)
         with patch.object(news.requests, 'get', side_effect=response), \
-             patch.object(web, 'bing_web', return_value=([],0,False)), patch.object(web, 'gdelt_web', return_value=([],0,False)):
+             patch.object(web, 'duckduckgo_web', return_value=([],0,False)):
             result = news.search_news(self.query,self.start,self.end)
         self.assertEqual(result['count'],1)
 
     def test_publication_date_is_required_and_updates_or_index_dates_cannot_replace_it(self):
-        candidate = {'url':'https://regional.example/a','title':'María Ejemplo','engine':'GDELT','seendate':'20260906T120000Z'}
+        candidate = {'url':'https://regional.example/a','title':'María Ejemplo','engine':'DuckDuckGo web','seendate':'20260906T120000Z'}
         for html in (page('María Ejemplo'), page('María Ejemplo','2026-08-01T00:00:00Z') + '<meta property="article:modified_time" content="2026-09-06T12:00:00Z">'):
             with patch.object(web,'cached_page',return_value=(candidate['url'],html)):
                 self.assertIsNone(web.verify_page(candidate,self.query.terms,self.start,self.end)[0])
@@ -75,17 +89,17 @@ class BroadSearchTest(unittest.TestCase):
 
     def test_date_from_an_unrelated_schema_object_cannot_count_a_page(self):
         html = '<script type="application/ld+json">' + json.dumps({'@type':'Organization','datePublished':'2026-09-06T12:00:00Z','name':'María Ejemplo'}) + '</script>'
-        candidate = {'url':'https://regional.example/a','title':'María Ejemplo','engine':'Bing web'}
+        candidate = {'url':'https://regional.example/a','title':'María Ejemplo','engine':'DuckDuckGo web'}
         with patch.object(web,'cached_page',return_value=(candidate['url'],html)):
             self.assertIsNone(web.verify_page(candidate,self.query.terms,self.start,self.end)[0])
 
     def test_same_story_across_indexes_uses_direct_link_once(self):
         article = {'title':'Una mención','url':'https://regional.example/a','link':'https://regional.example/a',
-                   'source':'Medio Regional','publisher_domain':'regional.example','published':'2026-09-06T12:00:00Z','discovery':'Bing web'}
+                   'source':'Medio Regional','publisher_domain':'regional.example','published':'2026-09-06T12:00:00Z','discovery':'DuckDuckGo web'}
         google = dict(article,url='https://news.google.com/rss/articles/example',discovery='google_news')
-        candidate = {'url':article['url'],'title':article['title'],'engine':'Bing web','candidate':True}
+        candidate = {'url':article['url'],'title':article['title'],'engine':'DuckDuckGo web','candidate':True}
         with patch.object(news,'google_news',return_value=([google],0,False)), \
-             patch.object(web,'bing_web',return_value=([candidate],0,False)), patch.object(web,'gdelt_web',return_value=([],0,False)), \
+             patch.object(web,'duckduckgo_web',return_value=([candidate],0,False)), \
              patch.object(web,'verify_candidates',return_value=([article],0,False)):
             result = news.search_news(self.query,self.start,self.end)
         self.assertEqual(result['count'],1)
@@ -102,7 +116,7 @@ class BroadSearchTest(unittest.TestCase):
         self.assertIn('Consulta parcial',result['message'])
 
     def test_social_results_are_excluded_from_all_indexes(self):
-        self.assertEqual(web.candidates([{'url':'https://www.facebook.com/post','title':'María Ejemplo'}],'Bing web'),[])
+        self.assertEqual(web.candidates([{'url':'https://www.facebook.com/post','title':'María Ejemplo'}],'DuckDuckGo web'),[])
         self.assertEqual(news.feed_items(rss('Social','https://news.google.com/rss/articles/post',self.end-timedelta(days=2),'facebook.com'),self.start,self.end)[0],[])
         self.assertTrue(news.social_result('https://news.google.com/article',{'href':'https://www.instagram.com'}))
         self.assertFalse(news.social_result('https://regional.example/noticia-sobre-facebook',{}))

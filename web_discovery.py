@@ -11,7 +11,6 @@ from time import time
 from urllib.parse import parse_qs, quote, urlencode, urljoin, urlsplit, urlunsplit
 
 import certifi
-import feedparser
 import urllib3
 
 from news_sources import UA, matches, publication_date, safe_url, social_result, source_bytes, iso, url_key
@@ -35,21 +34,6 @@ def candidates(rows, engine):
         result.append({'url': link, 'title': row.get('title', ''),
                        'summary': row.get('summary', ''), 'engine': engine, 'candidate': True})
     return result
-
-
-def bing_web(term, territory, start, end):
-    # General web search: no publisher allowlist and no dependence on Google News.
-    # Keep variants independent: complex OR expressions can return unrelated pages.
-    query = indexed_query([term], territory)
-    # Index freshness is a discovery hint only; verify the original date on the page.
-    first_day, last_day = int(start.timestamp() // 86400), int(end.timestamp() // 86400)
-    url = 'https://www.bing.com/search?' + urlencode({'q': query, 'format': 'rss', 'count': 30, 'mkt': 'es-CO',
-                                                    'filters': f'ex1:"ez5_{first_day}_{last_day}"'}, quote_via=quote)
-    feed = feedparser.parse(source_bytes(url))
-    if not feed.get('version'):
-        raise ValueError('Web search did not return a feed')
-    logging.getLogger(__name__).warning('Bing results: query_matched=%s', matches(feed.feed.get('title', ''), [term]))
-    return candidates(feed.entries[:30], 'Bing web'), 0, len(feed.entries) >= 30
 
 
 class SearchPage(HTMLParser):
@@ -79,7 +63,7 @@ class SearchPage(HTMLParser):
 
 def duckduckgo_web(terms, territory, start, end):
     url = 'https://html.duckduckgo.com/html/?' + urlencode({'q': indexed_query(terms[:1], territory),
-                                                         'df': 'w' if (end-start).days <= 7 else 'm'}, quote_via=quote)
+                                                         'df': 'd' if (end-start).days <= 1 else 'w' if (end-start).days <= 7 else 'm' if (end-start).days <= 30 else 'y'}, quote_via=quote)
     raw = source_bytes(url).decode('utf-8', errors='replace')
     if 'anomaly.js' in raw or 'challenge-form' in raw:
         raise ValueError('Web search requires an interactive challenge')
@@ -87,18 +71,6 @@ def duckduckgo_web(terms, territory, start, end):
     if not page.rows and 'no-results' not in raw:
         raise ValueError('Web search did not return results')
     return candidates(page.rows[:30], 'DuckDuckGo web'), 0, len(page.rows) >= 30
-
-
-def gdelt_web(terms, territory, start, end):
-    url = 'https://api.gdeltproject.org/api/v2/doc/doc?' + urlencode({
-        'query': indexed_query(terms[:1], territory), 'mode': 'artlist', 'format': 'json',
-        'maxrecords': 30, 'sort': 'datedesc', 'startdatetime': start.strftime('%Y%m%d%H%M%S'),
-        'enddatetime': end.strftime('%Y%m%d%H%M%S')})
-    data = json.loads(source_bytes(url))
-    if not isinstance(data, dict) or not isinstance(data.get('articles'), list):
-        raise ValueError('News index did not return articles')
-    # seendate is an index timestamp. Never use it as the publication date.
-    return candidates(data['articles'][:30], 'GDELT'), 0, len(data['articles']) >= 30
 
 
 def public_target(url):
@@ -151,7 +123,7 @@ def cached_page(url, bucket):
 class ArticlePage(HTMLParser):
     def __init__(self, raw):
         super().__init__()
-        self.meta, self.structured, self.article_text = {}, [], []
+        self.meta, self.structured, self.article_text, self.published_times = {}, [], [], []
         self.canonical, self.depth, self.script, self.buffer = '', 0, False, []
         self.ignored = 0
         self.feed(raw)
@@ -159,7 +131,9 @@ class ArticlePage(HTMLParser):
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if tag == 'meta':
-            self.meta[attrs.get('property', attrs.get('name', '')).lower()] = attrs.get('content', '')
+            self.meta[(attrs.get('property') or attrs.get('name') or attrs.get('itemprop') or '').lower()] = attrs.get('content', '')
+        if tag == 'time' and (attrs.get('itemprop') == 'datePublished' or 'published' in attrs.get('class', '').split()):
+            self.published_times.append(attrs.get('datetime', ''))
         if tag == 'link' and attrs.get('rel') == 'canonical':
             self.canonical = attrs.get('href', '')
         if tag in ('article', 'main'):
@@ -209,12 +183,14 @@ def verify_page(candidate, terms, start, end):
     objects = list(article_objects(page.structured))
     # The first article describes the main page; never choose a sidebar article's date.
     article = objects[0] if objects else {}
-    published = publication_date(page.meta.get('article:published_time') or article.get('datePublished'))
+    published = next((value for raw_date in [page.meta.get('article:published_time'), article.get('datePublished'),
+                                            page.meta.get('datepublished'), page.meta.get('parsely-pub-date'), *page.published_times]
+                      if (value := publication_date(raw_date))), None)
     if not published:
-        logging.getLogger(__name__).warning('Page omitted: host=%s; reason=publication_date', urlsplit(url).hostname)
+        logging.getLogger(__name__).info('Page omitted: host=%s; reason=publication_date', urlsplit(url).hostname)
         return None, 1
     if not start <= published < end:
-        logging.getLogger(__name__).warning('Page omitted: host=%s; reason=outside_window', urlsplit(url).hostname)
+        logging.getLogger(__name__).info('Page omitted: host=%s; reason=outside_window', urlsplit(url).hostname)
         return None, 0
     title = page.meta.get('og:title') or article.get('headline') or candidate['title']
     text = ' '.join([title, candidate.get('summary', ''), page.meta.get('description', ''),
@@ -255,7 +231,7 @@ def verify_candidates(found, terms, start, end):
                 if item:
                     items.append(item)
             except (ValueError, TypeError, AttributeError, RecursionError, OSError, urllib3.exceptions.HTTPError) as error:
-                logging.getLogger(__name__).warning('Page omitted: host=%s; reason=%s', urlsplit(candidate['url']).hostname, type(error).__name__)
+                logging.getLogger(__name__).info('Page omitted: host=%s; reason=%s', urlsplit(candidate['url']).hostname, type(error).__name__)
                 skipped += 1
-    logging.getLogger(__name__).warning('Web verification: candidates=%s; verified=%s; unavailable=%s', len(ordered), len(items), skipped)
+    logging.getLogger(__name__).info('Web verification: candidates=%s; verified=%s; unavailable=%s', len(ordered), len(items), skipped)
     return items, skipped, len(ordered) > MAX_CANDIDATES

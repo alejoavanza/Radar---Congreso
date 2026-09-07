@@ -95,8 +95,7 @@ def get_bytes(url, **kwargs):
 @lru_cache(maxsize=64)
 def cached_source(url, bucket):
     # Cached index URLs use fixed hosts and encoded search parameters.
-    timeout = (3, 20) if urlsplit(url).hostname == 'api.gdeltproject.org' else TIMEOUT
-    return get_bytes(url, timeout=timeout)
+    return get_bytes(url)
 
 
 def source_bytes(url):
@@ -143,13 +142,11 @@ def google_news(term, territory, start, end):
 
 
 def search_news(query, start, end, limit=100):
-    from web_discovery import bing_web, gdelt_web, duckduckgo_web, verify_candidates
+    from web_discovery import duckduckgo_web, verify_candidates
     if isinstance(query, str):
         query = NewsQuery((query,), '')
     terms = list(dict.fromkeys(t.replace('"', ' ').strip() for t in query.terms if t.strip()))
     jobs = [('Google Noticias', google_news, (term, query.territory, start, end)) for term in terms[:MAX_NAMES]]
-    jobs.extend([('Bing web', bing_web, (term, query.territory, start, end)) for term in terms[:MAX_NAMES]])
-    jobs.append(('GDELT', gdelt_web, (terms[:MAX_NAMES], query.territory, start, end)))
     jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, start, end)))
     items, sources, missing = [], [], 0
     limited = len(terms) > MAX_NAMES
@@ -173,7 +170,7 @@ def search_news(query, start, end, limit=100):
         items.extend(verified)
         missing += skipped
         limited |= capped or bool(skipped)
-    logging.getLogger(__name__).warning('Search indexes: %s', [(s['source'], s['status'], s['retrieved']) for s in sources])
+    logging.getLogger(__name__).info('Search indexes: %s', [(s['source'], s['status'], s['retrieved']) for s in sources])
     active = sorted({s['source'] for s in sources if s['status'] == 'available'})
     failed = sorted({s['source'] for s in sources if s['status'] == 'unavailable'})
     if not active:

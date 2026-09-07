@@ -22,10 +22,8 @@ class RadarSourcesTest(unittest.TestCase):
             if host == 'news.google.com':
                 return Mock(content=b'<rss version="2.0"><channel><item><title>Una noticia</title>'
                             b'<link>https://example.org/noticia</link><pubDate>' + published + b'</pubDate></item></channel></rss>')
-            if host == 'www.bing.com':
-                return Mock(content=b'<rss version="2.0"><channel><title>Web</title></channel></rss>')
-            if host == 'api.gdeltproject.org':
-                return Mock(content=b'{"articles": []}')
+            if host == 'html.duckduckgo.com':
+                return Mock(content=b'<div class="no-results">No results</div>')
             raise AssertionError('Unexpected source: ' + host)
 
         with patch.object(news_sources.requests, 'get', side_effect=source_response) as get:
@@ -40,7 +38,7 @@ class RadarSourcesTest(unittest.TestCase):
         self.assertNotIn('platform_counts', mentions)
         self.assertNotIn('platform_status', mentions)
         self.assertCountEqual([urlparse(call.args[0]).hostname for call in get.call_args_list],
-                             ['news.google.com', 'www.bing.com', 'api.gdeltproject.org'])
+                             ['news.google.com', 'html.duckduckgo.com'])
         self.assertNotIn('La Chiva', response.json['web_coverage']['message'])
         self.assertNotIn('Confidencial', response.json['web_coverage']['message'])
 

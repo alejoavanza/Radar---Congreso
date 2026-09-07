@@ -21,8 +21,7 @@ class SourceLinksTest(unittest.TestCase):
                 '</item></channel></rss>')
         response = Mock(content=feed.encode())
         with patch.object(news_sources.requests, 'get', return_value=response), \
-             patch.object(web_discovery, 'bing_web', return_value=([], 0, False)), \
-             patch.object(web_discovery, 'gdelt_web', return_value=([], 0, False)):
+             patch.object(web_discovery, 'duckduckgo_web', return_value=([], 0, False)):
             result = radar.app.test_client().post('/api/report', json={
                 'name': 'Alejandro Toro', 'days': 30, 'territory': 'Colombia'
             })
