@@ -10,6 +10,7 @@ from time import time
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 import re
 import unicodedata
+import logging
 
 import feedparser
 import requests
@@ -232,7 +233,9 @@ def search_news(query, start, end, limit=100):
                 missing += skipped
                 limited |= capped or bool(skipped)
                 sources.append({'source': name, 'status': 'available', 'retrieved': len(found)})
-            except (requests.RequestException, ValueError, TypeError, AttributeError):
+            except (requests.RequestException, ValueError, TypeError, AttributeError) as error:
+                status = getattr(getattr(error, 'response', None), 'status_code', None)
+                logging.getLogger(__name__).warning('News source unavailable: %s; %s; HTTP %s', name, type(error).__name__, status)
                 sources.append({'source': name, 'status': 'unavailable', 'retrieved': None})
     active = sorted({s['source'] for s in sources if s['status'] == 'available'})
     failed = sorted({s['source'] for s in sources if s['status'] == 'unavailable'})
