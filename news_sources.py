@@ -143,13 +143,14 @@ def google_news(term, territory, start, end):
 
 
 def search_news(query, start, end, limit=100):
-    from web_discovery import bing_web, gdelt_web, verify_candidates
+    from web_discovery import bing_web, gdelt_web, duckduckgo_web, verify_candidates
     if isinstance(query, str):
         query = NewsQuery((query,), '')
     terms = list(dict.fromkeys(t.replace('"', ' ').strip() for t in query.terms if t.strip()))
     jobs = [('Google Noticias', google_news, (term, query.territory, start, end)) for term in terms[:MAX_NAMES]]
     jobs.extend([('Bing web', bing_web, (term, query.territory, start, end)) for term in terms[:MAX_NAMES]])
     jobs.append(('GDELT', gdelt_web, (terms[:MAX_NAMES], query.territory, start, end)))
+    jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, start, end)))
     items, sources, missing = [], [], 0
     limited = len(terms) > MAX_NAMES
     with ThreadPoolExecutor(max_workers=8) as pool:

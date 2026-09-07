@@ -8,7 +8,7 @@ import json
 import logging
 import socket
 from time import time
-from urllib.parse import urlencode, urljoin, urlsplit, urlunsplit
+from urllib.parse import parse_qs, quote, urlencode, urljoin, urlsplit, urlunsplit
 
 import certifi
 import feedparser
@@ -44,11 +44,49 @@ def bing_web(term, territory, start, end):
     # Index freshness is a discovery hint only; verify the original date on the page.
     first_day, last_day = int(start.timestamp() // 86400), int(end.timestamp() // 86400)
     url = 'https://www.bing.com/search?' + urlencode({'q': query, 'format': 'rss', 'count': 30, 'mkt': 'es-CO',
-                                                    'filters': f'ex1:"ez5_{first_day}_{last_day}"'})
+                                                    'filters': f'ex1:"ez5_{first_day}_{last_day}"'}, quote_via=quote)
     feed = feedparser.parse(source_bytes(url))
     if not feed.get('version'):
         raise ValueError('Web search did not return a feed')
+    logging.getLogger(__name__).warning('Bing results: query_matched=%s', matches(feed.feed.get('title', ''), [term]))
     return candidates(feed.entries[:30], 'Bing web'), 0, len(feed.entries) >= 30
+
+
+class SearchPage(HTMLParser):
+    def __init__(self, raw):
+        super().__init__()
+        self.rows, self.current, self.capture = [], None, False
+        self.feed(raw)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'a' and 'result__a' in attrs.get('class', '').split():
+            link = urljoin('https://html.duckduckgo.com/', attrs.get('href', ''))
+            if urlsplit(link).hostname in ('duckduckgo.com', 'html.duckduckgo.com'):
+                link = parse_qs(urlsplit(link).query).get('uddg', [''])[0]
+            self.current = {'url': link, 'title': ''}
+            self.rows.append(self.current)
+            self.capture = True
+
+    def handle_data(self, text):
+        if self.capture:
+            self.current['title'] += text
+
+    def handle_endtag(self, tag):
+        if tag == 'a':
+            self.capture = False
+
+
+def duckduckgo_web(terms, territory, start, end):
+    url = 'https://html.duckduckgo.com/html/?' + urlencode({'q': indexed_query(terms[:1], territory),
+                                                         'df': 'w' if (end-start).days <= 7 else 'm'}, quote_via=quote)
+    raw = source_bytes(url).decode('utf-8', errors='replace')
+    if 'anomaly.js' in raw or 'challenge-form' in raw:
+        raise ValueError('Web search requires an interactive challenge')
+    page = SearchPage(raw)
+    if not page.rows and 'no-results' not in raw:
+        raise ValueError('Web search did not return results')
+    return candidates(page.rows[:30], 'DuckDuckGo web'), 0, len(page.rows) >= 30
 
 
 def gdelt_web(terms, territory, start, end):
