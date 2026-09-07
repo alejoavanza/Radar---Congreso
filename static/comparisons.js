@@ -33,7 +33,7 @@
   const input = $('compare-name'), list = $('compare-options'), status = $('compare-picker-status');
   const form = $('compare-form'), run = $('compare-run'), progress = $('compare-progress');
   const results = $('compare-results'), chart = $('compare-chart');
-  const STORAGE = 'radar:comparison:v1';
+  const STORAGE = 'radar:comparison:web:v2';
   let selected = [], catalog = null, index = [], suggestions = [], active = -1;
   let snapshot = null, running = false, choosing = false;
   const fmt = value => new Intl.NumberFormat('es-CO').format(value);

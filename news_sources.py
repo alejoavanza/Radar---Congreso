@@ -148,8 +148,8 @@ def search_news(query, start, end, limit=100):
         query = NewsQuery((query,), '')
     terms = list(dict.fromkeys(t.replace('"', ' ').strip() for t in query.terms if t.strip()))
     jobs = [('Google Noticias', google_news, (term, query.territory, start, end)) for term in terms[:MAX_NAMES]]
-    jobs.extend([('Bing web', bing_web, (terms[:MAX_NAMES], query.territory, start, end)),
-                 ('GDELT', gdelt_web, (terms[:MAX_NAMES], query.territory, start, end))])
+    jobs.extend([('Bing web', bing_web, (term, query.territory, start, end)) for term in terms[:MAX_NAMES]])
+    jobs.append(('GDELT', gdelt_web, (terms[:MAX_NAMES], query.territory, start, end)))
     items, sources, missing = [], [], 0
     limited = len(terms) > MAX_NAMES
     with ThreadPoolExecutor(max_workers=8) as pool:

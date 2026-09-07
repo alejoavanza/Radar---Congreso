@@ -37,10 +37,10 @@ def candidates(rows, engine):
     return result
 
 
-def bing_web(terms, territory, start, end):
+def bing_web(term, territory, start, end):
     # General web search: no publisher allowlist and no dependence on Google News.
-    query = indexed_query(terms, territory)
-    query += ' -site:facebook.com -site:instagram.com -site:x.com -site:youtube.com -site:tiktok.com'
+    # Keep variants independent: complex OR expressions can return unrelated pages.
+    query = indexed_query([term], territory)
     # Index freshness is a discovery hint only; verify the original date on the page.
     first_day, last_day = int(start.timestamp() // 86400), int(end.timestamp() // 86400)
     url = 'https://www.bing.com/search?' + urlencode({'q': query, 'format': 'rss', 'count': 30, 'mkt': 'es-CO',
@@ -53,7 +53,7 @@ def bing_web(terms, territory, start, end):
 
 def gdelt_web(terms, territory, start, end):
     url = 'https://api.gdeltproject.org/api/v2/doc/doc?' + urlencode({
-        'query': indexed_query(terms, territory), 'mode': 'artlist', 'format': 'json',
+        'query': indexed_query(terms[:1], territory), 'mode': 'artlist', 'format': 'json',
         'maxrecords': 30, 'sort': 'datedesc', 'startdatetime': start.strftime('%Y%m%d%H%M%S'),
         'enddatetime': end.strftime('%Y%m%d%H%M%S')})
     data = json.loads(source_bytes(url))
