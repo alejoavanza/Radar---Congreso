@@ -5,6 +5,7 @@ from unittest.mock import Mock, patch
 
 import comparisons as comp
 import news_sources
+import web_discovery
 from app import app
 
 
@@ -85,7 +86,8 @@ class ComparisonTest(unittest.TestCase):
         xml += item('Fuera', self.end - timedelta(hours=25), 'https://example.org/b')
         xml += item('Posterior', self.end + timedelta(seconds=1), 'https://example.org/c')
         xml += '</channel></rss>'
-        with patch.object(comp.requests, 'get', return_value=Mock(ok=True, content=xml.encode())):
+        with patch.object(comp.requests, 'get', return_value=Mock(ok=True, content=xml.encode())), \
+             patch.object(web_discovery, 'duckduckgo_web', return_value=([], 0, False)):
             result = comp.count_news('test', self.end - timedelta(days=1), self.end)
         self.assertEqual(result['count'], 1)
         self.assertEqual(result['items'][0]['url'], 'https://example.org/a')

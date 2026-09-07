@@ -22,10 +22,8 @@ class RadarSourcesTest(unittest.TestCase):
             if host == 'news.google.com':
                 return Mock(content=b'<rss version="2.0"><channel><item><title>Una noticia</title>'
                             b'<link>https://example.org/noticia</link><pubDate>' + published + b'</pubDate></item></channel></rss>')
-            if host == 'confidencialnoticias.com':
-                return Mock(content=b'<rss version="2.0"><channel><title>Confidencial Noticias</title></channel></rss>')
-            if host == 'www.lachivadeuraba.com':
-                return Mock(content=b'<a href="/articulo/otra-noticia">Otra noticia</a>')
+            if host == 'html.duckduckgo.com':
+                return Mock(content=b'<div class="no-results">No results</div>')
             raise AssertionError('Unexpected source: ' + host)
 
         with patch.object(news_sources.requests, 'get', side_effect=source_response) as get:
@@ -40,11 +38,15 @@ class RadarSourcesTest(unittest.TestCase):
         self.assertNotIn('platform_counts', mentions)
         self.assertNotIn('platform_status', mentions)
         self.assertCountEqual([urlparse(call.args[0]).hostname for call in get.call_args_list],
-                             ['news.google.com', 'confidencialnoticias.com', 'www.lachivadeuraba.com'])
+                             ['news.google.com', 'html.duckduckgo.com'])
+        self.assertNotIn('La Chiva', response.json['web_coverage']['message'])
+        self.assertNotIn('Confidencial', response.json['web_coverage']['message'])
 
     def test_report_surface_has_one_web_count_and_keeps_company_links(self):
         html = radar.app.test_client().get('/').get_data(as_text=True)
         self.assertIn('Publicaciones en medios web', html)
+        self.assertNotIn('La Chiva', html)
+        self.assertNotIn('Confidencial', html)
         self.assertNotIn('id="msocial"', html)
         self.assertNotIn('id="mcombined"', html)
         self.assertNotIn('Menciones en redes y web', html)
