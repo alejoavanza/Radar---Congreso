@@ -4,11 +4,13 @@ from email.utils import format_datetime
 from unittest.mock import Mock, patch
 
 import comparisons as comp
+import news_sources
 from app import app
 
 
 class ComparisonTest(unittest.TestCase):
     def setUp(self):
+        news_sources.cached_source.cache_clear()
         self.client = app.test_client()
         self.ids = list(comp.members())[:10]
         self.end = datetime(2026, 9, 6, 12, tzinfo=timezone.utc)
@@ -29,13 +31,10 @@ class ComparisonTest(unittest.TestCase):
         for days in (60.0, True, 0, 120, '30', None):
             self.assertEqual(self.client.post('/api/compare/start', json={'days': days, 'member_ids': self.ids[:5]}).status_code, 400)
 
-    @patch.dict(comp.os.environ, {'X_BEARER_TOKEN': 'test-only-token'})
     def test_member_preserves_window_and_cache_without_calling_social_sources(self):
         start = self.client.post('/api/compare/start', json={'days': 60, 'territory': 'Antioquia', 'member_ids': self.ids[:5]}).get_json()
         with patch.object(comp, 'count_news', return_value=comp.available(17, 'Web')) as news, \
-             patch.object(comp, 'count_x') as x, \
-             patch.object(comp, 'count_bluesky') as bsky, \
-             patch.object(comp, 'count_reddit') as reddit:
+             patch.object(comp.requests, 'get', side_effect=AssertionError('Unexpected additional source')) as external:
             for member_id in self.ids[:5]:
                 response = self.client.post('/api/compare/member', json={'member_id': member_id, 'days': 60, 'end_time': start['end_time'], 'territory': 'Antioquia'})
                 self.assertEqual(response.status_code, 200)
@@ -50,9 +49,7 @@ class ComparisonTest(unittest.TestCase):
             self.assertTrue(all(call.args[1] == comp.date(start['start_time']) for call in news.call_args_list))
             self.client.post('/api/compare/member', json={'member_id': self.ids[0], 'days': 60, 'end_time': start['end_time'], 'territory': 'Antioquia'})
             self.assertEqual(news.call_count, 5, 'Identical windows use the cache')
-            x.assert_not_called()
-            bsky.assert_not_called()
-            reddit.assert_not_called()
+            external.assert_not_called()
 
     def test_web_failure_is_unavailable_and_valid_empty_search_is_zero(self):
         start = self.client.post('/api/compare/start', json={'days': 1, 'member_ids': self.ids[:2]}).get_json()
@@ -77,7 +74,7 @@ class ComparisonTest(unittest.TestCase):
 
     def test_zone_applies_to_all_aliases_and_contains_no_injected_quotes(self):
         member = {'search_name': 'Alejandro Toro', 'full_name': 'David Alejandro Toro Ramírez', 'aliases': ['Alejandro Toro']}
-        self.assertEqual(comp.query_for(member, 'Colombia'), '("Alejandro Toro" OR "David Alejandro Toro Ramírez") "Colombia"')
+        self.assertEqual(comp.query_for(member, 'Colombia'), news_sources.NewsQuery(('Alejandro Toro', 'David Alejandro Toro Ramírez'), 'Colombia'))
 
     def test_news_enforces_exact_last_24_hours_and_deduplicates(self):
         def item(title, date, link):
@@ -92,40 +89,9 @@ class ComparisonTest(unittest.TestCase):
             result = comp.count_news('test', self.end - timedelta(days=1), self.end)
         self.assertEqual(result['count'], 1)
         self.assertEqual(result['items'][0]['url'], 'https://example.org/a')
+        news_sources.cached_source.cache_clear()
         with patch.object(comp.requests, 'get', return_value=Mock(ok=True, content=b'<html>Access denied</html>')):
             self.assertIsNone(comp.count_news('test', self.end - timedelta(days=1), self.end)['count'])
-
-    @patch.dict(comp.os.environ, {'X_BEARER_TOKEN': 'test-only-token'})
-    def test_x_counts_support_current_and_legacy_fields_and_deduplicate_pages(self):
-        start = self.end - timedelta(days=30)
-        bucket = {'start': comp.iso(start), 'end': comp.iso(start + timedelta(days=1)), 'post_count': 8}
-        other = {'start': comp.iso(start + timedelta(days=1)), 'end': comp.iso(self.end), 'tweet_count': 12}
-        pages = [Mock(ok=True, json=lambda: {'data': [bucket], 'meta': {'next_token': 'next'}}),
-                 Mock(ok=True, json=lambda: {'data': [bucket, other], 'meta': {}})]
-        with patch.object(comp.requests, 'get', side_effect=pages) as get:
-            result = comp.count_x('test', start, self.end)
-            self.assertEqual(result['count'], 20)
-            self.assertTrue(get.call_args.args[0].endswith('/counts/all'))
-            self.assertEqual(get.call_args.kwargs['params']['end_time'], comp.iso(self.end))
-        with patch.object(comp.requests, 'get', return_value=Mock(ok=False, status_code=402)):
-            result = comp.count_x('test', start, self.end)
-            self.assertIsNone(result['count'])
-            self.assertIn('créditos', result['message'])
-        with patch.object(comp.requests, 'get', return_value=Mock(ok=True, json=lambda: {})):
-            self.assertIsNone(comp.count_x('test', start, self.end)['count'])
-
-    def test_social_search_failure_and_pagination_limit_do_not_claim_complete_zero(self):
-        with patch.object(comp.requests, 'get', return_value=Mock(ok=True, json=lambda: {})):
-            self.assertIsNone(comp.count_bluesky('test', self.end - timedelta(days=1), self.end)['count'])
-            self.assertIsNone(comp.count_reddit('test', self.end - timedelta(days=1), self.end)['count'])
-        pages = []
-        for i in range(3):
-            data = {'posts': [{'uri': f'at://{i}', 'record': {'createdAt': comp.iso(self.end - timedelta(hours=1))}}], 'cursor': str(i)}
-            pages.append(Mock(ok=True, json=lambda data=data: data))
-        with patch.object(comp.requests, 'get', side_effect=pages):
-            result = comp.count_bluesky('test', self.end - timedelta(days=1), self.end)
-        self.assertEqual(result['count'], 3)
-        self.assertTrue(result['limited'])
 
     def test_mi_red_is_replaced_and_sixty_days_is_in_both_forms(self):
         self.assertEqual(self.client.post('/api/mi-red', json={'username': 'test'}).status_code, 404)
