@@ -4,7 +4,7 @@ Ambas herramientas usan `search_news` y el mismo catálogo `source_catalog.py`, 
 
 ## Consultas
 
-Se conserva Google Noticias por cada variante del nombre y DuckDuckGo general por el nombre principal. Se añaden diez grupos de hasta cuatro fuentes, mediante consultas `site:` en Google Noticias (cada variante por separado) (nombre principal por separado y demás variantes agrupadas); DuckDuckGo se mantiene como búsqueda general. Todas las consultas incluyen la misma zona como frase, salvo cuando se deja vacía. Los nombres se entrecomillan y se admiten hasta seis variantes, igual que antes. Los grupos tienen un presupuesto propio de resultados para aumentar la visibilidad de fuentes regionales y especializadas.
+Se conserva Google Noticias por cada variante del nombre y DuckDuckGo general por el nombre principal. Se añaden diez grupos de hasta cuatro fuentes, mediante consultas `site:` en Google Noticias (nombre principal por separado y demás variantes agrupadas); DuckDuckGo se mantiene como búsqueda general. Todas las consultas incluyen la misma zona como frase, salvo cuando se deja vacía. Los nombres se entrecomillan y se admiten hasta seis variantes, igual que antes. Los grupos tienen un presupuesto propio de resultados para aumentar la visibilidad de fuentes regionales y especializadas.
 
 Son consultas dirigidas a índices públicos, no un rastreo exhaustivo de los archivos de cada medio. No hay APIs sociales, credenciales nuevas, suscripciones, fuentes exclusivas por persona ni acceso a contenido protegido. Si un buscador exige un reto interactivo o rechaza la consulta, se declara la consulta parcial sin intentar sortearlo. Una respuesta del buscador no demuestra acceso directo al medio ni cobertura completa de su archivo.
 
@@ -14,7 +14,7 @@ Google Noticias aplica las frases de nombre/zona y las restricciones de sitio en
 
 Para candidatos de ambos buscadores se verifica el sitio y sección, incluida la URL final tras redirecciones, y la fecha original en `article:published_time`, `datePublished`, `parsely-pub-date` o una etiqueta `time` publicada. El texto del artículo, sus metadatos o autor debe contener el nombre o una variante y, si se indicó zona, también esa zona. Se ignoran el título y resumen del buscador al comprobar coincidencias; el título del índice solo se usa para mostrar un enlace si la página carece de titular. No se usa la fecha de actualización como sustituto. La zona es un filtro textual, no geolocalización ni resolución de homónimos.
 
-Los periodos son 90/60/30/7/1 días; un día equivale a 24 horas. Comparativos fija la misma hora de corte para todos los congresistas. Radar puede tener otra hora de corte o variantes introducidas manualmente.
+Los periodos son 90/60/30/7/1 días; un día equivale a 24 horas. Radar y Comparativos comparten una hora de corte durante la sesión; Comparativos aplica ese mismo corte a todos los congresistas. Radar admite además variantes introducidas manualmente.
 
 ## Límites y duplicados
 
@@ -26,7 +26,7 @@ La respuesta conserva el estado de cada consulta y los identificadores del catá
 
 ## Seguridad y verificación
 
-La lectura directa de artículos mantiene validación de HTTP/HTTPS, puertos 80/443, DNS público, conexión a la IP validada y verificación TLS. Cada redirección se valida; las redes sociales se excluyen también después de redirigir. El HTML está limitado a 2 MB por página, con caché acotada a 32 páginas. El host fijo `news.google.com` necesita ese margen para obtener los datos del enlace original, que aparecen después de los scripts de su interfaz. Su petición pública de resolución usa un destino fijo, sin redirecciones ni credenciales.
+La lectura directa de artículos mantiene validación de HTTP/HTTPS, puertos 80/443, DNS público, conexión a la IP validada y verificación TLS. Cada redirección se valida; las redes sociales se excluyen también después de redirigir. El HTML está limitado a 2 MB por página, con cachés de HTML y de enlaces resueltos acotadas a 32 entradas cada una. El host fijo `news.google.com` necesita ese margen para obtener los datos del enlace original, que aparecen después de los scripts de su interfaz. Su petición pública de resolución usa un destino fijo, sin redirecciones ni credenciales.
 
 Las pruebas cubren las 38 fuentes y sus grupos, el mismo catálogo en ambas APIs, nombres alternativos, zona vacía y regional, ventanas de 24 horas y 90 días, dominios ajenos y secciones, duplicados, fallos parciales y la conservación de resultados de búsqueda general.
 

@@ -201,7 +201,7 @@ class GoogleLinkPage(HTMLParser):
             self.signature, self.timestamp = attrs['data-n-a-sg'], attrs['data-n-a-ts']
 
 
-@lru_cache(maxsize=256)
+@lru_cache(maxsize=32)
 def google_article(url, bucket):
     """Resolve a public Google News link, then read its original article.
 
