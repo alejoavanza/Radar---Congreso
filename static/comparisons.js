@@ -260,7 +260,7 @@
     return {member, sources: {Web: {status: 'unavailable', count: null, message}}};
   }
 
-  async function compare(event) {
+  async function compare(event, refresh = false) {
     event.preventDefault();
     if (running || selected.length < 2 || selected.length > 10) return;
     running = true; form.setAttribute('aria-busy', 'true');
@@ -269,16 +269,23 @@
     run.textContent = 'CONSULTANDO…'; $('compare-error').textContent = '';
     progress.textContent = 'Preparando una misma ventana de tiempo para todos…';
     try {
-      const meta = await post('/api/compare/start', {member_ids: selected.map(member => member.id), days: +$('compare-days').value, territory: $('compare-territory').value}, 15000);
+      const end_time = await root.RadarSearch.cutoff(refresh);
+      const meta = await post('/api/compare/start', {member_ids: selected.map(member => member.id), days: +$('compare-days').value, territory: $('compare-territory').value, end_time}, 15000);
       const rows = new Array(meta.members.length);
       let next = 0, complete = 0;
       async function worker() {
         while (next < meta.members.length) {
           const position = next++, member = meta.members[position];
           try {
-            const row = await post('/api/compare/member', {member_id: member.id, days: meta.days, territory: meta.territory, end_time: meta.end_time}, 120000);
-            if (row.member?.id !== member.id || !row.sources || row.end_time !== meta.end_time || row.start_time !== meta.start_time) throw new Error('La fuente no devolvió el periodo solicitado.');
-            rows[position] = row;
+            const full = selected.find(item=>item.id === member.id);
+            const query = {name:full.search_name, aliases:[...full.aliases, full.full_name].join(','), days:meta.days,
+              territory:meta.territory, end_time:meta.end_time, limit:100};
+            const data = await root.RadarSearch.run(query, async () => {
+              const row = await post('/api/compare/member', {member_id: member.id, days: meta.days, territory: meta.territory, end_time: meta.end_time}, 120000);
+              if (row.member?.id !== member.id || !row.sources || row.end_time !== meta.end_time || row.start_time !== meta.start_time) throw new Error('La fuente no devolvió el periodo solicitado.');
+              return row.sources.Web;
+            }, refresh);
+            rows[position] = {member, sources:{Web:data}, start_time:meta.start_time, end_time:meta.end_time};
           } catch (error) {
             rows[position] = failedRow(member, error.name === 'AbortError' ? 'La consulta superó el tiempo de espera.' : error.message);
           }
@@ -302,6 +309,7 @@
   }
 
   form.addEventListener('submit', compare);
+  $('compare-refresh').addEventListener('click', event=>compare(event, true));
   $('compare-days').addEventListener('change', dirty);
   $('compare-territory').addEventListener('input', dirty);
   $('compare-order').addEventListener('change', () => { renderSnapshot(); persist(); });

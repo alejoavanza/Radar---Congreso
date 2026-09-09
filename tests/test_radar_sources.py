@@ -1,6 +1,7 @@
+import search_state
 import os
 import unittest
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 from unittest.mock import Mock, patch
 from urllib.parse import urlparse
@@ -12,6 +13,7 @@ import web_discovery
 
 class RadarSourcesTest(unittest.TestCase):
     def setUp(self):
+        search_state.clear()
         batches = patch.object(news_sources, "BATCHES", ())
         batches.start()
         self.addCleanup(batches.stop)
@@ -19,7 +21,7 @@ class RadarSourcesTest(unittest.TestCase):
 
     @patch.dict(os.environ, {'X_BEARER_TOKEN':'test-only-token', 'YOUTUBE_API_KEY':'test-only-key'})
     def test_report_only_contacts_news_publishers_and_has_no_social_metrics(self):
-        published = format_datetime(datetime.now(timezone.utc)).encode()
+        published = format_datetime((datetime.now(timezone.utc)-timedelta(minutes=5))).encode()
 
         def source_response(url, **kwargs):
             host = urlparse(url).hostname
@@ -30,7 +32,7 @@ class RadarSourcesTest(unittest.TestCase):
                 return Mock(content=b'<div class="no-results">No results</div>')
             raise AssertionError('Unexpected source: ' + host)
 
-        html = '<meta property="article:published_time" content="' + datetime.now(timezone.utc).isoformat() + '"><article>Gustavo Petro en Colombia</article>'
+        html = '<meta property="article:published_time" content="' + (datetime.now(timezone.utc)-timedelta(minutes=5)).isoformat() + '"><article>Gustavo Petro en Colombia</article>'
         with patch.object(news_sources.requests, 'get', side_effect=source_response) as get, \
              patch.object(web_discovery, 'cached_page', return_value=('https://example.org/noticia', html)):
             response = radar.app.test_client().post('/api/report', json={

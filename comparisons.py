@@ -7,6 +7,7 @@ import json
 import requests
 from news_sources import NewsQuery, search_news
 from flask import Blueprint, jsonify, request
+from search_state import SearchCache
 
 comparison_api = Blueprint('comparison', __name__)
 PERIODS = (90, 60, 30, 7, 1)
@@ -70,8 +71,7 @@ def source_count(name, fn, query, start, end):
         return unavailable(f'No se pudo verificar la respuesta de {name}.')
 
 
-@lru_cache(maxsize=128)
-def collect(member_id, days, end_time, territory):
+def _collect(member_id, days, end_time, territory):
     member = members()[member_id]
     end = date(end_time)
     start = end - timedelta(days=days)
@@ -80,6 +80,27 @@ def collect(member_id, days, end_time, territory):
     counts = {'Web': source_count('Web', count_news, query, start, end)}
     return {'member': public_member(member), 'sources': counts,
             'start_time': iso(start), 'end_time': end_time, 'days': days, 'territory': territory}
+
+
+_results = SearchCache(128)
+
+
+def collect(member_id, days, end_time, territory):
+    return _results.call((member_id, days, end_time, territory),
+                         lambda: _collect(member_id, days, end_time, territory),
+                         accept=lambda row: row['sources']['Web']['status'] == 'available')
+
+
+collect.cache_clear = _results.clear
+
+
+def search_end(value=None):
+    if value is None:
+        return (now() - timedelta(seconds=45)).replace(second=0, microsecond=0)
+    end = date(value)
+    if not end or not now() - timedelta(minutes=15) <= end <= now():
+        raise ValueError('La ventana de consulta venció. Actualiza la búsqueda.')
+    return end
 
 
 def criteria(payload):
@@ -96,6 +117,7 @@ def start_comparison():
     payload = request.get_json(silent=True)
     try:
         days, territory = criteria(payload)
+        end = search_end(payload.get('end_time'))
         ids = payload.get('member_ids')
         if not isinstance(ids, list) or not 2 <= len(ids) <= 10 or any(not isinstance(mid, str) or mid not in members() for mid in ids):
             raise ValueError('Selecciona entre 2 y 10 congresistas del directorio.')
@@ -104,7 +126,6 @@ def start_comparison():
     except ValueError as error:
         return jsonify({'error': str(error)}), 400
     # Every member uses the same immutable window. Minute buckets also permit cache reuse.
-    end = (now() - timedelta(seconds=45)).replace(second=0, microsecond=0)
     return jsonify({'members': [public_member(members()[mid]) for mid in ids], 'days': days,
                     'territory': territory, 'start_time': iso(end - timedelta(days=days)), 'end_time': iso(end)})
 

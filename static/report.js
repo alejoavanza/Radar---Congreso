@@ -6,6 +6,7 @@ let currentForm = null;
 let reportSearchSequence = 0;
 
 function webOnlyReport(report) {
+  if (report.web_coverage?.status === 'unavailable') return {...report, total:null, mentions:{web:null,combined:null}};
   const web = Number.isFinite(report.mentions?.web) ? report.mentions.web : Number(report.total) || 0;
   // Older clients may restore totals that included social networks.
   return {...report, total:web, mentions:{web, combined:web, note:'Publicaciones detectadas en medios web.'}};
@@ -136,7 +137,7 @@ function restoreReport() {
   }
 }
 
-async function go() {
+async function go(refresh = false) {
   const name = $('name').value.trim();
   if (!name) return alert('Escribe un nombre');
   const search = window.RadarCongress?.query() || {name, aliases: $('aliases').value};
@@ -147,15 +148,23 @@ async function go() {
   $('result').classList.add('hide');
   showOfficialProfile(query, form.congress_id, searchSequence);
   try {
-    const response = await (window.RadarNative?.request || fetch)('/api/report', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(query)
-    });
-    const data = await response.json();
+    query.end_time = await window.RadarSearch.cutoff(refresh);
+    const coverage = await window.RadarSearch.run(query, async () => {
+      const response = await (window.RadarNative?.request || fetch)('/api/report', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({...query, limit:100})
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || data.error || 'No se pudo completar la consulta.');
+      return {...data.web_coverage, items:data.items};
+    }, refresh);
     if (searchSequence !== reportSearchSequence) return;
-    if (!response.ok) throw new Error(data.error || 'Error');
-    const reportData = webOnlyReport(data);
+    const items = coverage.items.map(item=>({...item, sentiment:item.sentiment || 'Sin clasificar'}));
+    const count = coverage.count;
+    const summary = count === null ? 'No fue posible establecer un conteo verificable. Una búsqueda incompleta no significa cero menciones.'
+      : `${count} publicaciones verificadas para ${query.name} en ${query.days === 1 ? 'las últimas 24 horas' : 'los últimos ' + query.days + ' días'}, según la hora de corte indicada. La cobertura es parcial.`;
+    const reportData = webOnlyReport({name:query.name, days:query.days, total:count, items,
+      summary, mentions:{web:count, combined:count}, web_coverage:coverage});
     renderReport(reportData);
     currentReport = reportData;
     currentQuery = query;
@@ -164,12 +173,6 @@ async function go() {
     saveReport();
   } catch (error) {
     if (searchSequence === reportSearchSequence) {
-      if (window.RadarNative && currentReport) {
-        renderReport(currentReport);
-        const zone = currentQuery?.territory || 'Sin filtro de zona';
-        $('report-restored').textContent = `No se pudo actualizar. Se muestra la consulta anterior · Zona consultada: ${zone}.`;
-        $('report-restored').classList.remove('hide');
-      }
       alert(error.message);
     }
   } finally {
@@ -186,9 +189,14 @@ document.addEventListener('visibilitychange', () => {
 });
 
 function renderReport(d) {
-  $('mweb').textContent = d.mentions.web;
+  $('mweb').textContent = d.mentions.web ?? 'N/D';
   const coverage = $('report-coverage');
   if (coverage) coverage.textContent = d.web_coverage?.message || 'Publicaciones detectadas en medios web. La cobertura es parcial; pueden existir otras publicaciones.';
+  const period = $('report-window');
+  if (period && d.web_coverage?.start_time && d.web_coverage?.end_time) {
+    const when = new Intl.DateTimeFormat('es-CO', {timeZone:'America/Bogota', dateStyle:'medium', timeStyle:'short'});
+    period.textContent = `${when.format(new Date(d.web_coverage.start_time))} — ${when.format(new Date(d.web_coverage.end_time))} (hora de Colombia).`;
+  }
   $('rname').textContent = d.name;
   $('summary').textContent = d.summary;
   $('items').innerHTML = (d.items || []).map(newsItem).join('');

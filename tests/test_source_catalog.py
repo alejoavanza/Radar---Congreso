@@ -1,3 +1,4 @@
+import search_state
 import json
 import unittest
 from collections import Counter
@@ -14,6 +15,7 @@ import web_discovery as web
 
 class CatalogSearchTest(unittest.TestCase):
     def setUp(self):
+        search_state.clear()
         self.end = datetime(2026, 9, 9, 12, tzinfo=timezone.utc)
         self.start = self.end - timedelta(days=7)
         self.terms = ('Alejandro Toro', 'David Alejandro Toro Ramírez')
@@ -58,9 +60,9 @@ class CatalogSearchTest(unittest.TestCase):
 
     def assert_whole_catalog(self, google, duck, terms, zone, days):
         for term in terms:
-            calls = [call for call in google.call_args_list if call.args[0] == term]
+            calls = [call for call in google.call_args_list if term in ((call.args[0],) if isinstance(call.args[0], str) else call.args[0])]
             self.assertCountEqual([s.id for call in calls for s in call.args[4]], [s.id for s in catalog.SOURCES])
-        self.assertCountEqual([s.id for call in duck.call_args_list for s in call.args[4]], [s.id for s in catalog.SOURCES])
+        duck.assert_not_called()  # General DuckDuckGo remains; blocked per-batch requests were removed.
         for call in google.call_args_list + duck.call_args_list:
             self.assertEqual(call.args[1], zone)
             self.assertEqual(call.args[3] - call.args[2], timedelta(days=days))
@@ -91,12 +93,12 @@ class CatalogSearchTest(unittest.TestCase):
                 ('Alejandro Toros habló en Antioquia', 'Antioquia', False),
                 ('Alejandro Toro habló en Bogotá', '', True)):
             with patch.object(web, 'cached_page', return_value=(candidate['url'], html(body))):
-                item, _ = web.verify_page(candidate, self.terms, self.start, self.end, zone)
+                item, _ = web._verify_page(candidate, self.terms, self.start, self.end, zone)
             self.assertEqual(item is not None, expected)
         with patch.object(web, 'cached_page', return_value=('https://www.elespectador.com/deportes/nota', html('Alejandro Toro Antioquia'))):
-            self.assertIsNone(web.verify_page(candidate, self.terms, self.start, self.end, 'Antioquia')[0])
+            self.assertIsNone(web._verify_page(candidate, self.terms, self.start, self.end, 'Antioquia')[0])
         with patch.object(web, 'cached_page', return_value=(candidate['url'], html('Alejandro Toro Antioquia', '2026-07-01T00:00:00Z'))):
-            self.assertIsNone(web.verify_page(candidate, self.terms, self.start, self.end, 'Antioquia')[0])
+            self.assertIsNone(web._verify_page(candidate, self.terms, self.start, self.end, 'Antioquia')[0])
 
     def test_extra_source_adds_a_mention_without_losing_general_or_duplicating(self):
         def item(title, url, domain):
@@ -107,7 +109,7 @@ class CatalogSearchTest(unittest.TestCase):
         candidate = dict(direct, engine='DuckDuckGo fuentes', catalog_source='colombia20', candidate=True)
         with patch.object(news, 'google_news', return_value=([original, extra],0,False)), \
              patch.object(web, 'duckduckgo_web', return_value=([],0,False)), \
-             patch.object(news, 'focused_news', return_value=([extra],0,False)), \
+             patch.object(news, 'focused_news', return_value=([candidate],0,False)), \
              patch.object(web, 'focused_web', return_value=([candidate],0,False)), \
              patch.object(web, 'verify_candidates', return_value=([direct],0,False)):
             result = news.search_news(news.NewsQuery(self.terms, 'Colombia'), self.start, self.end)
@@ -134,7 +136,7 @@ class CatalogSearchTest(unittest.TestCase):
         self.assertTrue(result['limited'])
         self.assertEqual(result['catalog']['configured'], 38)
         self.assertEqual(result['catalog']['searchable'], 0)
-        self.assertIn('Consulta parcial', result['message'])
+        self.assertIn('fallida', result['message'])
 
     def test_source_catalog_is_visible_and_matches_the_search_configuration(self):
         html = radar.app.test_client().get('/').get_data(as_text=True)
@@ -153,10 +155,10 @@ class CatalogSearchTest(unittest.TestCase):
                                ('David Toro informa sobre fútbol en Croacia', False),
                                ('Alejandro Toro presenta un proyecto en Colombia', True)):
             with patch.object(web, 'google_article', return_value=(original, html(body))):
-                item, _ = web.verify_page(candidate, self.terms, self.start, self.end, 'Colombia')
+                item, _ = web._verify_page(candidate, self.terms, self.start, self.end, 'Colombia')
             self.assertEqual(item is not None, accepted)
         with patch.object(web, 'google_article', return_value=('https://www.infobae.com/deportes/nota/', html('Alejandro Toro Colombia'))):
-            self.assertIsNone(web.verify_page(candidate, self.terms, self.start, self.end, 'Colombia')[0])
+            self.assertIsNone(web._verify_page(candidate, self.terms, self.start, self.end, 'Colombia')[0])
 
     def test_google_public_link_resolution_preserves_original_url_and_stops_on_challenges(self):
         token = 'CBMiAAAAAAAAAAAA'
@@ -178,7 +180,7 @@ class CatalogSearchTest(unittest.TestCase):
             post.assert_not_called()
 
     def test_google_link_metadata_after_large_scripts_is_read_without_unbounded_articles(self):
-        raw = ('<script>' + ' ' * 650_000 + '</script><div data-n-a-ts="123" data-n-a-sg="signature"></div>').encode()
+        raw = ('<script>' + ' ' * 650_000 + '</script><div data-n-a-ts="123" data-n-a-sg="signature"></div>' + ' ' * 2_000_000).encode()
         response = MagicMock(status=200, headers={'Content-Type':'text/html'})
         response.read.side_effect = lambda size, **kwargs: raw[:size]
         pool = MagicMock()
@@ -189,7 +191,7 @@ class CatalogSearchTest(unittest.TestCase):
             _, article_html = web.cached_page('https://public.example/large-fixture', 0)
         self.assertEqual(web.GoogleLinkPage(google_html).signature, 'signature')
         self.assertLess(len(article_html), len(raw))
-        self.assertLess(len(google_html), 2_000_000)
+        self.assertLessEqual(len(google_html), 2_000_000)
 
 
 if __name__ == '__main__':
