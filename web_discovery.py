@@ -133,8 +133,10 @@ def cached_page(url, bucket):
                 raise ValueError('Article response unavailable')
             if 'html' not in response.headers.get('Content-Type', '').lower():
                 raise ValueError('Article is not HTML')
-            # Metadata normally appears in the head; never download an unbounded page.
-            return url, response.read(PAGE_BYTES, decode_content=True).decode('utf-8', errors='replace')
+            # Google places its public link metadata after ~650 KB of UI scripts.
+            # Keep article reads small and bound the fixed Google host separately.
+            byte_limit = 2_000_000 if host == 'news.google.com' else PAGE_BYTES
+            return url, response.read(byte_limit, decode_content=True).decode('utf-8', errors='replace')
         finally:
             if response is not None:
                 response.close()
