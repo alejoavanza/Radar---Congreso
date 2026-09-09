@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import re
 from collections import Counter
 from datetime import datetime, timedelta, timezone
-from comparisons import comparison_api
+from comparisons import comparison_api, search_end, iso
 from news_sources import NewsQuery, search_news
 from source_catalog import public_catalog
 
@@ -22,8 +22,8 @@ def topics(items,name):
             if w not in banned:c[w]+=1
     return [w for w,_ in c.most_common(8)]
 def search_terms(name,aliases):return [name]+[a.strip() for a in aliases.split(',') if a.strip()]
-def fetch_news(name,aliases,territory,days,limit):
-    end=datetime.now(timezone.utc)
+def fetch_news(name,aliases,territory,days,limit,end=None):
+    end=end or search_end()
     coverage=search_news(NewsQuery(tuple(search_terms(name,aliases)),territory.strip()),end-timedelta(days=days),end,limit)
     items=[{**item,'sentiment':sentiment(item['title'])} for item in coverage['items']]
     return items,coverage['message'] if coverage['status']=='unavailable' else None,coverage
@@ -44,11 +44,12 @@ def report():
     if not name:return jsonify({'error':'Escribe un nombre.'}),400
     try:
         days=max(1,min(int(d.get('days',30)),90));limit=max(10,min(int(d.get('limit',60)),100))
-    except (TypeError,ValueError):return jsonify({'error':'Elige un periodo válido.'}),400
+        end=search_end(d.get('end_time'))
+    except (TypeError,ValueError) as error:return jsonify({'error':str(error) or 'Elige un periodo válido.'}),400
     aliases=d.get('aliases','');territory=d.get('territory','Colombia')
     if not isinstance(aliases,str) or not isinstance(territory,str) or len(name)>200 or len(aliases)>1000 or len(territory)>100:
         return jsonify({'error':'Revisa el nombre, los términos asociados y la zona.'}),400
-    items,err,coverage=fetch_news(name,aliases,territory,days,limit)
+    items,err,coverage=fetch_news(name,aliases,territory,days,limit,end)
     if err:return jsonify({'error':'No fue posible consultar las fuentes en este momento.','detail':err}),502
     counts=Counter(x['sentiment'] for x in items)
     total=len(items);pos=counts['Positivo'];neg=counts['Negativo'];neu=counts['Neutral']
@@ -65,4 +66,9 @@ def report():
     })
 @app.get('/health')
 def health():return {'status':'ok'}
+@app.get('/api/search/window')
+def search_window():
+    response=jsonify({'end_time':iso(datetime.now(timezone.utc)-timedelta(seconds=45))})
+    response.headers['Cache-Control']='no-store'
+    return response
 if __name__=='__main__':app.run(host='0.0.0.0',port=5000,debug=True)

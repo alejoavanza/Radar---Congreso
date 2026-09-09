@@ -22,3 +22,5 @@ Preparada para despliegue como servicio web Python con `gunicorn app:app`. Inclu
 ## Nota metodológica
 
 El balance contextual es una clasificación heurística de titulares y no equivale a intención de voto, favorabilidad de encuesta ni medición científica de opinión pública. La evolución prevista de RADAR incorporará más fuentes, resolución de entidades, narrativas, evidencia auditable y modelos de scoring versionados.
+
+La corrección de estabilidad y sus límites se documentan en [docs/search-stability.md](docs/search-stability.md).

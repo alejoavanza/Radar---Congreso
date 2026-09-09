@@ -1,11 +1,11 @@
 """Bounded news discovery, with independent name queries and explicit coverage."""
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from functools import lru_cache
 from html import unescape
-from time import time
+from time import time, monotonic
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 import re
 import unicodedata
@@ -14,6 +14,7 @@ import logging
 import feedparser
 import requests
 from source_catalog import BATCHES, SOURCES, CATALOG_VERSION, matching_source, site_query
+import search_state
 
 TIMEOUT = (3, 8)
 UA = {'User-Agent': 'Radar-Politico/2.1 (public-news-monitor)'}
@@ -145,7 +146,7 @@ def google_news(term, territory, start, end):
     if territory:
         query += ' "' + territory.replace('"', ' ').strip() + '"'
     query += f' after:{(start-timedelta(days=1)):%Y-%m-%d} before:{(end+timedelta(days=1)):%Y-%m-%d}'
-    raw = get_bytes('https://news.google.com/rss/search', params={'q': query, 'hl': 'es-419', 'gl': 'CO', 'ceid': 'CO:es-419'})
+    raw = source_bytes('https://news.google.com/rss/search?' + urlencode({'q': query, 'hl': 'es-419', 'gl': 'CO', 'ceid': 'CO:es-419'}))
     return feed_items(raw, start, end)
 
 
@@ -156,7 +157,7 @@ Feed dates and declared publishers prefilter candidates. The common verifier
 resolves the original URL and checks the article's name, zone, date and section.
 """
     from web_discovery import indexed_query
-    query = indexed_query((term,), territory) + ' ' + site_query(batch)
+    query = indexed_query((term,) if isinstance(term, str) else term, territory) + ' ' + site_query(batch)
     query += f' after:{(start-timedelta(days=1)):%Y-%m-%d} before:{(end+timedelta(days=1)):%Y-%m-%d}'
     url = 'https://news.google.com/rss/search?' + urlencode({
         'q': query, 'hl': 'es-419', 'gl': 'CO', 'ceid': 'CO:es-419'})
@@ -172,24 +173,38 @@ resolves the original URL and checks the article's name, zone, date and section.
     return accepted, skipped, capped
 
 
-def search_news(query, start, end, limit=100):
-    from web_discovery import duckduckgo_web, focused_web, verify_candidates
+def _search_news(query, start, end, limit=100):
+    from web_discovery import duckduckgo_web, verify_candidates
     if isinstance(query, str):
         query = NewsQuery((query,), '')
     terms = list(dict.fromkeys(t.replace('"', ' ').strip() for t in query.terms if t.strip()))
-    jobs = [('Google Noticias', google_news, (term, query.territory, start, end), ()) for term in terms[:MAX_NAMES]]
-    jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, start, end), ()))
+    deadline = monotonic() + 40
+    # Day/week results share index queries; combine their samples before applying
+    # the actual requested window and the article-verification budget.
+    discovery_start = min(start, end-timedelta(days=7))
+    jobs = [('Google Noticias', google_news, (term, query.territory, discovery_start, end), ()) for term in terms[:MAX_NAMES]]
+    jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, discovery_start, end), ()))
+    jobs.append(('Google Noticias · recientes', google_news, (terms[0], query.territory, end-timedelta(days=1), end), ()))
+    jobs.append(('DuckDuckGo web · recientes', duckduckgo_web, (terms[:1], query.territory, end-timedelta(days=1), end), ()))
     for number, batch in enumerate(BATCHES, 1):
         ids = tuple(source.id for source in batch)
+        # Keep the primary name independent: an unindexed long variant can
+        # suppress its hits in an OR query. Group only the remaining variants.
+        names = [terms[0]] + ([tuple(terms[1:MAX_NAMES])] if len(terms) > 1 else [])
         jobs.extend((f'Google Noticias · fuentes {number}', focused_news,
-                     (term, query.territory, start, end, batch), ids) for term in terms[:MAX_NAMES])
-        jobs.append((f'DuckDuckGo · fuentes {number}', focused_web,
-                     (terms[:MAX_NAMES], query.territory, start, end, batch), ids))
+                     (name, query.territory, discovery_start, end, batch), ids) for name in names)
     items, sources, missing = [], [], 0
     limited = len(terms) > MAX_NAMES
-    with ThreadPoolExecutor(max_workers=12) as pool:
+    pool = ThreadPoolExecutor(max_workers=6)
+    try:
         futures = [(name, pool.submit(fn, *args), ids) for name, fn, args, ids in jobs]
+        done, _ = wait([future for _, future, _ in futures], timeout=18)
         for name, future, ids in futures:
+            if future not in done:
+                future.cancel()
+                limited = True
+                sources.append({'source':name, 'status':'unavailable', 'retrieved':None, 'catalog_sources':ids, 'reason':'time_budget'})
+                continue
             try:
                 found, skipped, capped = future.result()
                 items.extend(found)
@@ -200,10 +215,13 @@ def search_news(query, start, end, limit=100):
                 status = getattr(getattr(error, 'response', None), 'status_code', None)
                 logging.getLogger(__name__).warning('News source unavailable: %s; %s; HTTP %s; %s', name, type(error).__name__, status, str(error)[:120] if isinstance(error, ValueError) else '')
                 sources.append({'source': name, 'status': 'unavailable', 'retrieved': None, 'catalog_sources': ids})
-    candidates = [item for item in items if item.get('candidate')]
+    finally:
+        pool.shutdown(wait=False, cancel_futures=True)
+    candidates = [item for item in items if item.get('candidate') and
+                  (not item.get('published') or start <= publication_date(item['published']) < end)]
     items = [item for item in items if not item.get('candidate')]
     if candidates:
-        verified, skipped, capped = verify_candidates(candidates, terms, start, end, query.territory)
+        verified, skipped, capped = verify_candidates(candidates, terms, start, end, query.territory, deadline=deadline)
         items.extend(verified)
         missing += skipped
         limited |= capped or bool(skipped)
@@ -213,9 +231,9 @@ def search_news(query, start, end, limit=100):
     catalog_coverage = {'version': CATALOG_VERSION, 'configured': len(SOURCES),
                         'searchable': len({sid for s in sources if s['status'] == 'available' for sid in s['catalog_sources']}),
                         'mode': 'targeted_index_queries'}
-    if not active:
+    if not active or (not items and (missing or failed)):
         return {'status': 'unavailable', 'count': None, 'items': [], 'limited': True,
-                'sources': sources, 'catalog': catalog_coverage, 'message': 'No fue posible consultar las fuentes. Intenta de nuevo.'}
+                'sources': sources, 'catalog': catalog_coverage, 'message': 'No fue posible verificar las noticias. Una consulta fallida no significa cero menciones.', 'start_time': iso(start), 'end_time': iso(end)}
     # Prefer publisher URLs when the same headline also arrives through Google.
     items.sort(key=lambda i: i['discovery'] == 'google_news')
     unique, urls, titles = [], set(), set()
@@ -238,3 +256,34 @@ def search_news(query, start, end, limit=100):
         message += f' Se muestran las {limit} publicaciones más recientes recuperadas.'
     return {'status': 'available', 'count': len(unique[:limit]), 'items': unique[:limit], 'limited': limited,
             'sources': sources, 'catalog': catalog_coverage, 'message': message, 'start_time': iso(start), 'end_time': iso(end)}
+
+
+def search_news(query, start, end, limit=100):
+    if isinstance(query, str):
+        query = NewsQuery((query,), '')
+    scope = (tuple(sorted({normalize(t) for t in query.terms if normalize(t)})), normalize(query.territory))
+    key = (scope, iso(start), iso(end))
+    result = search_state.queries.call(key, lambda: _search_news(query, start, end, 300),
+                                      accept=lambda r: r['status'] == 'available' and bool(r['items']))
+    fresh_urls = {url_key(item['url']) for item in result['items']}
+    known = search_state.remember(scope, result['items'])
+    items, urls, titles = [], set(), set()
+    for item in known:
+        published = publication_date(item['published'])
+        if not published or not start <= published < end:
+            continue
+        url = url_key(item['url'])
+        title = (normalize(item['title']), normalize(item.get('publisher_domain') or item['source']), item['published'][:10])
+        if url in urls or title in titles:
+            continue
+        urls.add(url); titles.add(title); items.append(item)
+    retained = sum(url_key(item['url']) not in fresh_urls for item in items)
+    limited = result['limited'] or len(items) > limit or bool(retained)
+    result.update(items=items[:limit], limited=limited, retained_count=retained)
+    if items:
+        result.update(status='available', count=len(items[:limit]))
+    if retained:
+        result['message'] += f' Se conservan {retained} noticias verificadas previamente para el mismo nombre y zona.'
+    if len(items) > limit:
+        result['message'] += f' Se muestran las {limit} publicaciones más recientes.'
+    return result

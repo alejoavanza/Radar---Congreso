@@ -1,15 +1,17 @@
+import search_state
 import unittest
 from unittest.mock import Mock, patch
 
 import app as radar
 import news_sources
 import web_discovery
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 
 
 class SourceLinksTest(unittest.TestCase):
     def setUp(self):
+        search_state.clear()
         news_sources.cached_source.cache_clear()
         batches = patch.object(news_sources, 'BATCHES', ())
         batches.start()
@@ -18,9 +20,9 @@ class SourceLinksTest(unittest.TestCase):
     def test_report_links_to_the_verified_original_article(self):
         article_url = 'https://news.google.com/rss/articles/CBMiExample?oc=5&hl=es-419'
         original_url = 'https://example.com/politica/alejandro-toro'
-        html = '<meta property="article:published_time" content="' + datetime.now(timezone.utc).isoformat() + '"><article>Alejandro Toro en Colombia</article>'
+        html = '<meta property="article:published_time" content="' + (datetime.now(timezone.utc)-timedelta(minutes=5)).isoformat() + '"><article>Alejandro Toro en Colombia</article>'
         feed = ('<rss version="2.0"><channel><item>'
-                '<title>Alejandro Toro - Medio</title><pubDate>' + format_datetime(datetime.now(timezone.utc)) + '</pubDate>'
+                '<title>Alejandro Toro - Medio</title><pubDate>' + format_datetime((datetime.now(timezone.utc)-timedelta(minutes=5))) + '</pubDate>'
                 '<link>' + article_url.replace('&', '&amp;') + '</link>'
                 '<source url="https://example.com">Medio</source>'
                 '</item></channel></rss>')

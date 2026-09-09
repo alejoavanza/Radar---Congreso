@@ -1,15 +1,16 @@
 """Discover pages across indexes, then verify original publication metadata."""
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait
 from functools import lru_cache
 from html.parser import HTMLParser
 from ipaddress import ip_address
 from itertools import zip_longest
+from datetime import datetime, timezone
 import base64
 import json
 import logging
 import re
 import socket
-from time import time
+from time import time, monotonic
 from urllib.parse import parse_qs, quote, urlencode, urljoin, urlsplit, urlunsplit
 
 import certifi
@@ -18,10 +19,12 @@ import urllib3
 
 from news_sources import UA, matches, publication_date, safe_url, social_result, source_bytes, iso, url_key
 from source_catalog import matching_source, site_query
+import search_state
+from news_sources import normalize
 
 MAX_CANDIDATES = 24
 MAX_FOCUSED_CANDIDATES = 76
-PAGE_BYTES = 512_000
+PAGE_BYTES = 2_000_000
 
 
 def indexed_query(terms, territory):
@@ -111,7 +114,7 @@ def public_target(url):
     return parsed, host, port, address
 
 
-@lru_cache(maxsize=256)
+@lru_cache(maxsize=32)
 def cached_page(url, bucket):
     for _ in range(4):
         parsed, host, port, address = public_target(url)
@@ -134,8 +137,8 @@ def cached_page(url, bucket):
             if 'html' not in response.headers.get('Content-Type', '').lower():
                 raise ValueError('Article is not HTML')
             # Google places its public link metadata after ~650 KB of UI scripts.
-            # Keep article reads small and bound the fixed Google host separately.
-            byte_limit = 2_000_000 if host == 'news.google.com' else PAGE_BYTES
+            # Other publishers also place metadata after large scripts; cap every read.
+            byte_limit = PAGE_BYTES
             return url, response.read(byte_limit, decode_content=True).decode('utf-8', errors='replace')
         finally:
             if response is not None:
@@ -198,7 +201,7 @@ class GoogleLinkPage(HTMLParser):
             self.signature, self.timestamp = attrs['data-n-a-sg'], attrs['data-n-a-ts']
 
 
-@lru_cache(maxsize=256)
+@lru_cache(maxsize=32)
 def google_article(url, bucket):
     """Resolve a public Google News link, then read its original article.
 
@@ -268,7 +271,7 @@ def article_objects(value):
             yield from article_objects(value['mainEntity'])
 
 
-def verify_page(candidate, terms, start, end, territory=''):
+def _verify_page(candidate, terms, start, end, territory=''):
     loader = google_article if urlsplit(candidate['url']).hostname == 'news.google.com' else cached_page
     url, raw = loader(candidate['url'], int(time() // 300))
     if candidate.get('catalog_source'):
@@ -310,19 +313,43 @@ def verify_page(candidate, terms, start, end, territory=''):
     if not title:
         return None, 1
     return {'title': ' '.join(title.split()), 'url': url, 'link': url, 'published': iso(published),
+            'verified_at': iso(datetime.now(timezone.utc)),
             'source': page.meta.get('og:site_name') or domain, 'publisher_domain': domain,
             'discovery': candidate['engine'], **({'catalog_source': candidate['catalog_source']} if candidate.get('catalog_source') else {})}, 0
 
 
-def verify_candidates(found, terms, start, end, territory=''):
+def verify_page(candidate, terms, start, end, territory=''):
+    # Cache compact positive evidence independently of the selected period.
+    # A transient HTTP failure must not erase an already verified article.
+    key = (url_key(candidate['url']), tuple(sorted(normalize(t) for t in terms)),
+           normalize(territory), candidate.get('catalog_source'))
+    cached = search_state.verified.get(key)
+    if cached is not None:
+        published = publication_date(cached['published'])
+        return (cached, 0) if start <= published < end else (None, 0)
+    result = _verify_page(candidate, terms, start, end, territory)
+    if result[0]:
+        search_state.verified.put(key, result[0], ttl=86400)
+    return result
+
+
+def verify_candidates(found, terms, start, end, territory='', *, deadline=None):
     groups, by_url = {}, {}
     for candidate in found:
         key = url_key(candidate['url'])
         if key not in by_url or candidate.get('catalog_source'):
             by_url[key] = candidate
+    headlines = set()
     for candidate in by_url.values():
+        if candidate.get('publisher_domain') and candidate.get('published'):
+            headline = (normalize(candidate['title']), candidate['publisher_domain'], candidate['published'][:10])
+            if headline in headlines:
+                continue
+            headlines.add(headline)
         # Round-robin publishers, so a large outlet cannot consume the budget.
         groups.setdefault((bool(candidate.get('catalog_source')), candidate.get('publisher_domain') or urlsplit(candidate['url']).hostname), []).append(candidate)
+    for group in groups.values():
+        group.sort(key=lambda item: (item.get('published', '9999'), item['url']), reverse=True)
     # Give each index a share of the bounded page-verification budget.
     ordered, seen = [], set()
     for row in zip_longest(*groups.values()):
@@ -334,9 +361,17 @@ def verify_candidates(found, terms, start, end, territory=''):
     focused = [c for c in ordered if c.get('catalog_source')]
     selected = general[:MAX_CANDIDATES] + focused[:MAX_FOCUSED_CANDIDATES]
     items, skipped = [], 0
-    with ThreadPoolExecutor(max_workers=12) as pool:
+    pool = ThreadPoolExecutor(max_workers=6)
+    timed_out = False
+    try:
         futures = [pool.submit(verify_page, candidate, terms, start, end, territory) for candidate in selected]
+        done, _ = wait(futures, timeout=max(0, deadline-monotonic()) if deadline is not None else 40)
         for candidate, future in zip(selected, futures):
+            if future not in done:
+                future.cancel()
+                skipped += 1
+                timed_out = True
+                continue
             try:
                 item, missing = future.result()
                 skipped += missing
@@ -345,5 +380,7 @@ def verify_candidates(found, terms, start, end, territory=''):
             except (ValueError, TypeError, AttributeError, RecursionError, OSError, urllib3.exceptions.HTTPError, requests.RequestException) as error:
                 logging.getLogger(__name__).info('Page omitted: host=%s; reason=%s; %s', urlsplit(candidate['url']).hostname, type(error).__name__, str(error)[:120] if isinstance(error, ValueError) else '')
                 skipped += 1
+    finally:
+        pool.shutdown(wait=False, cancel_futures=True)
     logging.getLogger(__name__).info('Web verification: candidates=%s; verified=%s; unavailable=%s', len(ordered), len(items), skipped)
-    return items, skipped, len(general) > MAX_CANDIDATES or len(focused) > MAX_FOCUSED_CANDIDATES
+    return items, skipped, timed_out or len(general) > MAX_CANDIDATES or len(focused) > MAX_FOCUSED_CANDIDATES

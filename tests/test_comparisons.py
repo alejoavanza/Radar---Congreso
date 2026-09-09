@@ -1,3 +1,4 @@
+import search_state
 import unittest
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
@@ -11,6 +12,7 @@ from app import app
 
 class ComparisonTest(unittest.TestCase):
     def setUp(self):
+        search_state.clear()
         batches = patch.object(news_sources, "BATCHES", ())
         batches.start()
         self.addCleanup(batches.stop)
@@ -96,6 +98,7 @@ class ComparisonTest(unittest.TestCase):
         self.assertEqual(result['count'], 1)
         self.assertEqual(result['items'][0]['url'], 'https://example.org/a')
         news_sources.cached_source.cache_clear()
+        search_state.clear()
         with patch.object(comp.requests, 'get', return_value=Mock(ok=True, content=b'<html>Access denied</html>')):
             self.assertIsNone(comp.count_news('test', self.end - timedelta(days=1), self.end)['count'])
 

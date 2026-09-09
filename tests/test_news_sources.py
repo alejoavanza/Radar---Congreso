@@ -1,3 +1,4 @@
+import search_state
 import json
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -27,6 +28,7 @@ def page(title, date=None, author='María Ejemplo'):
 
 class BroadSearchTest(unittest.TestCase):
     def setUp(self):
+        search_state.clear()
         batches = patch.object(news, "BATCHES", ())
         batches.start()
         self.addCleanup(batches.stop)
@@ -66,13 +68,14 @@ class BroadSearchTest(unittest.TestCase):
         for field in ('<time class="entry-date published" datetime="2026-09-06T12:00:00Z"></time>',
                       '<meta itemprop="datePublished" content="2026-09-06T12:00:00Z">'):
             with patch.object(web, 'cached_page', return_value=(candidate['url'], field + '<article>María Ejemplo</article>')):
-                self.assertIsNotNone(web.verify_page(candidate, self.query.terms, self.start, self.end)[0])
+                self.assertIsNotNone(web._verify_page(candidate, self.query.terms, self.start, self.end)[0])
         with patch.object(web, 'cached_page', return_value=(candidate['url'], '<time class="updated" datetime="2026-09-06T12:00:00Z"></time>')):
-            self.assertIsNone(web.verify_page(candidate, self.query.terms, self.start, self.end)[0])
+            self.assertIsNone(web._verify_page(candidate, self.query.terms, self.start, self.end)[0])
 
     def test_name_variants_remain_independent_on_google(self):
         def response(url, **kwargs):
-            query = kwargs['params']['q']
+            from urllib.parse import urlsplit, parse_qs
+            query = parse_qs(urlsplit(url).query)['q'][0]
             self.assertNotIn(' OR ', query)
             self.assertIn('"Colombia"', query)
             return Mock(content=rss('Mención', 'https://regional.example/nota', self.end-timedelta(days=2))
@@ -87,15 +90,15 @@ class BroadSearchTest(unittest.TestCase):
         candidate = {'url':'https://regional.example/a','title':'María Ejemplo','engine':'DuckDuckGo web','seendate':'20260906T120000Z'}
         for html in (page('María Ejemplo'), page('María Ejemplo','2026-08-01T00:00:00Z') + '<meta property="article:modified_time" content="2026-09-06T12:00:00Z">'):
             with patch.object(web,'cached_page',return_value=(candidate['url'],html)):
-                self.assertIsNone(web.verify_page(candidate,self.query.terms,self.start,self.end)[0])
+                self.assertIsNone(web._verify_page(candidate,self.query.terms,self.start,self.end)[0])
         with patch.object(web,'cached_page',return_value=(candidate['url'],page('María Ejemplo','2026-09-06T02:00:00Z'))):
-            self.assertIsNone(web.verify_page(candidate,self.query.terms,self.end-timedelta(days=1),self.end)[0])
+            self.assertIsNone(web._verify_page(candidate,self.query.terms,self.end-timedelta(days=1),self.end)[0])
 
     def test_date_from_an_unrelated_schema_object_cannot_count_a_page(self):
         html = '<script type="application/ld+json">' + json.dumps({'@type':'Organization','datePublished':'2026-09-06T12:00:00Z','name':'María Ejemplo'}) + '</script>'
         candidate = {'url':'https://regional.example/a','title':'María Ejemplo','engine':'DuckDuckGo web'}
         with patch.object(web,'cached_page',return_value=(candidate['url'],html)):
-            self.assertIsNone(web.verify_page(candidate,self.query.terms,self.start,self.end)[0])
+            self.assertIsNone(web._verify_page(candidate,self.query.terms,self.start,self.end)[0])
 
     def test_same_story_across_indexes_uses_direct_link_once(self):
         article = {'title':'Una mención','url':'https://regional.example/a','link':'https://regional.example/a',
@@ -115,9 +118,9 @@ class BroadSearchTest(unittest.TestCase):
         self.assertIsNone(result['count'])
         with patch.object(news,'get_bytes',side_effect=news.requests.Timeout), patch.object(news,'google_news',return_value=([],0,False)):
             result = news.search_news(self.query,self.start,self.end)
-        self.assertEqual(result['count'],0)
+        self.assertIsNone(result['count'])
         self.assertTrue(result['limited'])
-        self.assertIn('Consulta parcial',result['message'])
+        self.assertIn('fallida',result['message'])
 
     def test_social_results_are_excluded_from_all_indexes(self):
         self.assertEqual(web.candidates([{'url':'https://www.facebook.com/post','title':'María Ejemplo'}],'DuckDuckGo web'),[])
