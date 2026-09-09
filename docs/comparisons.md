@@ -26,6 +26,6 @@ La respuesta conserva el estado de cada consulta y los identificadores del catá
 
 ## Seguridad y verificación
 
-La lectura directa de artículos mantiene validación de HTTP/HTTPS, puertos 80/443, DNS público, conexión a la IP validada y verificación TLS. Cada redirección se valida; las redes sociales se excluyen también después de redirigir. El HTML está limitado a 512 KB.
+La lectura directa de artículos mantiene validación de HTTP/HTTPS, puertos 80/443, DNS público, conexión a la IP validada y verificación TLS. Cada redirección se valida; las redes sociales se excluyen también después de redirigir. El HTML de artículos está limitado a 512 KB. Solo el host fijo `news.google.com` admite hasta 2 MB para obtener los datos del enlace original, que aparecen después de los scripts de su interfaz. Su petición pública de resolución usa un destino fijo, sin redirecciones ni credenciales.
 
 Las pruebas cubren las 38 fuentes y sus grupos, el mismo catálogo en ambas APIs, nombres alternativos, zona vacía y regional, ventanas de 24 horas y 90 días, dominios ajenos y secciones, duplicados, fallos parciales y la conservación de resultados de búsqueda general.

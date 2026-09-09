@@ -177,6 +177,20 @@ class CatalogSearchTest(unittest.TestCase):
                 web.google_article(url, 1)
             post.assert_not_called()
 
+    def test_google_link_metadata_after_large_scripts_is_read_without_unbounded_articles(self):
+        raw = ('<script>' + ' ' * 650_000 + '</script><div data-n-a-ts="123" data-n-a-sg="signature"></div>').encode()
+        response = MagicMock(status=200, headers={'Content-Type':'text/html'})
+        response.read.side_effect = lambda size, **kwargs: raw[:size]
+        pool = MagicMock()
+        pool.urlopen.return_value = response
+        with patch.object(web.socket, 'getaddrinfo', return_value=[(2,1,6,'',('93.184.216.34',443))]), \
+             patch.object(web.urllib3, 'HTTPSConnectionPool', return_value=pool):
+            _, google_html = web.cached_page('https://news.google.com/articles/large-fixture', 0)
+            _, article_html = web.cached_page('https://public.example/large-fixture', 0)
+        self.assertEqual(web.GoogleLinkPage(google_html).signature, 'signature')
+        self.assertLess(len(article_html), len(raw))
+        self.assertLess(len(google_html), 2_000_000)
+
 
 if __name__ == '__main__':
     unittest.main()
