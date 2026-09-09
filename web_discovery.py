@@ -1,5 +1,5 @@
 """Discover pages across indexes, then verify original publication metadata."""
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait
 from functools import lru_cache
 from html.parser import HTMLParser
 from ipaddress import ip_address
@@ -10,7 +10,7 @@ import json
 import logging
 import re
 import socket
-from time import time
+from time import time, monotonic
 from urllib.parse import parse_qs, quote, urlencode, urljoin, urlsplit, urlunsplit
 
 import certifi
@@ -137,7 +137,7 @@ def cached_page(url, bucket):
             if 'html' not in response.headers.get('Content-Type', '').lower():
                 raise ValueError('Article is not HTML')
             # Google places its public link metadata after ~650 KB of UI scripts.
-            # Keep article reads small and bound the fixed Google host separately.
+            # Other publishers also place metadata after large scripts; cap every read.
             byte_limit = PAGE_BYTES
             return url, response.read(byte_limit, decode_content=True).decode('utf-8', errors='replace')
         finally:
@@ -333,7 +333,7 @@ def verify_page(candidate, terms, start, end, territory=''):
     return result
 
 
-def verify_candidates(found, terms, start, end, territory=''):
+def verify_candidates(found, terms, start, end, territory='', *, deadline=None):
     groups, by_url = {}, {}
     for candidate in found:
         key = url_key(candidate['url'])
@@ -361,9 +361,17 @@ def verify_candidates(found, terms, start, end, territory=''):
     focused = [c for c in ordered if c.get('catalog_source')]
     selected = general[:MAX_CANDIDATES] + focused[:MAX_FOCUSED_CANDIDATES]
     items, skipped = [], 0
-    with ThreadPoolExecutor(max_workers=6) as pool:
+    pool = ThreadPoolExecutor(max_workers=6)
+    timed_out = False
+    try:
         futures = [pool.submit(verify_page, candidate, terms, start, end, territory) for candidate in selected]
+        done, _ = wait(futures, timeout=max(0, deadline-monotonic()) if deadline is not None else 40)
         for candidate, future in zip(selected, futures):
+            if future not in done:
+                future.cancel()
+                skipped += 1
+                timed_out = True
+                continue
             try:
                 item, missing = future.result()
                 skipped += missing
@@ -372,5 +380,7 @@ def verify_candidates(found, terms, start, end, territory=''):
             except (ValueError, TypeError, AttributeError, RecursionError, OSError, urllib3.exceptions.HTTPError, requests.RequestException) as error:
                 logging.getLogger(__name__).info('Page omitted: host=%s; reason=%s; %s', urlsplit(candidate['url']).hostname, type(error).__name__, str(error)[:120] if isinstance(error, ValueError) else '')
                 skipped += 1
+    finally:
+        pool.shutdown(wait=False, cancel_futures=True)
     logging.getLogger(__name__).info('Web verification: candidates=%s; verified=%s; unavailable=%s', len(ordered), len(items), skipped)
-    return items, skipped, len(general) > MAX_CANDIDATES or len(focused) > MAX_FOCUSED_CANDIDATES
+    return items, skipped, timed_out or len(general) > MAX_CANDIDATES or len(focused) > MAX_FOCUSED_CANDIDATES

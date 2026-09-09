@@ -1,11 +1,11 @@
 """Bounded news discovery, with independent name queries and explicit coverage."""
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from functools import lru_cache
 from html import unescape
-from time import time
+from time import time, monotonic
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 import re
 import unicodedata
@@ -178,20 +178,33 @@ def _search_news(query, start, end, limit=100):
     if isinstance(query, str):
         query = NewsQuery((query,), '')
     terms = list(dict.fromkeys(t.replace('"', ' ').strip() for t in query.terms if t.strip()))
-    jobs = [('Google Noticias', google_news, (term, query.territory, start, end), ()) for term in terms[:MAX_NAMES]]
-    jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, start, end), ()))
+    deadline = monotonic() + 40
+    # Day/week results share index queries; combine their samples before applying
+    # the actual requested window and the article-verification budget.
+    discovery_start = min(start, end-timedelta(days=7))
+    jobs = [('Google Noticias', google_news, (term, query.territory, discovery_start, end), ()) for term in terms[:MAX_NAMES]]
+    jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, discovery_start, end), ()))
+    jobs.append(('Google Noticias · recientes', google_news, (terms[0], query.territory, end-timedelta(days=1), end), ()))
+    jobs.append(('DuckDuckGo web · recientes', duckduckgo_web, (terms[:1], query.territory, end-timedelta(days=1), end), ()))
     for number, batch in enumerate(BATCHES, 1):
         ids = tuple(source.id for source in batch)
         # Keep the primary name independent: an unindexed long variant can
         # suppress its hits in an OR query. Group only the remaining variants.
         names = [terms[0]] + ([tuple(terms[1:MAX_NAMES])] if len(terms) > 1 else [])
         jobs.extend((f'Google Noticias · fuentes {number}', focused_news,
-                     (name, query.territory, start, end, batch), ids) for name in names)
+                     (name, query.territory, discovery_start, end, batch), ids) for name in names)
     items, sources, missing = [], [], 0
     limited = len(terms) > MAX_NAMES
-    with ThreadPoolExecutor(max_workers=6) as pool:
+    pool = ThreadPoolExecutor(max_workers=6)
+    try:
         futures = [(name, pool.submit(fn, *args), ids) for name, fn, args, ids in jobs]
+        done, _ = wait([future for _, future, _ in futures], timeout=18)
         for name, future, ids in futures:
+            if future not in done:
+                future.cancel()
+                limited = True
+                sources.append({'source':name, 'status':'unavailable', 'retrieved':None, 'catalog_sources':ids, 'reason':'time_budget'})
+                continue
             try:
                 found, skipped, capped = future.result()
                 items.extend(found)
@@ -202,10 +215,13 @@ def _search_news(query, start, end, limit=100):
                 status = getattr(getattr(error, 'response', None), 'status_code', None)
                 logging.getLogger(__name__).warning('News source unavailable: %s; %s; HTTP %s; %s', name, type(error).__name__, status, str(error)[:120] if isinstance(error, ValueError) else '')
                 sources.append({'source': name, 'status': 'unavailable', 'retrieved': None, 'catalog_sources': ids})
-    candidates = [item for item in items if item.get('candidate')]
+    finally:
+        pool.shutdown(wait=False, cancel_futures=True)
+    candidates = [item for item in items if item.get('candidate') and
+                  (not item.get('published') or start <= publication_date(item['published']) < end)]
     items = [item for item in items if not item.get('candidate')]
     if candidates:
-        verified, skipped, capped = verify_candidates(candidates, terms, start, end, query.territory)
+        verified, skipped, capped = verify_candidates(candidates, terms, start, end, query.territory, deadline=deadline)
         items.extend(verified)
         missing += skipped
         limited |= capped or bool(skipped)

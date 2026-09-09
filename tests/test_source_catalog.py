@@ -56,7 +56,7 @@ class CatalogSearchTest(unittest.TestCase):
                 self.assertEqual(result.json['sources']['Web']['catalog']['configured'], 38)
                 expected = comp.query_for(member, zone).terms
                 self.assert_whole_catalog(google, duck, expected, zone, days)
-                self.assertTrue(all(call.args[2] == comp.date(meta['start_time']) and call.args[3] == comp.date(meta['end_time']) for call in google.call_args_list))
+                self.assertTrue(all(call.args[2] == comp.date(meta['end_time'])-timedelta(days=max(7,days)) and call.args[3] == comp.date(meta['end_time']) for call in google.call_args_list))
 
     def assert_whole_catalog(self, google, duck, terms, zone, days):
         for term in terms:
@@ -65,7 +65,7 @@ class CatalogSearchTest(unittest.TestCase):
         duck.assert_not_called()  # General DuckDuckGo remains; blocked per-batch requests were removed.
         for call in google.call_args_list + duck.call_args_list:
             self.assertEqual(call.args[1], zone)
-            self.assertEqual(call.args[3] - call.args[2], timedelta(days=days))
+            self.assertEqual(call.args[3] - call.args[2], timedelta(days=max(7,days)))
 
     def test_targeted_news_uses_independent_names_and_discards_wrong_publishers_and_dates(self):
         entries = ''

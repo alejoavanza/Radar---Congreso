@@ -45,8 +45,8 @@ class RadarSourcesTest(unittest.TestCase):
         self.assertNotIn('social', mentions)
         self.assertNotIn('platform_counts', mentions)
         self.assertNotIn('platform_status', mentions)
-        self.assertCountEqual([urlparse(call.args[0]).hostname for call in get.call_args_list],
-                             ['news.google.com', 'html.duckduckgo.com'])
+        self.assertEqual({urlparse(call.args[0]).hostname for call in get.call_args_list},
+                         {'news.google.com', 'html.duckduckgo.com'})
         self.assertNotIn('La Chiva', response.json['web_coverage']['message'])
         self.assertNotIn('Confidencial', response.json['web_coverage']['message'])
 
