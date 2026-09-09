@@ -198,7 +198,7 @@ def search_news(query, start, end, limit=100):
                 sources.append({'source': name, 'status': 'available', 'retrieved': len(found), 'catalog_sources': ids})
             except (requests.RequestException, ValueError, TypeError, AttributeError) as error:
                 status = getattr(getattr(error, 'response', None), 'status_code', None)
-                logging.getLogger(__name__).warning('News source unavailable: %s; %s; HTTP %s', name, type(error).__name__, status)
+                logging.getLogger(__name__).warning('News source unavailable: %s; %s; HTTP %s; %s', name, type(error).__name__, status, str(error)[:120] if isinstance(error, ValueError) else '')
                 sources.append({'source': name, 'status': 'unavailable', 'retrieved': None, 'catalog_sources': ids})
     candidates = [item for item in items if item.get('candidate')]
     items = [item for item in items if not item.get('candidate')]

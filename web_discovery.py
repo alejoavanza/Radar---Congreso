@@ -341,7 +341,7 @@ def verify_candidates(found, terms, start, end, territory=''):
                 if item:
                     items.append(item)
             except (ValueError, TypeError, AttributeError, RecursionError, OSError, urllib3.exceptions.HTTPError, requests.RequestException) as error:
-                logging.getLogger(__name__).info('Page omitted: host=%s; reason=%s', urlsplit(candidate['url']).hostname, type(error).__name__)
+                logging.getLogger(__name__).info('Page omitted: host=%s; reason=%s; %s', urlsplit(candidate['url']).hostname, type(error).__name__, str(error)[:120] if isinstance(error, ValueError) else '')
                 skipped += 1
     logging.getLogger(__name__).info('Web verification: candidates=%s; verified=%s; unavailable=%s', len(ordered), len(items), skipped)
     return items, skipped, len(general) > MAX_CANDIDATES or len(focused) > MAX_FOCUSED_CANDIDATES
