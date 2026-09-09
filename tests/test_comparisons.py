@@ -11,6 +11,9 @@ from app import app
 
 class ComparisonTest(unittest.TestCase):
     def setUp(self):
+        batches = patch.object(news_sources, "BATCHES", ())
+        batches.start()
+        self.addCleanup(batches.stop)
         news_sources.cached_source.cache_clear()
         self.client = app.test_client()
         self.ids = list(comp.members())[:10]

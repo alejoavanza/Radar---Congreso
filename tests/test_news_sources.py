@@ -19,7 +19,7 @@ def rss(title, link, published=None, source='Medio'):
 
 
 def page(title, date=None, author='María Ejemplo'):
-    data = {'@type':'NewsArticle', 'headline':title, 'author':{'name':author}}
+    data = {'@type':'NewsArticle', 'headline':title, 'author':{'name':author}, 'articleBody':'Colombia'}
     if date:
         data['datePublished'] = date
     return '<meta property="og:site_name" content="Medio Regional"><script type="application/ld+json">' + json.dumps(data) + '</script>'
@@ -27,6 +27,9 @@ def page(title, date=None, author='María Ejemplo'):
 
 class BroadSearchTest(unittest.TestCase):
     def setUp(self):
+        batches = patch.object(news, "BATCHES", ())
+        batches.start()
+        self.addCleanup(batches.stop)
         news.cached_source.cache_clear()
         web.cached_page.cache_clear()
         self.end = datetime(2026, 9, 7, 5, tzinfo=timezone.utc)

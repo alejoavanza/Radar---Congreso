@@ -14,8 +14,10 @@ import certifi
 import urllib3
 
 from news_sources import UA, matches, publication_date, safe_url, social_result, source_bytes, iso, url_key
+from source_catalog import matching_source, site_query
 
 MAX_CANDIDATES = 24
+MAX_FOCUSED_CANDIDATES = 76
 PAGE_BYTES = 512_000
 
 
@@ -61,8 +63,8 @@ class SearchPage(HTMLParser):
             self.capture = False
 
 
-def duckduckgo_web(terms, territory, start, end):
-    url = 'https://html.duckduckgo.com/html/?' + urlencode({'q': indexed_query(terms[:1], territory),
+def web_query(query, start, end):
+    url = 'https://html.duckduckgo.com/html/?' + urlencode({'q': query,
                                                          'df': 'd' if (end-start).days <= 1 else 'w' if (end-start).days <= 7 else 'm' if (end-start).days <= 30 else 'y'}, quote_via=quote)
     raw = source_bytes(url).decode('utf-8', errors='replace')
     if 'anomaly.js' in raw or 'challenge-form' in raw:
@@ -70,7 +72,24 @@ def duckduckgo_web(terms, territory, start, end):
     page = SearchPage(raw)
     if not page.rows and 'no-results' not in raw:
         raise ValueError('Web search did not return results')
-    return candidates(page.rows[:30], 'DuckDuckGo web'), 0, len(page.rows) >= 30
+    return page.rows[:30], len(page.rows) >= 30
+
+
+def duckduckgo_web(terms, territory, start, end):
+    rows, capped = web_query(indexed_query(terms[:1], territory), start, end)
+    return candidates(rows, 'DuckDuckGo web'), 0, capped
+
+
+def focused_web(terms, territory, start, end, batch):
+    rows, capped = web_query(indexed_query(terms, territory) + ' ' + site_query(batch), start, end)
+    found = []
+    for item in candidates(rows, 'DuckDuckGo fuentes'):
+        source = matching_source(item['url'], batch)
+        if source:
+            item['catalog_source'] = source.id
+            item['engine'] = 'DuckDuckGo · ' + source.name
+            found.append(item)
+    return found, 0, capped
 
 
 def public_target(url):
@@ -89,7 +108,7 @@ def public_target(url):
     return parsed, host, port, address
 
 
-@lru_cache(maxsize=96)
+@lru_cache(maxsize=256)
 def cached_page(url, bucket):
     for _ in range(4):
         parsed, host, port, address = public_target(url)
@@ -177,8 +196,12 @@ def article_objects(value):
             yield from article_objects(value['mainEntity'])
 
 
-def verify_page(candidate, terms, start, end):
+def verify_page(candidate, terms, start, end, territory=''):
     url, raw = cached_page(candidate['url'], int(time() // 300))
+    if candidate.get('catalog_source'):
+        source = matching_source(url)
+        if not source or source.id != candidate['catalog_source']:
+            return None, 0
     page = ArticlePage(raw)
     objects = list(article_objects(page.structured))
     # The first article describes the main page; never choose a sidebar article's date.
@@ -193,27 +216,33 @@ def verify_page(candidate, terms, start, end):
         logging.getLogger(__name__).info('Page omitted: host=%s; reason=outside_window', urlsplit(url).hostname)
         return None, 0
     title = page.meta.get('og:title') or article.get('headline') or candidate['title']
-    text = ' '.join([title, candidate.get('summary', ''), page.meta.get('description', ''),
+    text = ' '.join([title, page.meta.get('description', ''),
                      page.meta.get('og:description', ''), page.meta.get('author', ''),
                      json.dumps(article.get('author', ''), ensure_ascii=False),
                      article.get('articleBody', ''), *page.article_text])
     if not title or not matches(text, terms):
         return None, 0
+    if territory and not matches(text, (territory,)):
+        return None, 0
     canonical = urljoin(url, page.canonical)
-    if safe_url(canonical) and urlsplit(canonical).hostname == urlsplit(url).hostname:
+    same_section = not candidate.get('catalog_source') or (
+        (canonical_source := matching_source(canonical)) is not None and
+        canonical_source.id == candidate['catalog_source'])
+    if safe_url(canonical) and urlsplit(canonical).hostname == urlsplit(url).hostname and same_section:
         url = canonical
     if social_result(url, {}):
         return None, 0
     domain = urlsplit(url).hostname.removeprefix('www.')
     return {'title': ' '.join(title.split()), 'url': url, 'link': url, 'published': iso(published),
             'source': page.meta.get('og:site_name') or domain, 'publisher_domain': domain,
-            'discovery': candidate['engine']}, 0
+            'discovery': candidate['engine'], **({'catalog_source': candidate['catalog_source']} if candidate.get('catalog_source') else {})}, 0
 
 
-def verify_candidates(found, terms, start, end):
+def verify_candidates(found, terms, start, end, territory=''):
     groups = {}
     for candidate in found:
-        groups.setdefault(candidate['engine'], []).append(candidate)
+        # Round-robin publishers, so a large outlet cannot consume the budget.
+        groups.setdefault((bool(candidate.get('catalog_source')), urlsplit(candidate['url']).hostname), []).append(candidate)
     # Give each index a share of the bounded page-verification budget.
     ordered, seen = [], set()
     for row in zip_longest(*groups.values()):
@@ -221,10 +250,13 @@ def verify_candidates(found, terms, start, end):
             if candidate is not None and url_key(candidate['url']) not in seen:
                 seen.add(url_key(candidate['url']))
                 ordered.append(candidate)
+    general = [c for c in ordered if not c.get('catalog_source')]
+    focused = [c for c in ordered if c.get('catalog_source')]
+    selected = general[:MAX_CANDIDATES] + focused[:MAX_FOCUSED_CANDIDATES]
     items, skipped = [], 0
-    with ThreadPoolExecutor(max_workers=8) as pool:
-        futures = [pool.submit(verify_page, candidate, terms, start, end) for candidate in ordered[:MAX_CANDIDATES]]
-        for candidate, future in zip(ordered[:MAX_CANDIDATES], futures):
+    with ThreadPoolExecutor(max_workers=12) as pool:
+        futures = [pool.submit(verify_page, candidate, terms, start, end, territory) for candidate in selected]
+        for candidate, future in zip(selected, futures):
             try:
                 item, missing = future.result()
                 skipped += missing
@@ -234,4 +266,4 @@ def verify_candidates(found, terms, start, end):
                 logging.getLogger(__name__).info('Page omitted: host=%s; reason=%s', urlsplit(candidate['url']).hostname, type(error).__name__)
                 skipped += 1
     logging.getLogger(__name__).info('Web verification: candidates=%s; verified=%s; unavailable=%s', len(ordered), len(items), skipped)
-    return items, skipped, len(ordered) > MAX_CANDIDATES
+    return items, skipped, len(general) > MAX_CANDIDATES or len(focused) > MAX_FOCUSED_CANDIDATES

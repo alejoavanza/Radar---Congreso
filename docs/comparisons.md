@@ -1,17 +1,31 @@
-# Comparativos: cobertura de noticias y web
+# Radar y Comparativos: búsqueda general y 38 fuentes adicionales
 
-Radar y Comparativos comparten `search_news`. Para cada persona se consultan Google Noticias por variante del nombre, búsqueda general web de DuckDuckGo por el nombre principal. No hay una lista fija de medios ni fuentes especiales por persona. Se excluyen redes sociales antes de verificar las páginas y después de las redirecciones. Los enlaces de servicios de Táctika del pie se conservan.
+Ambas herramientas usan `search_news` y el mismo catálogo `source_catalog.py`, versión 2026-09-09.1. Contiene las 38 fuentes aprobadas: 15 internacionales, 8 regionales y 15 de política, investigación y opinión. El catálogo no limita la búsqueda general ni depende de la persona o zona elegidas. Se puede consultar completo en «Cómo medimos las menciones».
 
-DuckDuckGo descubre páginas fuera del índice de Google Noticias. La consulta usa su versión HTML pública. Si exige un reto interactivo, se marca como no disponible; no se intenta sortearlo. Las consultas usan el nombre, variantes y zona como texto; no son geolocalización ni una resolución exhaustiva de homónimos. Las búsquedas de Google se mantienen separadas para evitar que una variante sin resultados anule otra.
+## Consultas
 
-Límites por persona: 6 variantes, 100 entradas por variante de Google Noticias, 30 candidatos de búsqueda web general, 24 páginas verificadas, 60 resultados en Radar o 100 en Comparativos. La caché de cinco minutos está limitada a 64 respuestas de índices y 96 páginas. No se promete un censo completo de la web.
+Se conserva Google Noticias por cada variante del nombre y DuckDuckGo general por el nombre principal. Se añaden diez grupos de hasta cuatro fuentes, mediante consultas `site:` en Google Noticias (cada variante por separado) y DuckDuckGo (nombre y variantes). Todas las consultas incluyen la misma zona como frase, salvo cuando se deja vacía. Los nombres se entrecomillan y se admiten hasta seis variantes, igual que antes. Los grupos tienen un presupuesto propio de resultados para aumentar la visibilidad de fuentes regionales y especializadas.
 
-Los candidatos se verifican mediante `article:published_time`, `datePublished` del artículo en JSON-LD/microdatos, `parsely-pub-date` o una etiqueta `time` marcada explícitamente como publicada y coincidencia textual en titular, autor, resumen o artículo. No se usa `dateModified` ni fechas de rastreo como fecha de publicación. Las páginas que no permiten verificar la fecha quedan fuera y el resultado se marca limitado. Se preservan la ventana UTC común del comparativo y los periodos 90/60/30/7/1 días. Un día equivale a 24 horas. Los duplicados se eliminan por URL sin seguimiento o por título, medio y fecha, prefiriendo el enlace directo.
+Son consultas dirigidas a índices públicos, no un rastreo exhaustivo de los archivos de cada medio. No hay APIs sociales, credenciales nuevas, suscripciones, fuentes exclusivas por persona ni acceso a contenido protegido. Si un buscador exige un reto interactivo o rechaza la consulta, se declara la consulta parcial sin intentar sortearlo. Una respuesta del buscador no demuestra acceso directo al medio ni cobertura completa de su archivo.
 
-La lectura de páginas solo permite HTTP/HTTPS públicos, puertos 80/443 y cuatro saltos. Cada destino se resuelve, se rechazan IP privadas/reservadas y la conexión se fija a la IP validada con comprobación TLS del hostname original. Se excluyen redes también en redirecciones. Se limita el HTML a 512 KB por página. No se envían credenciales, no se cambia de identidad de cliente y no se sortean rechazos del medio.
+## Fechas, nombres y zona
 
-La interfaz resume cobertura parcial sin atribuir cada búsqueda a medios concretos. Los fallos de índices no borran los demás resultados ni se disfrazan como una consulta completa. Si ningún índice responde, el conteo es desconocido y el Radar devuelve error, no cero. El backend conserva el estado por índice para diagnóstico.
+Google Noticias aplica las frases de nombre/zona y las restricciones de sitio en la consulta. El servidor valida además la fecha de publicación del feed dentro de la ventana UTC exacta y, en consultas dirigidas, el dominio del editor declarado en el resultado. Cuando el feed solo ofrece una redirección de Google, el filtro de sección depende del operador `site:` del índice; no se afirma haber leído el artículo original.
 
-Referencias: [Búsqueda HTML de DuckDuckGo](https://duckduckgo.com/duckduckgo-help-pages/features/non-javascript), [TLS y SNI en urllib3](https://urllib3.readthedocs.io/en/stable/advanced-usage.html#custom-sni-hostname).
+DuckDuckGo aporta enlaces candidatos. Se verifica su sitio y sección, incluida la URL final tras redirecciones, y la fecha original en `article:published_time`, `datePublished`, `parsely-pub-date` o una etiqueta `time` publicada. El texto del artículo, sus metadatos o autor debe contener el nombre o una variante y, si se indicó zona, también esa zona. Se ignora el resumen del buscador al verificar el artículo. No se usa la fecha de actualización como sustituto. La zona es un filtro textual, no geolocalización ni resolución de homónimos.
 
-La vista previa comprobó consultas de siete días para Alejandro Toro e Iván Cepeda: el buscador general respondió en ambas y, para Cepeda, añadió dos publicaciones al conjunto de Google Noticias después de verificar tres páginas y deduplicar. Bing RSS devolvía resultados irrelevantes y GDELT agotó el tiempo de espera; se descartaron de la integración final. El resultado sigue dependiendo de los índices y del acceso a las páginas.
+Los periodos son 90/60/30/7/1 días; un día equivale a 24 horas. Comparativos fija la misma hora de corte para todos los congresistas. Radar puede tener otra hora de corte o variantes introducidas manualmente.
+
+## Límites y duplicados
+
+Hasta 100 entradas de Google por consulta; hasta 30 candidatos por consulta web. Se conservan 24 verificaciones de la búsqueda general y se añaden hasta 76 del catálogo, repartidas por editor. Hasta 12 consultas o verificaciones concurrentes por persona; Comparativos consulta dos personas a la vez. Las respuestas de índices/páginas se reutilizan durante cinco minutos con cachés limitadas. Radar muestra hasta 60 resultados y Comparativos hasta 100 por persona.
+
+Se deduplica por URL normalizada sin seguimiento o por titular, dominio del editor y fecha. Se prefiere el enlace original sobre la redirección de Google. Colombia+20 se consulta como sección de `elespectador.com/colombia-20`, con el mismo dominio de editor que El Espectador. Una nota recuperada tanto por la búsqueda general como por el catálogo se cuenta una vez. Republicaciones en distintos medios pueden contarse por separado.
+
+La respuesta conserva el estado de cada consulta y los identificadores del catálogo incluidos en ella. `catalog.configured` indica 38 fuentes; `catalog.searchable` cuenta las fuentes incluidas en al menos una consulta de índice completada, no los medios accedidos directamente. No se ocultan las búsquedas fallidas ni se convierten en ceros completos. Sin ningún índice disponible, el resultado es N/D y Radar devuelve error.
+
+## Seguridad y verificación
+
+La lectura directa de artículos mantiene validación de HTTP/HTTPS, puertos 80/443, DNS público, conexión a la IP validada y verificación TLS. Cada redirección se valida; las redes sociales se excluyen también después de redirigir. El HTML está limitado a 512 KB.
+
+Las pruebas cubren las 38 fuentes y sus grupos, el mismo catálogo en ambas APIs, nombres alternativos, zona vacía y regional, ventanas de 24 horas y 90 días, dominios ajenos y secciones, duplicados, fallos parciales y la conservación de resultados de búsqueda general.
