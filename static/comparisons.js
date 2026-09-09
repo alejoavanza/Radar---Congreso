@@ -276,7 +276,7 @@
         while (next < meta.members.length) {
           const position = next++, member = meta.members[position];
           try {
-            const row = await post('/api/compare/member', {member_id: member.id, days: meta.days, territory: meta.territory, end_time: meta.end_time}, 55000);
+            const row = await post('/api/compare/member', {member_id: member.id, days: meta.days, territory: meta.territory, end_time: meta.end_time}, 120000);
             if (row.member?.id !== member.id || !row.sources || row.end_time !== meta.end_time || row.start_time !== meta.start_time) throw new Error('La fuente no devolvió el periodo solicitado.');
             rows[position] = row;
           } catch (error) {

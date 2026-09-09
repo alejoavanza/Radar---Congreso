@@ -4,6 +4,7 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 from comparisons import comparison_api
 from news_sources import NewsQuery, search_news
+from source_catalog import public_catalog
 
 app = Flask(__name__)
 app.register_blueprint(comparison_api)
@@ -27,7 +28,7 @@ def fetch_news(name,aliases,territory,days,limit):
     items=[{**item,'sentiment':sentiment(item['title'])} for item in coverage['items']]
     return items,coverage['message'] if coverage['status']=='unavailable' else None,coverage
 @app.get('/')
-def home():return render_template('index.html')
+def home():return render_template('index.html', source_catalog=public_catalog())
 @app.errorhandler(404)
 def not_found(error):
     if request.path.startswith('/api/'):

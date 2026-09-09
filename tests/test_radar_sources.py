@@ -7,10 +7,14 @@ from urllib.parse import urlparse
 
 import app as radar
 import news_sources
+import web_discovery
 
 
 class RadarSourcesTest(unittest.TestCase):
     def setUp(self):
+        batches = patch.object(news_sources, "BATCHES", ())
+        batches.start()
+        self.addCleanup(batches.stop)
         news_sources.cached_source.cache_clear()
 
     @patch.dict(os.environ, {'X_BEARER_TOKEN':'test-only-token', 'YOUTUBE_API_KEY':'test-only-key'})
@@ -26,7 +30,9 @@ class RadarSourcesTest(unittest.TestCase):
                 return Mock(content=b'<div class="no-results">No results</div>')
             raise AssertionError('Unexpected source: ' + host)
 
-        with patch.object(news_sources.requests, 'get', side_effect=source_response) as get:
+        html = '<meta property="article:published_time" content="' + datetime.now(timezone.utc).isoformat() + '"><article>Gustavo Petro en Colombia</article>'
+        with patch.object(news_sources.requests, 'get', side_effect=source_response) as get, \
+             patch.object(web_discovery, 'cached_page', return_value=('https://example.org/noticia', html)):
             response = radar.app.test_client().post('/api/report', json={
                 'name':'Gustavo Petro', 'days':30, 'territory':'Colombia'
             })
@@ -46,7 +52,7 @@ class RadarSourcesTest(unittest.TestCase):
         html = radar.app.test_client().get('/').get_data(as_text=True)
         self.assertIn('Publicaciones en medios web', html)
         self.assertNotIn('La Chiva', html)
-        self.assertNotIn('Confidencial', html)
+        self.assertIn('Confidencial Noticias', html)
         self.assertNotIn('id="msocial"', html)
         self.assertNotIn('id="mcombined"', html)
         self.assertNotIn('Menciones en redes y web', html)

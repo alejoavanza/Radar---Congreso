@@ -13,6 +13,7 @@ import logging
 
 import feedparser
 import requests
+from source_catalog import BATCHES, SOURCES, CATALOG_VERSION, matching_source, site_query
 
 TIMEOUT = (3, 8)
 UA = {'User-Agent': 'Radar-Politico/2.1 (public-news-monitor)'}
@@ -92,7 +93,7 @@ def get_bytes(url, **kwargs):
     return response.content
 
 
-@lru_cache(maxsize=64)
+@lru_cache(maxsize=256)
 def cached_source(url, bucket):
     # Cached index URLs use fixed hosts and encoded search parameters.
     return get_bytes(url)
@@ -100,6 +101,11 @@ def cached_source(url, bucket):
 
 def source_bytes(url):
     return cached_source(url, int(time() // 300))
+
+
+@lru_cache(maxsize=256)
+def focused_bytes(url, bucket):
+    return get_bytes(url, timeout=(2, 4))
 
 
 def feed_items(raw, start, end, *, source=None, terms=(), territory=''):
@@ -126,7 +132,9 @@ def feed_items(raw, start, end, *, source=None, terms=(), territory=''):
         if not source and publisher and title.endswith(' - ' + publisher):
             title = title[:-len(' - ' + publisher)]
         items.append({'title': title, 'url': link, 'link': link, 'published': iso(published),
-                      'source': publisher, 'publisher_domain': (urlsplit((entry.get('source') or {}).get('href', '')).hostname or '').removeprefix('www.'), 'discovery': 'publisher' if source else 'google_news'})
+                      'source': publisher, 'publisher_domain': (urlsplit((entry.get('source') or {}).get('href', '')).hostname or '').removeprefix('www.'),
+                      'discovery': 'publisher' if source else 'google_news',
+                      'engine': 'publisher' if source else 'Google Noticias', 'candidate': True})
     return items, skipped, len(feed.entries) >= 100
 
 
@@ -141,41 +149,73 @@ def google_news(term, territory, start, end):
     return feed_items(raw, start, end)
 
 
+def focused_news(term, territory, start, end, batch):
+    """Supplement the open query with an independent name query per source batch.
+
+Feed dates and declared publishers prefilter candidates. The common verifier
+resolves the original URL and checks the article's name, zone, date and section.
+"""
+    from web_discovery import indexed_query
+    query = indexed_query((term,), territory) + ' ' + site_query(batch)
+    query += f' after:{(start-timedelta(days=1)):%Y-%m-%d} before:{(end+timedelta(days=1)):%Y-%m-%d}'
+    url = 'https://news.google.com/rss/search?' + urlencode({
+        'q': query, 'hl': 'es-419', 'gl': 'CO', 'ceid': 'CO:es-419'})
+    items, skipped, capped = feed_items(focused_bytes(url, int(time() // 300)), start, end)
+    accepted = []
+    for item in items:
+        google_link = (urlsplit(item['url']).hostname or '') == 'news.google.com'
+        source = matching_source('https://' + item['publisher_domain'], batch, domain_only=True) if google_link else matching_source(item['url'], batch)
+        if source:
+            item['catalog_source'] = source.id
+            # Keep google_news so the common merge still prefers original URLs.
+            accepted.append(item)
+    return accepted, skipped, capped
+
+
 def search_news(query, start, end, limit=100):
-    from web_discovery import duckduckgo_web, verify_candidates
+    from web_discovery import duckduckgo_web, focused_web, verify_candidates
     if isinstance(query, str):
         query = NewsQuery((query,), '')
     terms = list(dict.fromkeys(t.replace('"', ' ').strip() for t in query.terms if t.strip()))
-    jobs = [('Google Noticias', google_news, (term, query.territory, start, end)) for term in terms[:MAX_NAMES]]
-    jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, start, end)))
+    jobs = [('Google Noticias', google_news, (term, query.territory, start, end), ()) for term in terms[:MAX_NAMES]]
+    jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, start, end), ()))
+    for number, batch in enumerate(BATCHES, 1):
+        ids = tuple(source.id for source in batch)
+        jobs.extend((f'Google Noticias · fuentes {number}', focused_news,
+                     (term, query.territory, start, end, batch), ids) for term in terms[:MAX_NAMES])
+        jobs.append((f'DuckDuckGo · fuentes {number}', focused_web,
+                     (terms[:MAX_NAMES], query.territory, start, end, batch), ids))
     items, sources, missing = [], [], 0
     limited = len(terms) > MAX_NAMES
-    with ThreadPoolExecutor(max_workers=8) as pool:
-        futures = [(name, pool.submit(fn, *args)) for name, fn, args in jobs]
-        for name, future in futures:
+    with ThreadPoolExecutor(max_workers=12) as pool:
+        futures = [(name, pool.submit(fn, *args), ids) for name, fn, args, ids in jobs]
+        for name, future, ids in futures:
             try:
                 found, skipped, capped = future.result()
                 items.extend(found)
                 missing += skipped
                 limited |= capped or bool(skipped)
-                sources.append({'source': name, 'status': 'available', 'retrieved': len(found)})
+                sources.append({'source': name, 'status': 'available', 'retrieved': len(found), 'catalog_sources': ids})
             except (requests.RequestException, ValueError, TypeError, AttributeError) as error:
                 status = getattr(getattr(error, 'response', None), 'status_code', None)
-                logging.getLogger(__name__).warning('News source unavailable: %s; %s; HTTP %s', name, type(error).__name__, status)
-                sources.append({'source': name, 'status': 'unavailable', 'retrieved': None})
+                logging.getLogger(__name__).warning('News source unavailable: %s; %s; HTTP %s; %s', name, type(error).__name__, status, str(error)[:120] if isinstance(error, ValueError) else '')
+                sources.append({'source': name, 'status': 'unavailable', 'retrieved': None, 'catalog_sources': ids})
     candidates = [item for item in items if item.get('candidate')]
     items = [item for item in items if not item.get('candidate')]
     if candidates:
-        verified, skipped, capped = verify_candidates(candidates, terms, start, end)
+        verified, skipped, capped = verify_candidates(candidates, terms, start, end, query.territory)
         items.extend(verified)
         missing += skipped
         limited |= capped or bool(skipped)
     logging.getLogger(__name__).info('Search indexes: %s', [(s['source'], s['status'], s['retrieved']) for s in sources])
     active = sorted({s['source'] for s in sources if s['status'] == 'available'})
     failed = sorted({s['source'] for s in sources if s['status'] == 'unavailable'})
+    catalog_coverage = {'version': CATALOG_VERSION, 'configured': len(SOURCES),
+                        'searchable': len({sid for s in sources if s['status'] == 'available' for sid in s['catalog_sources']}),
+                        'mode': 'targeted_index_queries'}
     if not active:
         return {'status': 'unavailable', 'count': None, 'items': [], 'limited': True,
-                'sources': sources, 'message': 'No fue posible consultar las fuentes. Intenta de nuevo.'}
+                'sources': sources, 'catalog': catalog_coverage, 'message': 'No fue posible consultar las fuentes. Intenta de nuevo.'}
     # Prefer publisher URLs when the same headline also arrives through Google.
     items.sort(key=lambda i: i['discovery'] == 'google_news')
     unique, urls, titles = [], set(), set()
@@ -189,12 +229,12 @@ def search_news(query, start, end, limit=100):
         unique.append(item)
     unique.sort(key=lambda i: i['published'], reverse=True)
     limited |= len(unique) > limit or bool(failed)
-    message = 'Búsqueda en noticias y páginas web. Cobertura parcial; no incluye redes sociales.'
+    message = 'Búsqueda general y consultas dirigidas a 38 fuentes. Cobertura parcial; no incluye redes sociales.'
     if failed:
-        message = 'Consulta parcial: no se completó la búsqueda en todos los buscadores. Se muestran los resultados disponibles.'
+        message = 'Consulta parcial: algunas búsquedas generales o dirigidas a las 38 fuentes no respondieron. Se muestran los resultados disponibles.'
     if missing:
         message += ' Algunas páginas se omitieron por falta de fecha o contenido verificable.'
     if len(unique) > limit:
         message += f' Se muestran las {limit} publicaciones más recientes recuperadas.'
     return {'status': 'available', 'count': len(unique[:limit]), 'items': unique[:limit], 'limited': limited,
-            'sources': sources, 'message': message, 'start_time': iso(start), 'end_time': iso(end)}
+            'sources': sources, 'catalog': catalog_coverage, 'message': message, 'start_time': iso(start), 'end_time': iso(end)}

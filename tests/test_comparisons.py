@@ -11,6 +11,9 @@ from app import app
 
 class ComparisonTest(unittest.TestCase):
     def setUp(self):
+        batches = patch.object(news_sources, "BATCHES", ())
+        batches.start()
+        self.addCleanup(batches.stop)
         news_sources.cached_source.cache_clear()
         self.client = app.test_client()
         self.ids = list(comp.members())[:10]
@@ -87,7 +90,8 @@ class ComparisonTest(unittest.TestCase):
         xml += item('Posterior', self.end + timedelta(seconds=1), 'https://example.org/c')
         xml += '</channel></rss>'
         with patch.object(comp.requests, 'get', return_value=Mock(ok=True, content=xml.encode())), \
-             patch.object(web_discovery, 'duckduckgo_web', return_value=([], 0, False)):
+             patch.object(web_discovery, 'duckduckgo_web', return_value=([], 0, False)), \
+             patch.object(web_discovery, 'cached_page', return_value=('https://example.org/a', '<meta property="article:published_time" content="2026-09-05T13:00:00Z"><article>test</article>')):
             result = comp.count_news('test', self.end - timedelta(days=1), self.end)
         self.assertEqual(result['count'], 1)
         self.assertEqual(result['items'][0]['url'], 'https://example.org/a')
