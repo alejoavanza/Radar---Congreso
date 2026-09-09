@@ -132,7 +132,9 @@ def feed_items(raw, start, end, *, source=None, terms=(), territory=''):
         if not source and publisher and title.endswith(' - ' + publisher):
             title = title[:-len(' - ' + publisher)]
         items.append({'title': title, 'url': link, 'link': link, 'published': iso(published),
-                      'source': publisher, 'publisher_domain': (urlsplit((entry.get('source') or {}).get('href', '')).hostname or '').removeprefix('www.'), 'discovery': 'publisher' if source else 'google_news'})
+                      'source': publisher, 'publisher_domain': (urlsplit((entry.get('source') or {}).get('href', '')).hostname or '').removeprefix('www.'),
+                      'discovery': 'publisher' if source else 'google_news',
+                      'engine': 'publisher' if source else 'Google Noticias', 'candidate': True})
     return items, skipped, len(feed.entries) >= 100
 
 
@@ -150,9 +152,8 @@ def google_news(term, territory, start, end):
 def focused_news(term, territory, start, end, batch):
     """Supplement the open query with an independent name query per source batch.
 
-Google's article feed does not always expose the body or a direct article URL.
-The name and zone are enforced by the search query, the exact time window by
-the feed publication date, and the publisher by its declared source URL.
+Feed dates and declared publishers prefilter candidates. The common verifier
+resolves the original URL and checks the article's name, zone, date and section.
 """
     from web_discovery import indexed_query
     query = indexed_query((term,), territory) + ' ' + site_query(batch)

@@ -2,7 +2,7 @@ import json
 import unittest
 from collections import Counter
 from datetime import datetime, timedelta, timezone
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 from urllib.parse import parse_qs, urlsplit
 
 import app as radar
@@ -19,6 +19,7 @@ class CatalogSearchTest(unittest.TestCase):
         self.terms = ('Alejandro Toro', 'David Alejandro Toro Ramírez')
         comp.collect.cache_clear()
         news.focused_bytes.cache_clear()
+        web.google_article.cache_clear()
 
     def test_catalog_preserves_all_38_sources_and_the_requested_section(self):
         self.assertEqual(len(catalog.SOURCES), 38)
@@ -140,6 +141,41 @@ class CatalogSearchTest(unittest.TestCase):
         self.assertIn('Ver las 38 fuentes adicionales', html)
         for source in catalog.SOURCES:
             self.assertIn(source.url, html)
+
+    def test_google_candidates_must_match_the_original_article_not_the_search_snippet(self):
+        candidate = {'url':'https://news.google.com/rss/articles/CBMiExample',
+                     'title':'Alejandro Toro en Colombia', 'summary':'Alejandro Toro Colombia',
+                     'engine':'Google Noticias', 'catalog_source':'infobae'}
+        original = 'https://www.infobae.com/colombia/2026/09/09/nota/'
+        def html(body):
+            return '<meta property="article:published_time" content="2026-09-09T11:00:00Z"><article>' + body + '</article>'
+        for body, accepted in (('Préstamo para empresas hondureñas', False),
+                               ('David Toro informa sobre fútbol en Croacia', False),
+                               ('Alejandro Toro presenta un proyecto en Colombia', True)):
+            with patch.object(web, 'google_article', return_value=(original, html(body))):
+                item, _ = web.verify_page(candidate, self.terms, self.start, self.end, 'Colombia')
+            self.assertEqual(item is not None, accepted)
+        with patch.object(web, 'google_article', return_value=('https://www.infobae.com/deportes/nota/', html('Alejandro Toro Colombia'))):
+            self.assertIsNone(web.verify_page(candidate, self.terms, self.start, self.end, 'Colombia')[0])
+
+    def test_google_public_link_resolution_preserves_original_url_and_stops_on_challenges(self):
+        token = 'CBMiAAAAAAAAAAAA'
+        url = 'https://news.google.com/rss/articles/' + token
+        original = 'https://confidencialnoticias.com/politica/nota/'
+        response = MagicMock()
+        response.__enter__.return_value = response
+        response.iter_content.return_value = [(")]}'\n\n123\n" + json.dumps([
+            ['wrb.fr', 'Fbv4je', json.dumps(['garturlres', original])]])).encode()]
+        google_html = '<div data-n-a-ts="123" data-n-a-sg="public-signature"></div>'
+        with patch.object(web, 'cached_page', side_effect=[('https://news.google.com/articles/' + token, google_html), (original, '<article>Original</article>')]), \
+             patch.object(web.requests, 'post', return_value=response) as post:
+            self.assertEqual(web.google_article(url, 0), (original, '<article>Original</article>'))
+        self.assertFalse(post.call_args.kwargs['allow_redirects'])
+        with patch.object(web, 'cached_page', return_value=(url, '<form>Interactive challenge</form>')), \
+             patch.object(web.requests, 'post') as post:
+            with self.assertRaises(ValueError):
+                web.google_article(url, 1)
+            post.assert_not_called()
 
 
 if __name__ == '__main__':

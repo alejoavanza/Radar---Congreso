@@ -10,9 +10,9 @@ Son consultas dirigidas a índices públicos, no un rastreo exhaustivo de los ar
 
 ## Fechas, nombres y zona
 
-Google Noticias aplica las frases de nombre/zona y las restricciones de sitio en la consulta. El servidor valida además la fecha de publicación del feed dentro de la ventana UTC exacta y, en consultas dirigidas, el dominio del editor declarado en el resultado. Cuando el feed solo ofrece una redirección de Google, el filtro de sección depende del operador `site:` del índice; no se afirma haber leído el artículo original.
+Google Noticias aplica las frases de nombre/zona y las restricciones de sitio en la consulta. El servidor prefiltra la fecha de publicación del feed dentro de la ventana UTC exacta y, en consultas dirigidas, el dominio del editor declarado. Sus resultados son candidatos: los enlaces de Google se resuelven a la noticia original antes de contarla. Si no se puede obtener o verificar el original, se omite y se indica cobertura parcial.
 
-DuckDuckGo aporta enlaces candidatos. Se verifica su sitio y sección, incluida la URL final tras redirecciones, y la fecha original en `article:published_time`, `datePublished`, `parsely-pub-date` o una etiqueta `time` publicada. El texto del artículo, sus metadatos o autor debe contener el nombre o una variante y, si se indicó zona, también esa zona. Se ignora el resumen del buscador al verificar el artículo. No se usa la fecha de actualización como sustituto. La zona es un filtro textual, no geolocalización ni resolución de homónimos.
+Para candidatos de ambos buscadores se verifica el sitio y sección, incluida la URL final tras redirecciones, y la fecha original en `article:published_time`, `datePublished`, `parsely-pub-date` o una etiqueta `time` publicada. El texto del artículo, sus metadatos o autor debe contener el nombre o una variante y, si se indicó zona, también esa zona. Se ignoran el título y resumen del buscador al comprobar coincidencias; el título del índice solo se usa para mostrar un enlace si la página carece de titular. No se usa la fecha de actualización como sustituto. La zona es un filtro textual, no geolocalización ni resolución de homónimos.
 
 Los periodos son 90/60/30/7/1 días; un día equivale a 24 horas. Comparativos fija la misma hora de corte para todos los congresistas. Radar puede tener otra hora de corte o variantes introducidas manualmente.
 
