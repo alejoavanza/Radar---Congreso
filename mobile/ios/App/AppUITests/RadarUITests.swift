@@ -273,7 +273,8 @@ final class RadarUITests: XCTestCase {
         let clear = control("Borrar consultas guardadas")
         reveal(clear)
         tapWeb(clear)
-        let confirm = app.alerts.buttons.matching(NSPredicate(format: "label IN %@", ["OK", "Aceptar", "Borrar"])).firstMatch
+        // Capacitor's WKWebView confirm uses the observed native label "Ok".
+        let confirm = app.alerts.buttons.matching(NSPredicate(format: "label IN %@", ["Ok", "OK", "Aceptar", "Borrar"])).firstMatch
         XCTAssertTrue(confirm.waitForExistence(timeout: 10))
         confirm.tap()
         XCTAssertTrue(field("Nombre o apellido", id: "name").waitForExistence(timeout: 20))
