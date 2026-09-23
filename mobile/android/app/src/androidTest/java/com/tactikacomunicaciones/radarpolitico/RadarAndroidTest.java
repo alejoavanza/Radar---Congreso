@@ -75,6 +75,19 @@ public class RadarAndroidTest {
         waitFor("window.__flushed", 10000);
     }
 
+    private void waitForIntent(org.hamcrest.Matcher<Intent> matcher) {
+        long deadline = SystemClock.elapsedRealtime() + 10000;
+        while (SystemClock.elapsedRealtime() < deadline) {
+            InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+            if (getIntents().stream().anyMatch(matcher::matches)) {
+                intended(matcher);
+                return;
+            }
+            SystemClock.sleep(100);
+        }
+        intended(matcher);
+    }
+
     @Test public void nativeHttpCanReadProductionSearchWindow() {
         js("window.RadarNative.request('/api/search/window', {cache:'no-store'}).then(async r=>{window.__http=r.ok && Number.isFinite(Date.parse((await r.json()).end_time));}).catch(e=>window.__httpError=String(e))");
         waitFor("window.__http === true || window.__httpError", 90000);
@@ -91,8 +104,11 @@ public class RadarAndroidTest {
             intended(hasAction(Intent.ACTION_CHOOSER));
             intending(hasAction(Intent.ACTION_VIEW)).respondWith(new ActivityResult(Activity.RESULT_CANCELED, null));
             onWebView().withElement(findElement(Locator.CSS_SELECTOR, "#items a")).perform(webClick());
-            intended(allOf(hasAction(Intent.ACTION_VIEW), hasData("https://example.org/")));
+            // Browser first starts its controller Activity, then the custom tab.
+            waitForIntent(allOf(hasAction(Intent.ACTION_VIEW), hasData("https://example.org/")));
             assertEquals("\"https://localhost/\"", js("location.href"));
+            js("window.__browserClosed=false;window.Capacitor.Plugins.Browser.close().then(()=>window.__browserClosed=true)");
+            waitFor("window.__browserClosed", 10000);
         } finally { release(); }
         scenario.recreate();
         waitFor("document.getElementById('native-starting').hidden && document.getElementById('mweb').textContent === '1'", 20000);
@@ -110,7 +126,9 @@ public class RadarAndroidTest {
         onWebView().withElement(findElement(Locator.CSS_SELECTOR, "a[href='/privacy.html']")).perform(webClick());
         waitFor("location.pathname === '/privacy.html' && document.querySelector('h1')", 10000);
         assertEquals("\"https://localhost\"",js("location.origin"));
-        androidx.test.espresso.Espresso.pressBack();
+        // Android 16 does not dispatch the legacy KEYCODE_BACK injected by
+        // Espresso.pressBack. Exercise the AndroidX callback used by system Back.
+        scenario.onActivity(activity -> activity.getOnBackPressedDispatcher().onBackPressed());
         waitFor("document.getElementById('native-starting')?.hidden", 10000);
         js("document.getElementById('native-settings').open=true");
         onWebView().withElement(findElement(Locator.CSS_SELECTOR, "a[href='/privacy.html']")).perform(webClick());
@@ -120,7 +138,7 @@ public class RadarAndroidTest {
         js("window.showTab('compare')");
         // Keep the real history from privacy: Back on the root must change tabs,
         // rather than reopening the previous legal page.
-        androidx.test.espresso.Espresso.pressBack();
+        scenario.onActivity(activity -> activity.getOnBackPressedDispatcher().onBackPressed());
         waitFor("document.getElementById('report-tab').getAttribute('aria-selected') === 'true'",10000);
     }
 }

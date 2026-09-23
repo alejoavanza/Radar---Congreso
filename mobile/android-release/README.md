@@ -1,6 +1,6 @@
 # Android y verificación de ambas plataformas
 
-Preparación del 23 de septiembre de 2026. Código revisable localmente; todavía no enviado a Google Play ni a App Store.
+Preparación del 23 de septiembre de 2026. Código subido y revisable en el [PR #21](https://github.com/alejoavanza/Radar---Congreso/pull/21); todavía no enviado a Google Play ni a App Store.
 
 ## Resultado de esta continuación
 
@@ -22,9 +22,9 @@ En esta continuación se corrigió también el contraste de los iconos de las ba
 | Reconstrucción y sincronización de iOS y Android | Aprobadas |
 | Validadores de recursos, plugins e identidad | Aprobados para ambas plataformas |
 | Cambios involuntarios en `mobile/ios` respecto de `d428cd5` | Ninguno |
-| Compilación Android APK/AAB de esta revisión | Pendiente |
-| Pruebas instrumentadas en Android | Preparadas; pendientes de ejecución |
-| Nueva compilación y ejecución en simulador iOS | Pendientes |
+| Compilación Android APK/AAB y lint | Aprobados en GitHub Actions para `7cd170d` |
+| Compilación de simulador y archivo Release iOS | Aprobados en GitHub Actions para `7cd170d` |
+| Pruebas instrumentadas Android y pruebas de uso iPhone | Resultados por revisión y artefactos en el PR #21 |
 | Pruebas en teléfonos físicos y firma de distribución | Pendientes |
 
 Las pruebas móviles locales usan el paquete real con respuestas controladas de los plugins. No equivalen a ejecutar Android o iOS. El entorno local no tiene Xcode ni el SDK/emulador Android y cuenta con Java 17; Android requiere Java 21 para este proyecto.
@@ -56,7 +56,7 @@ El APK de prueba se genera en `android/app/build/outputs/apk/debug/`. El AAB se 
 
 ## Pasos concretos para publicar
 
-1. Subir la rama de preparación a GitHub y ejecutar ambos flujos, conforme a la autorización recibida. Revisar cualquier fallo antes de integrar cambios o preparar un lanzamiento.
+1. Revisar los resultados nativos y los artefactos del PR #21 antes de integrar cambios o preparar un lanzamiento.
 2. Probar el APK en un Android físico: abrir, buscar, comparar, compartir, volver de fuentes y páginas legales, perder la conexión, cerrar y reabrir, y borrar consultas. Probar igualmente la nueva compilación de iPhone.
 3. Usar la cuenta de organización de Táctika que corresponda en cada tienda. La inscripción de Apple no crea una cuenta de Google Play. Verificar los identificadores antes de registrarlos.
 4. Para Android, generar y custodiar la clave de subida bajo control de Táctika y producir el AAB firmado mediante Android Studio. No guardar claves ni contraseñas en Git. Para iOS, archivar y firmar con el equipo autorizado de Apple.
