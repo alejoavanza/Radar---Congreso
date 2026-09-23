@@ -29,6 +29,10 @@ def fetch_news(name,aliases,territory,days,limit,end=None):
     return items,coverage['message'] if coverage['status']=='unavailable' else None,coverage
 @app.get('/')
 def home():return render_template('index.html', source_catalog=public_catalog())
+@app.get('/support')
+def support():return render_template('support.html')
+@app.get('/privacy')
+def privacy():return render_template('privacy.html')
 @app.errorhandler(404)
 def not_found(error):
     if request.path.startswith('/api/'):

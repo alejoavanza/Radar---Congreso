@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Radar Político</string>
+    <string name="title_activity_main">Radar Político</string>
+    <string name="package_name">com.tactikacomunicaciones.radarpolitico</string>
+    <string name="custom_url_scheme">com.tactikacomunicaciones.radarpolitico</string>
+</resources>

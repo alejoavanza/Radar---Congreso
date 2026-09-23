@@ -1,0 +1,86 @@
+name: Android preparation
+
+on:
+  pull_request:
+    paths:
+      - 'mobile/**'
+      - 'static/**'
+      - 'templates/**'
+      - '*.py'
+      - 'requirements.txt'
+      - '.github/workflows/android.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install dependencies
+        run: |
+          npm ci
+          python -m pip install -r ../requirements.txt
+      - name: Bundle Android and verify shared resources
+        run: |
+          npm run sync:android
+          npm test
+          node --test ../tests/*.test.cjs
+          cd .. && python -m unittest discover -s tests -p 'test_*.py'
+      - name: Build APK, unsigned Play bundle and lint
+        run: cd android && ./gradlew --no-daemon assembleDebug bundleRelease lintDebug
+      - name: Enable emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Verify on Android 16
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 36
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          script: cd mobile/android && ./gradlew --no-daemon connectedDebugAndroidTest
+      - name: Save native test evidence and lint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Radar-Politico-Android-Evidence
+          path: |
+            mobile/android/app/build/reports
+            mobile/android/app/build/outputs/androidTest-results
+          retention-days: 30
+      - name: Save installable test APK and unsigned release bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: Radar-Politico-Android-Test-APK-and-Unsigned-AAB
+          path: |
+            mobile/android/app/build/outputs/apk/debug/*.apk
+            mobile/android/app/build/outputs/bundle/release/*.aab
+          retention-days: 30
