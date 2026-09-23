@@ -32,22 +32,46 @@ final class RadarUITests: XCTestCase {
         add(attachment)
     }
 
+    private func webViewport() -> CGRect {
+        let bounds = app.frame
+        let top = bounds.minY + 80
+        var bottom = bounds.maxY - 50
+        let keyboard = app.keyboards.firstMatch
+        if keyboard.exists { bottom = min(bottom, keyboard.frame.minY - 10) }
+        return CGRect(x: bounds.minX + 1, y: top, width: bounds.width - 2, height: max(1, bottom - top))
+    }
+
     private func reveal(_ element: XCUIElement, upwards: Bool = true) {
+        // WKWebView on iOS 26.5 can expose a valid visible frame while its
+        // accessibility activation point is invalid. Scroll by actual bounds;
+        // the assertions after each real touch still require the app to react.
         for _ in 0..<20 {
-            if element.exists && element.isHittable { return }
-            let view = app.webViews.firstMatch
-            let forward = element.exists && element.frame.height > 0 ? element.frame.midY > app.frame.midY : upwards
-            let start = view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: forward ? 0.75 : 0.3))
-            let end = view.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: forward ? 0.35 : 0.75))
+            let viewport = webViewport()
+            let frame = element.exists ? element.frame : .zero
+            if !frame.isEmpty && viewport.contains(frame) { return }
+            let forward = !frame.isEmpty ? frame.midY > viewport.midY : upwards
+            let origin = app.coordinate(withNormalizedOffset: .zero)
+            let start = origin.withOffset(CGVector(dx: viewport.midX - app.frame.minX,
+                dy: viewport.minY - app.frame.minY + viewport.height * (forward ? 0.8 : 0.25)))
+            let end = origin.withOffset(CGVector(dx: viewport.midX - app.frame.minX,
+                dy: viewport.minY - app.frame.minY + viewport.height * (forward ? 0.25 : 0.8)))
             start.press(forDuration: 0.05, thenDragTo: end)
         }
-        XCTAssertTrue(element.isHittable, "El control debe poder alcanzarse desplazando la pantalla: \(element.label)")
+        XCTAssertTrue(element.exists && !element.frame.isEmpty && webViewport().contains(element.frame),
+                      "El control debe poder alcanzarse desplazando la pantalla: \(element.label)")
+    }
+
+    private func tapWeb(_ element: XCUIElement) {
+        reveal(element)
+        element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
     }
 
     private func selectTab(_ name: String) {
         let tab = control(name)
         reveal(tab, upwards: false)
-        tab.tap()
+        tapWeb(tab)
+        let selected = XCTNSPredicateExpectation(predicate: NSPredicate(format: "selected == true"), object: tab)
+        XCTAssertEqual(XCTWaiter.wait(for: [selected], timeout: 10), .completed)
     }
 
     private func frameResult(_ firstControl: XCUIElement) {
@@ -77,7 +101,7 @@ final class RadarUITests: XCTestCase {
     private func cancelShare(_ name: String) {
         let share = control(name)
         reveal(share)
-        share.tap()
+        tapWeb(share)
         let sheet = app.otherElements["ActivityListView"]
         XCTAssertTrue(sheet.waitForExistence(timeout: 20), "Debe abrir la hoja nativa para compartir.")
         capture(name == "Compartir reporte" ? "QA-Compartir-reporte" : "QA-Compartir-comparativo")
@@ -106,7 +130,7 @@ final class RadarUITests: XCTestCase {
         XCTAssertTrue(comparisonTab.isHittable)
         capture("01-Radar-iPhone")
 
-        comparisonTab.tap()
+        selectTab("COMPARATIVOS")
         let comparisonName = field("Agregar congresista", id: "compare-name")
         XCTAssertTrue(comparisonName.waitForExistence(timeout: 10))
         let ready = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: comparisonName)
@@ -115,30 +139,31 @@ final class RadarUITests: XCTestCase {
         XCTAssertEqual(comparisonZone.value as? String, "Colombia")
         capture("02-Comparativos-iPhone")
 
-        comparisonName.tap()
+        tapWeb(comparisonName)
         comparisonName.typeText("Toro")
         let clearComparisonName = control("Borrar nombre para comparar")
         XCTAssertTrue(clearComparisonName.waitForExistence(timeout: 5))
-        clearComparisonName.tap()
+        tapWeb(clearComparisonName)
         XCTAssertTrue(comparisonName.value as? String == "" || comparisonName.value as? String == "Escribe un nombre o apellido")
         comparisonName.typeText("Lara")
         XCTAssertEqual(comparisonName.value as? String, "Lara", "Después de borrar se conserva el foco para escribir de nuevo.")
-        clearComparisonName.tap()
+        tapWeb(clearComparisonName)
 
         let clearComparisonZone = control("Borrar zona para comparar")
-        clearComparisonZone.tap()
+        tapWeb(clearComparisonZone)
         XCTAssertTrue(comparisonZone.value as? String == "" || comparisonZone.value as? String == "Ej. Colombia o Antioquia")
         comparisonZone.typeText("Colombia")
         XCTAssertEqual(comparisonZone.value as? String, "Colombia")
 
-        control("RADAR").tap()
+        dismissKeyboard()
+        selectTab("RADAR")
         XCTAssertTrue(radarName.waitForExistence(timeout: 10))
-        radarName.tap()
+        tapWeb(radarName)
         radarName.typeText("Toro")
-        control("Borrar nombre").tap()
+        tapWeb(control("Borrar nombre"))
         XCTAssertTrue(radarName.value as? String == "" || radarName.value as? String == "Ej. Arizabaleta o Alejandro")
         let radarZone = field("Zona", id: "territory")
-        control("Borrar zona").tap()
+        tapWeb(control("Borrar zona"))
         XCTAssertTrue(radarZone.value as? String == "" || radarZone.value as? String == "Ej. Colombia o Antioquia")
         radarZone.typeText("Colombia")
         XCTAssertEqual(radarZone.value as? String, "Colombia")
@@ -150,13 +175,13 @@ final class RadarUITests: XCTestCase {
         selectTab("RADAR")
         let name = field("Nombre o apellido", id: "name")
         reveal(name, upwards: false)
-        name.tap()
-        if control("Borrar nombre").isHittable { control("Borrar nombre").tap() }
+        tapWeb(name)
+        if control("Borrar nombre").exists { tapWeb(control("Borrar nombre")) }
         name.typeText("Alejandro Toro")
         dismissKeyboard()
         let generate = control("GENERAR REPORTE")
         reveal(generate)
-        generate.tap()
+        tapWeb(generate)
 
         let source = app.links.matching(NSPredicate(format: "label BEGINSWITH %@", "Abrir fuente:")).firstMatch
         XCTAssertTrue(source.waitForExistence(timeout: 100), "La consulta real debe devolver al menos una noticia; un fallo de la fuente no se sustituye por datos inventados.")
@@ -167,7 +192,7 @@ final class RadarUITests: XCTestCase {
         let source = generateLiveReport()
         let originalSource = source.label
         reveal(source)
-        source.tap()
+        tapWeb(source)
         // The observed iOS 26 Safari toolbar exposes Close instead of Done.
         // Match exact native identifiers to avoid a site's cookie-dialog button.
         let safariDone = app.buttons.matching(NSPredicate(format: "identifier IN %@ OR label IN %@", ["Close", "Done"], ["OK", "Listo", "Done", "Cerrar", "Close"])).firstMatch
@@ -176,13 +201,14 @@ final class RadarUITests: XCTestCase {
         // A publisher's modal cookie dialog can trap accessibility focus in the
         // web page. Dismiss that dialog without accepting cookies before using
         // Safari's own toolbar, then require the actual return to Radar.
-        let cookieClose = app.webViews.buttons.matching(NSPredicate(format: "label IN %@", ["Close dialog", "Cerrar diálogo"])).firstMatch
-        if cookieClose.exists && cookieClose.isHittable { cookieClose.tap() }
+        let cookieClose = app.webViews.buttons.matching(NSPredicate(format: "label IN %@", ["Close dialog", "Cerrar diálogo", "NON ACCETTO", "Reject all", "Rechazar todo"])).firstMatch
+        if cookieClose.exists && app.frame.contains(cookieClose.frame) {
+            cookieClose.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
         let toolbarClose = app.otherElements["TopBrowserBar"].buttons["Close"]
         let closeControl = toolbarClose.exists ? toolbarClose : safariDone
-        let closeReady = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == true"), object: closeControl)
-        XCTAssertEqual(XCTWaiter.wait(for: [closeReady], timeout: 15), .completed)
-        closeControl.tap()
+        XCTAssertTrue(closeControl.exists && !closeControl.frame.isEmpty && app.frame.contains(closeControl.frame))
+        closeControl.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
         XCTAssertTrue(source.waitForExistence(timeout: 20), "Cerrar Safari debe devolver la consulta original.")
         XCTAssertEqual(source.label, originalSource, "Al cerrar Safari se conserva la noticia de la consulta.")
 
@@ -208,17 +234,17 @@ final class RadarUITests: XCTestCase {
         let comparisonName = field("Agregar congresista", id: "compare-name")
         for (query, expected) in [("Alejandro Toro", "Toro Ramírez, David Alejandro"), ("Iván Cepeda", "Cepeda Castro, Iván")] {
             reveal(comparisonName, upwards: false)
-            comparisonName.tap()
+            tapWeb(comparisonName)
             comparisonName.typeText(query)
             let option = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", expected)).firstMatch
             XCTAssertTrue(option.waitForExistence(timeout: 10), "El congresista debe estar en el directorio incluido.")
-            option.tap()
+            tapWeb(option)
         }
         dismissKeyboard()
         let compare = control("COMPARAR MENCIONES")
         reveal(compare)
         XCTAssertTrue(compare.isEnabled)
-        compare.tap()
+        tapWeb(compare)
         let comparisonShare = control("Compartir comparativo")
         XCTAssertTrue(comparisonShare.waitForExistence(timeout: 100), "Comparativos debe terminar con los datos reales y los fallos que correspondan.")
         frameResult(comparisonShare)
@@ -231,18 +257,18 @@ final class RadarUITests: XCTestCase {
 
         let settings = control("Soporte, privacidad y datos guardados")
         reveal(settings)
-        settings.tap()
+        tapWeb(settings)
         let privacy = control("Privacidad")
         reveal(privacy)
-        privacy.tap()
+        tapWeb(privacy)
         XCTAssertTrue(control("Privacidad de Radar Político").waitForExistence(timeout: 10))
-        control("← Volver a Radar").tap()
+        tapWeb(control("← Volver a Radar"))
         XCTAssertTrue(comparisonShare.waitForExistence(timeout: 20), "Volver de privacidad debe recuperar el comparativo.")
         reveal(settings)
-        settings.tap()
+        tapWeb(settings)
         let clear = control("Borrar consultas guardadas")
         reveal(clear)
-        clear.tap()
+        tapWeb(clear)
         let confirm = app.alerts.buttons.matching(NSPredicate(format: "label IN %@", ["OK", "Aceptar", "Borrar"])).firstMatch
         XCTAssertTrue(confirm.waitForExistence(timeout: 10))
         confirm.tap()

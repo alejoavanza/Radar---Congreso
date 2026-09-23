@@ -10,7 +10,7 @@ Se conserva la clave de Preferences usada por iPhone, para recuperar los reporte
 
 Android incorpora los iconos de Radar, pantalla de lanzamiento, márgenes para las barras del sistema, compartir y apertura de fuentes mediante plugins nativos. Ayuda y Privacidad permanecen dentro de la aplicación. El botón Atrás vuelve de Comparativos a Radar y, desde Radar, guarda el estado y minimiza la aplicación; no reabre páginas legales que hayan quedado en el historial.
 
-En esta continuación se corrigió también el contraste de los iconos de las barras de Android sobre el fondo claro. El proyecto Xcode, su identidad, sus iconos y su manifiesto de privacidad no presentan cambios respecto del punto de partida iOS `d428cd5`. La interfaz compartida sí recibe las mejoras de búsqueda y requiere una nueva ejecución nativa en iOS.
+En esta continuación se corrigió también el contraste de los iconos de las barras de Android sobre el fondo claro. La configuración Xcode, el código de la app nativa iOS, su identidad, sus iconos y su manifiesto de privacidad no presentan cambios respecto del punto de partida iOS `d428cd5`. La interfaz compartida sí recibe las mejoras de búsqueda. Las pruebas de uso de iPhone se ajustan para tocar los controles por su posición visible y evitar los puntos de activación inválidos observados en iOS 26.5.
 
 ## Evidencia y límites
 
@@ -21,7 +21,7 @@ En esta continuación se corrigió también el contraste de los iconos de las ba
 | Pruebas móviles de transporte, persistencia y arranque | 12 aprobadas |
 | Reconstrucción y sincronización de iOS y Android | Aprobadas |
 | Validadores de recursos, plugins e identidad | Aprobados para ambas plataformas |
-| Cambios involuntarios en `mobile/ios` respecto de `d428cd5` | Ninguno |
+| Cambios en la app nativa iOS y su configuración respecto de `d428cd5` | Ninguno; solo se ajusta la automatización de UI |
 | Compilación Android APK/AAB y lint | Aprobados en GitHub Actions para `7cd170d` |
 | Compilación de simulador y archivo Release iOS | Aprobados en GitHub Actions para `7cd170d` |
 | Pruebas instrumentadas Android y pruebas de uso iPhone | Resultados por revisión y artefactos en el PR #21 |

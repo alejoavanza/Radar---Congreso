@@ -8,7 +8,7 @@
 | Pruebas de interfaz y búsqueda compartidas | 21/21 aprobadas |
 | Pruebas Python del servidor | 44/44 aprobadas |
 | `npm run sync:all` | Aprobado; incluye ambos verificadores de recursos |
-| Cambios dentro del proyecto nativo `mobile/ios` frente a `d428cd5` | Ninguno |
+| Cambios en la app nativa iOS, identidad, iconos y configuración Xcode frente a `d428cd5` | Ninguno; se ajusta únicamente la automatización de UI para iOS 26.5 |
 | Compilación Android APK/AAB y lint | Aprobados en GitHub Actions para `7cd170d` |
 | Compilación de simulador y archivo Release iOS | Aprobados en GitHub Actions para `7cd170d` |
 | Instrumentación Android y pruebas de uso iPhone | Resultado de cada revisión en el [PR #21](https://github.com/alejoavanza/Radar---Congreso/pull/21) |
