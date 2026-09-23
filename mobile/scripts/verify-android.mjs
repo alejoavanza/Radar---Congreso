@@ -16,6 +16,9 @@ assert.equal(generated.android?.allowMixedContent,false);
 assert.equal(generated.android?.webContentsDebuggingEnabled,false);
 const deps = JSON.parse(await read('package.json')).dependencies;
 assert.equal(deps['@capacitor/android'],deps['@capacitor/ios']);
+const bridge = await read('node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/MessageHandler.java');
+assert.ok(bridge.includes('javaScriptReplyProxy = replyProxy;\n                    postMessage(message.getData());'),
+  'Apply the Android reply-proxy patch with npm run postinstall before building.');
 const plugins = JSON.parse(await read('android/app/src/main/assets/capacitor.plugins.json'));
 for (const name of ['app','browser','network','preferences','share']) assert.ok(plugins.some(p=>p.pkg==='@capacitor/'+name),`Missing ${name}`);
 for (const asset of ['index.html','native.js','app.js','mobile.css','support.html','privacy.html','static/congress-members.json']) {

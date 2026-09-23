@@ -31,6 +31,8 @@ Las pruebas móviles locales usan el paquete real con respuestas controladas de 
 
 Los flujos `.github/workflows/android.yml` e `ios.yml` están preparados para compilar y probar las plataformas. El flujo Android genera un APK de depuración, un AAB Release sin firma y ejecuta las pruebas en Android 16. Las pruebas instrumentadas distinguen una consulta real al endpoint de hora de corte de los reportes sintéticos empleados para verificar compartir, persistencia y navegación. Las verificaciones locales no acreditan ejecución nativa ni aprobación de ninguna tienda. Las intenciones de compartir y navegador se interceptan en las pruebas instrumentadas: no sustituyen una prueba manual con Chrome o WhatsApp.
 
+La instalación aplica una corrección acotada a Capacitor Android 8.5.1 mediante `scripts/patch-capacitor-android.mjs`: se asigna el canal de respuesta de la página antes de despachar la llamada nativa. Evita que una lectura rápida de Preferences responda a la página anterior y deje Radar cargando tras volver de Ayuda o Privacidad. Conserva el puente moderno y sus comprobaciones de origen. El script comprueba la versión y el fragmento original; debe revisarse al actualizar Capacitor. La carrera está descrita también en [ionic-team/capacitor#8382](https://github.com/ionic-team/capacitor/issues/8382).
+
 El 23 de septiembre de 2026 Alejandro autorizó explícitamente subir esta rama al repositorio público `alejoavanza/Radar---Congreso` y ejecutar las compilaciones de prueba de Android e iOS. Esta autorización resuelve el bloqueo automático anterior. La publicación en las tiendas y la integración en producción son pasos posteriores. El estado y los enlaces de ejecución se registran en `VERIFICACION.md`.
 
 ## Preparar Android localmente
