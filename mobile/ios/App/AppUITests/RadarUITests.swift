@@ -139,7 +139,7 @@ final class RadarUITests: XCTestCase {
         XCTAssertEqual(comparisonZone.value as? String, "Colombia")
         capture("02-Comparativos-iPhone")
 
-        tapWeb(comparisonName)
+        comparisonName.tap()
         comparisonName.typeText("Toro")
         let clearComparisonName = control("Borrar nombre para comparar")
         XCTAssertTrue(clearComparisonName.waitForExistence(timeout: 5))
@@ -158,7 +158,7 @@ final class RadarUITests: XCTestCase {
         dismissKeyboard()
         selectTab("RADAR")
         XCTAssertTrue(radarName.waitForExistence(timeout: 10))
-        tapWeb(radarName)
+        radarName.tap()
         radarName.typeText("Toro")
         tapWeb(control("Borrar nombre"))
         XCTAssertTrue(radarName.value as? String == "" || radarName.value as? String == "Ej. Arizabaleta o Alejandro")
@@ -175,7 +175,7 @@ final class RadarUITests: XCTestCase {
         selectTab("RADAR")
         let name = field("Nombre o apellido", id: "name")
         reveal(name, upwards: false)
-        tapWeb(name)
+        name.tap()
         if control("Borrar nombre").exists { tapWeb(control("Borrar nombre")) }
         name.typeText("Alejandro Toro")
         dismissKeyboard()
@@ -234,8 +234,12 @@ final class RadarUITests: XCTestCase {
         let comparisonName = field("Agregar congresista", id: "compare-name")
         for (query, expected) in [("Alejandro Toro", "Toro Ramírez, David Alejandro"), ("Iván Cepeda", "Cepeda Castro, Iván")] {
             reveal(comparisonName, upwards: false)
-            tapWeb(comparisonName)
+            // Let XCTest focus text inputs through the keyboard-aware tap;
+            // coordinate touches are reserved for the affected web controls.
+            comparisonName.tap()
             comparisonName.typeText(query)
+            let entered = XCTNSPredicateExpectation(predicate: NSPredicate(format: "value == %@", query), object: comparisonName)
+            XCTAssertEqual(XCTWaiter.wait(for: [entered], timeout: 10), .completed, "El campo debe recibir el nombre antes de buscarlo.")
             let option = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", expected)).firstMatch
             XCTAssertTrue(option.waitForExistence(timeout: 10), "El congresista debe estar en el directorio incluido.")
             tapWeb(option)
