@@ -121,15 +121,17 @@ public class RadarAndroidTest {
         assertEquals("true",js("document.getElementById('result').classList.contains('hide')"));
     }
 
-    @Test public void privacyStaysLocalAndBackReturnsToRadar() {
-        js("document.getElementById('native-settings').open=true");
-        onWebView().withElement(findElement(Locator.CSS_SELECTOR, "a[href='/privacy.html']")).perform(webClick());
-        waitFor("location.pathname === '/privacy.html' && document.querySelector('h1')", 10000);
-        assertEquals("\"https://localhost\"",js("location.origin"));
-        // Android 16 does not dispatch the legacy KEYCODE_BACK injected by
-        // Espresso.pressBack. Exercise the AndroidX callback used by system Back.
-        scenario.onActivity(activity -> activity.getOnBackPressedDispatcher().onBackPressed());
-        waitFor("document.getElementById('native-starting')?.hidden", 10000);
+    @Test public void localPagesStayLocalAndBackReturnsToRadar() {
+        for (String page : new String[]{"privacy", "support"}) {
+            js("document.getElementById('native-settings').open=true");
+            onWebView().withElement(findElement(Locator.CSS_SELECTOR, "a[href='/" + page + ".html']")).perform(webClick());
+            waitFor("location.pathname === '/" + page + ".html' && document.querySelector('h1')", 10000);
+            assertEquals("\"https://localhost\"",js("location.origin"));
+            // Android 16 does not dispatch Espresso's legacy KEYCODE_BACK.
+            // Exercise the AndroidX callback used by system Back.
+            scenario.onActivity(activity -> activity.getOnBackPressedDispatcher().onBackPressed());
+            waitFor("document.getElementById('native-starting')?.hidden", 10000);
+        }
         js("document.getElementById('native-settings').open=true");
         onWebView().withElement(findElement(Locator.CSS_SELECTOR, "a[href='/privacy.html']")).perform(webClick());
         waitFor("location.pathname === '/privacy.html' && document.querySelector('h1')", 10000);
