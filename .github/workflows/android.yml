@@ -77,7 +77,9 @@ jobs:
           arch: x86_64
           profile: pixel_6
           disable-animations: true
-          script: cd mobile/android && ./gradlew --no-daemon connectedDebugAndroidTest
+          # Run Radar's instrumented suite with its real plugin dependencies.
+          # The generated Cordova library has no tests or instrumentation runner.
+          script: cd mobile/android && ./gradlew --no-daemon :app:connectedDebugAndroidTest
       - name: Save native test evidence and lint
         if: always()
         uses: actions/upload-artifact@v4
