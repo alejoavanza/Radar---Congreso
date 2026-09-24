@@ -15,6 +15,8 @@ import feedparser
 import requests
 from source_catalog import BATCHES, SOURCES, CATALOG_VERSION, matching_source, site_query
 import search_state
+from gdelt_source import gdelt_news
+from territory_context import territory_query
 
 TIMEOUT = (3, 8)
 UA = {'User-Agent': 'Radar-Politico/2.1 (public-news-monitor)'}
@@ -144,7 +146,7 @@ def google_news(term, territory, start, end):
     # unindexed full-name variant returned an empty feed despite short-name hits.
     query = '"' + term.replace('"', ' ').strip() + '"'
     if territory:
-        query += ' "' + territory.replace('"', ' ').strip() + '"'
+        query += ' ' + territory_query(territory)
     query += f' after:{(start-timedelta(days=1)):%Y-%m-%d} before:{(end+timedelta(days=1)):%Y-%m-%d}'
     raw = source_bytes('https://news.google.com/rss/search?' + urlencode({'q': query, 'hl': 'es-419', 'gl': 'CO', 'ceid': 'CO:es-419'}))
     return feed_items(raw, start, end)
@@ -178,11 +180,14 @@ def _search_news(query, start, end, limit=100):
     if isinstance(query, str):
         query = NewsQuery((query,), '')
     terms = list(dict.fromkeys(t.replace('"', ' ').strip() for t in query.terms if t.strip()))
+    if not terms:
+        raise ValueError('Escribe el nombre de un político.')
     deadline = monotonic() + 40
     # Day/week results share index queries; combine their samples before applying
     # the actual requested window and the article-verification budget.
     discovery_start = min(start, end-timedelta(days=7))
     jobs = [('Google Noticias', google_news, (term, query.territory, discovery_start, end), ()) for term in terms[:MAX_NAMES]]
+    jobs.insert(0, ('GDELT', gdelt_news, (terms[:MAX_NAMES], query.territory, discovery_start, end), ()))
     jobs.append(('DuckDuckGo web', duckduckgo_web, (terms[:MAX_NAMES], query.territory, discovery_start, end), ()))
     jobs.append(('Google Noticias · recientes', google_news, (terms[0], query.territory, end-timedelta(days=1), end), ()))
     jobs.append(('DuckDuckGo web · recientes', duckduckgo_web, (terms[:1], query.territory, end-timedelta(days=1), end), ()))
@@ -247,9 +252,9 @@ def _search_news(query, start, end, limit=100):
         unique.append(item)
     unique.sort(key=lambda i: i['published'], reverse=True)
     limited |= len(unique) > limit or bool(failed)
-    message = 'Búsqueda general y consultas dirigidas a 38 fuentes. Cobertura parcial; no incluye redes sociales.'
+    message = 'Búsqueda con Google Noticias, DuckDuckGo y GDELT, más consultas dirigidas a 38 fuentes. Cobertura parcial; no incluye redes sociales.'
     if failed:
-        message = 'Consulta parcial: algunas búsquedas generales o dirigidas a las 38 fuentes no respondieron. Se muestran los resultados disponibles.'
+        message = 'Consulta parcial: no disponibles ' + ', '.join(failed) + '. Se muestran los resultados de las demás búsquedas y de las consultas dirigidas a 38 fuentes.'
     if missing:
         message += ' Algunas páginas se omitieron por falta de fecha o contenido verificable.'
     if len(unique) > limit:

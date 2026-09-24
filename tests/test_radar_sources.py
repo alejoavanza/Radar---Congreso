@@ -14,6 +14,9 @@ import web_discovery
 class RadarSourcesTest(unittest.TestCase):
     def setUp(self):
         search_state.clear()
+        gdelt = patch.object(news_sources, "gdelt_news", return_value=([], 0, False))
+        self.gdelt = gdelt.start()
+        self.addCleanup(gdelt.stop)
         batches = patch.object(news_sources, "BATCHES", ())
         batches.start()
         self.addCleanup(batches.stop)

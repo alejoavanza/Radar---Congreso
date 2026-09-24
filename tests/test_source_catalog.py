@@ -16,6 +16,9 @@ import web_discovery as web
 class CatalogSearchTest(unittest.TestCase):
     def setUp(self):
         search_state.clear()
+        gdelt = patch.object(news, "gdelt_news", return_value=([], 0, False))
+        self.gdelt = gdelt.start()
+        self.addCleanup(gdelt.stop)
         self.end = datetime(2026, 9, 9, 12, tzinfo=timezone.utc)
         self.start = self.end - timedelta(days=7)
         self.terms = ('Alejandro Toro', 'David Alejandro Toro Ramírez')

@@ -13,6 +13,9 @@ from source_catalog import SOURCES
 class StabilityTest(unittest.TestCase):
     def setUp(self):
         search_state.clear()
+        gdelt = patch.object(news, "gdelt_news", return_value=([], 0, False))
+        self.gdelt = gdelt.start()
+        self.addCleanup(gdelt.stop)
         self.end=datetime.now(timezone.utc).replace(microsecond=0)-timedelta(minutes=2)
         self.query=news.NewsQuery(('Alejandro Toro','David Alejandro Toro Ramírez'), 'Colombia')
 
