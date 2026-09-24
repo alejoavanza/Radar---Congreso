@@ -29,6 +29,9 @@ def page(title, date=None, author='María Ejemplo'):
 class BroadSearchTest(unittest.TestCase):
     def setUp(self):
         search_state.clear()
+        gdelt = patch.object(news, "gdelt_news", return_value=([], 0, False))
+        self.gdelt = gdelt.start()
+        self.addCleanup(gdelt.stop)
         batches = patch.object(news, "BATCHES", ())
         batches.start()
         self.addCleanup(batches.stop)
@@ -76,7 +79,7 @@ class BroadSearchTest(unittest.TestCase):
         def response(url, **kwargs):
             from urllib.parse import urlsplit, parse_qs
             query = parse_qs(urlsplit(url).query)['q'][0]
-            self.assertNotIn(' OR ', query)
+            self.assertEqual(sum(('\"' + name + '\"') in query for name in self.query.terms), 1)
             self.assertIn('"Colombia"', query)
             return Mock(content=rss('Mención', 'https://regional.example/nota', self.end-timedelta(days=2))
                         if query.startswith('"María Ejemplo"') else EMPTY)

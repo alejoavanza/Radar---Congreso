@@ -12,6 +12,9 @@ from email.utils import format_datetime
 class SourceLinksTest(unittest.TestCase):
     def setUp(self):
         search_state.clear()
+        gdelt = patch.object(news_sources, "gdelt_news", return_value=([], 0, False))
+        self.gdelt = gdelt.start()
+        self.addCleanup(gdelt.stop)
         news_sources.cached_source.cache_clear()
         batches = patch.object(news_sources, 'BATCHES', ())
         batches.start()

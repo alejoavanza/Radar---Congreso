@@ -21,6 +21,7 @@ from news_sources import UA, matches, publication_date, safe_url, social_result,
 from source_catalog import matching_source, site_query
 import search_state
 from news_sources import normalize
+from territory_context import matches_territory, territory_query
 
 MAX_CANDIDATES = 24
 MAX_FOCUSED_CANDIDATES = 76
@@ -30,7 +31,7 @@ PAGE_BYTES = 2_000_000
 def indexed_query(terms, territory):
     phrases = ['"' + term.replace('"', ' ').strip() + '"' for term in terms]
     query = phrases[0] if len(phrases) == 1 else '(' + ' OR '.join(phrases) + ')'
-    return query + (' "' + territory.replace('"', ' ').strip() + '"' if territory else '')
+    return query + (' ' + territory_query(territory) if territory.strip() else '')
 
 
 def candidates(rows, engine):
@@ -298,7 +299,7 @@ def _verify_page(candidate, terms, start, end, territory=''):
                      article.get('articleBody', ''), *page.article_text])
     if not matches(text, terms):
         return None, 0
-    if territory and not matches(text, (territory,)):
+    if not matches_territory(text, territory):
         return None, 0
     canonical = urljoin(url, page.canonical)
     same_section = not candidate.get('catalog_source') or (
@@ -359,6 +360,12 @@ def verify_candidates(found, terms, start, end, territory='', *, deadline=None):
                 ordered.append(candidate)
     general = [c for c in ordered if not c.get('catalog_source')]
     focused = [c for c in ordered if c.get('catalog_source')]
+    # GDELT may return dozens of unique publishers. Share the existing budget
+    # with the other indexes so those candidates cannot displace all of them.
+    gdelt = [c for c in general if c.get('engine') == 'GDELT']
+    existing = [c for c in general if c.get('engine') != 'GDELT']
+    general = [candidate for pair in zip_longest(existing, gdelt)
+               for candidate in pair if candidate is not None]
     selected = general[:MAX_CANDIDATES] + focused[:MAX_FOCUSED_CANDIDATES]
     items, skipped = [], 0
     pool = ThreadPoolExecutor(max_workers=6)
