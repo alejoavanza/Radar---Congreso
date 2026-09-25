@@ -19,6 +19,17 @@
     <label><input type="checkbox" value="instagram" checked>Instagram</label><label><input type="checkbox" value="facebook" checked>Facebook</label><label><input type="checkbox" value="tiktok" checked>TikTok</label><label><input type="checkbox" value="youtube" checked>YouTube</label><label><input type="checkbox" value="x" checked>X</label>
   </fieldset>
   <p id="social-error" role="alert"></p>
+  <details class="methodology social-publishing" open><summary>Crear imagen para redes</summary><div class="methodology-body">
+    <div class="social-piece-options">
+      <div><label for="social-piece-view">Gráfico</label><select id="social-piece-view"><option value="comparison">Todas las redes seleccionadas</option><option value="total">Total de las redes seleccionadas</option><option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="tiktok">TikTok</option><option value="youtube">YouTube</option><option value="x">X</option></select></div>
+      <div><label for="social-piece-scale">Comparación</label><select id="social-piece-scale"><option value="absolute">Cifras reales</option><option value="index">Crecimiento · base común 100</option></select></div>
+      <div><label for="social-piece-format">Formato</label><select id="social-piece-format"><option value="portrait">Publicación vertical · 1080 × 1350</option><option value="landscape">Horizontal · 1600 × 900</option><option value="story">Historia · 1080 × 1920</option></select></div>
+      <div><label for="social-piece-theme">Estilo</label><select id="social-piece-theme"><option value="light">Claro</option><option value="dark">Oscuro</option></select></div>
+    </div>
+    <button id="social-piece-generate" type="button" disabled>Generar imagen</button>
+    <button id="social-piece-example" type="button" class="secondary">Ver ejemplo con datos simulados</button>
+    <p id="social-piece-status" role="status" aria-live="polite">Importa registros para generar una pieza con datos.</p>
+  </div></details>
   <section class="social-total" aria-labelledby="social-total-title"><div class="social-chart-heading"><h3 id="social-total-title">Audiencia acumulada</h3><strong id="social-total-value">N/D</strong></div><p id="social-total-note" class="note"></p><div id="social-total-chart" class="social-chart"></div></section>
   <div id="social-charts" class="social-charts"></div>
   <details class="methodology"><summary>Importar registros y conservar una copia</summary><div class="methodology-body">
@@ -39,3 +50,11 @@
     <p><strong>Presencia web:</strong> las menciones siguen disponibles en Radar y Comparativos; todavía no existe una serie histórica de 12 meses. No se suman menciones web con seguidores.</p>
   </div></details>
 </section>
+<dialog id="social-piece-dialog" aria-labelledby="social-piece-title">
+  <header class="social-piece-header"><h2 id="social-piece-title">Lista para compartir</h2><button id="social-piece-close" type="button" aria-label="Cerrar vista previa" title="Cerrar vista previa">×</button></header>
+  <p class="note">Revisa las cifras antes de compartir. La imagen incluye el nombre, fechas y origen de los datos.</p>
+  <img id="social-piece-image" alt="Vista previa del gráfico" width="1080" height="1350">
+  <div class="social-piece-actions"><a id="social-piece-download" download>Descargar PNG</a><button id="social-piece-share" type="button" disabled>Compartir imagen</button><button id="social-piece-copy" class="secondary" type="button" disabled>Copiar texto</button></div>
+  <p id="social-piece-share-note" class="note"></p><p id="social-piece-feedback" role="status" aria-live="polite"></p>
+  <textarea id="social-piece-caption" aria-label="Texto para acompañar la publicación" rows="8" readonly hidden></textarea>
+</dialog>

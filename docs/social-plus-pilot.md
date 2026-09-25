@@ -26,6 +26,16 @@ Los puntos no se interpolan. El total sólo existe en fechas con valores de toda
 
 El CSV aportado no demuestra autenticidad, consentimiento ni propiedad de la cuenta. Se rotula como importado, no verificado. No incluir estos datos en rankings públicos ni decisiones comerciales automáticas.
 
+## Piezas para descargar y compartir
+
+El generador produce PNG en 1080 × 1350, 1600 × 900 y 1080 × 1920 con estilos claro/oscuro. Ofrece comparativo de redes seleccionadas, total e individuales. Usa el periodo, persona y métrica activos; no trae datos nuevos ni reutiliza cifras de otro perfil.
+
+El comparativo de seguidores puede usar cifras reales o índice base 100, únicamente desde la primera fecha común con saldo positivo en todas las redes seleccionadas. No se normaliza cada red en una fecha diferente. Las cifras finales y porcentajes conservan las fechas observadas. Líneas discontinuas unen puntos medidos y el pie aclara los huecos. Cero se conserva; ausencia no se sustituye por cero.
+
+Las piezas muestran nombre, periodo, métrica, redes, número de observaciones, fechas, origen importado no verificado y dominios de las fuentes. No presentan impacto legislativo, influencia ni votos. Se pueden descargar y acompañar del texto copiable. Web Share utiliza un archivo preparado antes del clic para conservar la activación de usuario en iOS. Cuando el navegador no soporta compartir archivos, se ofrece descarga manual. Cancelar el menú no publica nada. Radar no confirma publicaciones hechas por aplicaciones externas ni envía archivos automáticamente a ninguna cuenta.
+
+Cambiar persona, métrica, rango, archivo o diseño invalida la imagen previa. El diálogo es nativo, admite Escape y presenta una vista previa antes de compartir. La imagen se genera en el dispositivo y no se almacena ni publica en el servidor.
+
 ## Pendientes para Plus operativo
 
 1. Identidad, membresía Plus y autorización por equipo comprobadas en servidor. El piloto actual no da acceso a ningún dato almacenado de otra persona.

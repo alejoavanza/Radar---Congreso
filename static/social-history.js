@@ -92,6 +92,7 @@
     $('social-export').disabled = !records.length || busy;
     $('social-clear').disabled = !records.length || busy;
     $('social-template').disabled = !memberId || busy;
+    window.RadarSocialExport?.update({current, member: members.find(member => member.id === memberId), metric, busy});
   }
   function filterMembers(preferred) {
     const query = window.RadarCongress.normalize($('social-search').value);
