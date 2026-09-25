@@ -5,9 +5,11 @@ from datetime import datetime, timedelta, timezone
 from comparisons import comparison_api, search_end, iso
 from news_sources import NewsQuery, search_news
 from source_catalog import public_catalog
+from social_history import social_api
 
 app = Flask(__name__)
 app.register_blueprint(comparison_api)
+app.register_blueprint(social_api)
 POS={'apoyo','respaldo','logro','avance','acuerdo','lidera','celebra','aprobado','victoria','positivo','defiende','gracias','excelente','bien'}
 NEG={'crítica','critica','denuncia','escándalo','escandalo','rechazo','ataque','investigación','investigacion','crisis','polémica','polemica','fracaso','corrupción','corrupcion','mentira'}
 STOP={'para','como','sobre','entre','desde','ante','tras','este','esta','estos','estas','del','las','los','una','uno','que','por','con','sin','más','mas','sus','han','fue','son','ser','https','esto','pero','porque','cuando','donde'}
