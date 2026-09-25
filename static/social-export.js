@@ -139,7 +139,7 @@
       });
     }
     const footerY = height - (wide ? 91 : 211);
-    const baseNote = report.baseline ? `Base común: ${date(report.baseline)} = 100. Las cifras de abajo son seguidores reales.` : report.view === 'total' ? `Total: ${report.included.map(key => labels[key]).join(', ')}. No son personas únicas.` : metrics[report.metric] + '. Sin datos no equivale a cero.';
+    const baseNote = report.baseline ? `Base común: ${date(report.baseline)} = 100. Abajo: seguidores en valores absolutos.` : report.view === 'total' ? `Total: ${report.included.map(key => labels[key]).join(', ')}. No son personas únicas.` : metrics[report.metric] + '. Sin datos no equivale a cero.';
     wrap(baseNote, pad, footerY, usable, wide ? 17 : 20, 25, 2);
     const noteY = footerY + (wide ? 27 : 52);
     wrap('Líneas entre observaciones; no hay mediciones en los huecos. Datos importados; origen no verificado.', pad, noteY, usable, wide ? 17 : 20, 25, 2);
