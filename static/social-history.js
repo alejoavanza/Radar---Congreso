@@ -235,7 +235,7 @@
     } finally { clearTimeout(timeout); busy = false; $('social-file').disabled = false; $('social-file').value = ''; render(); }
   });
   window.addEventListener('beforeunload', event => { if (records.length) { event.preventDefault(); event.returnValue = ''; } });
-  window.RadarCongress.catalogReady.then(data => {
+  const catalogReady = window.RadarCongress?.catalogReady;\n  if (!catalogReady) { $('social-error').textContent = 'No se pudo iniciar el directorio de congresistas.'; return; }\n  catalogReady.then(data => {
     if (!data) throw new Error('No se pudo cargar el directorio. Recarga la página.');
     members = data.members;
     $('social-directory').textContent = `${members.length} personas en el directorio · revisión: ${dateLabel(data.checked_at)}. Puede requerir actualización por cambios de curul.`;
