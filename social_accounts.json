@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "description": "Registro editorial de cuentas. Añadir sólo identidades corroboradas con evidencia y fecha; nunca cifras de seguidores ni credenciales. Los candidatos descubiertos no se aprueban automáticamente.",
+  "accounts": []
+}

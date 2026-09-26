@@ -1,0 +1,36 @@
+<section id="socialtab" class="hide" role="tabpanel" aria-labelledby="social-tab">
+  <header class="social-heading"><div><p class="social-kicker">RADAR PLUS</p><h2>Seguidores públicos</h2></div></header>
+  <p class="note">Consulta fuentes habilitadas y revisa observaciones fechadas de la misma cuenta. Sin medición disponible no significa cero seguidores.</p>
+  <p id="followers-service" class="social-data-state" role="status">Comprobando conexiones…</p>
+  <div class="social-controls">
+    <div class="social-combobox congress-combobox">
+      <label for="followers-search">Nombre o apellido</label>
+      <div class="social-search-field"><input id="followers-search" type="search" placeholder="Nombre o apellido" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="followers-options" aria-describedby="followers-search-status"><button id="followers-clear" type="button" aria-label="Borrar nombre" title="Borrar nombre">×</button></div>
+      <ul id="followers-options" class="congress-options" role="listbox" aria-label="Congresistas" hidden></ul>
+      <p class="congress-help">Escribe al menos dos letras y selecciona una persona. No se elige la primera coincidencia automáticamente.</p>
+      <p id="followers-search-status" class="congress-status" role="status" aria-live="polite"></p>
+    </div>
+    <div><label for="followers-period">Observaciones que mostrar</label><select id="followers-period"><option value="1">Últimas 24 horas</option><option value="7">Últimos 7 días</option><option value="28" selected>Últimos 28 días</option></select></div>
+  </div>
+  <button id="followers-refresh" type="button" disabled>CONSULTAR SEGUIDORES DISPONIBLES</button>
+  <p id="followers-progress" role="status" aria-live="polite"></p>
+  <p id="followers-error" role="alert"></p>
+  <p id="followers-storage" class="note"></p>
+  <div id="followers-results" class="social-charts" aria-live="polite"></div>
+  <details class="methodology"><summary>Encontrar y corroborar cuentas</summary><div class="methodology-body">
+    <p>Busca enlaces públicos en la ficha institucional de la persona seleccionada. Los enlaces encontrados son candidatos: pueden pertenecer a la institución y no a la persona. Se revisan antes de habilitar mediciones.</p>
+    <button id="followers-discover" type="button" class="secondary" disabled>Buscar enlaces en la ficha institucional</button>
+    <p id="followers-discovery-status" role="status" aria-live="polite"></p>
+    <ul id="followers-candidates"></ul>
+    <a id="followers-web-search" target="_blank" rel="noopener noreferrer" hidden>Buscar perfiles en la web — abre el buscador</a>
+    <p class="note">Un resultado de búsqueda no acredita la identidad, la fecha ni el número actual de seguidores. Las cuentas medidas necesitan un identificador estable y evidencia de revisión.</p>
+  </div></details>
+  <details class="methodology"><summary>Fuentes, fechas y límites</summary><div class="methodology-body">
+    <p>La conexión preparada en esta primera fase es YouTube Data API. Requiere una clave del proyecto y un canal corroborado. Instagram, Facebook, TikTok y X se muestran como conexiones pendientes; no se consultan a escondidas ni se reemplazan por aproximaciones de noticias.</p>
+    <p>YouTube entrega suscriptores públicos redondeados hacia abajo a tres cifras significativas. La fecha mostrada es la de obtención de la API. Reutilizar una respuesta no cambia su fecha. Las observaciones guardadas no se presentan como cifras actuales.</p>
+    <p>El historial depende de una base central habilitada. Se prepara una observación por cuenta y fecha UTC, conservando el primer registro. No hay rastreo diario automático activo. Las consultas sin base funcionan sólo durante esta visita y no construyen un historial duradero.</p>
+    <p>En YouTube, los registros públicos caducan a los 29 días. No se reconstruyen meses anteriores ni se rellenan huecos. Por ahora se comparan observaciones fechadas sin generar porcentajes o índices derivados de YouTube, pendientes de la revisión y permisos aplicables. No se suman seguidores entre redes ni se interpretan como personas únicas.</p>
+    <p>La aplicación no solicita contraseñas. Las credenciales de las API se configuran únicamente en el servidor.</p>
+    <p><a href="https://developers.google.com/youtube/terms/developer-policies" target="_blank" rel="noopener noreferrer">Políticas de YouTube</a> · <a href="https://developers.google.com/youtube/v3/docs/channels" target="_blank" rel="noopener noreferrer">Definición del conteo de suscriptores</a></p>
+  </div></details>
+</section>
