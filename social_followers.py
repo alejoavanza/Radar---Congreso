@@ -9,7 +9,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from threading import Lock
 from time import monotonic
-from urllib.parse import urlsplit, urljoin
+from urllib.parse import urlsplit
 import json
 import os
 import re
@@ -56,7 +56,7 @@ def registry():
 def reviewed_accounts(member_id):
     result = {}
     for item in registry():
-        if item.get('member_id') != member_id or item.get('status') != 'reviewed':
+        if not isinstance(item, dict) or item.get('member_id') != member_id or item.get('status') != 'reviewed':
             continue
         platform = item.get('platform')
         if platform not in PLATFORMS or not safe_https(item.get('evidence_url')):
@@ -65,7 +65,7 @@ def reviewed_accounts(member_id):
             checked = datetime.fromisoformat(item['reviewed_at'].replace('Z', '+00:00'))
             if not timedelta(0) <= now() - checked <= timedelta(days=30):
                 continue
-        except (KeyError, ValueError, TypeError):
+        except (KeyError, ValueError, TypeError, AttributeError):
             continue
         # Permanent IDs, not names/handles, identify measured YouTube accounts.
         if platform == 'youtube' and not re.fullmatch(r'UC[A-Za-z0-9_-]{22}', item.get('account_id', '')):
@@ -88,10 +88,11 @@ def youtube_observation(account):
     if not key:
         return missing('not_configured', 'Falta habilitar la conexión oficial de YouTube en Radar.')
     account_id = account['account_id']
+    cache_key = (account['member_id'], account_id)
     # Lock suppresses simultaneous requests in one worker. Provider quota remains
     # the global safeguard; this bounded cache is not durable historical storage.
     with _LOCK:
-        cached = _CACHE.get(account_id)
+        cached = _CACHE.get(cache_key)
         if cached and monotonic() < cached[0]:
             return dict(cached[1], reused=True)
         if len(_CACHE) > 600:
@@ -112,7 +113,7 @@ def youtube_observation(account):
                         if len(raw) > 64000:
                             raise ValueError('Response too large')
                     items = json.loads(raw).get('items', [])
-                    if len(items) != 1 or items[0].get('id') != account_id:
+                    if not isinstance(items, list) or len(items) != 1 or items[0].get('id') != account_id:
                         result = missing('account_unavailable', 'No se pudo confirmar el canal registrado.')
                     else:
                         stats = items[0].get('statistics', {})
@@ -135,7 +136,7 @@ def youtube_observation(account):
         except (requests.RequestException, ValueError, TypeError, KeyError, AttributeError):
             result = missing('provider_unavailable', 'No se pudo obtener una medición válida de YouTube.')
         # Cache failures briefly; a cached response retains its original timestamp.
-        _CACHE[account_id] = (monotonic() + (900 if result['status'] == 'available' else 60), result)
+        _CACHE[cache_key] = (monotonic() + (900 if result['status'] == 'available' else 60), result)
         return dict(result, reused=False)
 
 
@@ -228,6 +229,8 @@ class Links(HTMLParser):
 
 
 def account_link(url):
+    if not safe_https(url):
+        return None
     parsed = urlsplit(url)
     host = parsed.hostname.removeprefix('www.')
     platform = {'instagram.com': 'instagram', 'facebook.com': 'facebook', 'tiktok.com': 'tiktok',
