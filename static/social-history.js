@@ -131,8 +131,8 @@
       option.dataset.index = i;
       option.setAttribute('role', 'option');
       option.setAttribute('aria-selected', 'false');
-      option.append(el('span', member.display_name, 'social-option-name'),
-        el('span', `${member.chamber === 'camara' ? 'Cámara' : 'Senado'} · ${member.constituency || ''}`, 'social-option-detail'));
+      option.append(el('span', member.display_name, 'congress-option-name'),
+        el('span', `${member.chamber === 'camara' ? 'Cámara' : 'Senado'} · ${member.constituency || ''} · ${member.party || ''}`, 'congress-option-detail'));
       return option;
     }));
     if (!suggestions.length) {
