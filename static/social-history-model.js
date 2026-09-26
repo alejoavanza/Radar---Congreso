@@ -11,7 +11,7 @@
   }
   function windowStart(end, period) {
     const date = new Date(`${end}T00:00:00Z`);
-    if (period === '7d') date.setUTCDate(date.getUTCDate() - 6);
+    if (period === '1d') date.setUTCDate(date.getUTCDate());\n    else if (period === '7d') date.setUTCDate(date.getUTCDate() - 6);\n    else if (period === '60d') date.setUTCDate(date.getUTCDate() - 59);
     else {
       const months = {'1m': 1, '3m': 3, '6m': 6, '12m': 12}[period];
       if (!months) throw new Error('Periodo inválido');
