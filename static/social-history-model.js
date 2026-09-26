@@ -54,9 +54,7 @@
   }
   function csv(records) {
     const escape = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
-    return [columns.join(','), ...records.map(row => columns.map(key => escape(row[key])).join(','))].join('\r
-') + '\r
-';
+    return [columns.join(','), ...records.map(row => columns.map(key => escape(row[key])).join(','))].join('\r\n') + '\r\n';
   }
   const api = {platforms, metrics, columns, bogotaToday, windowStart, calculate, csv};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
