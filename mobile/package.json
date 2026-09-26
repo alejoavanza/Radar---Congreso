@@ -1,0 +1,41 @@
+{
+  "name": "radar-politico-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Radar Pol\u00edtico para iOS y Android, de TACTIKA COMUNICACIONES S.A.S",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "postinstall": "node scripts/patch-capacitor-android.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "node scripts/verify.mjs",
+    "sync": "npm run build && cap sync ios && npm run verify",
+    "open": "cap open ios",
+    "sync:ios": "npm run build && cap sync ios && npm run verify",
+    "sync:android": "npm run build && cap sync android && npm run verify:android",
+    "sync:all": "npm run build && cap sync && npm run verify && npm run verify:android",
+    "verify:android": "node scripts/verify-android.mjs",
+    "open:android": "cap open android",
+    "android:debug": "cd android && ./gradlew assembleDebug",
+    "android:bundle": "cd android && ./gradlew bundleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.1",
+    "@capacitor/app": "8.1.1",
+    "@capacitor/browser": "8.0.4",
+    "@capacitor/core": "8.5.1",
+    "@capacitor/ios": "8.5.1",
+    "@capacitor/network": "8.0.1",
+    "@capacitor/preferences": "8.0.1",
+    "@capacitor/share": "8.0.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.1",
+    "esbuild": "0.28.2",
+    "jsdom": "30.0.1",
+    "sharp": "0.35.4"
+  }
+}
