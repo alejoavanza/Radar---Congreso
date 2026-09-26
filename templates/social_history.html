@@ -2,11 +2,11 @@
   <header class="social-heading"><div><p class="social-kicker">RADAR PLUS</p><h2>Evolución digital</h2></div></header>
   <p class="note">Audiencia y actividad en Instagram, Facebook, TikTok, YouTube y X. Hasta 12 meses de registros.</p>
   <div class="social-controls">
-    <div class="social-combobox"><label for="social-search">Buscar y seleccionar congresista</label>
+    <div class="social-combobox congress-combobox"><label for="social-search">Nombre o apellido</label>
       <div class="social-search-field"><input id="social-search" type="search" placeholder="Nombre o apellido" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="social-options" aria-describedby="social-search-status"><button id="social-search-clear" type="button" aria-label="Borrar nombre" title="Borrar nombre"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
       <input id="social-member" type="hidden" value="">
-      <ul id="social-options" role="listbox" aria-label="Congresistas encontrados" hidden></ul>
-      <p id="social-search-status" class="subtle" role="status" aria-live="polite">Cargando directorio…</p>
+      <ul id="social-options" class="congress-options" role="listbox" aria-label="Congresistas" hidden></ul>
+      <p class="congress-help">Escribe al menos 2 letras y elige un congresista.</p><p id="social-search-status" class="congress-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </div>
     <div><label for="social-metric">Qué medir</label><select id="social-metric"><option value="followers">Seguidores / suscriptores</option><option value="views">Visualizaciones por día</option><option value="interactions">Interacciones por día</option><option value="posts">Publicaciones por día</option><option value="impressions">Impresiones por día</option><option value="reach">Alcance diario por red</option></select></div>
   </div>
