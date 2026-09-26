@@ -46,6 +46,7 @@
   }
   function exampleReport(formatView = 'comparison', scale = 'absolute') {
     const model = root.RadarSocialModel;
+    if (!model?.bogotaToday || !model?.windowStart || !model?.calculate) throw new Error('No se pudo cargar el módulo de evolución digital. Recarga la página.');
     const end = model.bogotaToday(), start = model.windowStart(end, '12m');
     const middle = model.windowStart(end, '6m');
     const records = model.platforms.flatMap((platform, i) => [start, middle, end].map((date, cut) => ({
