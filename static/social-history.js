@@ -243,5 +243,5 @@
     $('social-search').disabled = false; $('social-search-clear').disabled = false; $('social-file').disabled = false;
     selectMember(members.find(member => member.id === window.RadarCongress.selectedId?.()));
     try { if ((window.RadarNative?.storage || sessionStorage).getItem('radar:tab:v1') === 'social') window.showTab('social'); } catch (_) { /* Optional view preference. */ }
-  }).catch(error => { $('social-error').textContent = error.message; });
+  }).catch(error => { $('social-error').textContent = error.message; $('social-search-status').textContent = 'El directorio no está disponible. Inténtalo de nuevo al recargar.'; });
 })();
