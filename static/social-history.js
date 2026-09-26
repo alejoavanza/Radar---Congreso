@@ -9,6 +9,7 @@
   const shortDate = date => new Date(`${date}T12:00:00Z`).toLocaleDateString('es-CO', {day: 'numeric', month: 'short', timeZone: 'America/Bogota'});
   const compact = value => new Intl.NumberFormat('es-CO', {notation: 'compact', maximumFractionDigits: 1}).format(value);
   let records = [], members = [], current = null, busy = false;
+  let memberIndex = [], suggestions = [], active = -1, choosing = false;
   function el(tag, text, className) {
     const node = document.createElement(tag);
     if (text !== undefined) node.textContent = text;
@@ -45,12 +46,14 @@
   }
   function description(series, metric, expectedDays) {
     if (!series.last) return 'Sin registros para este periodo.';
-    let text = `${series.count} de ${expectedDays} fechas con datos. Última observación: ${dateLabel(series.last.date)}.`;
-    if (metric === 'followers') {
-      if (series.growth === null) text += ' Hace falta otra observación para calcular crecimiento.';
-      else text += ` Cambio entre ${dateLabel(series.first.date)} y ${dateLabel(series.last.date)}: ${series.growth > 0 ? '+' : ''}${number(series.growth)}${series.percent === null ? ' (porcentaje N/D: base cero)' : ` (${series.percent > 0 ? '+' : ''}${number(series.percent)} %)`}.`;
-    }
-    return text;
+    return `${series.count} de ${expectedDays} fechas con datos. Última observación: ${dateLabel(series.last.date)}.`;
+  }
+  function changeDescription(series, metric) {
+    if (metric !== 'followers') return 'La cifra corresponde al último día observado, no al acumulado del periodo.';
+    if (series.growth === null) return 'Crecimiento: N/D. Se necesitan al menos dos fechas con datos.';
+    const change = `${series.growth > 0 ? '+' : ''}${number(series.growth)}`;
+    const percent = series.percent === null ? 'porcentaje N/D: base cero' : `${series.percent > 0 ? '+' : ''}${number(series.percent)} %`;
+    return `Cambio observado: ${change} (${percent}), entre ${dateLabel(series.first.date)} y ${dateLabel(series.last.date)}.`;
   }
   function render() {
     if (!members.length) return;
@@ -60,11 +63,18 @@
     const selected = [...document.querySelectorAll('.social-networks input:checked')].map(input => input.value);
     current = model.calculate(records, memberId, period, metric, selected);
     $('social-window').textContent = `${dateLabel(current.start)} a ${dateLabel(current.end)} · Corte diario de Colombia`;
-    $('social-member-id').textContent = memberId ? `Identificador para la plantilla: ${memberId}` : 'No hay coincidencias en el directorio.';
-    $('social-total-title').textContent = metric === 'followers' ? 'Audiencia acumulada' : metric === 'reach' ? 'Alcance: consulta cada red' : `${metricLabels[metric]} · total`;
+    $('social-member-id').textContent = memberId ? `Identificador para la plantilla: ${memberId}` : 'Selecciona un congresista para descargar su plantilla.';
+    $('social-total-title').textContent = metric === 'followers' ? 'Seguidores sumados · última fecha común' : metric === 'reach' ? 'Alcance: consulta cada red' : `${metricLabels[metric]} · total`;
     $('social-total-value').textContent = current.total.last ? number(current.total.last.value) : 'N/D';
     const totalNote = metric === 'reach' ? 'El alcance no se suma: una persona puede estar en varias redes.' : `${selected.length} redes seleccionadas. ${description(current.total, metric, current.expectedDays)} ${metric === 'followers' ? 'La suma no representa personas únicas.' : 'Las definiciones pueden variar entre redes.'}`;
     $('social-total-note').textContent = totalNote;
+    $('social-total-change').textContent = metric === 'reach' ? 'Consulta el alcance individual de cada red.' : changeDescription(current.total, metric);
+    $('social-data-state').textContent = !records.length
+      ? 'Sin datos importados. Este buscador selecciona una persona; no consulta sus redes automáticamente. Los ejemplos son simulados.'
+      : !memberId ? 'Selecciona una persona para consultar los registros importados. El origen de las cifras no ha sido verificado.'
+      : !current.rows.length ? 'Sin registros para esta persona y periodo. N/D significa dato no disponible, no cero.'
+      : `${current.rows.length} registros importados para esta persona y periodo. Origen no verificado; no son datos obtenidos automáticamente.`;
+    $('social-charts').hidden = !current.rows.length;
     draw($('social-total-chart'), current.total.points, current.start, current.end, '#075056', $('social-total-title').textContent,
       metric === 'reach' ? 'Revisa el alcance individual en los gráficos de abajo.' : !selected.length ? 'Selecciona al menos una red para calcular el total.' : 'No hay fechas con datos en todas las redes seleccionadas. Importa registros o ajusta las redes del total.');
     $('social-charts').replaceChildren();
@@ -74,7 +84,7 @@
       const heading = el('div', undefined, 'social-chart-heading');
       heading.append(el('h3', labels[platform]), el('strong', series.last ? number(series.last.value) : 'N/D'));
       const chart = el('div', undefined, 'social-chart');
-      section.append(heading, el('p', metricLabels[metric], 'note'), chart, el('p', description(series, metric, current.expectedDays), 'note'));
+      section.append(heading, el('p', metric === 'followers' ? 'Seguidores / suscriptores al último registro' : metricLabels[metric], 'note'), el('p', changeDescription(series, metric), 'social-change'), chart, el('p', description(series, metric, current.expectedDays), 'note'));
       draw(chart, series.points, current.start, current.end, colors[platform], `${labels[platform]}: ${metricLabels[metric]}`, 'Sin datos en este rango. No equivale a cero.');
       $('social-charts').append(section);
     }
@@ -94,24 +104,101 @@
     $('social-template').disabled = !memberId || busy;
     window.RadarSocialExport?.update({current, member: members.find(member => member.id === memberId), metric, busy});
   }
-  function filterMembers(preferred) {
-    const query = window.RadarCongress.normalize($('social-search').value);
-    const tokens = query.split(' ').filter(Boolean);
-    const matched = members.filter(member => tokens.every(token => window.RadarCongress.normalize(`${member.display_name} ${member.full_name} ${member.aliases.join(' ')}`).includes(token)));
-    $('social-member').replaceChildren(...matched.map(member => {
-      const option = el('option', `${member.display_name} · ${member.chamber === 'camara' ? 'Cámara' : 'Senado'}`); option.value = member.id; return option;
-    }));
-    if (!matched.length) { const option = el('option', 'Sin coincidencias'); option.value = ''; $('social-member').append(option); }
-    if (matched.some(member => member.id === preferred)) $('social-member').value = preferred;
+  function closeSuggestions() {
+    $('social-options').hidden = true;
+    $('social-search').setAttribute('aria-expanded', 'false');
+    $('social-search').removeAttribute('aria-activedescendant');
+    active = -1;
+  }
+  function selectMember(member) {
+    $('social-member').value = member?.id || '';
+    $('social-search').value = member?.display_name || '';
+    $('social-search-status').textContent = member
+      ? `${member.display_name} · ${member.chamber === 'camara' ? 'Cámara' : 'Senado'} · ${member.constituency || ''}`
+      : 'Escribe al menos dos letras y selecciona una coincidencia.';
+    closeSuggestions();
     render();
+  }
+  function showSuggestions() {
+    if ($('social-member').value) return closeSuggestions();
+    const result = window.RadarCongress.findMatches(memberIndex, $('social-search').value);
+    suggestions = result.members;
+    active = -1;
+    $('social-search').removeAttribute('aria-activedescendant');
+    $('social-options').replaceChildren(...suggestions.map((member, i) => {
+      const option = el('li');
+      option.id = `social-option-${i}`;
+      option.dataset.index = i;
+      option.setAttribute('role', 'option');
+      option.setAttribute('aria-selected', 'false');
+      option.append(el('span', member.display_name, 'social-option-name'),
+        el('span', `${member.chamber === 'camara' ? 'Cámara' : 'Senado'} · ${member.constituency || ''}`, 'social-option-detail'));
+      return option;
+    }));
+    if (!suggestions.length) {
+      $('social-search-status').textContent = window.RadarCongress.normalize($('social-search').value).replace(/ /g, '').length < 2
+        ? 'Escribe al menos dos letras y selecciona una coincidencia.'
+        : 'Sin coincidencias en el directorio. Revisa el nombre; no se seleccionó otra persona.';
+      return closeSuggestions();
+    }
+    $('social-options').hidden = false;
+    $('social-search').setAttribute('aria-expanded', 'true');
+    $('social-search-status').textContent = `${suggestions.length} de ${result.total} coincidencias. Selecciona la persona que buscas.`;
+  }
+  function setActive(i) {
+    active = i;
+    [...$('social-options').children].forEach((option, j) => option.setAttribute('aria-selected', String(j === i)));
+    const option = $('social-options').children[i];
+    $('social-search').setAttribute('aria-activedescendant', option.id);
+    option.scrollIntoView?.({block: 'nearest'});
   }
   function download(text, filename) {
     const url = URL.createObjectURL(new Blob(['\ufeff', text], {type: 'text/csv;charset=utf-8'}));
     const link = el('a'); link.href = url; link.download = filename; document.body.append(link); link.click(); link.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
-  $('social-search').addEventListener('input', () => filterMembers($('social-member').value));
-  $('social-member').addEventListener('change', render);
+  $('social-search').addEventListener('input', () => {
+    // A partial name must never display another person's previously selected data.
+    $('social-member').value = '';
+    showSuggestions();
+    render();
+  });
+  $('social-search').addEventListener('focus', showSuggestions);
+  $('social-search').addEventListener('blur', () => { if (!choosing) closeSuggestions(); });
+  $('social-search').addEventListener('keydown', event => {
+    if (event.isComposing) return;
+    if (event.key === 'Escape' || event.key === 'Tab') { closeSuggestions(); return; }
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      if ($('social-options').hidden) showSuggestions();
+      if ($('social-options').hidden) return;
+      event.preventDefault();
+      setActive(event.key === 'ArrowDown' ? (active + 1) % suggestions.length : (active < 0 ? suggestions.length - 1 : (active - 1 + suggestions.length) % suggestions.length));
+    } else if (event.key === 'Enter' && !$('social-options').hidden && active >= 0) {
+      event.preventDefault();
+      selectMember(suggestions[active]);
+    }
+  });
+  $('social-search-clear').addEventListener('mousedown', event => event.preventDefault());
+  $('social-search-clear').addEventListener('click', () => {
+    selectMember(null); $('social-search').focus();
+  });
+  $('social-options').addEventListener('mousedown', event => event.preventDefault());
+  $('social-options').addEventListener('pointerdown', () => { choosing = true; });
+  function finishChoice() {
+    if (!choosing) return;
+    choosing = false;
+    setTimeout(() => { if (document.activeElement !== $('social-search')) closeSuggestions(); }, 0);
+  }
+  document.addEventListener('pointerup', finishChoice);
+  document.addEventListener('pointercancel', finishChoice);
+  $('social-options').addEventListener('click', event => {
+    const option = event.target.closest('[role="option"]');
+    const member = option && suggestions[Number(option.dataset.index)];
+    if (member) { selectMember(member); $('social-search').focus(); }
+  });
+  document.addEventListener('pointerdown', event => {
+    if (!event.target.closest('.social-combobox')) closeSuggestions();
+  });
   $('social-metric').addEventListener('change', render);
   for (const input of document.querySelectorAll('input[name="social-period"], .social-networks input')) input.addEventListener('change', render);
   $('social-template').addEventListener('click', () => {
@@ -140,8 +227,7 @@
       if (!retained.length) throw new Error('No hay registros dentro de los últimos 12 meses. Se conserva la carga anterior.');
       records = retained;
       const skipped = data.records.length - records.length;
-      $('social-search').value = '';
-      filterMembers(records[0].member_id);
+      selectMember(members.find(member => member.id === records[0].member_id));
       $('social-import-status').textContent = `${records.length} registros importados en esta pestaña. Origen no verificado por la plataforma.${skipped ? ` ${skipped} registros anteriores a 12 meses excluidos.` : ''} Exporta una copia antes de cerrar.`;
     } catch (error) {
       $('social-error').textContent = error.name === 'AbortError' ? 'La importación tardó demasiado. Inténtalo de nuevo.' : error.message;
@@ -153,8 +239,9 @@
     if (!data) throw new Error('No se pudo cargar el directorio. Recarga la página.');
     members = data.members;
     $('social-directory').textContent = `${members.length} personas en el directorio · revisión: ${dateLabel(data.checked_at)}. Puede requerir actualización por cambios de curul.`;
-    $('social-member').disabled = false; $('social-file').disabled = false;
-    filterMembers(members.find(member => member.id === 'camara-david-alejandro-toro-ramirez')?.id);
+    memberIndex = window.RadarCongress.createIndex(members);
+    $('social-search').disabled = false; $('social-search-clear').disabled = false; $('social-file').disabled = false;
+    selectMember(members.find(member => member.id === window.RadarCongress.selectedId?.()));
     try { if ((window.RadarNative?.storage || sessionStorage).getItem('radar:tab:v1') === 'social') window.showTab('social'); } catch (_) { /* Optional view preference. */ }
   }).catch(error => { $('social-error').textContent = error.message; });
 })();
