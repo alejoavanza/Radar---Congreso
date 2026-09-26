@@ -200,7 +200,8 @@
     if (!event.target.closest('.social-combobox')) closeSuggestions();
   });
   $('social-metric').addEventListener('change', render);
-  $('social-period').addEventListener('change', render);\n  for (const input of document.querySelectorAll('.social-networks input')) input.addEventListener('change', render);
+  $('social-period').addEventListener('change', render);
+  for (const input of document.querySelectorAll('.social-networks input')) input.addEventListener('change', render);
   $('social-template').addEventListener('click', () => {
     const template = model.platforms.map(platform => ({member_id: $('social-member').value, platform, date: model.bogotaToday()}));
     download(model.csv(template), 'radar-plus-plantilla.csv');
@@ -235,7 +236,9 @@
     } finally { clearTimeout(timeout); busy = false; $('social-file').disabled = false; $('social-file').value = ''; render(); }
   });
   window.addEventListener('beforeunload', event => { if (records.length) { event.preventDefault(); event.returnValue = ''; } });
-  const catalogReady = window.RadarCongress?.catalogReady;\n  if (!catalogReady) { $('social-error').textContent = 'No se pudo iniciar el directorio de congresistas.'; return; }\n  catalogReady.then(data => {
+  const catalogReady = window.RadarCongress?.catalogReady;
+  if (!catalogReady) { $('social-error').textContent = 'No se pudo iniciar el directorio de congresistas.'; return; }
+  catalogReady.then(data => {
     if (!data) throw new Error('No se pudo cargar el directorio. Recarga la página.');
     members = data.members;
     $('social-directory').textContent = `${members.length} personas en el directorio · revisión: ${dateLabel(data.checked_at)}. Puede requerir actualización por cambios de curul.`;
