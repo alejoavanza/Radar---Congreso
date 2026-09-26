@@ -1,9 +1,9 @@
 <section id="socialtab" class="hide" role="tabpanel" aria-labelledby="social-tab">
-  <header class="social-heading"><div><p class="social-kicker">RADAR PLUS · PILOTO</p><h2>Evolución digital</h2></div><span class="social-badge">Sin conexiones activas</span></header>
+  <header class="social-heading"><div><p class="social-kicker">RADAR PLUS</p><h2>Evolución digital</h2></div></header>
   <p class="note">Audiencia y actividad en Instagram, Facebook, TikTok, YouTube y X. Hasta 12 meses de registros.</p>
   <div class="social-controls">
     <div class="social-combobox"><label for="social-search">Buscar y seleccionar congresista</label>
-      <div class="social-search-field"><input id="social-search" type="search" placeholder="Nombre o apellido" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="social-options" aria-describedby="social-search-status" disabled><button id="social-search-clear" type="button" aria-label="Borrar congresista seleccionado" disabled>×</button></div>
+      <div class="social-search-field"><input id="social-search" type="search" placeholder="Nombre o apellido" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="social-options" aria-describedby="social-search-status" disabled><button id="social-search-clear" type="button" aria-label="Borrar nombre" title="Borrar nombre" disabled><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
       <input id="social-member" type="hidden" value="">
       <ul id="social-options" role="listbox" aria-label="Congresistas encontrados" hidden></ul>
       <p id="social-search-status" class="subtle" role="status" aria-live="polite">Cargando directorio…</p>
@@ -11,13 +11,7 @@
     <div><label for="social-metric">Qué medir</label><select id="social-metric"><option value="followers">Seguidores / suscriptores</option><option value="views">Visualizaciones por día</option><option value="interactions">Interacciones por día</option><option value="posts">Publicaciones por día</option><option value="impressions">Impresiones por día</option><option value="reach">Alcance diario por red</option></select></div>
   </div>
   <p id="social-directory" class="subtle"></p>
-  <fieldset class="social-periods"><legend>Periodo</legend><div>
-    <label><input type="radio" name="social-period" value="7d">7 días</label>
-    <label><input type="radio" name="social-period" value="1m" checked>1 mes</label>
-    <label><input type="radio" name="social-period" value="3m">3 meses</label>
-    <label><input type="radio" name="social-period" value="6m">6 meses</label>
-    <label><input type="radio" name="social-period" value="12m">1 año</label>
-  </div></fieldset>
+  <label for="social-period">Periodo</label><select id="social-period"><option value="3m">90 días</option><option value="60d">60 días</option><option value="1m" selected>30 días</option><option value="7d">7 días</option><option value="1d">1 día · últimas 24 horas</option></select>
   <p id="social-window" class="subtle"></p>
   <fieldset class="social-networks"><legend>Redes incluidas en el total</legend>
     <label><input type="checkbox" value="instagram" checked>Instagram</label><label><input type="checkbox" value="facebook" checked>Facebook</label><label><input type="checkbox" value="tiktok" checked>TikTok</label><label><input type="checkbox" value="youtube" checked>YouTube</label><label><input type="checkbox" value="x" checked>X</label>
@@ -45,14 +39,6 @@
     <p id="social-import-status" role="status" aria-live="polite">Todavía no hay registros importados.</p>
     <div class="social-actions"><button id="social-template" class="secondary" type="button" disabled>Descargar plantilla</button><button id="social-export" class="secondary" type="button" disabled>Exportar registros</button><button id="social-clear" class="secondary" type="button" disabled>Borrar carga</button></div>
     <p id="social-member-id" class="subtle"></p>
-  </div></details>
-  <details class="methodology"><summary>Cifras y fuentes</summary><div class="methodology-body"><div class="social-table-wrap"><table class="social-table"><caption id="social-table-caption">Registros del periodo seleccionado</caption><thead><tr><th>Fecha</th><th>Red</th><th>Cuenta</th><th>Valor</th><th>Fuente</th></tr></thead><tbody id="social-table"></tbody></table></div></div></details>
-  <details class="methodology"><summary>Conexiones y límites del piloto</summary><div class="methodology-body">
-    <p><strong>Instagram, Facebook, TikTok, YouTube y X:</strong> autorización pendiente. No se consultan cuentas automáticamente y no se han contratado servicios. Conectar una cuenta requerirá el permiso de su administrador y la aprobación correspondiente de la plataforma.</p>
-    <p><strong>Plus:</strong> este es un piloto accesible desde la aplicación. El inicio de sesión, el acceso por suscripción y el almacenamiento privado compartido todavía no están habilitados.</p>
-    <p><strong>Medición:</strong> cada punto corresponde a una observación; los huecos no son ceros. El total exige una cifra en cada red seleccionada para la misma fecha. Sumar seguidores no mide personas únicas. El alcance no se suma entre redes. Las visualizaciones y las interacciones pueden tener definiciones distintas en cada plataforma.</p>
-    <p><strong>Crecimiento:</strong> se calcula entre la primera y la última observación disponible dentro del rango; las fechas se muestran. No reconstruye meses ausentes. No se estima influencia, intención de voto ni un índice político a partir de estas cifras.</p>
-    <p><strong>Presencia web:</strong> las menciones siguen disponibles en Radar y Comparativos; todavía no existe una serie histórica de 12 meses. No se suman menciones web con seguidores.</p>
   </div></details>
 </section>
 <dialog id="social-piece-dialog" aria-labelledby="social-piece-title">
