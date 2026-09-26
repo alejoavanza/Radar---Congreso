@@ -59,7 +59,7 @@
     if (!members.length) return;
     const memberId = $('social-member').value;
     const metric = $('social-metric').value;
-    const period = document.querySelector('input[name="social-period"]:checked').value;
+    const period = $('social-period').value;
     const selected = [...document.querySelectorAll('.social-networks input:checked')].map(input => input.value);
     current = model.calculate(records, memberId, period, metric, selected);
     $('social-window').textContent = `${dateLabel(current.start)} a ${dateLabel(current.end)} · Corte diario de Colombia`;
@@ -200,7 +200,7 @@
     if (!event.target.closest('.social-combobox')) closeSuggestions();
   });
   $('social-metric').addEventListener('change', render);
-  for (const input of document.querySelectorAll('input[name="social-period"], .social-networks input')) input.addEventListener('change', render);
+  $('social-period').addEventListener('change', render);\n  for (const input of document.querySelectorAll('.social-networks input')) input.addEventListener('change', render);
   $('social-template').addEventListener('click', () => {
     const template = model.platforms.map(platform => ({member_id: $('social-member').value, platform, date: model.bogotaToday()}));
     download(model.csv(template), 'radar-plus-plantilla.csv');
