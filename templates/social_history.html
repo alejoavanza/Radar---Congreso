@@ -1,0 +1,52 @@
+<section id="socialtab" class="hide" role="tabpanel" aria-labelledby="social-tab">
+  <header class="social-heading"><div><p class="social-kicker">RADAR PLUS</p><h2>Evolución digital</h2></div></header>
+  <p class="note">Audiencia y actividad en Instagram, Facebook, TikTok, YouTube y X. Hasta 12 meses de registros.</p>
+  <div class="social-controls">
+    <div class="social-combobox congress-combobox"><label for="social-search">Nombre o apellido</label>
+      <div class="social-search-field"><input id="social-search" type="search" placeholder="Nombre o apellido" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="social-options" aria-describedby="social-search-status"><button id="social-search-clear" type="button" aria-label="Borrar nombre" title="Borrar nombre"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <input id="social-member" type="hidden" value="">
+      <ul id="social-options" class="congress-options" role="listbox" aria-label="Congresistas" hidden></ul>
+      <p class="congress-help">Escribe al menos 2 letras y elige un congresista.</p><p id="social-search-status" class="congress-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+    <div><label for="social-metric">Qué medir</label><select id="social-metric"><option value="followers">Seguidores / suscriptores</option><option value="views">Visualizaciones por día</option><option value="interactions">Interacciones por día</option><option value="posts">Publicaciones por día</option><option value="impressions">Impresiones por día</option><option value="reach">Alcance diario por red</option></select></div>
+  </div>
+  <p id="social-directory" class="subtle"></p>
+  <label for="social-period">Periodo</label><select id="social-period"><option value="3m">90 días</option><option value="60d">60 días</option><option value="1m" selected>30 días</option><option value="7d">7 días</option><option value="1d">1 día · últimas 24 horas</option></select>
+  <p id="social-window" class="subtle"></p>
+  <fieldset class="social-networks"><legend>Redes incluidas en el total</legend>
+    <label><input type="checkbox" value="instagram" checked>Instagram</label><label><input type="checkbox" value="facebook" checked>Facebook</label><label><input type="checkbox" value="tiktok" checked>TikTok</label><label><input type="checkbox" value="youtube" checked>YouTube</label><label><input type="checkbox" value="x" checked>X</label>
+  </fieldset>
+  <p id="social-error" role="alert"></p>
+  <p id="social-data-state" class="social-data-state" role="status" aria-live="polite">Sin datos importados. No hay consultas automáticas a las redes.</p>
+  <section class="social-total" aria-labelledby="social-total-title"><div class="social-chart-heading"><h3 id="social-total-title">Seguidores sumados · última fecha común</h3><strong id="social-total-value">N/D</strong></div><p id="social-total-change" class="social-change"></p><p id="social-total-note" class="note"></p><div id="social-total-chart" class="social-chart"></div></section>
+  <div id="social-charts" class="social-charts" hidden></div>
+  <details class="methodology social-publishing"><summary>Crear imagen para redes</summary><div class="methodology-body">
+    <div class="social-piece-options">
+      <div><label for="social-piece-view">Gráfico</label><select id="social-piece-view"><option value="comparison">Todas las redes seleccionadas</option><option value="total">Total de las redes seleccionadas</option><option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="tiktok">TikTok</option><option value="youtube">YouTube</option><option value="x">X</option></select></div>
+      <div><label for="social-piece-scale">Comparación</label><select id="social-piece-scale"><option value="absolute">Valores absolutos</option><option value="index">Crecimiento · base común 100</option></select></div>
+      <div><label for="social-piece-format">Formato</label><select id="social-piece-format"><option value="portrait">Publicación vertical · 1080 × 1350</option><option value="landscape">Horizontal · 1600 × 900</option><option value="story">Historia · 1080 × 1920</option></select></div>
+      <div><label for="social-piece-theme">Estilo</label><select id="social-piece-theme"><option value="light">Claro</option><option value="dark">Oscuro</option></select></div>
+    </div>
+    <button id="social-piece-generate" type="button" disabled>Generar imagen</button>
+    <button id="social-piece-example" type="button" class="secondary">Ver ejemplo con datos simulados</button>
+    <p id="social-piece-status" role="status" aria-live="polite">Importa registros para generar una pieza con datos.</p>
+  </div></details>
+  <details class="methodology"><summary>Importar registros y conservar una copia</summary><div class="methodology-body">
+    <p>El piloto procesa tu CSV sin guardarlo en el servidor. Los registros quedan en esta pestaña hasta recargarla o cerrarla. Exporta una copia para conservarlos. Importar reemplaza la carga anterior.</p>
+    <p>Seguidores es el saldo al cierre de cada fecha; las demás cifras son totales de ese día, con corte de Colombia. Una fila por persona, red y fecha. Vacío significa N/D; cero significa un dato medido. Usa una cuenta por red e incluye la fuente de cada registro.</p>
+    <p>No incluyas contraseñas ni tokens. Importa solamente registros que tengas autorización para utilizar. Radar identifica estos datos como importados; no certifica su origen.</p>
+    <label for="social-file">Archivo CSV UTF-8 · máximo 2 MB</label><input id="social-file" type="file" accept=".csv,text/csv" disabled>
+    <p id="social-import-status" role="status" aria-live="polite">Todavía no hay registros importados.</p>
+    <div class="social-actions"><button id="social-template" class="secondary" type="button" disabled>Descargar plantilla</button><button id="social-export" class="secondary" type="button" disabled>Exportar registros</button><button id="social-clear" class="secondary" type="button" disabled>Borrar carga</button></div>
+    <p id="social-member-id" class="subtle"></p>
+  </div></details>
+  <details class="methodology"><summary>Cifras y fuentes</summary><div class="methodology-body"><div class="social-table-wrap"><table class="social-table"><caption id="social-table-caption">Registros del periodo seleccionado</caption><thead><tr><th>Fecha</th><th>Red</th><th>Cuenta</th><th>Valor</th><th>Fuente</th></tr></thead><tbody id="social-table"></tbody></table></div></div></details>
+</section>
+<dialog id="social-piece-dialog" aria-labelledby="social-piece-title">
+  <header class="social-piece-header"><h2 id="social-piece-title">Lista para compartir</h2><button id="social-piece-close" type="button" aria-label="Cerrar vista previa" title="Cerrar vista previa">×</button></header>
+  <p class="note">Revisa las cifras antes de compartir. La imagen incluye el nombre, fechas y origen de los datos.</p>
+  <img id="social-piece-image" alt="Vista previa del gráfico" width="1080" height="1350">
+  <div class="social-piece-actions"><a id="social-piece-download" download>Descargar PNG</a><button id="social-piece-share" type="button" disabled>Compartir imagen</button><button id="social-piece-copy" class="secondary" type="button" disabled>Copiar texto</button></div>
+  <p id="social-piece-share-note" class="note"></p><p id="social-piece-feedback" role="status" aria-live="polite"></p>
+  <textarea id="social-piece-caption" aria-label="Texto para acompañar la publicación" rows="8" readonly hidden></textarea>
+</dialog>

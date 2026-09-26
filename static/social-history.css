@@ -1,0 +1,35 @@
+.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.tabs button{font-size:13px;overflow-wrap:anywhere}
+.social-heading,.social-chart-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.social-heading{margin-top:26px}.social-heading h2{font-size:25px;margin:5px 0}.social-kicker{font-size:12px;font-weight:700;margin:0;color:var(--tactika-teal)}
+.social-badge{border:1px solid var(--line);padding:6px 9px;border-radius:5px;font-size:12px;background:#fff}
+.social-controls{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:0 14px}.social-controls>div{min-width:0}
+#socialtab fieldset{border:0;padding:0;margin:18px 0}#socialtab legend{font-size:13px;font-weight:650;margin-bottom:8px}
+.social-periods>div{display:flex;flex-wrap:wrap;gap:7px}.social-periods label{display:flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:6px;background:#fff;padding:11px 9px;margin:0;font-size:13px;cursor:pointer}
+.social-periods label:has(:checked){background:var(--tactika-teal);color:#fff;border-color:var(--tactika-teal)}
+#socialtab input[type=radio],#socialtab input[type=checkbox]{width:16px;height:16px;padding:0;margin:0;accent-color:var(--tactika-teal);flex:none}
+.social-networks{display:flex;flex-wrap:wrap;gap:8px 16px}.social-networks label{display:flex;align-items:center;gap:6px;font-size:13px;margin:0;padding:7px 0}
+.social-total{border-top:2px solid var(--tactika-teal);padding:16px 0}.social-chart-heading h3{font-size:17px;margin:0}.social-chart-heading strong{font-size:23px}
+.social-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.social-network{border:1px solid var(--line);border-radius:8px;background:#fff;padding:14px;min-width:0}
+.social-chart{min-height:146px;display:flex;align-items:center;justify-content:center}.social-chart svg{width:100%;height:auto;display:block;overflow:visible}
+.social-empty{font-size:13px;color:var(--muted);text-align:center;line-height:1.6;max-width:320px;padding:12px}
+.social-network .note,.social-total .note{font-size:12px;line-height:1.6;margin:8px 0}.social-actions{display:flex;flex-wrap:wrap;gap:8px}.social-actions button{width:auto;font-size:13px;padding:10px;margin:0}
+#socialtab button:disabled,#socialtab input:disabled{opacity:.55;cursor:not-allowed}#social-error{color:#942b21;font-size:14px}#social-import-status{font-size:13px}
+.social-table-wrap{overflow-x:auto}.social-table{width:100%;border-collapse:collapse;font-size:12px}.social-table caption{text-align:left;padding:10px 0;color:var(--muted)}.social-table td,.social-table th{text-align:left;padding:10px 7px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.social-table a{color:var(--tactika-teal)}
+#social-member-id{overflow-wrap:anywhere}#socialtab .note{line-height:1.6}
+@media(max-width:520px){.social-charts{grid-template-columns:1fr}.social-controls{grid-template-columns:1fr}.social-controls>div:nth-child(2){grid-row:auto}.tabs button{font-size:11px;padding:12px 6px}.social-periods label{padding:10px 7px}}
+.social-piece-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 12px}.social-piece-options>div{min-width:0}#social-piece-status{font-size:13px;line-height:1.5}
+#social-piece-dialog{width:min(760px,calc(100% - 24px));max-height:92dvh;border:1px solid var(--line);border-radius:8px;padding:18px;background:var(--panel);color:var(--text);overflow-y:auto}#social-piece-dialog::backdrop{background:#10282ccc}
+.social-piece-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.social-piece-header h2{font-size:22px;margin:0}.social-piece-header button{width:42px;height:42px;padding:0;font-size:26px;margin:0;flex:none}
+#social-piece-image{display:block;width:100%;height:auto;max-height:65dvh;object-fit:contain;background:#e9e8e6;border:1px solid var(--line)}.social-piece-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.social-piece-actions button,.social-piece-actions a{width:auto;display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1.3;padding:12px;margin:0;border-radius:6px;min-height:44px}.social-piece-actions a{background:var(--tactika-teal);color:white;text-decoration:none;font-weight:700;cursor:pointer}
+#social-piece-dialog .note,#social-piece-feedback{font-size:13px;line-height:1.5}#social-piece-dialog textarea{width:100%;font:inherit;padding:10px}#social-piece-dialog button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:480px){.social-piece-options{grid-template-columns:1fr}.social-piece-actions>*{flex:1 1 130px}#social-piece-dialog{padding:12px}.social-piece-header h2{font-size:19px}}
+
+/* One explicit person picker; imported counts are never labelled as verified. */
+.social-combobox{position:relative}.social-search-field{display:flex;align-items:center;gap:6px}.social-search-field input{min-width:0;flex:1}#social-search-clear{width:44px;min-width:44px;height:44px;margin:0;padding:0;font-size:24px}
+#social-options{position:absolute;left:0;right:0;top:78px;z-index:20;max-height:280px;overflow-y:auto;list-style:none;margin:0;padding:4px;background:var(--panel,#fff);border:1px solid var(--line,#c4d3d2);border-radius:6px;box-shadow:0 8px 24px #10282c26}
+#social-options[hidden],.social-charts[hidden]{display:none}#social-options [role=option]{padding:10px;min-height:44px;cursor:pointer;border-radius:4px}#social-options [aria-selected=true],#social-options [role=option]:hover{background:#e6f2f1}
+.social-option-name,.social-option-detail{display:block}.social-option-name{font-size:14px;font-weight:600}.social-option-detail{font-size:12px;color:var(--muted,#526568);margin-top:3px}
+.social-data-state{font-size:13px;line-height:1.6;padding:12px;border:1px solid var(--line,#c4d3d2);border-radius:6px;background:#f0f5f4}.social-change{font-size:13px;line-height:1.6;font-weight:600;margin:10px 0}.social-chart-heading h3{max-width:100%;overflow-wrap:anywhere}
+
+/* Match the clear-name control used by the Radar tab. */
+.social-search-field{position:relative;display:block}.social-search-field input{padding-right:52px}.social-search-field #social-search-clear{position:absolute;right:4px;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:44px;height:44px;min-width:44px;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:var(--muted,#526568);cursor:pointer;touch-action:manipulation}.social-search-field #social-search-clear:hover{background:var(--tactika-soft,#edf4f3);color:var(--tactika-teal,#075056)}#social-search:placeholder-shown+#social-search-clear,#social-search:disabled+#social-search-clear{display:none}
