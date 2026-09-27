@@ -75,7 +75,7 @@ jobs:
           psql -v ON_ERROR_STOP=1 -f migrations/001_follower_snapshots.sql
           psql -v ON_ERROR_STOP=1 -f tests/follower_storage.sql
       - name: Chromium Android and WebKit iPhone browser profiles
-        run: python tests/browser_followers_release.py
+        run: python tests/browser_plus_paused.py
       - name: Record tested source version
         if: always()
         run: |

@@ -71,10 +71,14 @@ class SocialHistoryTest(unittest.TestCase):
             self.assertEqual(response.status_code, status)
         page = client.get('/')
         self.assertEqual(page.status_code, 200)
-        # CSV compatibility remains server-side; the public screen now measures
-        # followers and must not load the former illustrative demo controls.
-        for id_ in ('report-tab', 'compare-tab', 'social-tab', 'followers-search', 'followers-results'):
+        # Plus Redes is temporarily withdrawn; its backend and saved work remain.
+        for id_ in ('report-tab', 'compare-tab'):
             self.assertIn(f'id="{id_}"', page.text)
+        for id_ in ('social-tab', 'socialtab', 'followers-search', 'followers-results'):
+            self.assertNotIn(f'id="{id_}"', page.text)
+        self.assertNotIn('/static/social-followers.js', page.text)
+        self.assertNotIn('/static/social-followers.css', page.text)
+        self.assertNotIn('/static/social-history.css', page.text)
         self.assertNotIn('id="social-piece-example"', page.text)
         self.assertNotIn('/static/social-export.js', page.text)
         self.assertEqual(client.get('/health').json, {'status': 'ok'})

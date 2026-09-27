@@ -42,7 +42,9 @@ class FollowersTests(unittest.TestCase):
 
     def test_public_screen_has_no_demo_or_legacy_exporter(self):
         text = self.client.get('/').get_data(as_text=True)
-        self.assertIn('followers-search', text)
+        # Temporarily withdrawn from the public UI; backend tests below remain.
+        self.assertNotIn('followers-search', text)
+        self.assertNotIn('/static/social-followers.js', text)
         self.assertNotIn('social-piece-example', text)
         self.assertNotIn('/static/social-export.js', text)
         self.assertNotIn('/static/social-history.js', text)
