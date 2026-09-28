@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#075056</color>
+    <color name="colorPrimaryDark">#075056</color>
+    <color name="colorAccent">#FF5D00</color>
+    <color name="radar_canvas">#E9E8E6</color>
+</resources>

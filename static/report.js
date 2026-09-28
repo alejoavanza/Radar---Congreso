@@ -1,4 +1,4 @@
-const reportStorageKey = 'radar:report:web:v4';
+const reportStorageKey = window.RadarNative ? 'radar:report:v1' : 'radar:report:web:v4';
 const reportStorage = window.RadarNative?.storage || sessionStorage;
 let currentReport = null;
 let currentQuery = null;
@@ -159,6 +159,9 @@ async function go(refresh = false) {
       return {...data.web_coverage, items:data.items};
     }, refresh);
     if (searchSequence !== reportSearchSequence) return;
+    if (window.RadarNative && currentReport && coverage.status === 'unavailable') {
+      throw new Error(coverage.message || 'No se pudo actualizar la consulta.');
+    }
     const items = coverage.items.map(item=>({...item, sentiment:item.sentiment || 'Sin clasificar'}));
     const count = coverage.count;
     const summary = count === null ? 'No fue posible establecer un conteo verificable. Una búsqueda incompleta no significa cero menciones.'
@@ -173,6 +176,12 @@ async function go(refresh = false) {
     saveReport();
   } catch (error) {
     if (searchSequence === reportSearchSequence) {
+      if (window.RadarNative && currentReport) {
+        renderReport(currentReport);
+        const zone = currentQuery?.territory || 'Sin filtro de zona';
+        $('report-restored').textContent = `No se pudo actualizar. Se muestra la consulta anterior · Zona consultada: ${zone}.`;
+        $('report-restored').classList.remove('hide');
+      }
       alert(error.message);
     }
   } finally {
