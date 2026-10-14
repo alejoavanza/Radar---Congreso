@@ -1,5 +1,5 @@
 <section id="socialtab" class="hide" role="tabpanel" aria-labelledby="social-tab">
-  <header class="social-heading"><div><p class="social-kicker">RADAR PLUS</p><h2>Seguidores públicos</h2></div></header>
+  <header class="social-heading"><div><p class="social-kicker">REDES SOCIALES · PRIMERA VERSIÓN</p><h2>Informe de redes sociales</h2></div></header>
   <p class="note">Consulta fuentes habilitadas y revisa observaciones fechadas de la misma cuenta. Sin medición disponible no significa cero seguidores.</p>
   <p id="followers-service" class="social-data-state" role="status">Comprobando conexiones…</p>
   <div class="social-controls">
@@ -12,10 +12,11 @@
     </div>
     <div><label for="followers-period">Observaciones que mostrar</label><select id="followers-period"><option value="1">Últimas 24 horas</option><option value="7">Últimos 7 días</option><option value="28" selected>Últimos 28 días</option></select></div>
   </div>
-  <button id="followers-refresh" type="button" disabled>CONSULTAR SEGUIDORES DISPONIBLES</button>
+  <button id="followers-refresh" type="button" disabled>GENERAR INFORME DE REDES</button>
   <p id="followers-progress" role="status" aria-live="polite"></p>
   <p id="followers-error" role="alert"></p>
   <p id="followers-storage" class="note"></p>
+  <section id="followers-summary" class="card" aria-live="polite" hidden></section>
   <div id="followers-results" class="social-charts" aria-live="polite"></div>
   <details class="methodology"><summary>Encontrar y corroborar cuentas</summary><div class="methodology-body">
     <p>Busca enlaces públicos en la ficha institucional de la persona seleccionada. Los enlaces encontrados son candidatos: pueden pertenecer a la institución y no a la persona. Se revisan antes de habilitar mediciones.</p>

@@ -40,7 +40,8 @@
   function cancel() {
     revision++; discoveryRevision++;
     pending?.abort(); pending = null; report = null;
-    $('followers-results').replaceChildren(); $('followers-candidates').replaceChildren();
+    $('followers-results').replaceChildren();
+    $('followers-summary').replaceChildren(); $('followers-summary').hidden = true; $('followers-candidates').replaceChildren();
     for (const id of ['followers-progress','followers-error','followers-storage','followers-discovery-status']) $(id).textContent = '';
   }
   function showSuggestions() {
@@ -80,7 +81,16 @@
   }
   function render() {
     $('followers-results').replaceChildren();
+    $('followers-summary').replaceChildren(); $('followers-summary').hidden = true;
     if (!report || !selected || report.member_id !== selected.id) return;
+    const available = report.results.filter(item => item.status === 'available' && Number.isSafeInteger(item.followers) && item.followers >= 0 && item.source_kind === 'official_api' && Number.isFinite(Date.parse(item.observed_at)));
+    const summary = $('followers-summary');
+    summary.hidden = false;
+    summary.append(el('h3', `Informe de ${selected.display_name}`),
+      el('p', `Consulta realizada: ${date(report.checked_at)}.`, 'note'),
+      el('p', `${available.length} de ${report.results.length} redes con medición disponible.`),
+      el('p', available.length ? 'Consulta abajo los seguidores, fuentes y fechas de cada red. Los conteos no representan personas únicas entre plataformas.' : 'Todavía no hay cifras verificadas para esta persona. Este primer informe muestra el estado de cada red y permite buscar perfiles para corroborarlos.'),
+      el('p', 'Alcance, interacciones, publicaciones y análisis de contenido: pendientes de integración. La falta de datos no permite evaluar el desempeño ni concluir que no existe actividad.', 'note'));
     const days = Number($('followers-period').value);
     const end = Date.parse(report.checked_at), start = end - days * 86400000;
     $('followers-storage').textContent = report.history_configured
