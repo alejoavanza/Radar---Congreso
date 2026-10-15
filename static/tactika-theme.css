@@ -1,16 +1,16 @@
-/* Colombia palette; existing layout and interactions preserved. */
+/* Tactika Comunicaciones: colors sampled from the supplied brand reference. */
 :root {
-  --tactika-teal: #003893;
-  --tactika-orange: #FCD116;
-  --tactika-gray: #f3f5fa;
-  --tactika-ink: #10264a;
-  --tactika-soft: #edf2fa;
+  --tactika-teal: #075056;
+  --tactika-orange: #ff5d00;
+  --tactika-gray: #e9e8e6;
+  --tactika-ink: #062d30;
+  --tactika-soft: #edf4f3;
   --navy: var(--tactika-gray);
   --panel: #ffffff;
   --panel2: var(--tactika-soft);
-  --line: #c5d1e5;
+  --line: #c4d3d2;
   --text: var(--tactika-ink);
-  --muted: #50617b;
+  --muted: #526568;
 }
 
 body { background: var(--tactika-gray); color: var(--text); }
@@ -18,7 +18,7 @@ body { background: var(--tactika-gray); color: var(--text); }
 .brand, .hero h1 { color: var(--tactika-teal); }
 .hero p { color: var(--muted); }
 .creator-credit::before {
-  background: linear-gradient(90deg, var(--tactika-orange) 0 50%, var(--tactika-teal) 50% 75%, #CE1126 75% 100%);
+  background: linear-gradient(90deg, var(--tactika-orange) 0 60%, var(--tactika-teal) 60% 100%);
 }
 .creator-credit strong { color: var(--tactika-teal); }
 
@@ -26,7 +26,7 @@ body { background: var(--tactika-gray); color: var(--text); }
 .splash img { filter: none; }
 .splash h1 span { color: var(--tactika-orange); }
 .splash p { color: var(--tactika-gray); }
-.splash::after { background: linear-gradient(90deg, #FCD116 0 50%, #003893 50% 75%, #CE1126 75% 100%); }
+.splash::after { background: var(--tactika-orange); }
 
 .card { background: var(--panel); border-color: var(--line); }
 label, .metric span, .note, .subtle, .loading {
@@ -44,7 +44,7 @@ button {
   border-color: var(--tactika-orange);
   cursor: pointer;
 }
-button:hover:not(:disabled) { background: #e5bc00; border-color: #e5bc00; }
+button:hover:not(:disabled) { background: #ed5600; border-color: #ed5600; }
 button:focus-visible, a:focus-visible, summary:focus-visible {
   outline: 3px solid var(--tactika-teal);
   outline-offset: 3px;
@@ -74,7 +74,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
 .topic { background: var(--tactika-soft); border-color: var(--line); color: var(--tactika-teal); }
 .item { border-bottom-color: var(--line); }
 .item a, #comparetab a, .congress-sources a { color: var(--tactika-teal); }
-.official-profile { border-left: 4px solid #CE1126; }
+.official-profile { border-left: 4px solid var(--tactika-orange); }
 .official-profile-label { color: var(--tactika-teal); font-size: .875rem; font-weight: 700; margin: 0 0 .5rem; }
 .official-profile h2 { margin: .5rem 0; overflow-wrap: anywhere; }
 .official-profile a { color: var(--tactika-teal); display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
@@ -82,13 +82,13 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
 .official-profile-footnote { font-size: .875rem; }
 .coverage { background: var(--tactika-soft); }
 .coverage > div { background: var(--tactika-teal); }
-.warning { background: #fff9dc; border-color: var(--tactika-orange); color: var(--tactika-ink); }
+.warning { background: #fff3eb; border-color: var(--tactika-orange); color: var(--tactika-ink); }
 .neg, .pos { color: var(--tactika-teal); }
 
 .congress-options {
   background: var(--panel);
   border-color: var(--line);
-  box-shadow: 0 8px 24px #0038931a;
+  box-shadow: 0 8px 24px #0750561a;
 }
 .congress-options [role="option"] + [role="option"] { border-top-color: var(--tactika-soft); }
 .congress-options [role="option"]:hover, .congress-options [aria-selected="true"] {

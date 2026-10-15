@@ -71,14 +71,14 @@ class SocialHistoryTest(unittest.TestCase):
             self.assertEqual(response.status_code, status)
         page = client.get('/')
         self.assertEqual(page.status_code, 200)
-        # Social report is available; legacy import examples remain hidden.
+        # Plus Redes is temporarily withdrawn; its backend and saved work remain.
         for id_ in ('report-tab', 'compare-tab'):
             self.assertIn(f'id="{id_}"', page.text)
         for id_ in ('social-tab', 'socialtab', 'followers-search', 'followers-results'):
-            self.assertIn(f'id="{id_}"', page.text)
-        self.assertIn('/static/social-followers.js', page.text)
-        self.assertIn('/static/social-followers.css', page.text)
-        self.assertIn('/static/social-history.css', page.text)
+            self.assertNotIn(f'id="{id_}"', page.text)
+        self.assertNotIn('/static/social-followers.js', page.text)
+        self.assertNotIn('/static/social-followers.css', page.text)
+        self.assertNotIn('/static/social-history.css', page.text)
         self.assertNotIn('id="social-piece-example"', page.text)
         self.assertNotIn('/static/social-export.js', page.text)
         self.assertEqual(client.get('/health').json, {'status': 'ok'})
