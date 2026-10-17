@@ -1,16 +1,23 @@
-/* Tactika Comunicaciones: colors sampled from the supplied brand reference. */
+/* Pride palette: six rainbow colors, with dark text and high-contrast controls. */
 :root {
-  --tactika-teal: #075056;
-  --tactika-orange: #ff5d00;
-  --tactika-gray: #e9e8e6;
-  --tactika-ink: #062d30;
-  --tactika-soft: #edf4f3;
+  --pride-red: #e40303;
+  --pride-orange: #ff8c00;
+  --pride-yellow: #ffed00;
+  --pride-green: #008026;
+  --pride-blue: #004dff;
+  --pride-violet: #750787;
+  --pride-rainbow: linear-gradient(90deg, var(--pride-red) 0% 16.6667%, var(--pride-orange) 16.6667% 33.3333%, var(--pride-yellow) 33.3333% 50%, var(--pride-green) 50% 66.6667%, var(--pride-blue) 66.6667% 83.3333%, var(--pride-violet) 83.3333% 100%);
+  --tactika-teal: #5b167a;
+  --tactika-orange: var(--pride-orange);
+  --tactika-gray: #f7f3fb;
+  --tactika-ink: #261332;
+  --tactika-soft: #f1e8f8;
   --navy: var(--tactika-gray);
   --panel: #ffffff;
   --panel2: var(--tactika-soft);
-  --line: #c4d3d2;
+  --line: #d8c9e5;
   --text: var(--tactika-ink);
-  --muted: #526568;
+  --muted: #63536c;
 }
 
 body { background: var(--tactika-gray); color: var(--text); }
@@ -18,15 +25,15 @@ body { background: var(--tactika-gray); color: var(--text); }
 .brand, .hero h1 { color: var(--tactika-teal); }
 .hero p { color: var(--muted); }
 .creator-credit::before {
-  background: linear-gradient(90deg, var(--tactika-orange) 0 60%, var(--tactika-teal) 60% 100%);
+  background: var(--pride-rainbow);
 }
 .creator-credit strong { color: var(--tactika-teal); }
 
 .splash { background: var(--tactika-teal); color: #ffffff; }
 .splash img { filter: none; }
-.splash h1 span { color: var(--tactika-orange); }
+.splash h1 span { color: var(--pride-yellow); }
 .splash p { color: var(--tactika-gray); }
-.splash::after { background: var(--tactika-orange); }
+.splash::after { background: var(--pride-rainbow); }
 
 .card { background: var(--panel); border-color: var(--line); }
 label, .metric span, .note, .subtle, .loading {
@@ -39,12 +46,12 @@ input:focus, select:focus {
   border-color: var(--tactika-teal);
 }
 button {
-  background: var(--tactika-orange);
-  color: var(--tactika-ink);
-  border-color: var(--tactika-orange);
+  background: var(--pride-violet);
+  color: #ffffff;
+  border-color: var(--pride-violet);
   cursor: pointer;
 }
-button:hover:not(:disabled) { background: #ed5600; border-color: #ed5600; }
+button:hover:not(:disabled) { background: #590666; border-color: #590666; }
 button:focus-visible, a:focus-visible, summary:focus-visible {
   outline: 3px solid var(--tactika-teal);
   outline-offset: 3px;
@@ -65,7 +72,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
   background: var(--tactika-teal);
   color: #ffffff;
   border: 1px solid var(--tactika-teal);
-  border-bottom: 4px solid var(--tactika-orange);
+  border-bottom: 4px solid var(--pride-yellow);
 }
 .metric { background: var(--tactika-soft); border-color: var(--line); }
 .metric b { color: var(--tactika-teal); }
@@ -81,14 +88,15 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
 .official-profile .note { margin: .5rem 0; }
 .official-profile-footnote { font-size: .875rem; }
 .coverage { background: var(--tactika-soft); }
-.coverage > div { background: var(--tactika-teal); }
+.coverage > div { background: var(--pride-rainbow); }
 .warning { background: #fff3eb; border-color: var(--tactika-orange); color: var(--tactika-ink); }
-.neg, .pos { color: var(--tactika-teal); }
+.neg { color: #b60000; }
+.pos { color: #006b20; }
 
 .congress-options {
   background: var(--panel);
   border-color: var(--line);
-  box-shadow: 0 8px 24px #0750561a;
+  box-shadow: 0 8px 24px #7507871a;
 }
 .congress-options [role="option"] + [role="option"] { border-top-color: var(--tactika-soft); }
 .congress-options [role="option"]:hover, .congress-options [aria-selected="true"] {
@@ -116,7 +124,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
 }
 #comparetab .compare-remove:hover { background: var(--tactika-soft); border-color: var(--tactika-teal); }
 .compare-track { background: var(--tactika-soft); }
-.web-bar { background: var(--tactika-teal); }
+.web-bar { background: var(--pride-blue); }
 .social-bar { background: var(--tactika-orange); }
 
 .tactika-footer {
@@ -168,3 +176,9 @@ button:focus-visible, a:focus-visible, summary:focus-visible {
 .methodology-body p { margin: 0 0 14px; }
 
 .mentions.mentions-web { grid-template-columns: 1fr; }
+
+/* Rainbow accents retain the existing layout and chart scale. */
+.tactika-links a:nth-child(1) { background: var(--pride-green); border-color: var(--pride-green); }
+.tactika-links a:nth-child(2) { background: var(--pride-violet); border-color: var(--pride-violet); }
+.tactika-links a:nth-child(3) { background: var(--pride-blue); border-color: var(--pride-blue); }
+.tactika-links a:hover { background: var(--pride-yellow); border-color: var(--pride-yellow); color: var(--tactika-ink); }
